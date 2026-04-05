@@ -170,7 +170,7 @@
   .offers-wrap { padding: 100px 48px; max-width: 1100px; margin: 0 auto; }
   .offers-header { text-align: center; max-width: 620px; margin: 0 auto 64px; }
   .offers-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
   }
   .offer-card {
     background: var(--card);
@@ -339,6 +339,9 @@
   @media (max-width: 1280px) {
     .hero-content { padding-top: 80px; }
   }
+  @media (max-width: 1100px) {
+    .offers-grid { grid-template-columns: repeat(2, 1fr); }
+  }
   @media (max-width: 900px) {
     nav { padding: 0 24px; }
     .nav-right .nav-link { display: none; }
@@ -357,7 +360,7 @@
   <a class="nav-logo" href="#">Jon Bjork Music</a>
   <div class="nav-right">
     <a class="nav-link" href="#offers">What I Offer</a>
-    <a class="nav-link" href="https://www.jonbjorkmusic.com/courses/">Courses</a>
+    <a class="nav-link" href="/courses">Courses</a>
     <a class="nav-link" href="#about">About</a>
     <a class="nav-btn" href="/start" target="_blank">Join The Practice Room</a>
   </div>
@@ -405,13 +408,20 @@
       <div class="offer-icon">02</div>
       <div class="offer-title">Courses</div>
       <div class="offer-desc">Self-paced courses covering technique, speed, shred, and practice methodology. Structured lessons you can work through at your own pace, whenever it suits you.</div>
-      <a class="offer-link" href="https://www.jonbjorkmusic.com/courses/" target="_blank">Browse Courses &#8594;</a>
+      <a class="offer-link" href="/courses">Browse Courses &#8594;</a>
     </div>
 
     <div class="offer-card">
       <div class="offer-icon">03</div>
-      <div class="offer-title">Free Lessons</div>
-      <div class="offer-desc">Hundreds of free guitar lessons on YouTube covering technique, licks, practice tips and more. A great place to start and get a feel for how I teach.</div>
+      <div class="offer-title">Free Community</div>
+      <div class="offer-desc">Join 1,100+ guitarists in my free Skool community. Includes the Alternate Picking Deep Dive — a free 30-day program with a clear daily routine to build real technique from day one.</div>
+      <a class="offer-link" href="https://www.skool.com/the-practice-room/about" target="_blank">Join Free &#8594;</a>
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-icon">04</div>
+      <div class="offer-title">Free Lessons on YouTube</div>
+      <div class="offer-desc">Hundreds of free guitar lessons covering technique, licks, practice tips and more. A great place to start and get a feel for how I teach.</div>
       <a class="offer-link" href="https://youtube.com/@jonbjork" target="_blank">Watch on YouTube &#8594;</a>
     </div>
 
@@ -517,9 +527,9 @@
   <a class="footer-logo" href="#">Jon Bjork Music</a>
   <div class="footer-links">
     <a class="footer-link" href="#offers">What I Offer</a>
-    <a class="footer-link" href="https://www.jonbjorkmusic.com/courses/">Courses</a>
+    <a class="footer-link" href="/courses">Courses</a>
     <a class="footer-link" href="https://youtube.com/@jonbjork" target="_blank">YouTube</a>
-    <a class="footer-link" href="https://www.jonbjorkmusic.com/contact-me/">Contact</a>
+    <a class="footer-link" href="mailto:jon@jonbjorkmusic.com">Contact</a>
   </div>
   <a class="footer-link" href="/legal">Legal</a>
   <div class="footer-copy">2025 Jon Bjork Music</div>
