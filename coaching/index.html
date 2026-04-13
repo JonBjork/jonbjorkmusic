@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12-Week Guitar Mastery Program | Jon Bjork Music</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:            #0d0d0d;
+    --card:          #181818;
+    --card2:         #1f1f1f;
+    --border:        #2a2a2a;
+    --white:         #ffffff;
+    --off:           #e8e8e8;
+    --muted:         #aaaaaa;
+    --dim:           #666666;
+    --purple:        #7c3aed;
+    --purple-lt:     #9d5ff5;
+    --navy:          #1a1040;
+    --navy-lt:       #2d1a60;
+    --accent-border: #4a3a9a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: rgba(13,13,13,0.95);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 0 48px; height: 64px;
+  }
+  .nav-logo {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--white); text-decoration: none;
+  }
+  .nav-right { display: flex; align-items: center; gap: 36px; }
+  .nav-link {
+    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 0.75rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none; transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--white); }
+  .nav-cta {
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.75rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--purple); color: var(--white);
+    padding: 10px 24px; border-radius: 6px; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--purple-lt); }
+  .hamburger {
+    display: none; background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .hamburger svg { width: 24px; height: 24px; stroke: var(--white); }
+  .mobile-menu {
+    display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+    background: rgba(13,13,13,0.98); z-index: 199;
+    flex-direction: column; align-items: center; justify-content: center; gap: 32px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu .nav-link { font-size: 1rem; }
+  .mobile-menu .nav-cta { font-size: 0.85rem; padding: 14px 32px; }
+
+  /* ── SECTION BASICS ── */
+  .section { padding: 100px 24px; max-width: 800px; margin: 0 auto; }
+  .section-wide { padding: 100px 24px; max-width: 1000px; margin: 0 auto; }
+  .section-full { padding: 100px 24px; }
+  .section-label {
+    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 0.7rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 16px;
+  }
+  h1, h2, h3 {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.15;
+  }
+  h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); }
+  h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); }
+  h3 { font-size: 1.1rem; letter-spacing: 0.08em; }
+  .text-muted { color: var(--muted); }
+  .text-purple { color: var(--purple-lt); }
+  .text-center { text-align: center; }
+  .italic { font-style: italic; }
+  .mb-8 { margin-bottom: 8px; }
+  .mb-16 { margin-bottom: 16px; }
+  .mb-24 { margin-bottom: 24px; }
+  .mb-32 { margin-bottom: 32px; }
+  .mb-48 { margin-bottom: 48px; }
+  .mb-64 { margin-bottom: 64px; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-block;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--purple); color: var(--white);
+    padding: 16px 40px; border-radius: 8px; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn:hover { background: var(--purple-lt); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; border: 1px solid var(--purple);
+    color: var(--purple-lt);
+  }
+  .btn-outline:hover { background: var(--purple); color: var(--white); }
+  .btn-note {
+    font-size: 0.8rem; color: var(--dim); margin-top: 12px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 120px 24px 80px;
+    background: radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.12) 0%, transparent 60%);
+  }
+  .hero-inner { max-width: 720px; }
+  .hero h1 { margin-bottom: 24px; }
+  .hero p { font-size: 1.15rem; color: var(--muted); max-width: 560px; margin: 0 auto 40px; }
+
+  /* ── OPENING ── */
+  .opening { padding: 80px 24px 100px; }
+  .opening-inner {
+    max-width: 700px; margin: 0 auto;
+    border-left: 3px solid var(--purple);
+    padding-left: 32px;
+  }
+  .opening-inner p {
+    font-size: 1.05rem; color: var(--off); margin-bottom: 20px;
+  }
+  .opening-inner p:last-child { margin-bottom: 0; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    max-width: 800px; margin: 0 auto; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  /* ── FEATURES GRID ── */
+  .features-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    max-width: 900px; margin: 0 auto;
+  }
+  .feature-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 36px 28px;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+  .feature-card:hover { border-color: var(--accent-border); transform: translateY(-2px); }
+  .feature-card.full-width { grid-column: 1 / -1; }
+  .feature-icon {
+    width: 48px; height: 48px; border-radius: 10px;
+    background: var(--navy); border: 1px solid var(--accent-border);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 20px;
+  }
+  .feature-icon svg { width: 22px; height: 22px; stroke: var(--purple-lt); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .feature-card h3 { margin-bottom: 12px; color: var(--white); }
+  .feature-card p { color: var(--muted); font-size: 0.95rem; }
+
+  /* ── WHY 12 WEEKS ── */
+  .timeline-section {
+    background: linear-gradient(180deg, var(--navy) 0%, var(--bg) 100%);
+    padding: 100px 24px;
+  }
+  .timeline-grid {
+    max-width: 800px; margin: 48px auto 0;
+    display: grid; gap: 0;
+  }
+  .timeline-item {
+    display: grid; grid-template-columns: 60px 1fr; gap: 0;
+    position: relative;
+  }
+  .timeline-line {
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .timeline-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: var(--purple); border: 2px solid var(--purple-lt);
+    flex-shrink: 0; position: relative; z-index: 2;
+  }
+  .timeline-stem {
+    width: 2px; flex: 1; background: var(--accent-border); opacity: 0.4;
+  }
+  .timeline-content {
+    padding: 0 0 48px 16px;
+  }
+  .timeline-content h3 { margin-bottom: 8px; color: var(--white); font-size: 1rem; }
+  .timeline-content p { color: var(--muted); font-size: 0.92rem; }
+  .timeline-item:last-child .timeline-stem { display: none; }
+  .timeline-item:last-child .timeline-content { padding-bottom: 0; }
+
+  /* ── COMMITMENT ── */
+  .commitment-box {
+    max-width: 700px; margin: 0 auto;
+    background: var(--card); border: 1px solid var(--accent-border);
+    border-radius: 16px; padding: 56px 48px; text-align: center;
+  }
+  .commitment-box p {
+    color: var(--muted); font-size: 1.05rem; margin-bottom: 16px;
+  }
+  .commitment-box p:last-child { margin-bottom: 0; }
+  .commitment-box .highlight {
+    color: var(--off); font-weight: 400;
+  }
+
+  /* ── STEPS ── */
+  .steps {
+    display: flex; gap: 24px; max-width: 900px; margin: 0 auto;
+  }
+  .step {
+    flex: 1; text-align: center; padding: 40px 24px;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; transition: border-color 0.3s;
+  }
+  .step:hover { border-color: var(--accent-border); }
+  .step-num {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 2.4rem;
+    color: var(--purple); line-height: 1; margin-bottom: 16px;
+  }
+  .step h3 { margin-bottom: 12px; font-size: 0.9rem; }
+  .step p { color: var(--muted); font-size: 0.88rem; }
+
+  /* ── AFTER PROGRAM ── */
+  .after-section {
+    max-width: 700px; margin: 0 auto;
+    background: var(--card2); border: 1px solid var(--border);
+    border-radius: 16px; padding: 48px; text-align: center;
+  }
+  .after-section p { color: var(--muted); font-size: 1rem; margin-bottom: 16px; }
+  .after-price {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.6rem; color: var(--purple-lt); margin: 20px 0;
+  }
+
+  /* ── PRICING ── */
+  .pricing-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    max-width: 800px; margin: 0 auto;
+  }
+  .price-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 48px 36px; text-align: center;
+    position: relative; transition: border-color 0.3s, transform 0.2s;
+  }
+  .price-card:hover { border-color: var(--accent-border); transform: translateY(-2px); }
+  .price-card.featured {
+    border-color: var(--purple);
+    background: linear-gradient(180deg, rgba(124,58,237,0.08) 0%, var(--card) 40%);
+  }
+  .price-card.featured::before {
+    content: 'BEST VALUE';
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.65rem;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    background: var(--purple); color: var(--white);
+    padding: 5px 16px; border-radius: 20px;
+  }
+  .price-amount {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 3rem; color: var(--white); line-height: 1;
+  }
+  .price-period {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--dim); margin-top: 8px; margin-bottom: 20px;
+  }
+  .price-desc {
+    color: var(--muted); font-size: 0.92rem; margin-bottom: 32px;
+  }
+  .price-card .btn { width: 100%; text-align: center; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;
+    max-width: 1000px; margin: 0 auto;
+  }
+  .testimonial {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 32px 24px;
+  }
+  .testimonial-stars { color: var(--purple-lt); font-size: 0.9rem; margin-bottom: 16px; letter-spacing: 2px; }
+  .testimonial-text {
+    color: var(--off); font-size: 0.92rem; font-style: italic;
+    margin-bottom: 20px; line-height: 1.7;
+  }
+  .testimonial-author {
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.8rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--dim);
+  }
+
+  /* ── FAQ ── */
+  .faq-list { max-width: 700px; margin: 0 auto; }
+  .faq-item {
+    border-bottom: 1px solid var(--border); overflow: hidden;
+  }
+  .faq-q {
+    width: 100%; background: none; border: none; color: var(--white);
+    font-family: 'Lato', sans-serif; font-weight: 400; font-size: 1rem;
+    text-align: left; padding: 24px 40px 24px 0; cursor: pointer;
+    position: relative; line-height: 1.5;
+  }
+  .faq-q::after {
+    content: '+'; position: absolute; right: 0; top: 24px;
+    font-family: 'Oswald', sans-serif; font-size: 1.4rem; color: var(--purple-lt);
+    transition: transform 0.3s;
+  }
+  .faq-item.open .faq-q::after { content: '\2212'; }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease;
+    color: var(--muted); font-size: 0.92rem; line-height: 1.7;
+  }
+  .faq-item.open .faq-a { max-height: 300px; padding-bottom: 24px; }
+
+  /* ── FINAL CTA ── */
+  .final-cta {
+    text-align: center; padding: 120px 24px;
+    background: radial-gradient(ellipse at 50% 100%, rgba(124,58,237,0.1) 0%, transparent 60%);
+  }
+  .final-cta h2 { margin-bottom: 20px; }
+  .final-cta p { color: var(--muted); font-size: 1.05rem; max-width: 500px; margin: 0 auto 40px; }
+  .urgency {
+    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 0.75rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--purple-lt); margin-top: 20px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 40px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-logo {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 0.85rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--white); text-decoration: none;
+  }
+  .footer-links { display: flex; gap: 28px; }
+  .footer-link {
+    font-family: 'Lato', sans-serif; font-weight: 300; font-size: 0.82rem;
+    color: var(--dim); text-decoration: none; transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--muted); }
+  .footer-copy { font-size: 0.75rem; color: var(--dim); }
+
+  /* ── REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-right .nav-link, .nav-right .nav-cta { display: none; }
+    .hamburger { display: block; }
+    .features-grid { grid-template-columns: 1fr; }
+    .steps { flex-direction: column; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
+    .testimonials-grid { grid-template-columns: 1fr; max-width: 500px; }
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+  }
+  @media (max-width: 600px) {
+    .hero { padding: 100px 20px 60px; }
+    .section, .section-wide { padding: 60px 20px; }
+    .timeline-section { padding: 60px 20px; }
+    .commitment-box { padding: 40px 24px; }
+    .after-section { padding: 36px 20px; }
+    .opening-inner { padding-left: 20px; }
+    footer { padding: 32px 20px; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="/">Jon Bjork Music</a>
+  <div class="nav-right">
+    <a class="nav-link" href="/#offers">What I Offer</a>
+    <a class="nav-link" href="/courses">Courses</a>
+    <a class="nav-link" href="/#about">About</a>
+    <a class="nav-cta" href="mailto:jon@jonbjorkmusic.com?subject=12-Week%20Mastery%20Program%20%E2%80%94%20Free%20Consultation">Book Free Consultation</a>
+  </div>
+  <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a class="nav-link" href="/#offers" onclick="document.getElementById('mobile-menu').classList.remove('open')">What I Offer</a>
+  <a class="nav-link" href="/courses" onclick="document.getElementById('mobile-menu').classList.remove('open')">Courses</a>
+  <a class="nav-link" href="/#about" onclick="document.getElementById('mobile-menu').classList.remove('open')">About</a>
+  <a class="nav-cta" href="mailto:jon@jonbjorkmusic.com?subject=12-Week%20Mastery%20Program%20%E2%80%94%20Free%20Consultation">Book Free Consultation</a>
+</div>
+
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<section class="hero">
+  <div class="hero-inner reveal">
+    <div class="section-label mb-16">1-on-1 Coaching</div>
+    <h1 class="mb-24">Stop Practicing in Circles.<br>Start Making Real Progress.</h1>
+    <p>The 12-Week Guitar Mastery Program. 1-on-1 coaching built around your playing, your goals, and the music you actually want to play.</p>
+    <a class="btn" href="mailto:jon@jonbjorkmusic.com?subject=12-Week%20Mastery%20Program%20%E2%80%94%20Free%20Consultation">Book Your Free Consultation</a>
+  </div>
+</section>
+
+
+<!-- ═══════════════════ OPENING ═══════════════════ -->
+<section class="opening">
+  <div class="opening-inner reveal">
+    <h2 class="mb-32">25+ Years. 1,000+ Students. One Goal: Your Guitar Mastery.</h2>
+    <p>Do you have a guitar goal that feels just out of reach?</p>
+    <p>Maybe you've been playing for years but feel stuck on a plateau. Maybe you practice every day but can't seem to break through. Maybe you've watched hundreds of YouTube videos and bought courses, but nothing sticks because none of it was built for <em>you</em>.</p>
+    <p>It's time for an approach as committed as you are.</p>
+    <p><strong>Welcome to the 12-Week Guitar Mastery Program.</strong></p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ═══════════════════ WHAT MAKES THIS DIFFERENT ═══════════════════ -->
+<section class="section-wide">
+  <div class="text-center mb-64 reveal">
+    <div class="section-label">The Program</div>
+    <h2>Why This Program Gets Results When Nothing Else Has</h2>
+  </div>
+
+  <div class="features-grid">
+
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4m0 12v4m-7.07-14.93 2.83 2.83m8.48 8.48 2.83 2.83M2 12h4m12 0h4M4.93 4.93l2.83 2.83m8.48 8.48 2.83 2.83"/></svg>
+      </div>
+      <h3>Tailored Goal-Setting</h3>
+      <p>In our initial FREE 15-minute consultation, we set a tangible, achievable goal together. Every session, every exercise, every practice plan is designed around where you are now and where you want to be in 12 weeks.</p>
+    </div>
+
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><path d="M15 10l-4 4l6 6l4-16l-18 7l4 2l2 6l3-4"/></svg>
+      </div>
+      <h3>Weekly 30-Minute Private Sessions</h3>
+      <p>Every week, you and I meet 1-on-1 over Google Meet. These aren't casual check-ins. They're focused, high-impact sessions where I assess your playing, refine your technique, and adjust your plan.</p>
+    </div>
+
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+      </div>
+      <h3>Custom Practice Plan</h3>
+      <p>No more guessing what to practice. I build you a personalized practice plan from day one and refine it as you progress. Every minute of your practice time has a purpose.</p>
+    </div>
+
+    <div class="feature-card reveal">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      </div>
+      <h3>Unlimited WhatsApp Support</h3>
+      <p>Stuck on a tricky passage? Need a quick tip between sessions? Message me anytime. You'll never have to wait a full week to get unstuck. I'm in your corner every step of the way.</p>
+    </div>
+
+    <div class="feature-card full-width reveal">
+      <div class="feature-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <h3>Full Access to All Courses</h3>
+      <p>Get instant access to my full library of structured courses inside The Practice Room, covering technique, speed, alternate picking, synchronization, and more. Practice on your own time, at your own pace, with a system that supports everything we work on together.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════ WHY 12 WEEKS ═══════════════════ -->
+<section class="timeline-section">
+  <div class="text-center mb-16 reveal">
+    <div class="section-label">The Timeframe</div>
+    <h2 class="mb-16">Why 12 Weeks?</h2>
+    <p class="text-muted" style="max-width:520px;margin:0 auto;">The perfect balance of time, intensity, and results.</p>
+  </div>
+
+  <div class="timeline-grid">
+
+    <div class="timeline-item reveal">
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-stem"></div></div>
+      <div class="timeline-content">
+        <h3>Focused, But Not Overwhelming</h3>
+        <p>Twelve weeks is long enough to make dramatic improvements in your playing but short enough to maintain laser-like focus. You won't burn out. You'll build momentum.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-stem"></div></div>
+      <div class="timeline-content">
+        <h3>Built-In Accountability</h3>
+        <p>A set timeframe creates urgency. There's an end date, and we're going to make the most of every session leading up to it. No drifting. No excuses.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-stem"></div></div>
+      <div class="timeline-content">
+        <h3>Real Habit Change</h3>
+        <p>Studies show it takes about 66 days to form a new habit. In 12 weeks, we don't just improve your technique. We rewire the way you practice. These habits stick long after the program ends.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-stem"></div></div>
+      <div class="timeline-content">
+        <h3>Weekly Iterations</h3>
+        <p>With sessions every week, we can constantly assess, adjust, and push forward. If something isn't working, we fix it in days, not weeks. You're always moving toward your goal.</p>
+      </div>
+    </div>
+
+    <div class="timeline-item reveal">
+      <div class="timeline-line"><div class="timeline-dot"></div></div>
+      <div class="timeline-content">
+        <h3>Lasting Transformation</h3>
+        <p>By the end of 12 weeks, you won't just play better. You'll practice better. You'll hear better. You'll have the confidence and the system to keep improving on your own.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════ COMMITMENT ═══════════════════ -->
+<section class="section">
+  <div class="commitment-box reveal">
+    <div class="section-label mb-16">A Mutual Investment</div>
+    <h2 class="mb-32">Commit to Mastery</h2>
+    <p>My methods have transformed 1,000+ students into confident, proficient guitarists over more than 25 years.</p>
+    <p class="highlight">But here's the catch: I can't practice for you.</p>
+    <p>Your transformation requires your commitment.</p>
+    <p>That's why this 12-Week Mastery Program is built for serious players who are ready to put in the work.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- ═══════════════════ HOW IT WORKS ═══════════════════ -->
+<section class="section-wide">
+  <div class="text-center mb-64 reveal">
+    <div class="section-label">Getting Started</div>
+    <h2>Are You Ready to Take It to the Next Level?</h2>
+  </div>
+
+  <div class="steps">
+    <div class="step reveal">
+      <div class="step-num">01</div>
+      <h3>Free 15-Minute Consultation</h3>
+      <p>No hype, just a straightforward discussion about your goals and where you're stuck.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">02</div>
+      <h3>Pick Your Payment Plan</h3>
+      <p>One-time or three installments. The choice is yours.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-num">03</div>
+      <h3>Start Your 12-Week Journey</h3>
+      <p>You, me, and a single-minded focus to turn you into the guitarist you were meant to be.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════ KEEP THE MOMENTUM ═══════════════════ -->
+<section class="section">
+  <div class="after-section reveal">
+    <div class="section-label mb-16">After the Program</div>
+    <h2 class="mb-24">Keep the Momentum Going</h2>
+    <p>After your 12 weeks, you'll have the skills, the habits, and the system to keep progressing on your own. But if you want to stay connected, keep getting feedback, and continue growing alongside other serious players, you can join The Practice Room.</p>
+    <div class="after-price">$67/month</div>
+    <p>Inside, you'll keep access to all courses, weekly group Q&amp;As, and a community of guitarists who've been through the same transformation you have.</p>
+    <p style="color:var(--dim);font-size:0.88rem;">No obligation. No pressure. Just an option if you want it.</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════ PRICING ═══════════════════ -->
+<section class="section-wide" id="pricing">
+  <div class="text-center mb-64 reveal">
+    <div class="section-label">Invest in Your Playing</div>
+    <h2>Choose Your Payment Plan</h2>
+  </div>
+
+  <div class="pricing-grid">
+
+    <div class="price-card featured reveal">
+      <div class="price-amount">$2,000</div>
+      <div class="price-period">One-Time Payment</div>
+      <p class="price-desc">12-Week Guitar Mastery Program. Full access. Full commitment. Best value.</p>
+      <a class="btn" href="mailto:jon@jonbjorkmusic.com?subject=12-Week%20Mastery%20Program%20%E2%80%94%20One-Time%20Payment">Enroll Now</a>
+    </div>
+
+    <div class="price-card reveal">
+      <div class="price-amount">3 &times; $700</div>
+      <div class="price-period">Monthly Payment Plan</div>
+      <p class="price-desc">12-Week Guitar Mastery Program. Same program, spread across three monthly payments.</p>
+      <a class="btn btn-outline" href="mailto:jon@jonbjorkmusic.com?subject=12-Week%20Mastery%20Program%20%E2%80%94%20Payment%20Plan">Enroll Now</a>
+    </div>
+
+  </div>
+
+  <p class="btn-note text-center" style="margin-top:24px;">We'll schedule your FREE 15-minute consultation after enrollment to set your goals and get started.</p>
+</section>
+
+
+<!-- ═══════════════════ TESTIMONIALS ═══════════════════ -->
+<section class="section-wide">
+  <div class="text-center mb-64 reveal">
+    <div class="section-label">Results</div>
+    <h2>What My Students Say</h2>
+  </div>
+
+  <div class="testimonials-grid">
+    <div class="testimonial reveal">
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="testimonial-text">"Jon's coaching completely changed the way I practice. In 12 weeks I went from noodling aimlessly to having a real system. The progress was undeniable."</p>
+      <div class="testimonial-author">George Keenan</div>
+    </div>
+    <div class="testimonial reveal">
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="testimonial-text">"I've taken lessons from many teachers over the years. Jon is different. He actually listens, adapts, and pushes you just the right amount. Worth every penny."</p>
+      <div class="testimonial-author">Toni Watzinger</div>
+    </div>
+    <div class="testimonial reveal">
+      <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <p class="testimonial-text">"The WhatsApp support alone is a game-changer. Whenever I hit a wall, Jon was there with a quick fix. It kept me moving forward between sessions."</p>
+      <div class="testimonial-author">Richard Pedrazzini</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════ FAQ ═══════════════════ -->
+<section class="section">
+  <div class="text-center mb-64 reveal">
+    <div class="section-label">Questions</div>
+    <h2>Frequently Asked Questions</h2>
+  </div>
+
+  <div class="faq-list">
+
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I schedule my free 15-minute consultation?</button>
+      <div class="faq-a">Send me an email and we'll schedule a time that works for both of us as soon as possible.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I get a refund if I'm unhappy with my purchase?</button>
+      <div class="faq-a">All contracts are binding. I am here to coach you to your highest level of success, and part of that is requiring a commitment from you that you are fully invested. It is to YOUR benefit to decide BEFORE purchasing that I am the right coach for you. If you're in, you need to be 100% in, just as I will be for you.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I schedule my coaching sessions?</button>
+      <div class="faq-a">We'll figure out a recurring weekly time that works for both of us during our initial consultation.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">Can I purchase coaching more than once?</button>
+      <div class="faq-a">Absolutely. Many students go through a second round to tackle a new goal. Simply purchase the program again when you're ready.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What if I only need a single lesson?</button>
+      <div class="faq-a">I do offer single lessons as well, but those don't come with the custom practice plan, WhatsApp support, or course access. Send me an email to ask about current rates.</div>
+    </div>
+
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="this.parentElement.classList.toggle('open')">What happens after the 12 weeks?</button>
+      <div class="faq-a">You'll have everything you need to keep progressing independently. If you'd like ongoing community access, courses, and weekly group Q&amp;As, you can join The Practice Room for $67/month.</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════ FINAL CTA ═══════════════════ -->
+<section class="final-cta">
+  <div class="reveal">
+    <div class="section-label mb-16">Let's Go</div>
+    <h2>Don't Let Another Year Slip By.</h2>
+    <p>Book your FREE 15-minute consultation and start your path to guitar mastery now.</p>
+    <a class="btn" href="mailto:jon@jonbjorkmusic.com?subject=12-Week%20Mastery%20Program%20%E2%80%94%20Free%20Consultation">Book Your Free Consultation</a>
+    <div class="urgency">Limited spots available. I only take on a small number of students at a time.</div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="/">Jon Bjork Music</a>
+  <div class="footer-links">
+    <a class="footer-link" href="/">Home</a>
+    <a class="footer-link" href="/courses">Courses</a>
+    <a class="footer-link" href="/start">The Practice Room</a>
+    <a class="footer-link" href="/legal">Legal</a>
+  </div>
+  <div class="footer-copy">&copy; 2025 Jon Bjork Music. All rights reserved.</div>
+</footer>
+
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
