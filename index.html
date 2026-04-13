@@ -170,7 +170,7 @@
   .offers-wrap { padding: 100px 48px; max-width: 1100px; margin: 0 auto; }
   .offers-header { text-align: center; max-width: 620px; margin: 0 auto 64px; }
   .offers-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
   }
   .offer-card {
     background: var(--card);
@@ -362,7 +362,7 @@
     <a class="nav-link" href="#offers">What I Offer</a>
     <a class="nav-link" href="/courses">Courses</a>
     <a class="nav-link" href="#about">About</a>
-    <a class="nav-btn" href="/start" target="_blank">Join The Practice Room</a>
+    <a class="nav-btn" href="/coaching">1-on-1 Coaching</a>
   </div>
 </nav>
 
@@ -376,7 +376,7 @@
     <h1>Practice Smarter.<br>Progress Faster.<br>Play Better.</h1>
     <p class="hero-sub">25 years of teaching. One clear system. Built around your playing.</p>
     <div class="hero-ctas">
-      <a class="btn btn-purple" href="/start" target="_blank">Join The Practice Room</a>
+      <a class="btn btn-purple" href="/coaching">Learn About 1-on-1 Coaching</a>
       <a class="btn btn-outline" href="#offers">See What I Offer</a>
     </div>
   </div>
@@ -392,37 +392,30 @@
   <div class="offers-header reveal">
     <span class="section-tag">What I Offer</span>
     <h2 class="section-title">Three Ways To Work With Me.</h2>
-    <p class="section-body" style="margin-top:12px">Whether you want personalised coaching, structured courses, or free lessons to get started — there is a path for you.</p>
+    <p class="section-body" style="margin-top:12px">Whether you want intensive 1-on-1 coaching, structured courses with a community, or a free place to start.</p>
   </div>
   <div class="offers-grid reveal">
 
     <div class="offer-card featured">
       <div class="offer-badge">Most Popular</div>
       <div class="offer-icon">01</div>
-      <div class="offer-title">The Practice Room Coaching Program</div>
-      <div class="offer-desc">Personalised 1-on-1 coaching built around your playing. A 12-week plan, monthly lessons with me, video feedback, and unlimited support whenever you need it. Your first week is free.</div>
-      <a class="offer-link" href="/start" target="_blank">Learn More &#8594;</a>
+      <div class="offer-title">The 12-Week Guitar Mastery Program</div>
+      <div class="offer-desc">Personalised 1-on-1 coaching built around your playing. Weekly private lessons, a custom practice plan, and unlimited WhatsApp support. For serious players ready to break through.</div>
+      <a class="offer-link" href="/coaching">Learn More &#8594;</a>
     </div>
 
     <div class="offer-card">
       <div class="offer-icon">02</div>
-      <div class="offer-title">Courses</div>
-      <div class="offer-desc">Self-paced courses covering technique, speed, shred, and practice methodology. Structured lessons you can work through at your own pace, whenever it suits you.</div>
-      <a class="offer-link" href="/courses">Browse Courses &#8594;</a>
+      <div class="offer-title">The Practice Room Pro</div>
+      <div class="offer-desc">All courses, weekly live Q&amp;A with me, and a community of committed players. For guitarists who want structure, accountability, and direct access. $99/month.</div>
+      <a class="offer-link" href="https://www.skool.com/the-practice-room-pro/plans" target="_blank">Join Pro &#8594;</a>
     </div>
 
     <div class="offer-card">
       <div class="offer-icon">03</div>
-      <div class="offer-title">Free Community</div>
-      <div class="offer-desc">Join 1,100+ guitarists in my free Skool community. Includes the Alternate Picking Deep Dive — a free 30-day program with a clear daily routine to build real technique from day one.</div>
+      <div class="offer-title">The Practice Room</div>
+      <div class="offer-desc">Join 1,100+ guitarists. Free lessons, challenges, and the Alternate Picking Deep Dive — a 30-day program to build real technique from day one.</div>
       <a class="offer-link" href="https://www.skool.com/the-practice-room/about" target="_blank">Join Free &#8594;</a>
-    </div>
-
-    <div class="offer-card">
-      <div class="offer-icon">04</div>
-      <div class="offer-title">Free Lessons on YouTube</div>
-      <div class="offer-desc">Hundreds of free guitar lessons covering technique, licks, practice tips and more. A great place to start and get a feel for how I teach.</div>
-      <a class="offer-link" href="https://youtube.com/@jonbjork" target="_blank">Watch on YouTube &#8594;</a>
     </div>
 
   </div>
@@ -519,17 +512,17 @@
 <!-- CTA -->
 <section class="cta-band">
   <h2>Ready To Make<br>Real Progress?</h2>
-  <p>Join The Practice Room today. Your first week is completely free.</p>
-  <a class="btn btn-purple" href="/start" target="_blank">Join The Practice Room</a>
+  <p>Book a free 15-minute consultation and find out if 1-on-1 coaching is right for you.</p>
+  <a class="btn btn-purple" href="/coaching">Learn About 1-on-1 Coaching</a>
 </section>
 
 <footer>
   <a class="footer-logo" href="#">Jon Bjork Music</a>
   <div class="footer-links">
-    <a class="footer-link" href="#offers">What I Offer</a>
+    <a class="footer-link" href="/">Home</a>
+    <a class="footer-link" href="/coaching">Coaching</a>
     <a class="footer-link" href="/courses">Courses</a>
     <a class="footer-link" href="https://youtube.com/@jonbjork" target="_blank">YouTube</a>
-    <a class="footer-link" href="mailto:jon@jonbjorkmusic.com">Contact</a>
   </div>
   <a class="footer-link" href="/legal">Legal</a>
   <div class="footer-copy">2025 Jon Bjork Music</div>
@@ -544,7 +537,7 @@
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.08 });
+  }, { threshold: 0.1 });
   reveals.forEach(function(el) { io.observe(el); });
 </script>
 </body>
