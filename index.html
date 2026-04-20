@@ -352,6 +352,211 @@
     .testi-grid { grid-template-columns: 1fr; }
     .about-wrap { padding-left: 24px; padding-right: 24px; }
   }
+
+  /* =========================================================
+     ANIMATION LAYER — added April 2026
+     Subtle motion enhancements. Respects prefers-reduced-motion.
+     ========================================================= */
+
+  /* Smooth easing variable */
+  :root {
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  /* --- Nav slide-down on load --- */
+  nav {
+    animation: navDrop 0.5s var(--ease-out-smooth) both;
+  }
+  @keyframes navDrop {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+
+  /* --- Refined hero fadeUp (overrides the basic one) --- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-tag   { animation: fadeUp 0.8s 0.3s var(--ease-out-expo) both; opacity: 0; }
+  .hero h1    { animation: fadeUp 0.9s 0.45s var(--ease-out-expo) both; opacity: 0; }
+  .hero-sub   { animation: fadeUp 0.9s 0.65s var(--ease-out-expo) both; opacity: 0; }
+  .hero-ctas  { animation: fadeUp 0.9s 0.8s var(--ease-out-expo) both; opacity: 0; }
+
+  /* --- Refined scroll reveal with smoother easing --- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+      opacity 0.8s var(--ease-out-expo),
+      transform 0.8s var(--ease-out-expo);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* --- Cascading card stagger within grids --- */
+  .offers-grid .offer-card,
+  .testi-grid  .testi-card {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.7s var(--ease-out-expo),
+      transform 0.7s var(--ease-out-expo),
+      border-color 0.25s,
+      background 0.25s,
+      box-shadow 0.35s;
+  }
+  .offers-grid.visible .offer-card:nth-child(1),
+  .testi-grid.visible  .testi-card:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateY(0); }
+  .offers-grid.visible .offer-card:nth-child(2),
+  .testi-grid.visible  .testi-card:nth-child(2) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
+  .offers-grid.visible .offer-card:nth-child(3),
+  .testi-grid.visible  .testi-card:nth-child(3) { transition-delay: 0.25s; opacity: 1; transform: translateY(0); }
+
+  /* --- Card lift + purple glow on hover --- */
+  .offer-card,
+  .testi-card {
+    will-change: transform;
+  }
+  .offer-card:hover,
+  .testi-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px -12px rgba(124, 58, 237, 0.35);
+  }
+
+  /* --- Button shimmer sweep + subtle scale --- */
+  .btn,
+  .nav-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.25s var(--ease-out-smooth);
+  }
+  .btn::after,
+  .nav-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      120deg,
+      transparent,
+      rgba(255, 255, 255, 0.18),
+      transparent
+    );
+    transform: skewX(-20deg);
+    transition: left 0.7s var(--ease-out-smooth);
+    pointer-events: none;
+  }
+  .btn:hover::after,
+  .nav-btn:hover::after {
+    left: 125%;
+  }
+  .btn-purple:hover {
+    transform: scale(1.02);
+  }
+  .nav-btn:hover {
+    transform: scale(1.02);
+  }
+
+  /* --- Nav link underline draw --- */
+  .nav-link {
+    position: relative;
+    padding-bottom: 4px;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--purple-lt);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s var(--ease-out-smooth);
+  }
+  .nav-link:hover::after { transform: scaleX(1); }
+
+  /* --- Footer link underline draw --- */
+  .footer-link {
+    position: relative;
+    padding-bottom: 3px;
+  }
+  .footer-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--white);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s var(--ease-out-smooth);
+  }
+  .footer-link:hover::after { transform: scaleX(1); }
+
+  /* --- Social link gentle lift --- */
+  .social-link {
+    transition: all 0.25s var(--ease-out-smooth);
+  }
+  .social-link:hover {
+    transform: translateY(-2px);
+  }
+
+  /* --- About image subtle zoom on hover --- */
+  .about-img {
+    transition: transform 0.6s var(--ease-out-expo);
+  }
+  .about-img:hover {
+    transform: scale(1.02);
+  }
+
+  /* --- Purple accent divider slow pulse --- */
+  @keyframes purplePulse {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.55; }
+  }
+  .band {
+    position: relative;
+  }
+  .band::before,
+  .band::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--accent-border);
+    animation: purplePulse 5s ease-in-out infinite;
+  }
+  .band::before { top: -1px; }
+  .band::after  { bottom: -1px; animation-delay: 2.5s; }
+
+  /* --- Animated stat numbers --- */
+  .a-stat-num {
+    display: inline-block;
+  }
+
+  /* --- Accessibility: honor reduced-motion preference --- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .hero-tag, .hero h1, .hero-sub, .hero-ctas,
+    .reveal, .offers-grid .offer-card, .testi-grid .testi-card {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -552,16 +757,72 @@
 </footer>
 
 <script>
+  // Respect user's motion preference
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // --- Scroll reveal ---
   var reveals = document.querySelectorAll('.reveal');
-  var io = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e, i) {
-      if (e.isIntersecting) {
-        setTimeout(function() { e.target.classList.add('visible'); }, i * 80);
-        io.unobserve(e.target);
-      }
+  if (prefersReduced) {
+    reveals.forEach(function(el) { el.classList.add('visible'); });
+  } else {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e, i) {
+        if (e.isIntersecting) {
+          setTimeout(function() { e.target.classList.add('visible'); }, i * 60);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(function(el) { io.observe(el); });
+  }
+
+  // --- Stat number count-up ---
+  function animateCount(el) {
+    var text = el.textContent.trim();
+    var match = text.match(/^(\d+(?:[\.,]\d+)?)(.*)$/);
+    if (!match) return;
+    var target = parseFloat(match[1].replace(',', '.'));
+    var suffix = match[2] || '';
+    if (isNaN(target) || target === 0) return;
+    if (prefersReduced) { el.textContent = target + suffix; return; }
+
+    var duration = 1400;
+    var start = performance.now();
+    var isFloat = /[\.,]/.test(match[1]);
+
+    function tick(now) {
+      var progress = Math.min((now - start) / duration, 1);
+      // ease-out-expo
+      var eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      var value = target * eased;
+      el.textContent = (isFloat ? value.toFixed(1) : Math.floor(value)) + suffix;
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = (isFloat ? target.toFixed(1) : target) + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  var stats = document.querySelectorAll('.a-stat-num');
+  if (stats.length) {
+    var statObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          animateCount(e.target);
+          statObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    stats.forEach(function(el) { statObs.observe(el); });
+  }
+
+  // --- Smooth scroll for anchor links (native CSS already handles,
+  //     but ensure no jump-to-top on empty hrefs) ---
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(ev) {
+      var href = a.getAttribute('href');
+      if (href === '#' || href === '') { ev.preventDefault(); }
     });
-  }, { threshold: 0.1 });
-  reveals.forEach(function(el) { io.observe(el); });
+  });
 </script>
 </body>
 </html>
