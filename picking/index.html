@@ -760,6 +760,23 @@
     margin-bottom: 14px;
   }
 
+
+  /* VIDEO EMBED */
+  .video-wrap {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border: 1px solid var(--line-strong);
+    background: var(--bg-deep);
+  }
+  .video-wrap iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: block;
+  }
+
 </style>
 </head>
 <body>
@@ -996,6 +1013,25 @@
       <button class="btn" id="addRow">+ Add Row</button>
       <button class="btn" id="clearLog">Clear Log</button>
       <button class="btn" id="exportLog">Export as Text</button>
+    </div>
+  </section>
+
+
+  <!-- VIDEO -->
+  <section class="section reveal">
+    <div class="section-head">
+      <div class="label">See It In Action</div>
+      <h2>Watch The <span class="accent">Method</span></h2>
+      <p class="sub">A full walkthrough of the speed burst method. Watch it before you run the protocol, or come back to it if anything in the steps needs more context.</p>
+    </div>
+    <div class="video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/JDEPySORgsw"
+        title="The Speed Burst Method"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
     </div>
   </section>
 
