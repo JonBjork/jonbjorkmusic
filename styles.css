@@ -23,62 +23,64 @@
    14. Animations     — keyframes, scroll reveals, hover effects
    15. Responsive     — breakpoint overrides
    16. Reduced motion — accessibility
+
+   NOTE: hero photos go ON THE PAGE, not in this stylesheet. Each page sets
+   its own hero image via inline style on the .hero-bg div:
+     <div class="hero-bg" style="background-image: url(data:image/...);"></div>
    ============================================================================= */
 
 
 /* === 1. TOKENS ============================================================ */
 :root {
   /* --- Colors --- */
-  --bg:            #0d0d0d;  /* page background */
-  --card:          #181818;  /* card background, lighter than page */
-  --card2:         #1f1f1f;  /* nested card background, lighter still */
-  --border:        #2a2a2a;  /* default border */
+  --bg:            #0d0d0d;
+  --card:          #181818;
+  --card2:         #1f1f1f;
+  --border:        #2a2a2a;
   --white:         #ffffff;
-  --off:           #e8e8e8;  /* off-white, for body copy on dark */
-  --muted:         #aaaaaa;  /* secondary text */
-  --dim:           #666666;  /* tertiary text (footer, metadata) */
-  --purple:        #7c3aed;  /* brand purple, CTAs */
-  --purple-lt:     #9d5ff5;  /* lighter purple, accents and hover */
-  --navy:          #1a1040;  /* deep navy, hover backgrounds */
-  --accent-border: #4a3a9a;  /* purple-tinted border */
+  --off:           #e8e8e8;
+  --muted:         #aaaaaa;
+  --dim:           #666666;
+  --purple:        #7c3aed;
+  --purple-lt:     #9d5ff5;
+  --navy:          #1a1040;
+  --accent-border: #4a3a9a;
 
   /* --- Layout --- */
-  --nav-h:         190px;     /* nav height — controls body padding-top */
-  --content-max:   1100px;    /* default content max-width */
-  --hero-content-max: 1400px; /* wider for big hero h1 */
-  --section-pad-y: 100px;     /* vertical padding for full sections */
-  --section-pad-x: 48px;      /* horizontal padding for full sections */
-  --card-pad:      36px;      /* default card inner padding */
+  --nav-h:         190px;
+  --content-max:   1100px;
+  --hero-content-max: 1400px;
+  --section-pad-y: 100px;
+  --section-pad-x: 48px;
+  --card-pad:      36px;
 
-  /* --- Typography sizes (semantic, not class-based) --- */
-  --fs-eyebrow:    2rem;                              /* "WHAT I OFFER" small caps */
-  --fs-title:      clamp(2.75rem, 5.5vw, 4.5rem);     /* section H2s */
-  --fs-body:       1.4rem;                            /* paragraph copy in sections */
-  --fs-hero-h1:    clamp(4rem, 9vw, 8.5rem);          /* hero headline */
-  --fs-hero-sub:   1.45rem;                           /* hero subtitle */
-  --fs-btn:        1.1rem;                            /* primary buttons */
-  --fs-band:       1.25rem;                           /* band p (thin strips) */
-  --fs-card-title: 1.55rem;                           /* offer card titles */
-  --fs-card-body:  1.3rem;                            /* offer card descriptions */
-  --fs-card-link:  1.1rem;                            /* "Learn More →" links */
-  --fs-card-icon:  3.5rem;                            /* big number icons (01, 02) */
-  --fs-quote-mark: 4.2rem;                            /* testimonial " glyph */
-  --fs-quote-text: 1.25rem;                           /* testimonial body */
-  --fs-quote-author: 1rem;                            /* testimonial attribution */
-  --fs-stat-num:   2.5rem;                            /* big stat numbers */
-  --fs-stat-lbl:   0.95rem;                           /* stat labels */
-  --fs-cta-h2:     clamp(2.75rem, 5.5vw, 5rem);       /* bottom CTA band heading */
-  --fs-courses-band-p: 1.4rem;                        /* courses band paragraph */
-  --fs-courses-band-a: 1.2rem;                        /* courses band link */
+  /* --- Typography sizes --- */
+  --fs-eyebrow:    2rem;
+  --fs-title:      clamp(2.75rem, 5.5vw, 4.5rem);
+  --fs-body:       1.4rem;
+  --fs-hero-h1:    clamp(4rem, 9vw, 8.5rem);
+  --fs-hero-sub:   1.45rem;
+  --fs-btn:        1.1rem;
+  --fs-band:       1.25rem;
+  --fs-card-title: 1.55rem;
+  --fs-card-body:  1.3rem;
+  --fs-card-link:  1.1rem;
+  --fs-card-icon:  3.5rem;
+  --fs-quote-mark: 4.2rem;
+  --fs-quote-text: 1.25rem;
+  --fs-quote-author: 1rem;
+  --fs-stat-num:   2.5rem;
+  --fs-stat-lbl:   0.95rem;
+  --fs-cta-h2:     clamp(2.75rem, 5.5vw, 5rem);
+  --fs-courses-band-p: 1.4rem;
+  --fs-courses-band-a: 1.2rem;
 
-  /* Nav typography */
   --fs-nav-name:    4.55rem;
   --fs-nav-tag:     1.5rem;
   --fs-nav-tagline: 1.1rem;
   --fs-nav-link:    1.6rem;
   --fs-nav-btn:     1.4rem;
 
-  /* Footer typography */
   --fs-footer-name:    1.4rem;
   --fs-footer-tag:     0.9rem;
   --fs-footer-tagline: 0.8rem;
@@ -90,7 +92,6 @@
   --ease-out-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Responsive token overrides */
 @media (max-width: 1280px) {
   :root {
     --nav-h: 162px;
@@ -127,7 +128,7 @@ body {
   font-weight: 300;
   line-height: 1.7;
   overflow-x: hidden;
-  padding-top: var(--nav-h); /* offset for fixed nav */
+  padding-top: var(--nav-h);
 }
 
 
@@ -283,6 +284,7 @@ nav {
   background-position: center 30%;
   filter: brightness(0.55);
   z-index: 0;
+  /* NOTE: background-image is set inline on the element per-page */
 }
 .hero-overlay {
   position: absolute; inset: 0;
@@ -383,7 +385,6 @@ nav {
 
 
 /* === 7. BANDS ============================================================= */
-/* --- Generic band (purple-bordered strip) --- */
 .band {
   background: var(--navy);
   border-top: 1px solid var(--accent-border);
@@ -408,7 +409,6 @@ nav {
 .band::before { top: -1px; }
 .band::after  { bottom: -1px; animation-delay: 2.5s; }
 
-/* --- Courses band (lighter strip with link) --- */
 .courses-band {
   background: var(--card);
   border-top: 1px solid var(--border);
@@ -702,7 +702,6 @@ footer {
   50%      { opacity: 0.55; }
 }
 
-/* Card stagger inside grids */
 .offers-grid .offer-card,
 .testi-grid  .testi-card {
   opacity: 0;
