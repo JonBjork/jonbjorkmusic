@@ -29,7 +29,11 @@
     --purple-lt:     #9d5ff5;
     --navy:          #1a1040;
     --accent-border: #4a3a9a;
+    --nav-h:         190px;
   }
+  @media (max-width: 1280px) { :root { --nav-h: 162px; } }
+  @media (max-width: 900px)  { :root { --nav-h: 100px; } }
+  @media (max-width: 480px)  { :root { --nav-h: 80px; } }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
@@ -44,33 +48,70 @@
 
   /* NAV */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    position: sticky; top: 0; z-index: 200;
     background: rgba(13,13,13,0.95);
     border-bottom: 1px solid var(--border);
     backdrop-filter: blur(12px);
     display: flex; justify-content: space-between; align-items: center;
-    padding: 0 48px; height: 64px;
+    padding: 40px 78px;
   }
   .nav-logo {
-    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1rem;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--white); text-decoration: none;
+    display: inline-flex; flex-direction: column; align-items: flex-start;
+    gap: 20px; text-decoration: none; line-height: 1;
   }
-  .nav-right { display: flex; align-items: center; gap: 36px; }
+  .nav-logo-row {
+    display: inline-flex; align-items: center; gap: 30px; line-height: 1;
+  }
+  .nav-logo-name {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 4.55rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--white);
+    line-height: 1;
+  }
+  .nav-logo-divider {
+    display: inline-block;
+    width: 3px; height: 78px;
+    background: #3a3a3a;
+  }
+  .nav-logo-tag {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 1.5rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--muted);
+    line-height: 1;
+  }
+  .nav-tagline {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 1.1rem; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--purple-lt);
+    line-height: 1;
+  }
+  .nav-right { display: flex; align-items: center; gap: 62px; }
   .nav-link {
-    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 0.75rem;
+    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 1.6rem;
     letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--muted); text-decoration: none; transition: color 0.2s;
   }
   .nav-link:hover { color: var(--white); }
   .nav-btn {
-    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.75rem;
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1.4rem;
     letter-spacing: 0.14em; text-transform: uppercase;
     background: var(--purple); color: var(--white);
-    padding: 11px 26px; border-radius: 6px;
+    padding: 26px 56px; border-radius: 12px;
     text-decoration: none; transition: background 0.2s; display: inline-block;
   }
   .nav-btn:hover { background: var(--purple-lt); }
+  @media (max-width: 1280px) {
+    nav { padding: 34px 62px; }
+    .nav-logo { gap: 16px; }
+    .nav-logo-row { gap: 26px; }
+    .nav-logo-name { font-size: 3.85rem; }
+    .nav-logo-divider { height: 68px; }
+    .nav-logo-tag { font-size: 1.35rem; }
+    .nav-tagline { font-size: 1rem; letter-spacing: 0.26em; }
+    .nav-right { gap: 50px; }
+    .nav-link { font-size: 1.4rem; }
+    .nav-btn { padding: 22px 46px; font-size: 1.25rem; border-radius: 11px; }
+  }
 
   /* COURSES BAND */
   .courses-band {
@@ -84,14 +125,14 @@
     margin: 0;
     font-family: 'Lato', sans-serif;
     font-weight: 300;
-    font-size: 1rem;
+    font-size: 1.4rem;
     color: var(--muted);
     letter-spacing: 0.02em;
   }
   .courses-band a {
     font-family: 'Oswald', sans-serif;
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 1.2rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--white);
@@ -139,7 +180,7 @@
 
   .mobile-menu {
     display: none;
-    position: fixed; top: 64px; left: 0; right: 0; z-index: 199;
+    position: fixed; top: 100px; left: 0; right: 0; z-index: 199;
     background: rgba(13,13,13,0.98);
     border-bottom: 1px solid var(--border);
     backdrop-filter: blur(12px);
@@ -157,20 +198,21 @@
   }
   .mobile-menu .nav-link {
     display: block;
-    padding: 16px 8px;
-    font-size: 0.85rem;
+    padding: 20px 8px;
+    font-size: 1.2rem;
     border-bottom: 1px solid var(--border);
   }
   .mobile-menu .nav-btn {
-    margin-top: 16px;
+    margin-top: 20px;
     text-align: center;
-    padding: 14px 26px;
+    padding: 18px 32px;
+    font-size: 1.1rem;
   }
 
   /* HERO */
   .hero {
     position: relative;
-    height: 100vh;
+    height: calc(100vh - var(--nav-h));
     min-height: 600px;
     display: flex;
     align-items: flex-end;
@@ -211,14 +253,14 @@
   }
   .hero h1 {
     font-family: 'Oswald', sans-serif; font-weight: 700;
-    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-size: clamp(4rem, 9vw, 8.5rem);
     line-height: 0.95; letter-spacing: 0.02em; text-transform: uppercase;
-    color: var(--white); margin-bottom: 24px;
+    color: var(--white); margin-bottom: 28px;
     opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
   }
   .hero-sub {
-    font-size: 1.05rem; color: var(--muted); max-width: 520px;
-    font-weight: 300; line-height: 1.75; margin-bottom: 40px;
+    font-size: 1.45rem; color: var(--muted); max-width: 680px;
+    font-weight: 300; line-height: 1.7; margin-bottom: 48px;
     opacity: 0; animation: fadeUp 0.6s 0.35s forwards;
   }
   .hero-ctas {
@@ -228,9 +270,9 @@
 
   /* BUTTONS */
   .btn {
-    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.8rem;
-    letter-spacing: 0.16em; text-transform: uppercase; padding: 16px 40px;
-    border-radius: 8px; text-decoration: none; display: inline-block;
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1.1rem;
+    letter-spacing: 0.16em; text-transform: uppercase; padding: 22px 50px;
+    border-radius: 10px; text-decoration: none; display: inline-block;
     transition: all 0.2s; cursor: pointer; border: none;
   }
   .btn-purple { background: var(--purple); color: var(--white); }
@@ -240,17 +282,17 @@
 
   /* SHARED */
   .section-tag {
-    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 0.7rem;
+    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 1rem;
     letter-spacing: 0.28em; text-transform: uppercase; color: var(--purple-lt);
-    margin-bottom: 16px; display: block;
+    margin-bottom: 22px; display: block;
   }
   .section-title {
     font-family: 'Oswald', sans-serif; font-weight: 700;
-    font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.0;
+    font-size: clamp(2.75rem, 5.5vw, 4.5rem); line-height: 1.0;
     letter-spacing: 0.01em; text-transform: uppercase;
-    color: var(--white); margin-bottom: 20px;
+    color: var(--white); margin-bottom: 28px;
   }
-  .section-body { font-size: 1rem; color: var(--muted); line-height: 1.8; font-weight: 300; }
+  .section-body { font-size: 1.4rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
   .reveal {
     opacity: 0; transform: translateY(24px);
     transition: opacity 0.65s ease, transform 0.65s ease;
@@ -265,7 +307,7 @@
     padding: 22px 48px; text-align: center;
   }
   .band p {
-    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 0.88rem;
+    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 1.25rem;
     letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted);
   }
 
@@ -296,27 +338,27 @@
   .offer-card.featured { border-color: var(--purple); background: var(--navy); }
   .offer-card.featured::before { transform: scaleX(1); }
   .offer-icon {
-    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 2.5rem;
-    color: var(--purple); opacity: 0.4; line-height: 1; margin-bottom: 24px;
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 3.5rem;
+    color: var(--purple); opacity: 0.4; line-height: 1; margin-bottom: 28px;
     transition: opacity 0.25s;
   }
   .offer-card:hover .offer-icon { opacity: 0.8; }
   .offer-card.featured .offer-icon { opacity: 0.8; }
   .offer-title {
-    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.1rem;
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.55rem;
     letter-spacing: 0.06em; text-transform: uppercase;
-    color: var(--white); margin-bottom: 16px;
+    color: var(--white); margin-bottom: 20px;
   }
-  .offer-desc { font-size: 0.92rem; color: var(--muted); line-height: 1.75; flex: 1; margin-bottom: 32px; }
+  .offer-desc { font-size: 1.3rem; color: var(--muted); line-height: 1.7; flex: 1; margin-bottom: 36px; }
   .offer-badge {
     position: absolute; top: -1px; right: 32px;
     background: var(--purple); color: var(--white);
-    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 0.62rem;
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 0.88rem;
     letter-spacing: 0.18em; text-transform: uppercase;
-    padding: 5px 14px; border-radius: 0 0 6px 6px;
+    padding: 7px 18px; border-radius: 0 0 6px 6px;
   }
   .offer-link {
-    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.78rem;
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1.1rem;
     letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--purple-lt); text-decoration: none;
     display: flex; align-items: center; gap: 8px;
@@ -347,11 +389,11 @@
   }
   .a-stat-num {
     font-family: 'Oswald', sans-serif; font-weight: 700;
-    font-size: 1.8rem; color: var(--purple-lt); line-height: 1;
+    font-size: 2.5rem; color: var(--purple-lt); line-height: 1;
   }
   .a-stat-lbl {
-    font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--muted); margin-top: 5px;
+    font-size: 0.95rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--muted); margin-top: 7px;
   }
 
   /* SOCIAL LINKS */
@@ -363,11 +405,11 @@
     margin-top: 40px;
   }
   .social-link {
-    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.78rem;
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1.1rem;
     letter-spacing: 0.14em; text-transform: uppercase;
     background: var(--card); color: var(--muted);
-    border: 1px solid var(--border); border-radius: 8px;
-    padding: 14px 28px; text-decoration: none;
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 18px 36px; text-decoration: none;
     transition: all 0.2s;
     display: flex; align-items: center; gap: 10px;
   }
@@ -390,12 +432,12 @@
   }
   .testi-card:hover { border-color: var(--accent-border); }
   .testi-mark {
-    font-family: 'Oswald', sans-serif; font-size: 3rem; line-height: 0.7;
-    color: var(--purple); opacity: 0.4; display: block; margin-bottom: 16px;
+    font-family: 'Oswald', sans-serif; font-size: 4.2rem; line-height: 0.7;
+    color: var(--purple); opacity: 0.4; display: block; margin-bottom: 20px;
   }
-  .testi-text { font-size: 0.88rem; color: var(--muted); line-height: 1.8; margin-bottom: 24px; font-style: italic; }
+  .testi-text { font-size: 1.25rem; color: var(--muted); line-height: 1.7; margin-bottom: 28px; font-style: italic; }
   .testi-author {
-    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.72rem;
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1rem;
     letter-spacing: 0.14em; text-transform: uppercase; color: var(--white);
   }
 
@@ -407,11 +449,11 @@
   }
   .cta-band h2 {
     font-family: 'Oswald', sans-serif; font-weight: 700;
-    font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: 0.02em;
+    font-size: clamp(2.75rem, 5.5vw, 5rem); letter-spacing: 0.02em;
     text-transform: uppercase; color: var(--white);
-    line-height: 1.0; margin-bottom: 16px;
+    line-height: 1.0; margin-bottom: 22px;
   }
-  .cta-band p { font-size: 1rem; color: var(--muted); margin-bottom: 40px; }
+  .cta-band p { font-size: 1.4rem; color: var(--muted); margin-bottom: 48px; }
 
   /* FOOTER */
   footer {
@@ -421,18 +463,40 @@
     flex-wrap: wrap; gap: 16px;
   }
   .footer-logo {
-    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 0.9rem;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--muted); text-decoration: none;
+    display: inline-flex; flex-direction: column; align-items: flex-start;
+    gap: 14px; text-decoration: none; line-height: 1;
+  }
+  .footer-logo-row {
+    display: inline-flex; align-items: center; gap: 16px; line-height: 1;
+  }
+  .footer-logo-name {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.4rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--white);
+    line-height: 1;
+  }
+  .footer-logo-divider {
+    display: inline-block; width: 2px; height: 28px; background: #3a3a3a;
+  }
+  .footer-logo-tag {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.9rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--muted);
+    line-height: 1;
+  }
+  .footer-tagline {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.8rem; letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--dim);
   }
   .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
   .footer-link {
-    font-family: 'Oswald', sans-serif; font-size: 0.7rem;
+    font-family: 'Oswald', sans-serif; font-size: 0.95rem;
     letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--dim); text-decoration: none; transition: color 0.2s;
   }
   .footer-link:hover { color: var(--white); }
-  .footer-copy { font-size: 0.72rem; color: var(--dim); }
+  .footer-copy { font-size: 1rem; color: var(--dim); }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
@@ -446,16 +510,28 @@
     .offers-grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 900px) {
-    nav { padding: 0 24px; }
+    nav { padding: 26px 24px; }
+    .nav-logo { gap: 11px; }
+    .nav-logo-row { gap: 22px; }
+    .nav-logo-name { font-size: 2.8rem; }
+    .nav-logo-divider { height: 50px; }
+    .nav-logo-tag { font-size: 1.2rem; }
+    .nav-tagline { display: none; }
     .nav-right { display: none; }
     .nav-toggle { display: flex; }
-    .mobile-menu { display: flex; }
+    .mobile-menu { display: flex; top: 100px; }
     .hero-content { padding: 0 24px 80px; }
     .offers-wrap, .social-wrap, .testi-wrap, .cta-band, footer, .band { padding-left: 24px; padding-right: 24px; }
     .offers-grid { grid-template-columns: 1fr; }
     .about-inner { grid-template-columns: 1fr; gap: 40px; padding: 72px 24px; }
     .testi-grid { grid-template-columns: 1fr; }
     .about-wrap { padding-left: 24px; padding-right: 24px; }
+  }
+  @media (max-width: 480px) {
+    nav { padding: 20px 20px; }
+    .nav-logo-divider, .nav-logo-tag { display: none; }
+    .nav-logo-name { font-size: 2.3rem; }
+    .mobile-menu { top: 80px; }
   }
 
   /* =========================================================
@@ -667,12 +743,19 @@
 <body>
 
 <nav>
-  <a class="nav-logo" href="#">Jon Bjork Music</a>
+  <a class="nav-logo" href="https://www.jonbjorkmusic.com/" aria-label="Jon Bjork Music — Guitarist, Coach, Composer">
+    <span class="nav-logo-row">
+      <span class="nav-logo-name">Jon Bjork</span>
+      <span class="nav-logo-divider" aria-hidden="true"></span>
+      <span class="nav-logo-tag">Music</span>
+    </span>
+    <span class="nav-tagline">Guitarist &middot; Coach &middot; Composer</span>
+  </a>
   <div class="nav-right">
-    <a class="nav-link" href="#offers">What I Offer</a>
-    <a class="nav-link" href="/courses">Courses</a>
-    <a class="nav-link" href="#about">About</a>
-    <a class="nav-btn" href="/coaching">1-on-1 Coaching</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/start">Coaching</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/#about">About</a>
+    <a class="nav-btn" href="https://www.jonbjorkmusic.com/coaching">1-on-1 Coaching</a>
   </div>
   <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
     <span></span>
@@ -680,10 +763,10 @@
 </nav>
 
 <div class="mobile-menu" id="mobileMenu" role="menu">
-  <a class="nav-link" href="#offers">What I Offer</a>
-  <a class="nav-link" href="/courses">Courses</a>
-  <a class="nav-link" href="#about">About</a>
-  <a class="nav-btn" href="/coaching">1-on-1 Coaching</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/start">Coaching</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/#about">About</a>
+  <a class="nav-btn" href="https://www.jonbjorkmusic.com/coaching">1-on-1 Coaching</a>
 </div>
 
 <!-- HERO -->
@@ -692,12 +775,11 @@
   <div class="hero-overlay"></div>
   <div class="hero-overlay-purple"></div>
   <div class="hero-content">
-    <span class="hero-tag">Jon Bjork · Guitarist · Coach · Composer</span>
     <h1>Practice Smarter.<br>Progress Faster.<br>Play Better.</h1>
     <p class="hero-sub">25 years of teaching. One clear system. Built around your playing.</p>
     <div class="hero-ctas">
-      <a class="btn btn-purple" href="/coaching">Learn About 1-on-1 Coaching</a>
-      <a class="btn btn-outline" href="#offers">See What I Offer</a>
+      <a class="btn btn-purple" href="https://www.jonbjorkmusic.com/coaching">Learn About 1-on-1 Coaching</a>
+      <a class="btn btn-outline" href="https://www.jonbjorkmusic.com/#offers">See What I Offer</a>
     </div>
   </div>
 </section>
@@ -729,7 +811,7 @@
         </ul>
         For serious players ready to break through.
       </div>
-      <a class="offer-link" href="/coaching">Learn More &#8594;</a>
+      <a class="offer-link" href="https://www.jonbjorkmusic.com/coaching">Learn More &#8594;</a>
     </div>
 
     <div class="offer-card">
@@ -744,7 +826,7 @@
         </ul>
         For guitarists who want to keep growing. $99/month.
       </div>
-      <a class="offer-link" href="/start">Join Pro &#8594;</a>
+      <a class="offer-link" href="https://www.jonbjorkmusic.com/start">Join Pro &#8594;</a>
     </div>
 
     <div class="offer-card">
@@ -767,7 +849,7 @@
 <!-- COURSES CTA BAND -->
 <section class="courses-band reveal">
   <div class="courses-band-inner">
-    <p>Looking for self-paced courses? <a class="courses-band-link" href="/courses">Browse all courses &#8594;</a></p>
+    <p>Looking for self-paced courses? <a class="courses-band-link" href="https://www.jonbjorkmusic.com/courses">Browse all courses &#8594;</a></p>
   </div>
 </section>
 
@@ -863,19 +945,26 @@
 <section class="cta-band">
   <h2>Ready To Make<br>Real Progress?</h2>
   <p>Book a free 15-minute consultation and find out if 1-on-1 coaching is right for you.</p>
-  <a class="btn btn-purple" href="/coaching">Learn About 1-on-1 Coaching</a>
+  <a class="btn btn-purple" href="https://www.jonbjorkmusic.com/coaching">Learn About 1-on-1 Coaching</a>
 </section>
 
 <footer>
-  <a class="footer-logo" href="#">Jon Bjork Music</a>
+  <a class="footer-logo" href="https://www.jonbjorkmusic.com/" aria-label="Jon Bjork Music — Guitarist, Coach, Composer">
+    <span class="footer-logo-row">
+      <span class="footer-logo-name">Jon Bjork</span>
+      <span class="footer-logo-divider" aria-hidden="true"></span>
+      <span class="footer-logo-tag">Music</span>
+    </span>
+    <span class="footer-tagline">Guitarist &middot; Coach &middot; Composer</span>
+  </a>
   <div class="footer-links">
-    <a class="footer-link" href="/">Home</a>
-    <a class="footer-link" href="/coaching">Coaching</a>
-    <a class="footer-link" href="/courses">Courses</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/">Home</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/coaching">Coaching</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
     <a class="footer-link" href="https://youtube.com/@jonbjork" target="_blank">YouTube</a>
   </div>
-  <a class="footer-link" href="/legal">Legal</a>
-  <div class="footer-copy">2025 Jon Bjork Music</div>
+  <a class="footer-link" href="https://www.jonbjorkmusic.com/legal">Legal</a>
+  <div class="footer-copy">&copy; 2026 Jon Bjork Music</div>
 </footer>
 
 <script>
