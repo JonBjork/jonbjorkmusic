@@ -969,6 +969,27 @@
 </footer>
 
 <script>
+  // --- Nav spacing: measure nav height and apply to body padding + hero height ---
+  (function() {
+    function syncNavSpacing() {
+      var nav = document.querySelector('nav');
+      var hero = document.querySelector('.hero');
+      if (!nav) return;
+      var h = nav.offsetHeight;
+      document.body.style.paddingTop = h + 'px';
+      if (hero) {
+        hero.style.height = 'calc(100vh - ' + h + 'px)';
+      }
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', syncNavSpacing);
+    } else {
+      syncNavSpacing();
+    }
+    window.addEventListener('load', syncNavSpacing);
+    window.addEventListener('resize', syncNavSpacing);
+  })();
+
   // --- Mobile menu toggle ---
   (function() {
     var toggle = document.getElementById('navToggle');
