@@ -108,6 +108,19 @@
     opacity: 0; animation: fadeUp 0.7s 0.3s forwards;
   }
 
+  /* --- PRODUCT IMAGE (sits above the form in the right column) --- */
+  .product-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--accent-border);
+    box-shadow: 0 0 50px rgba(124, 58, 237, 0.2);
+    margin-bottom: 32px;
+    transition: transform 0.6s var(--ease-out-expo);
+  }
+  .hero-right:hover .product-img { transform: scale(1.02); }
+
   /* --- KIT FORM --- */
   .kit-form-wrap {
     background: var(--card);
@@ -258,12 +271,27 @@
     nav.landing-nav { padding: 20px 24px; }
     .hero {
       grid-template-columns: 1fr;
-      gap: 56px;
+      gap: 48px;
       padding: 56px 24px;
     }
-    .hero-bullets li { font-size: 1.05rem; }
+    .hero-right { max-width: 480px; margin: 0 auto; width: 100%; }
+    .hero-bullets li { font-size: 1.1rem; }
     .kit-form-wrap { padding: 36px 28px; }
     footer.landing-footer { padding: 24px; }
+  }
+  @media (max-width: 600px) {
+    .hero { padding: 40px 20px; gap: 40px; }
+    .hero h1 { font-size: clamp(2.25rem, 9vw, 2.75rem); }
+    .hero-tag { font-size: 0.9rem; letter-spacing: 0.22em; margin-bottom: 18px; }
+    .hero-sub { font-size: 1.1rem; margin-bottom: 28px; }
+    .hero-bullets li { font-size: 1rem; padding: 14px 0; gap: 12px; }
+    .bullet-dot { width: 18px; height: 18px; }
+    .bullet-dot svg { width: 8px; height: 8px; }
+    .kit-form-wrap { padding: 28px 22px; }
+    .kit-form-title { font-size: 1.4rem; margin-bottom: 22px; }
+    .kit-input { font-size: 1rem; padding: 16px 18px; }
+    .kit-submit { font-size: 1rem; padding: 18px; }
+    .product-img { margin-bottom: 24px; }
   }
 </style>
 </head>
