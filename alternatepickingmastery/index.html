@@ -36,8 +36,8 @@
   }
   .hero {
     position: relative;
-    display: grid; grid-template-columns: 1fr 380px;
-    gap: 80px; align-items: center;
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 72px; align-items: center;
     height: auto;
     min-height: 0;
     overflow: visible;
@@ -424,7 +424,7 @@
     <span class="section-tag">Watch This First</span>
     <h2 class="section-title">Alternate Picking Mastery: 3 Notes Per String.</h2>
     <div class="video-embed" id="yt-alt">
-      <img src="https://img.youtube.com/vi/WleUmM8XdJg/maxresdefault.jpg" alt="Alternate Picking Mastery" class="yt-thumb" onclick="playAlt()" />
+      <img src="https://img.youtube.com/vi/WleUmM8XdJg/maxresdefault.jpg" onload="ytFallback(this)" alt="Alternate Picking Mastery" class="yt-thumb" onclick="playAlt()" />
       <button class="yt-play" onclick="playAlt()" aria-label="Play video">
         <svg viewBox="0 0 68 48" xmlns="http://www.w3.org/2000/svg">
           <path d="M66.52 7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13 34 0 34 0S12.21.13 6.9 1.55c-2.93.78-4.63 3.26-5.42 6.19C.06 13.05 0 24 0 24s.06 10.95 1.48 16.26c.78 2.93 2.49 5.41 5.42 6.19C12.21 47.87 34 48 34 48s21.79-.13 27.1-1.55c2.93-.78 4.64-3.26 5.42-6.19C67.94 34.95 68 24 68 24s-.06-10.95-1.48-16.26z" fill="#ff0000"/>
@@ -643,6 +643,14 @@
     window.addEventListener('load', syncNavSpacing);
     window.addEventListener('resize', syncNavSpacing);
   })();
+
+  // --- YouTube thumbnail fallback ---
+  function ytFallback(img) {
+    if (img.naturalWidth > 0 && img.naturalWidth <= 120) {
+      img.onload = null; img.onerror = null;
+      img.src = img.src.replace('maxresdefault.jpg', 'hqdefault.jpg');
+    }
+  }
 
   // --- Mobile menu toggle ---
   (function() {
