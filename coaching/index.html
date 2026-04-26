@@ -15,131 +15,74 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
 <style>
-  :root {
-    --bg:            #0d0d0d;
-    --card:          #181818;
-    --card2:         #1f1f1f;
-    --border:        #2a2a2a;
-    --white:         #ffffff;
-    --off:           #e8e8e8;
-    --muted:         #aaaaaa;
-    --dim:           #666666;
-    --purple:        #7c3aed;
-    --purple-lt:     #9d5ff5;
-    --navy:          #1a1040;
-    --navy-lt:       #2d1a60;
-    --accent-border: #4a3a9a;
-  }
+  /* =============================================================================
+     PAGE-SPECIFIC STYLES — /coaching  (12-Week Guitar Mastery Program)
+     Only styles unique to this page. Shared styles come from /styles.css.
+     Class names already standardised: .section-tag (was .section-label),
+     .nav-btn (was .nav-cta), .nav-toggle (was .hamburger).
+     ============================================================================= */
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--white);
-    font-family: 'Lato', sans-serif;
-    font-weight: 300;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+  :root { --navy-lt: #2d1a60; }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-    background: rgba(13,13,13,0.95);
-    border-bottom: 1px solid var(--border);
-    backdrop-filter: blur(12px);
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0 48px; height: 64px;
-  }
-  .nav-logo {
-    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1rem;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--white); text-decoration: none;
-  }
-  .nav-right { display: flex; align-items: center; gap: 36px; }
-  .nav-link {
-    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 0.75rem;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--muted); text-decoration: none; transition: color 0.2s;
-  }
-  .nav-link:hover { color: var(--white); }
-  .nav-cta {
-    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.75rem;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    background: var(--purple); color: var(--white);
-    padding: 10px 24px; border-radius: 6px; text-decoration: none;
-    transition: background 0.2s;
-  }
-  .nav-cta:hover { background: var(--purple-lt); }
-  .hamburger {
-    display: none; background: none; border: none; cursor: pointer; padding: 4px;
-  }
-  .hamburger svg { width: 24px; height: 24px; stroke: var(--white); }
-  .mobile-menu {
-    display: none; position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
-    background: rgba(13,13,13,0.98); z-index: 199;
-    flex-direction: column; align-items: center; justify-content: center; gap: 32px;
-  }
-  .mobile-menu.open { display: flex; }
-  .mobile-menu .nav-link { font-size: 1rem; }
-  .mobile-menu .nav-cta { font-size: 0.85rem; padding: 14px 32px; }
-
-  /* ── SECTION BASICS ── */
+  /* --- LAYOUT WRAPPERS --- */
   .section { padding: 100px 24px; max-width: 800px; margin: 0 auto; }
   .section-wide { padding: 100px 24px; max-width: 1000px; margin: 0 auto; }
   .section-full { padding: 100px 24px; }
-  .section-label {
-    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 0.7rem;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--purple-lt); margin-bottom: 16px;
-  }
+
+  /* --- GLOBAL HEADING STYLES (raw h1/h2/h3 since this page uses tags directly) --- */
   h1, h2, h3 {
     font-family: 'Oswald', sans-serif; font-weight: 700;
     text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.15;
   }
-  h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); }
-  h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); }
-  h3 { font-size: 1.1rem; letter-spacing: 0.08em; }
+  h1 { font-size: clamp(3rem, 6vw, 5rem); }
+  h2 { font-size: clamp(2.25rem, 4.5vw, 3.5rem); }
+  h3 { font-size: 1.55rem; letter-spacing: 0.08em; }
+
+  /* --- UTILITY CLASSES --- */
   .text-muted { color: var(--muted); }
   .text-purple { color: var(--purple-lt); }
   .text-center { text-align: center; }
   .italic { font-style: italic; }
-  .mb-8 { margin-bottom: 8px; }
+  .mb-8  { margin-bottom: 8px; }
   .mb-16 { margin-bottom: 16px; }
   .mb-24 { margin-bottom: 24px; }
   .mb-32 { margin-bottom: 32px; }
   .mb-48 { margin-bottom: 48px; }
   .mb-64 { margin-bottom: 64px; }
 
-  /* ── BUTTONS ── */
-  .btn {
-    display: inline-block;
-    font-family: 'Oswald', sans-serif; font-weight: 600;
-    font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase;
-    background: var(--purple); color: var(--white);
-    padding: 16px 40px; border-radius: 8px; text-decoration: none;
-    transition: background 0.2s, transform 0.15s;
-  }
-  .btn:hover { background: var(--purple-lt); transform: translateY(-1px); }
+  /* --- BUTTON VARIANTS (page-specific) --- */
   .btn-outline {
     background: transparent; border: 1px solid var(--purple);
     color: var(--purple-lt);
   }
   .btn-outline:hover { background: var(--purple); color: var(--white); }
-  .btn-note {
-    font-size: 0.8rem; color: var(--dim); margin-top: 12px;
-  }
+  .btn-note { font-size: 1rem; color: var(--dim); margin-top: 12px; }
 
-  /* ── HERO ── */
+  /* --- HERO (overrides the design system's full-screen hero) --- */
   .hero {
-    min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    text-align: center; padding: 120px 24px 80px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+    text-align: center;
+    padding: 120px 24px 80px;
     background: radial-gradient(ellipse at 50% 0%, rgba(124,58,237,0.12) 0%, transparent 60%);
   }
   .hero-inner { max-width: 720px; }
   .hero h1 { margin-bottom: 24px; }
-  .hero p { font-size: 1.15rem; color: var(--muted); max-width: 560px; margin: 0 auto 40px; }
+  .hero p {
+    font-size: var(--fs-hero-sub);
+    color: var(--muted);
+    max-width: 600px;
+    margin: 0 auto 40px;
+  }
+
+  /* --- VSL VIDEO --- */
   .vsl-wrapper {
     position: relative; width: 100%; max-width: 720px; margin: 0 auto 40px;
     padding-bottom: 56.25%; border-radius: 12px; overflow: hidden;
@@ -165,25 +108,27 @@
     position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
   }
 
-  /* ── OPENING ── */
+  /* --- OPENING (purple-bordered text block) --- */
   .opening { padding: 80px 24px 100px; }
   .opening-inner {
-    max-width: 700px; margin: 0 auto;
+    max-width: 720px; margin: 0 auto;
     border-left: 3px solid var(--purple);
     padding-left: 32px;
   }
   .opening-inner p {
-    font-size: 1.05rem; color: var(--off); margin-bottom: 20px;
+    font-size: var(--fs-body);
+    color: var(--off);
+    margin-bottom: 20px;
   }
   .opening-inner p:last-child { margin-bottom: 0; }
 
-  /* ── DIVIDER ── */
+  /* --- DIVIDER --- */
   .divider {
     max-width: 800px; margin: 0 auto; height: 1px;
     background: linear-gradient(90deg, transparent, var(--border), transparent);
   }
 
-  /* ── FEATURES GRID ── */
+  /* --- FEATURES GRID --- */
   .features-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
     max-width: 900px; margin: 0 auto;
@@ -191,26 +136,31 @@
   .feature-card {
     background: var(--card); border: 1px solid var(--border);
     border-radius: 12px; padding: 36px 28px;
-    transition: border-color 0.3s, transform 0.2s;
+    will-change: transform;
+    transition: border-color 0.3s, transform 0.2s, box-shadow 0.35s;
   }
-  .feature-card:hover { border-color: var(--accent-border); transform: translateY(-2px); }
+  .feature-card:hover {
+    border-color: var(--accent-border);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px -12px rgba(124, 58, 237, 0.35);
+  }
   .feature-card.full-width { grid-column: 1 / -1; }
   .feature-icon {
-    width: 48px; height: 48px; border-radius: 10px;
+    width: 56px; height: 56px; border-radius: 12px;
     background: var(--navy); border: 1px solid var(--accent-border);
     display: flex; align-items: center; justify-content: center;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
-  .feature-icon svg { width: 22px; height: 22px; stroke: var(--purple-lt); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-  .feature-card h3 { margin-bottom: 12px; color: var(--white); }
-  .feature-card p { color: var(--muted); font-size: 0.95rem; }
+  .feature-icon svg { width: 26px; height: 26px; stroke: var(--purple-lt); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .feature-card h3 { margin-bottom: 14px; color: var(--white); }
+  .feature-card p { color: var(--muted); font-size: var(--fs-body); }
 
-  /* ── VIDEO ── */
+  /* --- INLINE VIDEO BETWEEN SECTIONS --- */
   .video-section {
     max-width: 800px; margin: 0 auto; padding: 0 24px 100px;
   }
   .video-intro {
-    font-size: 0.95rem; color: var(--muted); margin-bottom: 20px;
+    font-size: 1.1rem; color: var(--muted); margin-bottom: 24px;
     text-align: center;
   }
   .video-wrapper {
@@ -236,8 +186,18 @@
   .video-wrapper iframe {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
   }
+  .vsl-wrapper .play-btn,
+  .video-wrapper .play-btn {
+    animation: playPulse 2.6s var(--ease-out-smooth) infinite;
+  }
+  .vsl-wrapper:hover .play-btn,
+  .video-wrapper:hover .play-btn { animation: none; }
+  @keyframes playPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.55); }
+    70%      { box-shadow: 0 0 0 18px rgba(124, 58, 237, 0); }
+  }
 
-  /* ── WHY 12 WEEKS ── */
+  /* --- TIMELINE (Why 12 Weeks) --- */
   .timeline-section {
     background: linear-gradient(180deg, var(--navy) 0%, var(--bg) 100%);
     padding: 100px 24px;
@@ -254,102 +214,112 @@
     display: flex; flex-direction: column; align-items: center;
   }
   .timeline-dot {
-    width: 14px; height: 14px; border-radius: 50%;
+    width: 16px; height: 16px; border-radius: 50%;
     background: var(--purple); border: 2px solid var(--purple-lt);
     flex-shrink: 0; position: relative; z-index: 2;
   }
   .timeline-stem {
     width: 2px; flex: 1; background: var(--accent-border); opacity: 0.4;
   }
-  .timeline-content {
-    padding: 0 0 48px 16px;
-  }
-  .timeline-content h3 { margin-bottom: 8px; color: var(--white); font-size: 1rem; }
-  .timeline-content p { color: var(--muted); font-size: 0.92rem; }
+  .timeline-content { padding: 0 0 48px 16px; }
+  .timeline-content h3 { margin-bottom: 12px; color: var(--white); font-size: 1.4rem; }
+  .timeline-content p { color: var(--muted); font-size: 1.2rem; }
   .timeline-item:last-child .timeline-stem { display: none; }
   .timeline-item:last-child .timeline-content { padding-bottom: 0; }
 
-  /* ── COMMITMENT ── */
+  /* --- COMMITMENT BOX --- */
   .commitment-box {
-    max-width: 700px; margin: 0 auto;
+    max-width: 720px; margin: 0 auto;
     background: var(--card); border: 1px solid var(--accent-border);
     border-radius: 16px; padding: 56px 48px; text-align: center;
   }
   .commitment-box p {
-    color: var(--muted); font-size: 1.05rem; margin-bottom: 16px;
+    color: var(--muted); font-size: var(--fs-body); margin-bottom: 20px;
   }
   .commitment-box p:last-child { margin-bottom: 0; }
-  .commitment-box .highlight {
-    color: var(--off); font-weight: 400;
-  }
+  .commitment-box .highlight { color: var(--off); font-weight: 400; }
 
-  /* ── STEPS ── */
+  /* --- STEPS --- */
   .steps {
     display: flex; gap: 24px; max-width: 900px; margin: 0 auto;
   }
   .step {
-    flex: 1; text-align: center; padding: 40px 24px;
+    flex: 1; text-align: center; padding: 48px 28px;
     background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; transition: border-color 0.3s;
+    border-radius: 12px;
+    will-change: transform;
+    transition: border-color 0.3s, transform 0.2s, box-shadow 0.35s;
   }
-  .step:hover { border-color: var(--accent-border); }
+  .step:hover {
+    border-color: var(--accent-border);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px -14px rgba(124, 58, 237, 0.35);
+  }
   .step-num {
-    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 2.4rem;
-    color: var(--purple); line-height: 1; margin-bottom: 16px;
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 3.5rem;
+    color: var(--purple); line-height: 1; margin-bottom: 20px;
   }
-  .step h3 { margin-bottom: 12px; font-size: 0.9rem; }
-  .step p { color: var(--muted); font-size: 0.88rem; }
+  .step h3 { margin-bottom: 14px; font-size: 1.3rem; }
+  .step p { color: var(--muted); font-size: 1.15rem; }
 
-  /* ── AFTER PROGRAM ── */
+  /* --- AFTER PROGRAM --- */
   .after-section {
-    max-width: 700px; margin: 0 auto;
+    max-width: 720px; margin: 0 auto;
     background: var(--card2); border: 1px solid var(--border);
-    border-radius: 16px; padding: 48px; text-align: center;
+    border-radius: 16px; padding: 52px 44px; text-align: center;
   }
-  .after-section p { color: var(--muted); font-size: 1rem; margin-bottom: 16px; }
+  .after-section p {
+    color: var(--muted); font-size: var(--fs-body); margin-bottom: 16px;
+  }
   .after-price {
     font-family: 'Oswald', sans-serif; font-weight: 700;
-    font-size: 1.6rem; color: var(--purple-lt); margin: 20px 0;
+    font-size: 2.5rem; color: var(--purple-lt); margin: 24px 0;
   }
 
-  /* ── PRICING ── */
+  /* --- PRICING --- */
   .pricing-grid {
     display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
     max-width: 800px; margin: 0 auto;
   }
   .price-card {
     background: var(--card); border: 1px solid var(--border);
-    border-radius: 16px; padding: 48px 36px; text-align: center;
-    position: relative; transition: border-color 0.3s, transform 0.2s;
+    border-radius: 16px; padding: 56px 40px; text-align: center;
+    position: relative;
+    will-change: transform;
+    transition: border-color 0.3s, transform 0.2s, box-shadow 0.35s;
   }
-  .price-card:hover { border-color: var(--accent-border); transform: translateY(-2px); }
+  .price-card:hover {
+    border-color: var(--accent-border);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px -12px rgba(124, 58, 237, 0.35);
+  }
   .price-card.featured {
     border-color: var(--purple);
     background: linear-gradient(180deg, rgba(124,58,237,0.08) 0%, var(--card) 40%);
   }
   .price-card.featured::before {
     content: 'BEST VALUE';
-    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.65rem;
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.85rem;
     letter-spacing: 0.16em; text-transform: uppercase;
     background: var(--purple); color: var(--white);
-    padding: 5px 16px; border-radius: 20px;
+    padding: 7px 20px; border-radius: 20px;
   }
   .price-amount {
     font-family: 'Oswald', sans-serif; font-weight: 700;
-    font-size: 3rem; color: var(--white); line-height: 1;
+    font-size: 4rem; color: var(--white); line-height: 1;
   }
   .price-period {
     font-family: 'Oswald', sans-serif; font-weight: 400;
-    font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--dim); margin-top: 8px; margin-bottom: 20px;
+    font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--dim); margin-top: 12px; margin-bottom: 24px;
   }
   .price-desc {
-    color: var(--muted); font-size: 0.92rem; margin-bottom: 32px;
+    color: var(--muted); font-size: 1.2rem; margin-bottom: 36px;
   }
   .price-card .btn { width: 100%; text-align: center; }
 
-  /* ── TESTIMONIALS ── */
+  /* --- TESTIMONIALS (image-based) --- */
   .testimonials-grid {
     display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;
     max-width: 1000px; margin: 0 auto;
@@ -360,82 +330,53 @@
     transition: border-color 0.3s;
   }
   .testimonial-img:hover { border-color: var(--accent-border); }
-  .testimonial-img img {
-    width: 100%; height: auto; display: block;
-  }
+  .testimonial-img img { width: 100%; height: auto; display: block; }
 
-  /* ── FAQ ── */
-  .faq-list { max-width: 700px; margin: 0 auto; }
+  /* --- FAQ --- */
+  .faq-list { max-width: 720px; margin: 0 auto; }
   .faq-item {
     border-bottom: 1px solid var(--border); overflow: hidden;
   }
   .faq-q {
     width: 100%; background: none; border: none; color: var(--white);
-    font-family: 'Lato', sans-serif; font-weight: 400; font-size: 1rem;
-    text-align: left; padding: 24px 40px 24px 0; cursor: pointer;
+    font-family: 'Lato', sans-serif; font-weight: 400; font-size: 1.3rem;
+    text-align: left; padding: 28px 50px 28px 0; cursor: pointer;
     position: relative; line-height: 1.5;
   }
   .faq-q::after {
-    content: '+'; position: absolute; right: 0; top: 24px;
-    font-family: 'Oswald', sans-serif; font-size: 1.4rem; color: var(--purple-lt);
-    transition: transform 0.3s;
+    content: '+'; position: absolute; right: 0; top: 28px;
+    font-family: 'Oswald', sans-serif; font-size: 1.8rem; color: var(--purple-lt);
+    transition: transform 0.3s var(--ease-out-smooth), content 0s;
   }
-  .faq-item.open .faq-q::after { content: '\2212'; }
+  .faq-item.open .faq-q::after { content: '2'; transform: rotate(180deg); }
   .faq-a {
     max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease;
-    color: var(--muted); font-size: 0.92rem; line-height: 1.7;
+    color: var(--muted); font-size: 1.15rem; line-height: 1.7;
   }
-  .faq-item.open .faq-a { max-height: 300px; padding-bottom: 24px; }
+  .faq-item.open .faq-a { max-height: 400px; padding-bottom: 28px; }
 
-  /* ── FINAL CTA ── */
+  /* --- FINAL CTA --- */
   .final-cta {
     text-align: center; padding: 120px 24px;
     background: radial-gradient(ellipse at 50% 100%, rgba(124,58,237,0.1) 0%, transparent 60%);
   }
-  .final-cta h2 { margin-bottom: 20px; }
-  .final-cta p { color: var(--muted); font-size: 1.05rem; max-width: 500px; margin: 0 auto 40px; }
+  .final-cta h2 { margin-bottom: 24px; }
+  .final-cta p {
+    color: var(--muted); font-size: var(--fs-body);
+    max-width: 540px; margin: 0 auto 40px;
+  }
   .urgency {
-    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 0.75rem;
+    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 1rem;
     letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--purple-lt); margin-top: 20px;
+    color: var(--purple-lt); margin-top: 24px;
   }
 
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 40px 48px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .footer-logo {
-    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 0.85rem;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--white); text-decoration: none;
-  }
-  .footer-links { display: flex; gap: 28px; }
-  .footer-link {
-    font-family: 'Lato', sans-serif; font-weight: 300; font-size: 0.82rem;
-    color: var(--dim); text-decoration: none; transition: color 0.2s;
-  }
-  .footer-link:hover { color: var(--muted); }
-  .footer-copy { font-size: 0.75rem; color: var(--dim); }
-
-  /* ── REVEAL ── */
-  .reveal {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  /* ── RESPONSIVE ── */
+  /* --- RESPONSIVE OVERRIDES --- */
   @media (max-width: 900px) {
-    nav { padding: 0 24px; }
-    .nav-right .nav-link, .nav-right .nav-cta { display: none; }
-    .hamburger { display: block; }
     .features-grid { grid-template-columns: 1fr; }
     .steps { flex-direction: column; }
     .pricing-grid { grid-template-columns: 1fr; max-width: 420px; }
     .testimonials-grid { grid-template-columns: 1fr; max-width: 500px; }
-    footer { flex-direction: column; gap: 20px; text-align: center; }
   }
   @media (max-width: 600px) {
     .hero { padding: 100px 20px 60px; }
@@ -444,206 +385,44 @@
     .commitment-box { padding: 40px 24px; }
     .after-section { padding: 36px 20px; }
     .opening-inner { padding-left: 20px; }
-    footer { padding: 32px 20px; }
-    .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
   }
-
-  /* =========================================================
-     ANIMATION LAYER — April 2026
-     Matching the homepage animation language.
-     ========================================================= */
-
-  :root {
-    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-out-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  /* --- Nav drop-in on load --- */
-  nav {
-    animation: navDrop 0.5s var(--ease-out-smooth) both;
-  }
-  @keyframes navDrop {
-    from { transform: translateY(-100%); opacity: 0; }
-    to   { transform: translateY(0); opacity: 1; }
-  }
-
-  /* --- Refined scroll reveal with smoother easing --- */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition:
-      opacity 0.8s var(--ease-out-expo),
-      transform 0.8s var(--ease-out-expo);
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* --- Hero inner lifts up on load with staggered children feel --- */
-  .hero-inner.reveal {
-    transition-delay: 0.15s;
-  }
-
-  /* --- Card lift + purple glow on hover --- */
-  .feature-card,
-  .price-card,
-  .step,
-  .timeline-item {
-    will-change: transform;
-  }
-  .feature-card:hover,
-  .price-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px -12px rgba(124, 58, 237, 0.35);
-  }
-  .step:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px -14px rgba(124, 58, 237, 0.30);
-  }
-
-  /* --- Button shimmer sweep + subtle scale --- */
-  .btn,
-  .nav-cta {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.25s var(--ease-out-smooth) !important;
-  }
-  .btn::after,
-  .nav-cta::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -75%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(
-      120deg,
-      transparent,
-      rgba(255, 255, 255, 0.18),
-      transparent
-    );
-    transform: skewX(-20deg);
-    transition: left 0.7s var(--ease-out-smooth);
-    pointer-events: none;
-  }
-  .btn:hover::after,
-  .nav-cta:hover::after {
-    left: 125%;
-  }
-  .btn:hover { transform: scale(1.02); }
-  .nav-cta:hover { transform: scale(1.02); }
-
-  /* --- Nav link underline draw --- */
-  .nav-link {
-    position: relative;
-    padding-bottom: 4px;
-  }
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-    background: var(--purple-lt);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.35s var(--ease-out-smooth);
-  }
-  .nav-link:hover::after { transform: scaleX(1); }
-
-  /* --- Footer link underline draw --- */
-  footer a,
-  .footer-link {
-    position: relative;
-    padding-bottom: 3px;
-  }
-  footer a::after,
-  .footer-link::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-    background: var(--white);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s var(--ease-out-smooth);
-  }
-  footer a:hover::after,
-  .footer-link:hover::after { transform: scaleX(1); }
-
-  /* --- Video thumbnail play button: gentle pulse --- */
-  @keyframes playPulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.55); }
-    70%      { box-shadow: 0 0 0 18px rgba(124, 58, 237, 0); }
-  }
-  .vsl-wrapper .play-btn,
-  .video-wrapper .play-btn {
-    animation: playPulse 2.6s var(--ease-out-smooth) infinite;
-  }
-  .vsl-wrapper:hover .play-btn,
-  .video-wrapper:hover .play-btn {
-    animation: none;
-  }
-
-  /* --- FAQ chevron smoother rotation --- */
-  .faq-q::after {
-    transition: transform 0.3s var(--ease-out-smooth), content 0s;
-  }
-  .faq-item.open .faq-q::after {
-    transform: rotate(180deg);
-  }
-
-  /* --- Accessibility: honor reduced-motion --- */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
-    .reveal {
-      opacity: 1 !important;
-      transform: none !important;
-    }
-    .vsl-wrapper .play-btn,
-    .video-wrapper .play-btn {
-      animation: none !important;
-    }
-  }
-
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="/">Jon Bjork Music</a>
+  <a class="nav-logo" href="https://www.jonbjorkmusic.com/" aria-label="Jon Bjork Music — Guitarist, Coach, Composer">
+    <span class="nav-logo-row">
+      <span class="nav-logo-name">Jon Bjork</span>
+      <span class="nav-logo-divider" aria-hidden="true"></span>
+      <span class="nav-logo-tag">Music</span>
+    </span>
+    <span class="nav-tagline">Guitarist &middot; Coach &middot; Composer</span>
+  </a>
   <div class="nav-right">
-    <a class="nav-link" href="/#offers">What I Offer</a>
-    <a class="nav-link" href="/courses">Courses</a>
-    <a class="nav-link" href="/#about">About</a>
-    <a class="nav-cta" href="mailto:jon@jonbjorkmusic.com?subject=12-Week%20Mastery%20Program%20%E2%80%94%20Free%20Consultation">Book Free Consultation</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/start">Coaching</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/#about">About</a>
+    <a class="nav-btn" href="https://www.jonbjorkmusic.com/coaching">1-on-1 Coaching</a>
   </div>
-  <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span>
   </button>
 </nav>
-<div class="mobile-menu" id="mobile-menu">
-  <a class="nav-link" href="/#offers" onclick="document.getElementById('mobile-menu').classList.remove('open')">What I Offer</a>
-  <a class="nav-link" href="/courses" onclick="document.getElementById('mobile-menu').classList.remove('open')">Courses</a>
-  <a class="nav-link" href="/#about" onclick="document.getElementById('mobile-menu').classList.remove('open')">About</a>
-  <a class="nav-cta" href="mailto:jon@jonbjorkmusic.com?subject=12-Week%20Mastery%20Program%20%E2%80%94%20Free%20Consultation">Book Free Consultation</a>
+
+<div class="mobile-menu" id="mobileMenu" role="menu">
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/start">Coaching</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/#about">About</a>
+  <a class="nav-btn" href="https://www.jonbjorkmusic.com/coaching">1-on-1 Coaching</a>
 </div>
 
 
 <!-- ═══════════════════ HERO ═══════════════════ -->
 <section class="hero">
   <div class="hero-inner reveal">
-    <div class="section-label mb-16">1-on-1 Coaching</div>
+    <div class="section-tag mb-16">1-on-1 Coaching</div>
     <h1 class="mb-24">Stop Practicing in Circles.<br>Start Making Real Progress.</h1>
     <p>The 12-Week Guitar Mastery Program. 1-on-1 coaching built around your playing, your goals, and the music you actually want to play.</p>
     <div class="vsl-wrapper" onclick="this.innerHTML='<iframe src=\'https://www.youtube.com/embed/eknROdYhUXs?autoplay=1&rel=0\' allow=\'autoplay; encrypted-media\' allowfullscreen></iframe>'">
@@ -672,7 +451,7 @@
 <!-- ═══════════════════ WHAT MAKES THIS DIFFERENT ═══════════════════ -->
 <section class="section-wide">
   <div class="text-center mb-64 reveal">
-    <div class="section-label">The Program</div>
+    <div class="section-tag">The Program</div>
     <h2>Why This Program Gets Results When Nothing Else Has</h2>
   </div>
 
@@ -735,7 +514,7 @@
 <!-- ═══════════════════ WHY 12 WEEKS ═══════════════════ -->
 <section class="timeline-section">
   <div class="text-center mb-16 reveal">
-    <div class="section-label">The Timeframe</div>
+    <div class="section-tag">The Timeframe</div>
     <h2 class="mb-16">Why 12 Weeks?</h2>
     <p class="text-muted" style="max-width:520px;margin:0 auto;">The perfect balance of time, intensity, and results.</p>
   </div>
@@ -789,7 +568,7 @@
 <!-- ═══════════════════ COMMITMENT ═══════════════════ -->
 <section class="section">
   <div class="commitment-box reveal">
-    <div class="section-label mb-16">A Mutual Investment</div>
+    <div class="section-tag mb-16">A Mutual Investment</div>
     <h2 class="mb-32">Commit to Mastery</h2>
     <p>My methods have transformed 1,000+ students into confident, proficient guitarists over more than 25 years.</p>
     <p class="highlight">But here's the catch: I can't practice for you.</p>
@@ -804,7 +583,7 @@
 <!-- ═══════════════════ HOW IT WORKS ═══════════════════ -->
 <section class="section-wide">
   <div class="text-center mb-64 reveal">
-    <div class="section-label">Getting Started</div>
+    <div class="section-tag">Getting Started</div>
     <h2>Are You Ready to Take It to the Next Level?</h2>
   </div>
 
@@ -831,7 +610,7 @@
 <!-- ═══════════════════ KEEP THE MOMENTUM ═══════════════════ -->
 <section class="section">
   <div class="after-section reveal">
-    <div class="section-label mb-16">After the Program</div>
+    <div class="section-tag mb-16">After the Program</div>
     <h2 class="mb-24">Keep the Momentum Going</h2>
     <p>After your 12 weeks, you'll have the skills, the habits, and the system to keep progressing on your own. But if you want to stay connected, keep getting feedback, and continue growing alongside other serious players, you can join The Practice Room.</p>
     <div class="after-price"><a href="https://www.skool.com/the-practice-room-pro" target="_blank" style="color:inherit;text-decoration:none;">$67/month</a></div>
@@ -846,7 +625,7 @@
 <!-- ═══════════════════ PRICING ═══════════════════ -->
 <section class="section-wide" id="pricing">
   <div class="text-center mb-64 reveal">
-    <div class="section-label">Invest in Your Playing</div>
+    <div class="section-tag">Invest in Your Playing</div>
     <h2>Choose Your Payment Plan</h2>
   </div>
 
@@ -875,7 +654,7 @@
 <!-- ═══════════════════ TESTIMONIALS ═══════════════════ -->
 <section class="section-wide">
   <div class="text-center mb-64 reveal">
-    <div class="section-label">Results</div>
+    <div class="section-tag">Results</div>
     <h2>What My Students Say</h2>
   </div>
 
@@ -896,7 +675,7 @@
 <!-- ═══════════════════ FAQ ═══════════════════ -->
 <section class="section">
   <div class="text-center mb-64 reveal">
-    <div class="section-label">Questions</div>
+    <div class="section-tag">Questions</div>
     <h2>Frequently Asked Questions</h2>
   </div>
 
@@ -939,7 +718,7 @@
 <!-- ═══════════════════ FINAL CTA ═══════════════════ -->
 <section class="final-cta">
   <div class="reveal">
-    <div class="section-label mb-16">Let's Go</div>
+    <div class="section-tag mb-16">Let's Go</div>
     <h2>Don't Let Another Year Slip By.</h2>
     <p>Book your FREE 15-minute consultation and start your path to guitar mastery now.</p>
     <a class="btn" href="mailto:jon@jonbjorkmusic.com?subject=12-Week%20Mastery%20Program%20%E2%80%94%20Free%20Consultation">Book Your Free Consultation</a>
@@ -950,18 +729,68 @@
 
 <!-- FOOTER -->
 <footer>
-  <a class="footer-logo" href="/">Jon Bjork Music</a>
+  <a class="footer-logo" href="https://www.jonbjorkmusic.com/" aria-label="Jon Bjork Music — Guitarist, Coach, Composer">
+    <span class="footer-logo-row">
+      <span class="footer-logo-name">Jon Bjork</span>
+      <span class="footer-logo-divider" aria-hidden="true"></span>
+      <span class="footer-logo-tag">Music</span>
+    </span>
+    <span class="footer-tagline">Guitarist &middot; Coach &middot; Composer</span>
+  </a>
   <div class="footer-links">
-    <a class="footer-link" href="/">Home</a>
-    <a class="footer-link" href="/courses">Courses</a>
-    <a class="footer-link" href="/start">The Practice Room</a>
-    <a class="footer-link" href="/legal">Legal</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/">Home</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/coaching">1-on-1</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/start">The Practice Room</a>
   </div>
-  <div class="footer-copy">&copy; 2025 Jon Bjork Music. All rights reserved.</div>
+  <a class="footer-link" href="https://www.jonbjorkmusic.com/legal">Legal</a>
+  <div class="footer-copy">&copy; 2026 Jon Bjork Music</div>
 </footer>
 
 
 <script>
+  // --- Nav spacing: measure nav and apply to body padding ---
+  (function() {
+    function syncNavSpacing() {
+      var nav = document.querySelector('nav');
+      if (!nav) return;
+      document.body.style.paddingTop = nav.offsetHeight + 'px';
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', syncNavSpacing);
+    } else {
+      syncNavSpacing();
+    }
+    window.addEventListener('load', syncNavSpacing);
+    window.addEventListener('resize', syncNavSpacing);
+  })();
+
+  // --- Mobile menu toggle (design system standard) ---
+  (function() {
+    var toggle = document.getElementById('navToggle');
+    var menu = document.getElementById('mobileMenu');
+    if (!toggle || !menu) return;
+    function closeMenu() {
+      toggle.classList.remove('is-open');
+      menu.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+    function openMenu() {
+      toggle.classList.add('is-open');
+      menu.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+    toggle.addEventListener('click', function() {
+      if (menu.classList.contains('is-open')) closeMenu(); else openMenu();
+    });
+    menu.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', closeMenu);
+    });
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 900 && menu.classList.contains('is-open')) closeMenu();
+    });
+  })();
+
   // Respect user's motion preference
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
