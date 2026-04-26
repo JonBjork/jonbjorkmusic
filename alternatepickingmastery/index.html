@@ -276,6 +276,92 @@
     .video-wrap { padding-left: 24px; padding-right: 24px; }
     .guarantee-box { padding: 48px 28px; }
   }
+
+  /* --- ANIMATION LAYER (matching homepage motion) --- */
+
+  /* Card staggered reveal inside grids — fires when parent .reveal becomes visible */
+  .benefits-cols .benefit-card,
+  .what-get-grid .wg-item,
+  .testi-grid .testi-screenshot,
+  .steps-wrap > .reveal > .step {
+    opacity: 0;
+    transform: translateY(28px);
+    will-change: transform;
+    transition:
+      opacity 0.7s var(--ease-out-expo),
+      transform 0.7s var(--ease-out-expo),
+      border-color 0.25s,
+      background 0.25s,
+      box-shadow 0.35s;
+  }
+
+  .benefits-cols.visible .benefit-card:nth-child(1),
+  .what-get-grid.visible .wg-item:nth-child(1),
+  .testi-grid.visible .testi-screenshot:nth-child(1),
+  .steps-wrap > .reveal.visible .step:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateY(0); }
+
+  .benefits-cols.visible .benefit-card:nth-child(2),
+  .what-get-grid.visible .wg-item:nth-child(2),
+  .testi-grid.visible .testi-screenshot:nth-child(2),
+  .steps-wrap > .reveal.visible .step:nth-child(2) { transition-delay: 0.15s; opacity: 1; transform: translateY(0); }
+
+  .benefits-cols.visible .benefit-card:nth-child(3),
+  .what-get-grid.visible .wg-item:nth-child(3),
+  .steps-wrap > .reveal.visible .step:nth-child(3) { transition-delay: 0.25s; opacity: 1; transform: translateY(0); }
+
+  .what-get-grid.visible .wg-item:nth-child(4),
+  .steps-wrap > .reveal.visible .step:nth-child(4) { transition-delay: 0.35s; opacity: 1; transform: translateY(0); }
+
+  .steps-wrap > .reveal.visible .step:nth-child(5) { transition-delay: 0.45s; opacity: 1; transform: translateY(0); }
+
+  /* Card lift + purple glow on hover */
+  .benefit-card, .wg-item {
+    transition:
+      opacity 0.7s var(--ease-out-expo),
+      transform 0.25s var(--ease-out-smooth),
+      border-color 0.25s,
+      background 0.25s,
+      box-shadow 0.35s;
+  }
+  .benefit-card:hover,
+  .wg-item:hover {
+    border-color: var(--purple);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px -12px rgba(124, 58, 237, 0.35);
+  }
+
+  /* FAQ subtle hover */
+  .faq-q { transition: color 0.2s ease; }
+  .faq-item:hover .faq-q { color: var(--purple-lt); }
+
+  /* Hero cover subtle zoom on hover */
+  .hero-cover { transition: transform 0.6s var(--ease-out-expo); }
+  .hero-cover-wrap:hover .hero-cover { transform: scale(1.02); }
+
+  /* Course img cards (under guarantee) — gentle lift on hover */
+  .course-img {
+    transition: transform 0.25s var(--ease-out-smooth), border-color 0.25s, box-shadow 0.35s;
+  }
+  .course-img:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-border);
+    box-shadow: 0 10px 30px -14px rgba(124, 58, 237, 0.30);
+  }
+
+  /* Step row gentle highlight on hover */
+  .step .step-num { transition: opacity 0.2s ease, color 0.2s ease; }
+  .step:hover .step-num { opacity: 1; color: var(--purple-lt); }
+
+  /* Reduced motion respect */
+  @media (prefers-reduced-motion: reduce) {
+    .benefits-cols .benefit-card,
+    .what-get-grid .wg-item,
+    .testi-grid .testi-screenshot,
+    .steps-wrap > .reveal > .step {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
 </style>
 </head>
 <body>
