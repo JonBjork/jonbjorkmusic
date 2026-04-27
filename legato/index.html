@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>The 6-Minute Legato Workout | Jon Bjork Music</title>
 <meta name="description" content="A daily 6-minute drill that fixed my legato. Six finger combinations, sixty seconds each. Free from Jon Bjork.">
 <meta property="og:title" content="The 6-Minute Legato Workout">
@@ -649,7 +649,7 @@
   }
   .round-dot {
     width: 36px; height: 5px;
-    background: var(--border);
+    background: #404040;
     border-radius: 3px;
     transition: background 0.3s ease, transform 0.3s ease;
   }
@@ -914,13 +914,13 @@
     .principles-grid { grid-template-columns: 1fr; gap: 14px; }
   }
   @media (max-width: 600px) {
-    main { padding: 56px 18px 40px; }
+    main { padding: 56px 18px calc(56px + env(safe-area-inset-bottom)); }
     .lead-section { margin-bottom: 56px; }
     .hero { margin-bottom: 56px; }
     .card { padding: 40px 24px; }
     .video-card { padding: 36px 22px 26px; }
-    .workout-card { padding: 40px 22px; }
-    .complete-card { padding: 48px 22px; }
+    .workout-card { padding: 40px 22px 56px; }
+    .complete-card { padding: 48px 22px 64px; }
     .cta-box { padding: 36px 22px; }
     .principle-card { padding: 36px 26px; }
     .timer-wrap { width: 200px; height: 200px; }
