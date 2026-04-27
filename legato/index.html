@@ -95,6 +95,8 @@
     display: flex;
     flex-direction: column;
     overflow-x: hidden;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* === Sticky brand-only header === */
@@ -688,7 +690,7 @@
     height: 240px;
     margin: 0 auto 36px;
   }
-  .timer-ring { transform: rotate(-90deg); display: block; }
+  .timer-ring { transform: rotate(-90deg); display: block; width: 100%; height: 100%; }
   .timer-ring-bg {
     fill: none;
     stroke: var(--border);
@@ -909,6 +911,53 @@
   /* === Utilities === */
   [hidden] { display: none !important; }
 
+  /* === Rotate-to-portrait overlay === */
+  .rotate-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    text-align: center;
+  }
+  .rotate-overlay-inner {
+    max-width: 420px;
+  }
+  .rotate-icon {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 24px;
+    color: var(--purple-lt);
+    animation: rotateNudge 2.4s var(--ease-out-smooth) infinite;
+  }
+  .rotate-icon svg { width: 100%; height: 100%; display: block; }
+  .rotate-msg {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+  .rotate-sub {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+  @keyframes rotateNudge {
+    0%, 100% { transform: rotate(-90deg); }
+    50%      { transform: rotate(0deg); }
+  }
+  /* Show overlay only on small landscape (phones, not tablets) */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .rotate-overlay { display: flex; }
+    body { overflow: hidden; }
+  }
+
   /* === Mobile === */
   @media (max-width: 880px) {
     .principles-grid { grid-template-columns: 1fr; gap: 14px; }
@@ -957,6 +1006,21 @@
 </style>
 </head>
 <body>
+
+<div class="rotate-overlay" aria-hidden="true">
+  <div class="rotate-overlay-inner">
+    <div class="rotate-icon" aria-hidden="true">
+      <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="14" y="6" width="36" height="52" rx="4"></rect>
+        <line x1="32" y1="50" x2="32" y2="50"></line>
+        <path d="M52 28 a20 20 0 0 1 -16 16" stroke-dasharray="3 3"></path>
+        <polyline points="36 26 36 32 42 32"></polyline>
+      </svg>
+    </div>
+    <h2 class="rotate-msg">Rotate your device</h2>
+    <p class="rotate-sub">This workout is designed for portrait mode.</p>
+  </div>
+</div>
 
 <header class="site-header">
   <a class="site-header-brand" href="https://www.jonbjorkmusic.com/" aria-label="Jon Bjork Music, home">
@@ -1070,7 +1134,7 @@
     </div>
 
     <div class="timer-wrap">
-      <svg class="timer-ring" width="240" height="240" viewBox="0 0 240 240" aria-hidden="true">
+      <svg class="timer-ring" viewBox="0 0 240 240" aria-hidden="true">
         <circle class="timer-ring-bg" cx="120" cy="120" r="110"></circle>
         <circle class="timer-ring-progress" id="timer-ring-progress"
                 cx="120" cy="120" r="110"
