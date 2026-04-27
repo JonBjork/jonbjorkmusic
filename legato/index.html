@@ -19,6 +19,24 @@
   gtag('config', 'G-ZZW8ZW4P5D');
 </script>
 
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '3500842873287109');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=3500842873287109&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
@@ -626,6 +644,35 @@
 
   /* === Workout === */
   .workout-card { text-align: center; padding: 48px 36px; }
+  .workout-back {
+    position: absolute;
+    top: 22px;
+    left: 22px;
+    z-index: 2;
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-family: 'Oswald', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 10px 14px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s ease, background 0.2s ease;
+  }
+  .workout-back:hover {
+    color: var(--white);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .workout-back-arrow {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
   .workout-meta {
     display: flex;
     justify-content: center;
@@ -1150,6 +1197,9 @@
 
   <!-- Workout (hidden until Start) -->
   <section id="workout" class="card workout-card" hidden>
+    <button type="button" class="workout-back" id="back-btn" aria-label="Back to setup">
+      <span class="workout-back-arrow" aria-hidden="true">&larr;</span> Back
+    </button>
     <div class="workout-meta">
       <span class="info-tag" id="fret-tag">Fret 7</span>
       <span class="info-tag" id="bpm-tag">80 BPM</span>
@@ -1727,6 +1777,13 @@
         subdivision: metroState.subdivision
       });
     }
+    if (typeof fbq === 'function') {
+      fbq('trackCustom', 'WorkoutComplete', {
+        fret_position: currentFret,
+        bpm: metroState.bpm,
+        subdivision: metroState.subdivision
+      });
+    }
   }
 
   async function startWorkout() {
@@ -1758,6 +1815,13 @@
     // gtag
     if (typeof gtag === 'function') {
       gtag('event', 'workout_start', {
+        fret_position: currentFret,
+        bpm: metroState.bpm,
+        subdivision: metroState.subdivision
+      });
+    }
+    if (typeof fbq === 'function') {
+      fbq('trackCustom', 'WorkoutStart', {
         fret_position: currentFret,
         bpm: metroState.bpm,
         subdivision: metroState.subdivision
@@ -1820,8 +1884,31 @@
     });
   });
 
+  function backToSetup() {
+    if (workoutState === 'running') {
+      if (!window.confirm('Leave the workout? Your progress in this session will be lost.')) {
+        return;
+      }
+    }
+    clearInterval(timerInterval);
+    clearInterval(reminderInterval);
+    stopMetronome();
+    releaseWakeLock();
+    workoutState = 'idle';
+    currentRound = 0;
+    advancing = false;
+    const sbtn = document.getElementById('skip-btn');
+    sbtn.textContent = 'Skip to next round';
+    sbtn.classList.remove('btn-purple');
+    sbtn.classList.add('btn-outline');
+    document.getElementById('workout').setAttribute('hidden', '');
+    document.getElementById('setup').removeAttribute('hidden');
+    document.getElementById('setup').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   // === Wire workflow buttons ===
   document.getElementById('start-btn').addEventListener('click', startWorkout);
+  document.getElementById('back-btn').addEventListener('click', backToSetup);
   document.getElementById('skip-btn').addEventListener('click', handleAdvance);
   document.getElementById('restart-btn').addEventListener('click', () => {
     document.getElementById('complete').setAttribute('hidden', '');
@@ -1831,6 +1918,9 @@
   document.getElementById('cta-link').addEventListener('click', () => {
     if (typeof gtag === 'function') {
       gtag('event', 'cta_click', { destination: 'practice_room_pro' });
+    }
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead', { content_name: 'Sweep Picking Intensive' });
     }
   });
   document.getElementById('reset-history').addEventListener('click', resetHistory);
