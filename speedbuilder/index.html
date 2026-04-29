@@ -173,6 +173,15 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   .workout-card{text-align:center;padding:48px 36px;}
   .workout-back{position:absolute;top:22px;left:22px;z-index:2;background:transparent;border:none;color:var(--muted);font-family:'Oswald',sans-serif;font-weight:500;font-size:0.85rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;padding:10px 14px;border-radius:6px;display:inline-flex;align-items:center;gap:8px;transition:color 0.2s,background 0.2s;}
   .workout-back:hover{color:var(--white);background:rgba(255,255,255,0.05);}
+  .workout-pause{position:absolute;top:22px;right:22px;z-index:2;background:transparent;border:1px solid var(--border);color:var(--off);font-family:'Oswald',sans-serif;font-weight:600;font-size:0.85rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;padding:10px 16px;border-radius:6px;display:inline-flex;align-items:center;gap:10px;transition:color 0.2s,background 0.2s,border-color 0.2s,opacity 0.2s;}
+  .workout-pause:hover:not(:disabled){color:var(--white);border-color:var(--purple-lt);background:rgba(124,58,237,0.12);}
+  .workout-pause:disabled{opacity:0.35;cursor:not-allowed;}
+  .workout-pause.is-paused{color:var(--purple-lt);border-color:var(--purple-lt);background:rgba(124,58,237,0.10);}
+  .workout-pause svg{display:block;flex-shrink:0;}
+  @media(max-width:480px){
+    .workout-pause{padding:8px 12px;font-size:0.78rem;gap:8px;top:18px;right:18px;}
+    .workout-pause .pause-label{display:none;}
+  }
   .workout-meta{display:flex;justify-content:center;gap:10px;margin-bottom:26px;flex-wrap:wrap;}
   .info-tag{display:inline-block;font-family:'Oswald',sans-serif;font-weight:500;font-size:var(--fs-fret-tag);letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);background:var(--card2);border:1px solid var(--border);padding:8px 18px;border-radius:6px;}
 
@@ -394,6 +403,10 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     <button type="button" class="workout-back" id="back-btn" aria-label="Back to setup">
       <span aria-hidden="true">&larr;</span> Back
     </button>
+    <button type="button" class="workout-pause" id="pause-btn" aria-label="Pause" disabled>
+      <span class="pause-icon" id="pause-icon" aria-hidden="true"><svg width="12" height="14" viewBox="0 0 12 14" fill="currentColor"><rect x="0" y="0" width="4" height="14" rx="1"/><rect x="8" y="0" width="4" height="14" rx="1"/></svg></span>
+      <span class="pause-label" id="pause-label">Pause</span>
+    </button>
     <div class="workout-meta">
       <span class="info-tag" id="fret-tag">Fret 5</span>
       <span class="info-tag" id="bpm-tag">60 BPM</span>
@@ -545,6 +558,8 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   let elapsedSeconds = 0;
   let workoutTickInterval = null;
   let reminderInterval = null;
+  let isPaused = false;
+  let resuming = false;
 
   // Audio
   let audioCtx = null;
@@ -641,23 +656,39 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   function updateTempoHint(){ /* no-op: tempo is locked, no hint element */ }
 
   // === Audio ===
+  // initAudio is called on every play. iOS Safari suspends the AudioContext
+  // after audio stops or after a short idle, so we must re-check and resume
+  // on every invocation, not just on first init. The early return on
+  // audioReady would skip the resume and produce silent playback.
   async function initAudio(){
-    if(audioReady)return true;
-    if(audioLoading){while(audioLoading)await sleep(50);return audioReady;}
-    audioLoading=true;
+    if(audioLoading){while(audioLoading)await sleep(50);}
     try{
-      const Ctx=window.AudioContext||window.webkitAudioContext;
-      if(!Ctx)throw 'no Web Audio';
-      if(!audioCtx)audioCtx=new Ctx();
-      if(audioCtx.state==='suspended')await audioCtx.resume();
-      if(!clickBuffer){
-        const res=await fetch(CLICK_DATA_URI);
-        const ab=await res.arrayBuffer();
-        clickBuffer=await audioCtx.decodeAudioData(ab);
+      if(!audioCtx){
+        const Ctx=window.AudioContext||window.webkitAudioContext;
+        if(!Ctx)throw 'no Web Audio';
+        audioCtx=new Ctx();
       }
-      audioReady=true;
-    }catch(e){console.warn('Audio failed',e);audioReady=false;}
-    audioLoading=false;return audioReady;
+      // Always try to resume. Cheap if already running.
+      if(audioCtx.state==='suspended'){
+        try{await audioCtx.resume();}catch(e){}
+      }
+      // Buffers only need to load once.
+      if(!audioReady){
+        audioLoading=true;
+        if(!clickBuffer){
+          const res=await fetch(CLICK_DATA_URI);
+          const ab=await res.arrayBuffer();
+          clickBuffer=await audioCtx.decodeAudioData(ab);
+        }
+        audioReady=true;
+        audioLoading=false;
+      }
+      return audioCtx.state==='running';
+    }catch(e){
+      console.warn('Audio failed',e);
+      audioLoading=false;
+      return false;
+    }
   }
   function playClick(time, vol){
     if(!clickBuffer||!audioCtx)return;
@@ -706,6 +737,78 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   }
   function releaseWakeLock(){if(wakeLock){wakeLock.release().catch(()=>{});wakeLock=null;}}
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&metro.running)requestWakeLock();});
+
+  // === Pause / Resume ===
+  const PAUSE_ICON_SVG='<svg width="12" height="14" viewBox="0 0 12 14" fill="currentColor"><rect x="0" y="0" width="4" height="14" rx="1"/><rect x="8" y="0" width="4" height="14" rx="1"/></svg>';
+  const PLAY_ICON_SVG='<svg width="12" height="14" viewBox="0 0 12 14" fill="currentColor"><path d="M1 1 L11 7 L1 13 Z"/></svg>';
+  function setPauseBtnState(state){
+    const btn=document.getElementById('pause-btn');
+    if(!btn)return;
+    const icon=document.getElementById('pause-icon');
+    const label=document.getElementById('pause-label');
+    if(state==='hidden'){
+      btn.disabled=true;
+      btn.classList.remove('is-paused');
+      if(icon)icon.innerHTML=PAUSE_ICON_SVG;
+      if(label)label.textContent='Pause';
+      btn.setAttribute('aria-label','Pause');
+      return;
+    }
+    if(state==='paused'){
+      btn.disabled=false;
+      btn.classList.add('is-paused');
+      if(icon)icon.innerHTML=PLAY_ICON_SVG;
+      if(label)label.textContent='Resume';
+      btn.setAttribute('aria-label','Resume workout');
+      return;
+    }
+    if(state==='running'){
+      btn.disabled=false;
+      btn.classList.remove('is-paused');
+      if(icon)icon.innerHTML=PAUSE_ICON_SVG;
+      if(label)label.textContent='Pause';
+      btn.setAttribute('aria-label','Pause workout');
+      return;
+    }
+    if(state==='disabled'){
+      btn.disabled=true;
+    }
+  }
+  async function togglePause(){
+    if(workoutState!=='running')return;
+    if(resuming)return;
+    if(isPaused){
+      // === Resume ===
+      resuming=true;
+      setPauseBtnState('disabled');
+      isPaused=false;
+      // Snap to start of current combination so it begins on the right string.
+      elapsedSeconds=currentPermIdx*SECONDS_PER_PERM;
+      updateStringIndicator(getStringForElapsed(0,currentPermIdx));
+      updateProgress();
+      await requestWakeLock();
+      const ok=await initAudio();
+      if(ok){
+        await playCountIn();
+        startMetronome();
+      }
+      // Tick once per second from this point on. The next tick increments
+      // elapsedSeconds to the second mark right after the count-in.
+      workoutTickInterval=setInterval(workoutTick,1000);
+      startReminders();
+      setPauseBtnState('running');
+      resuming=false;
+    } else {
+      // === Pause ===
+      // Don't allow pausing during the initial count-in (metronome not yet running).
+      if(!metro.running)return;
+      isPaused=true;
+      stopMetronome();
+      if(workoutTickInterval){clearInterval(workoutTickInterval);workoutTickInterval=null;}
+      if(reminderInterval){clearInterval(reminderInterval);reminderInterval=null;}
+      setPauseBtnState('paused');
+    }
+  }
 
   // === Build fret grid ===
   const fretGrid=document.getElementById('fret-grid');
@@ -820,6 +923,8 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     clearInterval(reminderInterval);
     stopMetronome();
     releaseWakeLock();
+    isPaused=false;
+    setPauseBtnState('hidden');
     workoutState='complete';
     recordWorkout(currentFret, metro.bpm, currentDirection);
     applyHistoryStyles();updateTempoHint();updateDirHint();
@@ -832,6 +937,8 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   async function startWorkout(){
     workoutState='running';
     elapsedSeconds=0;currentPermIdx=0;
+    isPaused=false;resuming=false;
+    setPauseBtnState('disabled');
     document.getElementById('setup').setAttribute('hidden','');
     document.getElementById('complete').setAttribute('hidden','');
     document.getElementById('workout').removeAttribute('hidden');
@@ -849,10 +956,14 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     const ok=await initAudio();
     if(ok){await playCountIn();startMetronome();}
     workoutTickInterval=setInterval(workoutTick,1000);
+    setPauseBtnState('running');
   }
   function backToSetup(){
     if(workoutState==='running'&&!window.confirm('Leave the workout? Your progress in this session will be lost.'))return;
     clearInterval(workoutTickInterval);clearInterval(reminderInterval);stopMetronome();releaseWakeLock();
+    workoutTickInterval=null;reminderInterval=null;
+    isPaused=false;resuming=false;
+    setPauseBtnState('hidden');
     workoutState='idle';elapsedSeconds=0;currentPermIdx=0;
     document.getElementById('workout').setAttribute('hidden','');
     document.getElementById('setup').removeAttribute('hidden');
@@ -861,6 +972,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
 
   document.getElementById('start-btn').addEventListener('click',startWorkout);
   document.getElementById('back-btn').addEventListener('click',backToSetup);
+  document.getElementById('pause-btn').addEventListener('click',togglePause);
   document.getElementById('restart-btn').addEventListener('click',()=>{
     document.getElementById('complete').setAttribute('hidden','');
     document.getElementById('setup').removeAttribute('hidden');
