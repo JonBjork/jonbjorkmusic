@@ -12,5 +12,6 @@
     mkdir -p build && \
     rsync -a --exclude='notes' --exclude='build' --exclude='.git' --exclude='node_modules' --exclude='.DS_Store' --exclude='admin' ./ build/ && \
     cp -r admin build/admin && \
-    rsync -a notes/_site/ build/notes/
+    rsync -a notes/_site/notes/ build/notes/ && \
+    if [ -d notes/_site/images ]; then rsync -a notes/_site/images/ build/notes/images/; fi
   """
