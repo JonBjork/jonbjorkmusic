@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: JonBjork/jonbjorkmusic
   branch: main
 media_folder: "notes/src/images"
 public_folder: "/notes/images"
