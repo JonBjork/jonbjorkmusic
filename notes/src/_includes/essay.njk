@@ -1,0 +1,19 @@
+---
+layout: base.njk
+ogType: article
+---
+<article>
+  <header class="essay-header">
+    <span class="essay-eyebrow"><a href="/notes/">Notes</a></span>
+    <h1 class="essay-title">{{ title }}</h1>
+    <div class="essay-meta">{{ page.date | monthYear }}</div>
+  </header>
+  <div class="essay-body">
+    {{ content | safe }}
+  </div>
+  <div class="essay-cta">
+    <h3>Want help applying this?</h3>
+    <p>The Practice Room Pro is where I help you put a system around all of this. Send videos, get feedback, stop guessing.</p>
+    <a href="https://www.skool.com/the-practice-room-pro" target="_blank" rel="noopener">Try Free for 7 Days</a>
+  </div>
+</article>

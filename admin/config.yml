@@ -1,0 +1,22 @@
+backend:
+  name: git-gateway
+  branch: main
+media_folder: "notes/src/images"
+public_folder: "/notes/images"
+site_url: https://jonbjorkmusic.com
+display_url: https://jonbjorkmusic.com
+logo_url: https://jonbjorkmusic.com/favicon.ico
+collections:
+  - name: "essays"
+    label: "Essays"
+    label_singular: "Essay"
+    folder: "notes/src/essays"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, picker_utc: false }
+      - { label: "Summary", name: "summary", widget: "string", hint: "One or two sentences shown on the library page." }
+      - { label: "Body", name: "body", widget: "markdown" }

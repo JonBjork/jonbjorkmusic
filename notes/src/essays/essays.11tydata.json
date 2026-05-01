@@ -1,0 +1,4 @@
+{
+  "layout": "essay.njk",
+  "permalink": "/notes/{{ page.fileSlug }}/"
+}

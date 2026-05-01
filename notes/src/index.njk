@@ -1,0 +1,21 @@
+---
+layout: base.njk
+title: Notes on Practice
+description: Essays, ideas, and observations on guitar practice, technique, and long-term musical development.
+permalink: /notes/
+---
+<header class="notes-header">
+  <h1>Notes on Practice</h1>
+  <p>Essays, ideas, and observations on guitar practice, technique, and long-term musical development.</p>
+</header>
+<ul class="notes-list">
+  {% for essay in collections.essays %}
+  <li class="notes-list-item">
+    <a href="{{ essay.url }}">
+      <h2>{{ essay.data.title }}</h2>
+      {% if essay.data.summary %}<p>{{ essay.data.summary }}</p>{% endif %}
+      <span class="meta">{{ essay.date | monthYear }}</span>
+    </a>
+  </li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,16 @@
+# Netlify configuration for jonbjorkmusic.com
+#
+# Strategy:
+# 1. Run Eleventy in the notes/ folder, which generates notes/_site/
+# 2. Copy the existing site files into a build/ folder
+# 3. Drop the generated notes pages into build/notes/
+# 4. Publish build/ as the live site
+[build]
+  publish = "build"
+  command = """
+    cd notes && npm install && npx @11ty/eleventy && cd .. && \
+    mkdir -p build && \
+    rsync -a --exclude='notes' --exclude='build' --exclude='.git' --exclude='node_modules' --exclude='.DS_Store' --exclude='admin' ./ build/ && \
+    cp -r admin build/admin && \
+    rsync -a notes/_site/ build/notes/
+  """
