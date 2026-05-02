@@ -8,7 +8,6 @@ summary: "Classical violinists and pianists have used dotted rhythms for
   that wastes the whole exercise, and a one-week routine to try it on a phrase
   that's been giving you trouble."
 ---
-
 There's a practice technique that classical violinists and pianists have been using for centuries to get difficult passages up to speed. It works just as well on guitar, and most guitarists I meet either don't know about it or have tried it once and given up before it clicked.
 
 It's called dotted rhythms. The idea is simple: instead of playing a phrase evenly, you play it lopsided. One note long, the next note short. Then you flip it: short, long. That's it.
@@ -31,7 +30,7 @@ You have to do both. If you only do long-short, you're only practicing half the 
 
 The most common mistake here is playing a kind of safe, quantized version of the rhythm. Something that's a bit lopsided but not really committed. If you've seen dotted rhythms written out in standard notation (a dotted eighth followed by a sixteenth), the strict version is worth three sixteenth notes on the long note and one on the short note. That ratio is too gentle for what we want.
 
-Forget the notation. The long note should be as long as you need to relax and reset. The short note should be as fast as you can play it without getting sloppy. 
+Forget the notation. The long note should be as long as you need to relax and reset. The short note should be as fast as you can play it without getting sloppy.
 
 If it sounds like a bad swing rhythm, you're doing it wrong.
 
@@ -67,12 +66,11 @@ Pick a short phrase. Something you've been struggling with. Don't make it too lo
 
 At each fret position, play three reps:
 
-
 1. Long-short version
 2. Short-long version
 3. Normal rhythm at a comfortable tempo
 
-
+&nbsp;
 
 If a rep isn't sharp enough, repeat it before moving on. When you start, you might need to play the rhythm a bit shallow just to get the feel of it. That's fine for the first attempt or two, but get it crisp before you move up the neck. Lazy rhythms will undo the whole point of the exercise.
 
