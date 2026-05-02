@@ -67,9 +67,11 @@ Pick a short phrase. Something you've been struggling with. Don't make it too lo
 
 At each fret position, play three reps:
 
+
 1. Long-short version
 2. Short-long version
 3. Normal rhythm at a comfortable tempo
+
 
 
 If a rep isn't sharp enough, repeat it before moving on. When you start, you might need to play the rhythm a bit shallow just to get the feel of it. That's fine for the first attempt or two, but get it crisp before you move up the neck. Lazy rhythms will undo the whole point of the exercise.
