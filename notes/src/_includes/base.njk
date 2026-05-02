@@ -63,8 +63,106 @@
 </style>
 </head>
 <body>
+
+<nav>
+  <a class="nav-logo" href="https://www.jonbjorkmusic.com/" aria-label="Jon Bjork Music — Guitarist, Coach, Composer">
+    <span class="nav-logo-row">
+      <span class="nav-logo-name">Jon Bjork</span>
+      <span class="nav-logo-divider" aria-hidden="true"></span>
+      <span class="nav-logo-tag">Music</span>
+    </span>
+    <span class="nav-tagline">Guitarist &middot; Coach &middot; Composer</span>
+  </a>
+  <div class="nav-right">
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/start">Coaching</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/#about">About</a>
+    <a class="nav-btn" href="https://www.jonbjorkmusic.com/coaching">1-on-1 Coaching</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="menu">
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/start">Coaching</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/#about">About</a>
+  <a class="nav-btn" href="https://www.jonbjorkmusic.com/coaching">1-on-1 Coaching</a>
+</div>
+
 <div class="notes-wrap">
   {{ content | safe }}
 </div>
+
+<footer>
+  <a class="footer-logo" href="https://www.jonbjorkmusic.com/" aria-label="Jon Bjork Music — Guitarist, Coach, Composer">
+    <span class="footer-logo-row">
+      <span class="footer-logo-name">Jon Bjork</span>
+      <span class="footer-logo-divider" aria-hidden="true"></span>
+      <span class="footer-logo-tag">Music</span>
+    </span>
+    <span class="footer-tagline">Guitarist &middot; Coach &middot; Composer</span>
+  </a>
+  <div class="footer-links">
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/">Home</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/coaching">1-on-1</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+    <a class="footer-link" href="https://youtube.com/@jonbjork" target="_blank">YouTube</a>
+  </div>
+  <a class="footer-link" href="https://www.jonbjorkmusic.com/legal">Legal</a>
+  <div class="footer-copy">&copy; 2026 Jon Bjork Music</div>
+</footer>
+
+<script>
+  // --- Nav spacing: measure nav and apply to body padding ---
+  (function() {
+    function syncNavSpacing() {
+      var nav = document.querySelector('nav');
+      if (!nav) return;
+      var h = nav.offsetHeight;
+      document.body.style.paddingTop = h + 'px';
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', syncNavSpacing);
+    } else {
+      syncNavSpacing();
+    }
+    window.addEventListener('load', syncNavSpacing);
+    window.addEventListener('resize', syncNavSpacing);
+  })();
+
+  // --- Mobile menu toggle ---
+  (function() {
+    var toggle = document.getElementById('navToggle');
+    var menu = document.getElementById('mobileMenu');
+    if (!toggle || !menu) return;
+
+    function closeMenu() {
+      toggle.classList.remove('is-open');
+      menu.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
+    }
+    function openMenu() {
+      toggle.classList.add('is-open');
+      menu.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Close menu');
+    }
+    toggle.addEventListener('click', function() {
+      if (menu.classList.contains('is-open')) { closeMenu(); } else { openMenu(); }
+    });
+    menu.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', closeMenu);
+    });
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 900 && menu.classList.contains('is-open')) closeMenu();
+    });
+  })();
+</script>
+
 </body>
 </html>
