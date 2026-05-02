@@ -14,7 +14,10 @@ permalink: /notes/
     <a href="{{ essay.url }}">
       <h2>{{ essay.data.title }}</h2>
       {% if essay.data.summary %}<p>{{ essay.data.summary }}</p>{% endif %}
-      <span class="meta">{{ essay.date | monthYear }}</span>
+      <div class="notes-list-foot">
+        <span class="meta">{{ essay.date | monthYear }}</span>
+        <span class="notes-list-read">Read &#8594;</span>
+      </div>
     </a>
   </li>
   {% endfor %}
