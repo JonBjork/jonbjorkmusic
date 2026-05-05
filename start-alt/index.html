@@ -316,6 +316,115 @@
   }
   .feature-card p { color: var(--muted); font-size: 1.08rem; line-height: 1.62; }
 
+  .app-showcase {
+    background:
+      linear-gradient(180deg, rgba(124,58,237,0.12), transparent 38%),
+      var(--card);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .app-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 0.88fr) minmax(420px, 1.12fr);
+    gap: 52px;
+    align-items: center;
+  }
+  .app-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 34px;
+  }
+  .app-stat {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: rgba(255,255,255,0.025);
+    padding: 22px;
+  }
+  .app-stat strong {
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2.8rem;
+    line-height: 1;
+    color: var(--white);
+    margin-bottom: 9px;
+  }
+  .app-stat span { color: var(--muted); font-size: 0.98rem; line-height: 1.4; display: block; }
+  .app-screens {
+    position: relative;
+    min-height: 520px;
+  }
+  .app-screen {
+    position: absolute;
+    border: 1px solid var(--accent-border);
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--bg);
+    box-shadow: 0 26px 70px rgba(0,0,0,0.48), 0 0 50px rgba(124,58,237,0.18);
+  }
+  .app-screen img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .app-screen-main {
+    width: 72%;
+    right: 0;
+    top: 0;
+    z-index: 2;
+  }
+  .app-screen-secondary {
+    width: 54%;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    opacity: 0.92;
+  }
+  .app-labs {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-top: 48px;
+  }
+  .lab-card {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: rgba(13,13,13,0.5);
+    padding: 24px;
+    min-height: 240px;
+    transition: transform 0.22s var(--ease-out-smooth), border-color 0.22s;
+  }
+  .lab-card:hover { transform: translateY(-4px); border-color: var(--accent-border); }
+  .lab-card h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.55rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.12;
+    margin-bottom: 14px;
+  }
+  .lab-card p { color: var(--muted); font-size: 1rem; line-height: 1.56; }
+  .app-flow {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .flow-card {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    background: rgba(124,58,237,0.07);
+  }
+  .flow-card strong {
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .flow-card p { color: var(--muted); line-height: 1.55; }
+
   .spotlight {
     display: grid;
     grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
@@ -367,6 +476,24 @@
     position: relative;
     z-index: 1;
   }
+  .cover-card-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+    opacity: 0.88;
+  }
+  .cover-card.has-img {
+    background: var(--card);
+  }
+  .cover-card.has-img::before {
+    background: linear-gradient(180deg, transparent, rgba(13,13,13,0.78));
+    border: 0;
+    inset: 0;
+  }
+  .cover-card.has-img::after { display: none; }
   .timeline { margin-top: 32px; display: grid; gap: 12px; }
   .timeline-item {
     display: grid;
@@ -384,38 +511,54 @@
   }
   .timeline-copy { color: var(--muted); font-size: 1.08rem; }
 
-  .library-strip {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(220px, 1fr));
-    gap: 14px;
-    overflow-x: auto;
-    padding: 8px 4px 18px;
-    margin-top: 44px;
-    scrollbar-color: var(--purple) var(--card);
+  .boxart-library { display: grid; gap: 46px; margin-top: 48px; }
+  .course-group-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 24px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 14px;
   }
+  .course-group-head h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(1.9rem, 3vw, 2.6rem);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .course-group-head span {
+    color: var(--purple-lt);
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+  }
+  .course-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .course-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .course-grid-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .mini-course {
-    min-width: 220px;
     border: 1px solid var(--border);
     border-radius: 14px;
     overflow: hidden;
     background: var(--card);
+    transition: transform 0.22s var(--ease-out-smooth), border-color 0.22s, box-shadow 0.22s;
+  }
+  .mini-course:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-border);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.28);
   }
   .mini-cover {
     aspect-ratio: 4 / 5;
-    background:
-      linear-gradient(145deg, rgba(124,58,237,0.62), rgba(13,13,13,0.28) 48%, rgba(31,31,31,1)),
-      repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0 1px, transparent 1px 18px);
-    padding: 22px;
-    display: flex;
-    align-items: end;
+    background: var(--card2);
   }
-  .mini-cover span {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.55rem;
-    line-height: 1.05;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
+  .mini-cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .mini-course p { padding: 18px; color: var(--muted); line-height: 1.45; }
 
   .quote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 44px; }
@@ -534,14 +677,19 @@
   @media (max-width: 1120px) {
     .hero-alt,
     .chooser,
+    .app-hero,
     .spotlight,
     .pricing-layout {
       grid-template-columns: 1fr;
     }
     .practice-console { max-width: 760px; }
     .feature-grid,
+    .app-labs,
     .rail-grid,
     .quote-grid { grid-template-columns: 1fr 1fr; }
+    .course-grid,
+    .course-grid-3,
+    .course-grid-6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
 
   @media (max-width: 760px) {
@@ -549,6 +697,9 @@
     .hero-proof,
     .plan-grid,
     .feature-grid,
+    .app-stats,
+    .app-labs,
+    .app-flow,
     .rail-grid,
     .quote-grid,
     .tech-buttons,
@@ -560,8 +711,23 @@
     .price-panel,
     .week-list,
     .selector-panel { padding: 24px; }
+    .app-screens { min-height: 420px; }
+    .app-screen-main { width: 86%; }
+    .app-screen-secondary { width: 66%; }
+    .course-grid,
+    .course-grid-3,
+    .course-grid-6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .course-group-head { display: block; }
+    .course-group-head span { display: block; margin-top: 8px; }
     .cover-stack { min-height: 380px; }
     .timeline-item { grid-template-columns: 1fr; gap: 4px; }
+  }
+
+  @media (max-width: 480px) {
+    .course-grid,
+    .course-grid-3,
+    .course-grid-6 { grid-template-columns: 1fr; }
+    .app-screens { min-height: 340px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -747,7 +913,7 @@
         <div class="feature-card reveal-soft">
           <div class="feature-num">04</div>
           <h3>Practice Lab</h3>
-          <p>Sit down, choose a target, and get a focused session instead of wasting your warm-up deciding what to practice.</p>
+          <p>Quick sessions, guided labs, rep tracking, rhythm training, ear training, and fretboard visualization in one focused app.</p>
         </div>
         <div class="feature-card reveal-soft">
           <div class="feature-num">05</div>
@@ -763,10 +929,83 @@
     </div>
   </section>
 
+  <section class="alt-section app-showcase" id="app">
+    <div class="alt-inner">
+      <div class="app-hero">
+        <div class="reveal-soft">
+          <span class="section-kicker">Practice Lab App</span>
+          <h2 class="alt-title">The App Turns Intention Into A Session.</h2>
+          <p class="alt-copy">Practice Lab is not just a timer. It is a full practice environment: quick technique sessions, a workout library with video and tab, rhythm subdivision training, lifetime rep goals, perfect-streak tempo work, ear training with drones, and fretboard maps for scales and arpeggios.</p>
+          <div class="app-stats">
+            <div class="app-stat">
+              <strong>27</strong>
+              <span>video-backed technique workouts with tab</span>
+            </div>
+            <div class="app-stat">
+              <strong>40</strong>
+              <span>scale and mode options inside Ear Lab</span>
+            </div>
+            <div class="app-stat">
+              <strong>256</strong>
+              <span>16th-note two-beat rhythm transitions</span>
+            </div>
+          </div>
+        </div>
+        <div class="app-screens reveal-soft" aria-label="Practice Lab screenshots">
+          <div class="app-screen app-screen-main">
+            <img src="assets/practice-lab-start.png" alt="Practice Lab start screen">
+          </div>
+          <div class="app-screen app-screen-secondary">
+            <img src="assets/practice-lab-exercise.png" alt="Practice Lab exercise view">
+          </div>
+        </div>
+      </div>
+
+      <div class="app-flow reveal-soft">
+        <div class="flow-card">
+          <strong>Pick For Me</strong>
+          <p>Low on willpower? The app chooses a focused session so you can stop negotiating and start playing.</p>
+        </div>
+        <div class="flow-card">
+          <strong>Choose Technique</strong>
+          <p>Alternate picking, economy picking, sweep picking, hybrid picking, legato, or tapping.</p>
+        </div>
+        <div class="flow-card">
+          <strong>Build Your Own</strong>
+          <p>Hand-pick up to six workouts and build the exact practice block you need that day.</p>
+        </div>
+      </div>
+
+      <div class="app-labs">
+        <div class="lab-card reveal-soft">
+          <h3>Workout Sessions</h3>
+          <p>Five to thirty minute sessions built from the 27-exercise library, each with YouTube instruction, tab images, metronome support, and clear technical focus.</p>
+        </div>
+        <div class="lab-card reveal-soft">
+          <h3>Rhythm Lab</h3>
+          <p>Loop individual rhythm cells, train 8ths, triplets, 16ths, quintuplets, sextuplets, and septuplets, then use anchor and continuous modes to master transitions.</p>
+        </div>
+        <div class="lab-card reveal-soft">
+          <h3>Technique Lab</h3>
+          <p>Create your own patterns, set notes per rep, track session reps, chase lifetime goals, review stats, and back up or restore your practice data.</p>
+        </div>
+        <div class="lab-card reveal-soft">
+          <h3>Virtuoso Lab</h3>
+          <p>Use perfect-streak tempo work to unlock the next BPM, with rest blocks, ceiling tracking, session history, and modes for beat-by-beat construction.</p>
+        </div>
+        <div class="lab-card reveal-soft">
+          <h3>Ear &amp; Fretboard Labs</h3>
+          <p>Hear melodies against drones, answer on the fretboard, switch between numbers and solfege, then map scales, modes, triads, and seventh arpeggios across the neck.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="alt-section" style="background: var(--card); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
     <div class="alt-inner spotlight">
       <div class="cover-stack reveal-soft" aria-hidden="true">
-        <div class="cover-card">
+        <div class="cover-card has-img">
+          <img class="cover-card-img" src="assets/boxart-sweep-intensive.jpg" alt="">
           <div class="cover-title">8-Week Sweep Picking Intensive</div>
           <div class="cover-foot">Current Pro Focus</div>
         </div>
@@ -801,12 +1040,51 @@
         <p class="alt-copy">The library is there when you need it, but the point is not to binge. The point is to pull the right lesson into the right practice block.</p>
       </div>
       <div class="library-strip reveal-soft" aria-label="Included course library">
-        <div class="mini-course"><div class="mini-cover"><span>Alternate Picking Mastery</span></div><p>Accuracy, string changes, speed, and control.</p></div>
-        <div class="mini-course"><div class="mini-cover"><span>Playing What You Hear</span></div><p>Movable Do, ear training, and fretboard connection.</p></div>
-        <div class="mini-course"><div class="mini-cover"><span>Pentatonic Picking Power</span></div><p>Fast, clean runs without hiding inside familiar shapes.</p></div>
-        <div class="mini-course"><div class="mini-cover"><span>10-Minute Workouts</span></div><p>Short focused routines for busy practice days.</p></div>
-        <div class="mini-course"><div class="mini-cover"><span>Deep Dives</span></div><p>Technique, shapes, licks, timing, tapping, and more.</p></div>
-        <div class="mini-course"><div class="mini-cover"><span>Practice Lab</span></div><p>Guided sessions that give every rep a job.</p></div>
+        <div class="boxart-library">
+          <div class="course-group">
+            <div class="course-group-head">
+              <h3>8-Week Intensives</h3>
+              <span>Focused Programs</span>
+            </div>
+            <div class="course-grid course-grid-3">
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-alt-picking-intensive.jpg" alt="8-Week Alternate Picking Intensive"></div><p>Build clean, accurate alternate picking.</p></div>
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-legato-intensive.jpg" alt="8-Week Legato Intensive"></div><p>Develop smooth, controlled legato.</p></div>
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-sweep-intensive.jpg" alt="8-Week Sweep Picking Intensive"></div><p>Build clean, controlled sweep picking.</p></div>
+            </div>
+          </div>
+
+          <div class="course-group">
+            <div class="course-group-head">
+              <h3>Deep Dives</h3>
+              <span>Technique Libraries</span>
+            </div>
+            <div class="course-grid course-grid-6">
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-alt-picking-deep-dive.jpg" alt="Alternate Picking Deep Dive"></div><p>Techniques, shapes, and licks.</p></div>
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-legato-deep-dive.jpg" alt="Legato Deep Dive"></div><p>Techniques, shapes, and licks.</p></div>
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-sweep-deep-dive.jpg" alt="Sweep Picking Deep Dive"></div><p>Techniques, shapes, and licks.</p></div>
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-hybrid-deep-dive.jpg" alt="Hybrid Picking Deep Dive"></div><p>Techniques, shapes, and licks.</p></div>
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-tapping-deep-dive.jpg" alt="Tapping Deep Dive"></div><p>Technique, scales, and arpeggios.</p></div>
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-timing-deep-dive.jpg" alt="Timing Deep Dive"></div><p>Subdivisions, counting, and precision.</p></div>
+            </div>
+          </div>
+
+          <div class="course-group">
+            <div class="course-group-head">
+              <h3>Full Courses</h3>
+              <span>Day One Access</span>
+            </div>
+            <div class="course-grid">
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-alternate-picking-mastery.jpg" alt="Alternate Picking Mastery"></div><p>3 notes per string picking control.</p></div>
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-playing-what-you-hear.jpg" alt="Playing What You Hear"></div><p>Ear training and fretboard knowledge.</p></div>
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-pentatonic-picking-power.jpg" alt="Pentatonic Picking Power"></div><p>Technique, ear training, and fretboard.</p></div>
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-quick-licks.jpg" alt="Quick Licks"></div><p>Level up your technique and fretboard.</p></div>
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-single-string-speed-system.jpg" alt="The Single-String Speed System"></div><p>Speed, control, and mastery.</p></div>
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-the-daily-ten.jpg" alt="The Daily Ten"></div><p>150 workouts for your path to mastery.</p></div>
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-10-minute-workouts.jpg" alt="10 Minute Workouts Vol 1 &amp; 2"></div><p>28 bite-sized workouts.</p></div>
+              <div class="mini-course"><div class="mini-cover"><img src="assets/boxart-3nps-speed-system.jpg" alt="The 3NPS Speed System"></div><p>Technique, consistency, and velocity.</p></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
