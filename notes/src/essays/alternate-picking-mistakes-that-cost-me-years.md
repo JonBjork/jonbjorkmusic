@@ -35,7 +35,7 @@ This isn't a license to ignore the great players. Study them. Watch what they do
 
 ## Licks are comfort zones in disguise
 
-For a long time, my entire technique practice was licks. I'd learn a fast run, drill it, get it clean, move to the next one. Felt productive. Wasn't.
+For a long time, my entire technique practice was licks. I'd learn a fast run, practice it, get it clean, move to the next one. Felt productive. Wasn't.
 
 The problem with practicing technique only through licks is that you play each lick the same way every time. So your picking hand gets really good at the specific motions that lick requires, and quietly terrible at everything else. I was solid at outside picking because most of my favorite licks used it. My inside picking was a mess. My fretting hand had the same problem. Some finger combinations felt natural, others felt like I'd never held a guitar before.
 
@@ -61,7 +61,7 @@ So I changed who I was comparing myself to. Instead of Yngwie at 19, I compared 
 
 ## It's not always your picking hand
 
-For years, whenever something didn't sound right, I assumed it was a picking problem. If a lick felt sloppy, I'd drill the picking hand. I never seriously considered that my fretting hand might be the actual issue.
+For years, whenever something didn't sound right, I assumed it was a picking problem. If a lick felt sloppy, I'd work the picking hand. I never seriously considered that my fretting hand might be the actual issue.
 
 When I finally slowed down and listened carefully, I realized my fretting hand was drifting out of time on certain phrases. The picking hand was hitting where it was supposed to, but the notes themselves were coming in late or early because the left hand wasn't synced up. Tiny timing errors, but enough to make everything sound messy.
 

@@ -42,7 +42,7 @@ Dotted rhythms split the difficulty in half. Every other transition is fast, but
 
 The long notes aren't just rests. They're for two things: physically relaxing your hands so you don't carry tension into the next fast note, and mentally evaluating what you just played. If something felt wrong, you have a beat to register it before the next attempt.
 
-This is why mindless reps don't work here. You have to actually pay attention during the long notes. If you zone out, you're just drilling sloppiness into the phrase.
+This is why mindless reps don't work here. You have to actually pay attention during the long notes. If you zone out, you're just training sloppiness into the phrase.
 
 ## Keep the technique intact
 
