@@ -1,0 +1,3198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The 90% Rule: Why Busy Guitarists Stop Improving | Jon Bjork</title>
+<meta name="description" content="The less time you have to practice, the more focused you need to be. Here's the rule, the science behind it, and what to do with your 30 minutes.">
+<meta property="og:title" content="The 90% Rule: Why Busy Guitarists Stop Improving">
+<meta property="og:description" content="The less time you have to practice, the more focused you need to be. Here's the rule, the science behind it, and what to do with your 30 minutes.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#0d0d0d">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZW8ZW4P5D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZZW8ZW4P5D');
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+
+<style>
+  /* =============================================================================
+     90% RULE — standalone landing page (self-contained, no external CSS dependency)
+     Mirrors jonbjorkmusic.com design tokens.
+     ============================================================================= */
+
+  :root {
+    --bg:            #0d0d0d;
+    --card:          #181818;
+    --card2:         #1f1f1f;
+    --card3:         #242424;
+    --border:        #2a2a2a;
+    --white:         #ffffff;
+    --off:           #e8e8e8;
+    --muted:         #aaaaaa;
+    --dim:           #666666;
+    --purple:        #7c3aed;
+    --purple-lt:     #9d5ff5;
+    --purple-dim:    rgba(124, 58, 237, 0.18);
+    --navy:          #1a1040;
+    --navy-deep:     #0d0830;
+    --accent-border: #4a3a9a;
+    --ease-out-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* === NAV === */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: rgba(13, 13, 13, 0.95);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px 48px;
+  }
+  .nav-logo {
+    display: inline-flex; align-items: center; gap: 16px;
+    text-decoration: none; line-height: 1;
+  }
+  .nav-logo-name {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.6rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--white);
+  }
+  .nav-logo-divider { width: 2px; height: 26px; background: var(--white); }
+  .nav-logo-tag {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.95rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--white);
+  }
+  .nav-right { display: flex; align-items: center; gap: 28px; }
+  .nav-link {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.95rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--white); }
+  .nav-btn {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--purple); color: var(--white);
+    padding: 12px 24px; border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .nav-btn:hover { background: var(--purple-lt); transform: scale(1.02); }
+  @media (max-width: 800px) {
+    nav { padding: 16px 22px; }
+    .nav-right .nav-link { display: none; }
+    .nav-logo-tag { display: none; }
+    .nav-logo-divider { display: none; }
+  }
+
+  /* === LAYOUT === */
+  .page { padding-top: 80px; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+  .wrap-wide { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+
+  /* === HERO === */
+  .hero {
+    position: relative;
+    padding: 80px 24px 60px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -200px; left: 50%;
+    transform: translateX(-50%); width: 900px; height: 700px;
+    background: radial-gradient(ellipse, rgba(124,58,237,0.20) 0%, rgba(26,16,64,0.10) 50%, transparent 75%);
+    pointer-events: none; z-index: 0;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; }
+  .hero-eyebrow {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 1rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 24px;
+    opacity: 0; animation: fadeUp 0.7s 0.1s var(--ease-out-expo) both;
+  }
+  .hero h1 {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(2.8rem, 7.5vw, 5.5rem);
+    letter-spacing: 0.01em; line-height: 1.0;
+    text-transform: uppercase; color: var(--white);
+    margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.8s 0.25s var(--ease-out-expo) both;
+  }
+  .hero-sub {
+    font-size: 1.3rem; color: var(--muted);
+    max-width: 640px; margin: 0 auto;
+    line-height: 1.6;
+    opacity: 0; animation: fadeUp 0.8s 0.4s var(--ease-out-expo) both;
+  }
+  .hero-meta {
+    margin-top: 32px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--dim);
+    opacity: 0; animation: fadeUp 0.8s 0.55s var(--ease-out-expo) both;
+  }
+
+  /* === ARTICLE === */
+  .article-section { padding: 36px 0; }
+  .article-section.first { padding-top: 24px; }
+  .section-h {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    letter-spacing: 0.02em; text-transform: uppercase;
+    line-height: 1.15; color: var(--white);
+    margin-bottom: 24px;
+  }
+  .article-body p {
+    font-size: 1.2rem; color: var(--off); font-weight: 300;
+    line-height: 1.75; margin-bottom: 22px;
+  }
+  .article-body strong { color: var(--white); font-weight: 700; }
+  .article-body em { font-style: italic; }
+  .pullquote {
+    margin: 36px 0;
+    padding: 28px 32px;
+    border-left: 3px solid var(--purple);
+    background: var(--card);
+    border-radius: 0 12px 12px 0;
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 1.5rem; line-height: 1.3;
+    letter-spacing: 0.01em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+  .pullquote-sub {
+    display: block; margin-top: 10px;
+    font-family: 'Lato', sans-serif; font-weight: 300; font-size: 1rem;
+    letter-spacing: 0.04em; text-transform: none;
+    color: var(--muted);
+  }
+
+  /* === CALCULATOR === */
+  .calc-wrap { padding: 60px 0 20px; }
+  .calc-card {
+    background: linear-gradient(180deg, var(--card) 0%, var(--card2) 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 44px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .calc-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--purple), var(--purple-lt));
+  }
+  .calc-eyebrow {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.85rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 12px;
+  }
+  .calc-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    letter-spacing: 0.01em; text-transform: uppercase;
+    color: var(--white); margin-bottom: 28px;
+    line-height: 1.15;
+  }
+  .calc-slider-row {
+    margin-bottom: 28px;
+  }
+  .calc-label {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 14px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.95rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .calc-label-value {
+    color: var(--white); font-weight: 600;
+    font-size: 1.6rem; letter-spacing: 0.02em;
+  }
+  .calc-label-value .unit {
+    font-size: 0.85rem; color: var(--muted);
+    font-weight: 400; margin-left: 4px;
+  }
+  input[type=range].calc-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: var(--card3);
+    border-radius: 4px;
+    outline: none;
+    border: 1px solid var(--border);
+  }
+  input[type=range].calc-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 26px;
+    height: 26px;
+    background: var(--purple);
+    border: 2px solid var(--white);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.5);
+    transition: background 0.15s, transform 0.15s;
+  }
+  input[type=range].calc-slider::-webkit-slider-thumb:hover {
+    background: var(--purple-lt);
+    transform: scale(1.08);
+  }
+  input[type=range].calc-slider::-moz-range-thumb {
+    width: 26px; height: 26px;
+    background: var(--purple);
+    border: 2px solid var(--white);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.5);
+  }
+
+  .calc-result {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .calc-stat {
+    background: var(--card3);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .calc-stat.focus { border-color: var(--purple); }
+  .calc-stat.focus::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 100%;
+    background: radial-gradient(ellipse at top, rgba(124,58,237,0.18), transparent 60%);
+    pointer-events: none;
+  }
+  .calc-stat-label {
+    position: relative;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 8px;
+  }
+  .calc-stat-value {
+    position: relative;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(2.6rem, 6vw, 3.6rem);
+    line-height: 1; color: var(--white);
+    letter-spacing: 0.01em;
+  }
+  .calc-stat-value .small {
+    font-size: 1.1rem; color: var(--muted); font-weight: 400;
+    margin-left: 6px; letter-spacing: 0.04em;
+  }
+  .calc-stat-sub {
+    position: relative;
+    margin-top: 10px;
+    font-family: 'Lato', sans-serif; font-size: 0.95rem;
+    color: var(--muted); font-weight: 300;
+  }
+  .calc-summary {
+    margin-top: 28px;
+    padding: 20px 24px;
+    background: rgba(124, 58, 237, 0.08);
+    border: 1px solid var(--accent-border);
+    border-radius: 10px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.1rem; line-height: 1.6;
+    color: var(--off);
+  }
+  .calc-summary strong { color: var(--white); font-weight: 700; }
+
+  /* === SCIENCE VISUALIZER === */
+  .science-wrap {
+    padding: 60px 0 40px;
+  }
+  .science-intro {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .science-intro .eyebrow {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.85rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 16px;
+  }
+  .science-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 40px;
+  }
+  @media (max-width: 880px) {
+    .science-grid { grid-template-columns: 1fr; }
+  }
+  .science-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px 26px 28px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.3s var(--ease-out-smooth);
+  }
+  .science-card:hover {
+    border-color: var(--accent-border);
+    transform: translateY(-4px);
+  }
+  .science-card .label {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.75rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 12px;
+  }
+  .science-card .stat {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(2.4rem, 5vw, 3.2rem);
+    line-height: 1; color: var(--white);
+    letter-spacing: 0.01em; margin-bottom: 8px;
+  }
+  .science-card .stat .of {
+    font-size: 1rem; color: var(--muted); font-weight: 400; margin-left: 4px;
+  }
+  .science-card .headline {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 1.1rem; line-height: 1.3;
+    color: var(--white); letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .science-card .copy {
+    font-size: 0.98rem; color: var(--muted); line-height: 1.6;
+  }
+
+  /* Boxes visualizer for 1/9 */
+  .boxes-row {
+    display: flex; gap: 5px; margin: 18px 0 18px;
+    flex-wrap: wrap;
+  }
+  .box {
+    width: 22px; height: 22px;
+    border-radius: 4px;
+    background: var(--card3);
+    border: 1px solid var(--border);
+    opacity: 0.5;
+  }
+  .box.lit {
+    background: var(--purple);
+    border-color: var(--purple-lt);
+    opacity: 1;
+    box-shadow: 0 0 12px rgba(124, 58, 237, 0.5);
+  }
+
+  /* Timeline for retention */
+  .timeline {
+    margin: 18px 0;
+    position: relative;
+    height: 32px;
+  }
+  .timeline-bar {
+    position: absolute; left: 0; right: 0; top: 14px;
+    height: 4px;
+    background: var(--card3);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .timeline-bar-fill {
+    position: absolute; top: 0; left: 0; height: 100%;
+    background: linear-gradient(90deg, var(--purple), var(--purple-lt));
+    width: 100%;
+  }
+  .timeline-marker {
+    position: absolute; top: 6px;
+    width: 20px; height: 20px;
+    background: var(--card);
+    border: 2px solid var(--purple-lt);
+    border-radius: 50%;
+    transform: translateX(-50%);
+  }
+  .timeline-marker.start { left: 0; }
+  .timeline-marker.end { left: 100%; }
+  .timeline-labels {
+    display: flex; justify-content: space-between;
+    margin-top: 2px;
+    font-family: 'Oswald', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  /* === COMMITMENT CARD === */
+  .commit-wrap { padding: 50px 0 30px; }
+  .commit-card {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--card) 100%);
+    border: 1px solid var(--accent-border);
+    border-radius: 16px;
+    padding: 44px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .commit-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--purple), var(--purple-lt));
+  }
+  .commit-eyebrow {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.85rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 12px;
+  }
+  .commit-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    letter-spacing: 0.01em; text-transform: uppercase;
+    color: var(--white); margin-bottom: 20px;
+    line-height: 1.15;
+  }
+  .commit-prompt {
+    font-size: 1.1rem; color: var(--muted);
+    margin-bottom: 22px; line-height: 1.6;
+  }
+  .commit-input {
+    width: 100%;
+    background: var(--card3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.15rem;
+    color: var(--white);
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .commit-input:focus {
+    border-color: var(--purple);
+    background: var(--card);
+  }
+  .commit-input::placeholder { color: var(--dim); }
+
+  .commit-preview {
+    margin-top: 28px;
+    padding: 28px 28px 26px;
+    background: var(--bg);
+    border: 1px dashed var(--accent-border);
+    border-radius: 12px;
+    text-align: center;
+  }
+  .commit-preview-eyebrow {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 12px;
+  }
+  .commit-preview-text {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(1.2rem, 3.2vw, 1.7rem);
+    line-height: 1.3; color: var(--white);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .commit-preview-text .focus { color: var(--purple-lt); }
+  .commit-preview-meta {
+    font-family: 'Lato', sans-serif; font-size: 0.95rem;
+    color: var(--muted); font-style: italic;
+  }
+  .commit-actions {
+    margin-top: 18px;
+    display: flex; gap: 10px; flex-wrap: wrap;
+    justify-content: center;
+  }
+  .commit-btn {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase;
+    background: transparent;
+    color: var(--purple-lt);
+    border: 1px solid var(--accent-border);
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .commit-btn:hover {
+    background: var(--purple);
+    color: var(--white);
+    border-color: var(--purple);
+  }
+
+  /* === TIMER === */
+  .timer-wrap { padding: 60px 0 40px; }
+  .timer-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 44px 36px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .timer-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--purple), var(--purple-lt));
+  }
+  .timer-eyebrow {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.85rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 12px;
+  }
+  .timer-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    letter-spacing: 0.01em; text-transform: uppercase;
+    color: var(--white); margin-bottom: 14px;
+    line-height: 1.15;
+  }
+  .timer-context {
+    font-size: 1rem; color: var(--muted);
+    margin-bottom: 28px; line-height: 1.6;
+  }
+  .timer-context .focus { color: var(--white); font-weight: 700; }
+  .timer-phase {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 1rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--purple-lt);
+    margin-bottom: 12px;
+    min-height: 1.2em;
+  }
+  .timer-display {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(4rem, 14vw, 7rem);
+    line-height: 1; color: var(--white);
+    letter-spacing: 0.02em;
+    margin-bottom: 24px;
+    font-variant-numeric: tabular-nums;
+  }
+  .timer-progress {
+    width: 100%;
+    height: 6px;
+    background: var(--card3);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .timer-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--purple), var(--purple-lt));
+    width: 0%;
+    transition: width 0.25s linear;
+  }
+  .timer-controls {
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  }
+  .timer-btn {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 16px 32px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s, color 0.2s;
+  }
+  .timer-btn.primary {
+    background: var(--purple); color: var(--white);
+  }
+  .timer-btn.primary:hover { background: var(--purple-lt); transform: scale(1.02); }
+  .timer-btn.secondary {
+    background: transparent; color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .timer-btn.secondary:hover { color: var(--white); border-color: var(--accent-border); }
+  .timer-status {
+    margin-top: 20px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.85rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--dim);
+    min-height: 1.2em;
+  }
+  .timer-card.is-maintenance { background: var(--card2); }
+  .timer-card.is-done {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--card) 100%);
+    border-color: var(--accent-border);
+  }
+
+  /* === METRONOME === */
+  .metro-wrap { padding: 60px 0 40px; }
+  .metro-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 44px 36px;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .metro-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--purple), var(--purple-lt));
+  }
+  .metro-eyebrow {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.85rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 12px;
+  }
+  .metro-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    letter-spacing: 0.01em; text-transform: uppercase;
+    color: var(--white); margin-bottom: 14px;
+    line-height: 1.15;
+  }
+  .metro-sub {
+    font-size: 1rem; color: var(--muted);
+    margin-bottom: 32px; line-height: 1.6;
+    max-width: 520px; margin-left: auto; margin-right: auto;
+  }
+  .metro-bpm-display {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(4.5rem, 14vw, 6.5rem);
+    line-height: 1; color: var(--white);
+    letter-spacing: 0.02em;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 4px;
+  }
+  .metro-bpm-display .unit {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.95rem; letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  .metro-bpm-controls {
+    display: flex; gap: 10px; justify-content: center; align-items: center;
+    margin-bottom: 22px;
+  }
+  .metro-step-btn {
+    background: var(--card3);
+    color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    width: 44px; height: 44px;
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.4rem;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .metro-step-btn:hover { background: var(--navy); border-color: var(--accent-border); }
+  .metro-bpm-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: var(--card3);
+    border-radius: 3px;
+    outline: none;
+    border: 1px solid var(--border);
+    margin-bottom: 32px;
+    max-width: 520px;
+  }
+  .metro-bpm-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 22px; height: 22px;
+    background: var(--purple);
+    border: 2px solid var(--white);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 3px 12px rgba(124, 58, 237, 0.5);
+  }
+  .metro-bpm-slider::-moz-range-thumb {
+    width: 22px; height: 22px;
+    background: var(--purple);
+    border: 2px solid var(--white);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .metro-sub-row {
+    margin-bottom: 28px;
+  }
+  .metro-sub-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--dim); margin-bottom: 12px;
+  }
+  .metro-sub-pills {
+    display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+  }
+  .metro-pill {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 60px;
+  }
+  .metro-pill:hover { color: var(--white); border-color: var(--accent-border); }
+  .metro-pill.active {
+    background: var(--purple);
+    color: var(--white);
+    border-color: var(--purple);
+  }
+  .metro-pill .pill-sub {
+    display: block;
+    font-family: 'Lato', sans-serif; font-weight: 300;
+    font-size: 0.65rem; letter-spacing: 0.08em;
+    color: var(--muted); margin-top: 3px;
+    text-transform: none;
+  }
+  .metro-pill.active .pill-sub { color: rgba(255, 255, 255, 0.75); }
+
+  /* Beat visualizer */
+  .metro-beats {
+    display: flex; gap: 14px; justify-content: center;
+    margin-bottom: 28px;
+    min-height: 28px;
+    align-items: center;
+  }
+  .metro-beat {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--card3);
+    border: 1px solid var(--border);
+    transition: background 0.08s, transform 0.08s, box-shadow 0.08s;
+  }
+  .metro-beat.flash {
+    background: var(--purple);
+    border-color: var(--purple-lt);
+    box-shadow: 0 0 18px rgba(124, 58, 237, 0.6);
+    transform: scale(1.15);
+  }
+  .metro-beat.sub-flash {
+    background: var(--card2);
+    border-color: var(--accent-border);
+  }
+
+  .metro-controls {
+    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  }
+  .metro-play-btn {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    background: var(--purple); color: var(--white);
+    transition: background 0.2s, transform 0.2s;
+    min-width: 180px;
+  }
+  .metro-play-btn:hover { background: var(--purple-lt); transform: scale(1.02); }
+  .metro-play-btn.is-running { background: var(--card3); border: 1px solid var(--accent-border); color: var(--white); }
+  .metro-play-btn.is-running:hover { background: var(--navy); }
+  .metro-status {
+    margin-top: 14px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--dim);
+    min-height: 1.2em;
+  }
+
+  @media (max-width: 600px) {
+    .metro-pill { padding: 8px 12px; font-size: 0.85rem; min-width: 52px; }
+  }
+
+  /* === CTA === */
+  .cta-band {
+    margin-top: 80px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 50%, #120a2e 100%);
+    border-top: 1px solid var(--accent-border);
+    border-bottom: 1px solid var(--accent-border);
+    padding: 80px 24px;
+    text-align: center;
+  }
+  .cta-inner { max-width: 720px; margin: 0 auto; }
+  .cta-eyebrow {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.85rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 18px;
+  }
+  .cta-h2 {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    line-height: 1.05; letter-spacing: 0.01em;
+    text-transform: uppercase; color: var(--white);
+    margin-bottom: 22px;
+  }
+  .cta-p {
+    font-size: 1.15rem; color: var(--muted);
+    line-height: 1.6; margin-bottom: 36px;
+    max-width: 560px; margin-left: auto; margin-right: auto;
+  }
+  .cta-btn {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 1.05rem; letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--purple); color: var(--white);
+    padding: 20px 44px; border-radius: 10px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .cta-btn:hover { background: var(--purple-lt); transform: scale(1.02); }
+  .cta-foot {
+    margin-top: 22px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  /* === FOOTER === */
+  footer {
+    background: var(--bg);
+    padding: 30px 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .footer-logo {
+    display: inline-flex; align-items: center; gap: 14px;
+    text-decoration: none;
+  }
+  .footer-logo-name {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.2rem; letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--white);
+  }
+  .footer-logo-divider { width: 2px; height: 22px; background: #3a3a3a; }
+  .footer-logo-tag {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.78rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .footer-links { display: flex; gap: 22px; flex-wrap: wrap; }
+  .footer-link {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--dim); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-link:hover { color: var(--white); }
+  .footer-copy {
+    font-size: 0.9rem; color: var(--dim);
+  }
+
+  /* === ANIMATIONS === */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 0 0 rgba(124, 58, 237, 0.3); }
+    50%      { box-shadow: 0 0 24px rgba(124, 58, 237, 0.5); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Stagger for science grid */
+  .science-grid .science-card {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo), border-color 0.25s;
+  }
+  .science-grid.visible .science-card:nth-child(1) { transition-delay: 0.05s; opacity: 1; transform: translateY(0); }
+  .science-grid.visible .science-card:nth-child(2) { transition-delay: 0.18s; opacity: 1; transform: translateY(0); }
+  .science-grid.visible .science-card:nth-child(3) { transition-delay: 0.31s; opacity: 1; transform: translateY(0); }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+    .hero-eyebrow, .hero h1, .hero-sub, .hero-meta,
+    .reveal, .science-grid .science-card {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+  /* Small screen tweaks */
+  @media (max-width: 600px) {
+    .hero { padding: 60px 20px 50px; }
+    .hero h1 { font-size: clamp(2.4rem, 8.5vw, 4rem); }
+    .calc-card, .commit-card, .timer-card { padding: 32px 22px; }
+    .calc-result { grid-template-columns: 1fr; }
+    .article-body p { font-size: 1.12rem; }
+    .pullquote { padding: 22px 22px; font-size: 1.25rem; }
+  }
+
+  /* =============================================================================
+     RETURNING-USER ADDITIONS — dashboard, heatmap, journal, settings, science redo
+     ============================================================================= */
+
+  /* === STICKY PRO BANNER (day 7+) === */
+  .sticky-banner {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 250;
+    background: linear-gradient(90deg, var(--purple) 0%, var(--purple-lt) 100%);
+    padding: 12px 24px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    box-shadow: 0 4px 24px rgba(124, 58, 237, 0.4);
+  }
+  .sticky-banner.show { display: flex; }
+  /* When the banner is visible, push the nav and key sections below it so
+     nothing overlaps. */
+  body.banner-visible nav { top: 50px; }
+  body.banner-visible .page { padding-top: 130px; }
+  body.banner-visible .dashboard { padding-top: 150px; }
+  .sticky-banner-text {
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 1rem; letter-spacing: 0.04em;
+    color: var(--white);
+    text-transform: none;
+  }
+  .sticky-banner-text strong { font-weight: 700; }
+  .sticky-banner-cta {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 0.95rem; letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--white); color: var(--purple);
+    padding: 8px 22px; border-radius: 6px;
+    text-decoration: none;
+    transition: transform 0.15s, background 0.2s;
+  }
+  .sticky-banner-cta:hover { background: #fffaff; transform: scale(1.03); }
+  .sticky-banner-close {
+    background: transparent; color: var(--white);
+    border: none; cursor: pointer;
+    font-size: 1.5rem; line-height: 1;
+    padding: 0 4px;
+    opacity: 0.7;
+    transition: opacity 0.15s;
+  }
+  .sticky-banner-close:hover { opacity: 1; }
+  body.banner-visible { padding-top: 50px; }
+
+  /* === DASHBOARD === */
+  .dashboard {
+    display: none;
+    padding: 100px 24px 40px;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .dashboard.active { display: block; }
+  .dash-header {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 22px; flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .dash-eyebrow {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.85rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--purple-lt);
+  }
+  .dash-day-counter {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1;
+    letter-spacing: 0.02em; text-transform: uppercase;
+    color: var(--white);
+  }
+  .dash-day-counter .num { color: var(--purple-lt); }
+  .dash-day-counter .of {
+    font-size: 0.6em; color: var(--muted); font-weight: 400;
+    margin-left: 4px; letter-spacing: 0.04em;
+  }
+  .dash-thing {
+    font-family: 'Lato', sans-serif; font-style: italic;
+    font-size: 1.2rem; color: var(--off);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+  .dash-thing strong { font-style: normal; font-weight: 700; color: var(--white); }
+
+  /* CTA Pill near the dashboard */
+  .dash-pill {
+    display: inline-flex; align-items: center;
+    gap: 8px;
+    background: linear-gradient(90deg, var(--purple) 0%, var(--purple-lt) 100%);
+    color: var(--white);
+    text-decoration: none;
+    padding: 9px 18px;
+    border-radius: 22px;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase;
+    transition: transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.3);
+  }
+  .dash-pill:hover {
+    transform: scale(1.04);
+    box-shadow: 0 6px 22px rgba(124, 58, 237, 0.5);
+  }
+
+  /* === DAILY CHECK-IN === */
+  .checkin-card {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--card) 100%);
+    border: 1px solid var(--accent-border);
+    border-radius: 14px;
+    padding: 32px 28px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+  .checkin-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--purple), var(--purple-lt));
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
+  }
+  .checkin-q {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(1.4rem, 3.5vw, 1.9rem);
+    letter-spacing: 0.01em; text-transform: uppercase;
+    color: var(--white); margin-bottom: 12px;
+    line-height: 1.2;
+  }
+  .checkin-sub {
+    font-size: 1rem; color: var(--muted);
+    margin-bottom: 22px; line-height: 1.55;
+  }
+  .checkin-actions {
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .checkin-btn {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.95rem; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 14px 28px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+  }
+  .checkin-btn.yes {
+    background: var(--purple); color: var(--white);
+  }
+  .checkin-btn.yes:hover { background: var(--purple-lt); transform: scale(1.02); }
+  .checkin-btn.no {
+    background: transparent; color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .checkin-btn.no:hover { color: var(--white); border-color: var(--accent-border); }
+  .checkin-done {
+    display: flex; align-items: center; gap: 12px;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--purple-lt);
+  }
+  .checkin-done .check {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px;
+    background: var(--purple);
+    border-radius: 50%;
+    color: var(--white);
+    font-weight: 700;
+    box-shadow: 0 0 16px rgba(124, 58, 237, 0.5);
+  }
+
+  /* === CALENDAR HEATMAP === */
+  .heatmap-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px 28px;
+    margin-bottom: 28px;
+  }
+  .heatmap-header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    gap: 18px; flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .heatmap-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.3rem; letter-spacing: 0.02em; text-transform: uppercase;
+    color: var(--white);
+  }
+  .heatmap-stats {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.82rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .heatmap-stats strong { color: var(--purple-lt); font-weight: 700; }
+  .heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 6px;
+  }
+  @media (max-width: 600px) {
+    .heatmap-grid { grid-template-columns: repeat(6, 1fr); }
+  }
+  .heat-cell {
+    aspect-ratio: 1 / 1;
+    background: var(--card3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.78rem;
+    color: var(--dim);
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.15s, border-color 0.2s, box-shadow 0.2s;
+  }
+  .heat-cell:hover {
+    border-color: var(--accent-border);
+    color: var(--off);
+    transform: scale(1.05);
+  }
+  .heat-cell.today {
+    border-color: var(--purple);
+    color: var(--white);
+    animation: todayPulse 2s ease-in-out infinite;
+  }
+  @keyframes todayPulse {
+    0%, 100% { box-shadow: 0 0 0 rgba(124, 58, 237, 0.4); }
+    50% { box-shadow: 0 0 18px rgba(124, 58, 237, 0.6); }
+  }
+  .heat-cell.logged {
+    background: var(--purple);
+    border-color: var(--purple-lt);
+    color: var(--white);
+    box-shadow: 0 0 10px rgba(124, 58, 237, 0.45);
+  }
+  .heat-cell.logged.today {
+    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-lt) 100%);
+    animation: loggedTodayGlow 2.5s ease-in-out infinite;
+  }
+  @keyframes loggedTodayGlow {
+    0%, 100% { box-shadow: 0 0 12px rgba(124, 58, 237, 0.5); }
+    50% { box-shadow: 0 0 22px rgba(157, 95, 245, 0.7); }
+  }
+  .heat-cell.future {
+    opacity: 0.45;
+    cursor: default;
+  }
+  .heat-cell.future:hover { transform: none; }
+  .heat-cell .has-note::after {
+    content: '';
+    position: absolute; top: 3px; right: 3px;
+    width: 4px; height: 4px;
+    background: var(--white);
+    border-radius: 50%;
+  }
+  .heat-cell[data-note]:not([data-note=""])::after {
+    content: '';
+    position: absolute; top: 4px; right: 4px;
+    width: 5px; height: 5px;
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 50%;
+  }
+  .heatmap-tooltip {
+    position: absolute;
+    background: var(--card2);
+    border: 1px solid var(--accent-border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    max-width: 260px;
+    font-family: 'Lato', sans-serif; font-size: 0.92rem;
+    color: var(--off);
+    line-height: 1.4;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    pointer-events: none;
+    display: none;
+  }
+  .heatmap-tooltip.show { display: block; }
+  .heatmap-tooltip .day-label {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 0.85rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 4px;
+  }
+
+  /* === PRACTICE JOURNAL === */
+  .journal-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px 28px;
+    margin-bottom: 28px;
+  }
+  .journal-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.3rem; letter-spacing: 0.02em; text-transform: uppercase;
+    color: var(--white); margin-bottom: 14px;
+  }
+  .journal-prompt {
+    font-size: 0.98rem; color: var(--muted);
+    margin-bottom: 16px; line-height: 1.55;
+  }
+  .journal-input {
+    width: 100%;
+    background: var(--card3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-family: 'Lato', sans-serif;
+    font-size: 1.05rem;
+    color: var(--white);
+    outline: none;
+    resize: vertical;
+    min-height: 72px;
+    transition: border-color 0.2s;
+  }
+  .journal-input:focus { border-color: var(--purple); }
+  .journal-input::placeholder { color: var(--dim); }
+  .journal-save-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 14px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .journal-charcount {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.14em;
+    color: var(--dim);
+  }
+  .journal-saved {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--purple-lt);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .journal-saved.show { opacity: 1; }
+  .journal-recent {
+    margin-top: 22px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+  }
+  .journal-recent-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--dim); margin-bottom: 14px;
+  }
+  .journal-entry {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .journal-entry:last-child { border-bottom: none; }
+  .journal-entry-day {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--purple-lt);
+    margin-bottom: 4px;
+  }
+  .journal-entry-text {
+    font-size: 1rem; color: var(--off); line-height: 1.55;
+  }
+  .journal-empty {
+    font-style: italic; color: var(--dim); font-size: 0.95rem;
+    padding: 10px 0;
+  }
+
+  /* === SETTINGS PANEL === */
+  .settings-toggle {
+    position: fixed;
+    top: 18px; right: 18px;
+    z-index: 240;
+    width: 42px; height: 42px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  .settings-toggle:hover {
+    background: var(--card2);
+    border-color: var(--accent-border);
+    transform: rotate(60deg);
+  }
+  .settings-toggle svg {
+    width: 18px; height: 18px;
+    fill: var(--muted);
+  }
+  .settings-toggle:hover svg { fill: var(--white); }
+  body.banner-visible .settings-toggle { top: 60px; }
+  @media (max-width: 800px) {
+    .settings-toggle { top: 12px; right: 12px; width: 38px; height: 38px; }
+    body.banner-visible .settings-toggle { top: 54px; }
+  }
+
+  .settings-panel {
+    position: fixed;
+    top: 70px; right: 18px;
+    z-index: 245;
+    width: 320px; max-width: calc(100vw - 36px);
+    background: var(--card);
+    border: 1px solid var(--accent-border);
+    border-radius: 14px;
+    padding: 24px 22px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.7);
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .settings-panel.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  body.banner-visible .settings-panel { top: 110px; }
+  .settings-h {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--white); margin-bottom: 14px;
+  }
+  .settings-note {
+    font-size: 0.85rem; color: var(--muted);
+    line-height: 1.5; margin-bottom: 18px;
+  }
+  .settings-btn {
+    display: block;
+    width: 100%;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase;
+    background: var(--card3);
+    color: var(--off);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+    text-align: center;
+  }
+  .settings-btn:hover {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--accent-border);
+  }
+  .settings-btn.danger { color: #ff6b6b; }
+  .settings-btn.danger:hover {
+    background: rgba(255, 107, 107, 0.1);
+    border-color: #ff6b6b;
+    color: #ff8a8a;
+  }
+  .settings-btn-foot {
+    font-size: 0.72rem; color: var(--dim);
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.45;
+  }
+  .hidden-file-input { display: none; }
+
+  /* === SCIENCE VISUALIZER REDO === */
+  .science-card-v2 {
+    background: linear-gradient(180deg, var(--card) 0%, var(--card2) 100%);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px 26px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s var(--ease-out-smooth);
+  }
+  .science-card-v2:hover {
+    border-color: var(--accent-border);
+    transform: translateY(-4px);
+  }
+  .science-card-v2 .study-tag {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 14px;
+  }
+  .science-card-v2 .headline-num {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(2.8rem, 6vw, 3.8rem);
+    line-height: 1;
+    color: var(--white);
+    letter-spacing: 0.01em;
+    margin-bottom: 8px;
+  }
+  .science-card-v2 .headline-num .unit {
+    font-size: 0.34em; color: var(--muted); font-weight: 400;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    margin-left: 6px;
+  }
+  .science-card-v2 .summary {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.98rem;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1.3;
+    margin-bottom: 18px;
+  }
+  .science-card-v2 .copy {
+    font-size: 0.92rem; color: var(--muted); line-height: 1.6;
+    margin-top: 16px;
+  }
+
+  /* Building vs Maintenance visual */
+  .bm-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 18px 0 14px;
+  }
+  .bm-col {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 10px;
+    text-align: center;
+  }
+  .bm-col-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 12px;
+  }
+  .bm-stack {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    margin: 0 auto 12px;
+    max-width: 90px;
+  }
+  .bm-dot {
+    aspect-ratio: 1 / 1;
+    border-radius: 3px;
+    background: var(--card3);
+    border: 1px solid var(--border);
+    opacity: 0.45;
+  }
+  .bm-dot.lit {
+    background: var(--purple);
+    border-color: var(--purple-lt);
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(124, 58, 237, 0.55);
+    animation: dotPulse 2.2s ease-in-out infinite;
+  }
+  .bm-stack.maint .bm-dot.lit {
+    animation: lonelyPulse 2.5s ease-in-out infinite;
+  }
+  @keyframes dotPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.75; }
+  }
+  @keyframes lonelyPulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(124, 58, 237, 0.5); transform: scale(1); }
+    50% { box-shadow: 0 0 18px rgba(157, 95, 245, 0.85); transform: scale(1.08); }
+  }
+  .bm-col-meta {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.78rem; letter-spacing: 0.06em;
+    color: var(--off);
+  }
+  .bm-col-meta .small {
+    display: block;
+    font-family: 'Lato', sans-serif; font-weight: 300;
+    font-size: 0.72rem; color: var(--muted);
+    letter-spacing: 0.02em; margin-top: 4px;
+  }
+  .bm-arrow {
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.4rem;
+    color: var(--purple-lt);
+    margin: -2px 0 0;
+    opacity: 0.7;
+  }
+
+  /* Long timeline */
+  .longtl {
+    margin: 22px 0 6px;
+    position: relative;
+    padding: 6px 0;
+  }
+  .longtl-bar {
+    position: relative;
+    height: 8px;
+    background: var(--card3);
+    border-radius: 4px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .longtl-fill {
+    position: absolute; top: 0; left: 0; height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--purple) 0%, var(--purple-lt) 100%);
+    animation: longtlFill 1.6s var(--ease-out-expo) 0.3s forwards;
+    box-shadow: 0 0 12px rgba(124, 58, 237, 0.4);
+  }
+  @keyframes longtlFill {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  .longtl-markers {
+    position: relative;
+    height: 14px;
+    margin-top: 6px;
+  }
+  .longtl-mk {
+    position: absolute;
+    top: -16px;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 14px;
+    background: var(--accent-border);
+  }
+  .longtl-mk-label {
+    position: absolute;
+    top: 4px;
+    transform: translateX(-50%);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--dim);
+    white-space: nowrap;
+  }
+  .longtl-end-flag {
+    position: absolute;
+    top: -36px;
+    transform: translateX(-50%);
+    background: var(--purple);
+    color: var(--white);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    box-shadow: 0 0 14px rgba(124, 58, 237, 0.5);
+    animation: flagBob 2s ease-in-out infinite;
+    white-space: nowrap;
+  }
+  .longtl-end-flag::after {
+    content: '';
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--purple);
+  }
+  @keyframes flagBob {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-3px); }
+  }
+
+  /* Make CTA brighter and bigger per Jon's note */
+  .cta-band-v2 {
+    margin-top: 80px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-deep) 50%, #120a2e 100%);
+    border-top: 1px solid var(--accent-border);
+    border-bottom: 1px solid var(--accent-border);
+    padding: 100px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-band-v2::before {
+    content: ''; position: absolute;
+    top: -100px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 600px;
+    background: radial-gradient(ellipse, rgba(124,58,237,0.25) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .cta-inner-v2 {
+    position: relative;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .cta-eyebrow-v2 {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 1rem; letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 24px;
+    text-shadow: 0 0 16px rgba(157, 95, 245, 0.4);
+  }
+  .cta-h2-v2 {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(2.6rem, 6.5vw, 4.6rem);
+    line-height: 1.0; letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 28px;
+    text-shadow: 0 0 32px rgba(124, 58, 237, 0.3);
+  }
+  .cta-p-v2 {
+    font-size: 1.35rem; color: var(--off);
+    line-height: 1.55; margin-bottom: 44px;
+    max-width: 640px; margin-left: auto; margin-right: auto;
+    font-weight: 400;
+  }
+  .cta-btn-v2 {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.3rem; letter-spacing: 0.16em; text-transform: uppercase;
+    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-lt) 100%);
+    color: var(--white);
+    padding: 26px 60px; border-radius: 12px;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(124, 58, 237, 0.5);
+    transition: transform 0.2s, box-shadow 0.3s;
+  }
+  .cta-btn-v2:hover {
+    transform: scale(1.04);
+    box-shadow: 0 12px 44px rgba(157, 95, 245, 0.7);
+  }
+  .cta-btn-v2::after {
+    content: '';
+    position: absolute; top: 0; left: -75%;
+    width: 50%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.7s var(--ease-out-smooth);
+  }
+  .cta-btn-v2:hover::after { left: 125%; }
+
+  @media (max-width: 600px) {
+    .dashboard { padding: 90px 18px 30px; }
+    .checkin-card, .heatmap-card, .journal-card { padding: 24px 18px; }
+    .cta-band-v2 { padding: 72px 22px; }
+    .sticky-banner { padding: 10px 14px; gap: 12px; font-size: 0.88rem; }
+    .sticky-banner-text { font-size: 0.88rem; }
+    .sticky-banner-cta { padding: 7px 16px; font-size: 0.82rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Sticky Pro banner (appears after day 7) -->
+<div class="sticky-banner" id="stickyBanner" role="region" aria-label="Practice Room Pro promotion">
+  <span class="sticky-banner-text">You've stuck with this for <strong><span id="bannerDay">7</span> days</strong>. Ready to take it further?</span>
+  <a class="sticky-banner-cta" href="https://www.jonbjorkmusic.com/start">Try Practice Room Pro</a>
+  <button class="sticky-banner-close" id="stickyBannerClose" type="button" aria-label="Dismiss">×</button>
+</div>
+
+<!-- Settings gear (top right, always available) -->
+<button class="settings-toggle" id="settingsToggle" type="button" aria-label="Settings">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M19.14,12.94a7.07,7.07,0,0,0,0-1.88l2.03-1.58a.5.5,0,0,0,.12-.64l-1.92-3.32a.5.5,0,0,0-.6-.22l-2.39.96a7.07,7.07,0,0,0-1.62-.94l-.36-2.54a.5.5,0,0,0-.5-.43h-3.84a.5.5,0,0,0-.5.43l-.36,2.54a7.07,7.07,0,0,0-1.62.94l-2.39-.96a.5.5,0,0,0-.6.22L2.69,8.84a.5.5,0,0,0,.12.64l2.03,1.58a7.07,7.07,0,0,0,0,1.88L2.81,14.52a.5.5,0,0,0-.12.64l1.92,3.32a.5.5,0,0,0,.6.22l2.39-.96a7.07,7.07,0,0,0,1.62.94l.36,2.54a.5.5,0,0,0,.5.43h3.84a.5.5,0,0,0,.5-.43l.36-2.54a7.07,7.07,0,0,0,1.62-.94l2.39.96a.5.5,0,0,0,.6-.22l1.92-3.32a.5.5,0,0,0-.12-.64ZM12,15.5a3.5,3.5,0,1,1,3.5-3.5A3.5,3.5,0,0,1,12,15.5Z"/>
+  </svg>
+</button>
+
+<!-- Settings panel -->
+<div class="settings-panel" id="settingsPanel" role="dialog" aria-label="Settings">
+  <div class="settings-h">Your progress</div>
+  <p class="settings-note">Your streak, journal, and commitment live in this browser. Back it up before switching devices or clearing your cache.</p>
+  <button class="settings-btn" id="exportBtn" type="button">Download backup (.json)</button>
+  <button class="settings-btn" id="importBtn" type="button">Import a backup</button>
+  <input type="file" id="importFile" class="hidden-file-input" accept=".json,application/json">
+  <button class="settings-btn danger" id="resetBtn" type="button">Reset everything</button>
+  <div class="settings-btn-foot">Your data never leaves your device unless you export it.</div>
+</div>
+
+<nav>
+  <a class="nav-logo" href="https://www.jonbjorkmusic.com/" aria-label="Jon Bjork Music">
+    <span class="nav-logo-name">Jon Bjork</span>
+    <span class="nav-logo-divider" aria-hidden="true"></span>
+    <span class="nav-logo-tag">Music</span>
+  </a>
+  <div class="nav-right">
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+    <a class="nav-btn" href="https://www.jonbjorkmusic.com/start">Practice Room Pro</a>
+  </div>
+</nav>
+
+<!-- Returning-user dashboard (shown above hero when saved progress exists) -->
+<section class="dashboard" id="dashboard" aria-label="Your 90% Rule dashboard">
+  <div class="dash-header">
+    <div>
+      <div class="dash-eyebrow">Your 30-day Challenge</div>
+      <div class="dash-day-counter">Day <span class="num" id="dashDay">1</span><span class="of">/ 30</span></div>
+    </div>
+    <a class="dash-pill" id="dashPill" href="https://www.jonbjorkmusic.com/start">
+      <span id="dashPillText">Practice Room Pro</span> →
+    </a>
+  </div>
+  <div class="dash-thing" id="dashThing">
+    Focusing on <strong id="dashThingName">_____</strong>
+  </div>
+
+  <!-- Today's check-in card -->
+  <div class="checkin-card" id="checkinCard">
+    <div id="checkinPrompt">
+      <h3 class="checkin-q" id="checkinQ">Did you practice today?</h3>
+      <p class="checkin-sub">A "yes" doesn't have to be a full 30 minutes. Even 10 focused minutes on your one thing counts.</p>
+      <div class="checkin-actions">
+        <button class="checkin-btn yes" id="checkinYes" type="button">Yes, mark today done</button>
+        <button class="checkin-btn no" id="checkinNo" type="button">Not yet</button>
+      </div>
+    </div>
+    <div id="checkinComplete" style="display:none">
+      <div class="checkin-done">
+        <span class="check">✓</span>
+        <span>Day <span id="checkinDayDone">1</span> banked. Keep going.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 30-day calendar heatmap -->
+  <div class="heatmap-card">
+    <div class="heatmap-header">
+      <div class="heatmap-title">Your 30-day grid</div>
+      <div class="heatmap-stats">
+        <strong id="statsLogged">0</strong> days logged &middot;
+        <strong id="statsStreak">0</strong>-day streak
+      </div>
+    </div>
+    <div class="heatmap-grid" id="heatmapGrid"></div>
+  </div>
+
+  <!-- Practice journal -->
+  <div class="journal-card">
+    <div class="journal-title">Today's note</div>
+    <p class="journal-prompt">One line on what you worked on. Reps, tempo, what clicked, what didn't. You'll thank yourself in a month.</p>
+    <textarea class="journal-input" id="journalInput" placeholder="e.g. Felt the picking lock in around 132 bpm today. String crossings still wobbly." maxlength="280"></textarea>
+    <div class="journal-save-row">
+      <span class="journal-charcount"><span id="journalChars">0</span>/280</span>
+      <span class="journal-saved" id="journalSaved">Saved ✓</span>
+    </div>
+    <div class="journal-recent">
+      <div class="journal-recent-label">Last few days</div>
+      <div id="journalRecent"></div>
+    </div>
+  </div>
+</section>
+
+<div class="page">
+
+  <!-- === HERO === -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Practice Note</div>
+      <h1>The 90% Rule</h1>
+      <p class="hero-sub">Why busy guitarists stop improving, and the focus ratio that fixes it. Take five minutes. Build the habit that changes the next year of your playing.</p>
+      <div class="hero-meta">By Jon Bjork &middot; 5 min read &middot; Interactive</div>
+    </div>
+  </section>
+
+  <!-- === THE PROBLEM === -->
+  <section class="article-section first">
+    <div class="wrap">
+      <h2 class="section-h">The problem</h2>
+      <div class="article-body">
+        <p>You have 30 minutes to practice. You try to fit in warmups, scales, technique, a riff you're learning, and a song. You spend five minutes on each. A month goes by. You're not better at any of them.</p>
+        <p>This is why you're stuck. Not because you're not practicing enough. Because you're spreading 30 minutes across too many things.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- === THE RULE + CALCULATOR === -->
+  <section class="article-section">
+    <div class="wrap">
+      <h2 class="section-h">The 90% Rule</h2>
+      <div class="article-body">
+        <p>The less time you have, the more focused you need to be. Move the slider to your daily practice time and the rule will calculate your split.</p>
+      </div>
+    </div>
+    <div class="wrap calc-wrap">
+      <div class="calc-card reveal" id="calcCard">
+        <div class="calc-eyebrow">Your Practice Split</div>
+        <h3 class="calc-title">How much focus does your session need?</h3>
+        <div class="calc-slider-row">
+          <div class="calc-label">
+            <span>Daily practice time</span>
+            <span class="calc-label-value"><span id="calcMin">30</span><span class="unit">min</span></span>
+          </div>
+          <input type="range" min="15" max="180" step="5" value="30" class="calc-slider" id="calcSlider" aria-label="Daily practice time">
+        </div>
+        <div class="calc-result">
+          <div class="calc-stat focus">
+            <div class="calc-stat-label">Focus on one thing</div>
+            <div class="calc-stat-value"><span id="calcFocusMin">27</span><span class="small">min</span></div>
+            <div class="calc-stat-sub"><span id="calcFocusPct">90</span>% of your session</div>
+          </div>
+          <div class="calc-stat">
+            <div class="calc-stat-label">Light maintenance</div>
+            <div class="calc-stat-value"><span id="calcMaintMin">3</span><span class="small">min</span></div>
+            <div class="calc-stat-sub"><span id="calcMaintPct">10</span>% of your session</div>
+          </div>
+        </div>
+        <div class="calc-summary" id="calcSummary">
+          With <strong>30 minutes</strong>, spend <strong>27 of them</strong> on the one thing you're trying to actually get better at. Use the last 3 to keep your hands warm on stuff you already play well.
+        </div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="article-body" style="margin-top: 40px;">
+        <p>The "one thing" is whatever you're trying to actually get better at. The rest is light maintenance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- === WHY THIS WORKS === -->
+  <section class="article-section">
+    <div class="wrap">
+      <h2 class="section-h">Why this works</h2>
+      <div class="article-body">
+        <p>Building a skill is expensive. Keeping a skill is cheap. Way cheaper than you think.</p>
+      </div>
+    </div>
+
+    <div class="wrap-wide science-wrap">
+      <div class="science-intro reveal">
+        <div class="eyebrow">The science, three ways</div>
+      </div>
+      <div class="science-grid" id="scienceGrid">
+
+        <div class="science-card-v2">
+          <div class="study-tag">The Muscle Study</div>
+          <div class="headline-num">1<span class="unit">/9 of the work</span></div>
+          <div class="summary">Building costs nine times what keeping costs</div>
+          <div class="bm-compare" aria-hidden="true">
+            <div class="bm-col">
+              <div class="bm-col-label">Building</div>
+              <div class="bm-stack">
+                <div class="bm-dot lit"></div><div class="bm-dot lit"></div><div class="bm-dot lit"></div>
+                <div class="bm-dot lit"></div><div class="bm-dot lit"></div><div class="bm-dot lit"></div>
+                <div class="bm-dot lit"></div><div class="bm-dot lit"></div><div class="bm-dot lit"></div>
+              </div>
+              <div class="bm-col-meta">9 sets / wk<span class="small">for 16 weeks</span></div>
+            </div>
+            <div class="bm-col">
+              <div class="bm-col-label">Maintaining</div>
+              <div class="bm-stack maint">
+                <div class="bm-dot lit"></div><div class="bm-dot"></div><div class="bm-dot"></div>
+                <div class="bm-dot"></div><div class="bm-dot"></div><div class="bm-dot"></div>
+                <div class="bm-dot"></div><div class="bm-dot"></div><div class="bm-dot"></div>
+              </div>
+              <div class="bm-col-meta">1 set / wk<span class="small">kept it all</span></div>
+            </div>
+          </div>
+          <div class="copy">After 16 weeks of resistance training, young adults dropped to one-ninth the original volume and kept all of their gains. Older adults needed roughly one-third.</div>
+        </div>
+
+        <div class="science-card-v2">
+          <div class="study-tag">Hand Skill Retention</div>
+          <div class="headline-num">15<span class="unit">years later</span></div>
+          <div class="summary">Motor memory doesn't behave like fact memory</div>
+          <div class="longtl" aria-hidden="true">
+            <div class="longtl-bar"><div class="longtl-fill"></div></div>
+            <div class="longtl-markers">
+              <div class="longtl-mk" style="left:0%"></div>
+              <div class="longtl-mk-label" style="left:0%">Year 0</div>
+              <div class="longtl-mk" style="left:33.3%"></div>
+              <div class="longtl-mk-label" style="left:33.3%">Year 5</div>
+              <div class="longtl-mk" style="left:66.6%"></div>
+              <div class="longtl-mk-label" style="left:66.6%">Year 10</div>
+              <div class="longtl-end-flag" style="left:100%">Still had it</div>
+              <div class="longtl-mk" style="left:100%"></div>
+              <div class="longtl-mk-label" style="left:100%">Year 15</div>
+            </div>
+          </div>
+          <div class="copy">Researchers tested participants on a learned hand-skill task fifteen years after they'd trained it. They still performed it. Motor memory lives in a different part of the brain than facts and doesn't really decay.</div>
+        </div>
+
+        <div class="science-card-v2">
+          <div class="study-tag">Rhythm + Style</div>
+          <div class="headline-num">8<span class="unit">years off, style intact</span></div>
+          <div class="summary">Your fingerprint survives the gap</div>
+          <div class="longtl" aria-hidden="true">
+            <div class="longtl-bar"><div class="longtl-fill"></div></div>
+            <div class="longtl-markers">
+              <div class="longtl-mk" style="left:0%"></div>
+              <div class="longtl-mk-label" style="left:0%">Learned</div>
+              <div class="longtl-mk" style="left:25%"></div>
+              <div class="longtl-mk-label" style="left:25%">Yr 2</div>
+              <div class="longtl-mk" style="left:50%"></div>
+              <div class="longtl-mk-label" style="left:50%">Yr 4</div>
+              <div class="longtl-mk" style="left:75%"></div>
+              <div class="longtl-mk-label" style="left:75%">Yr 6</div>
+              <div class="longtl-end-flag" style="left:100%">Played in same style</div>
+              <div class="longtl-mk" style="left:100%"></div>
+              <div class="longtl-mk-label" style="left:100%">Yr 8</div>
+            </div>
+          </div>
+          <div class="copy">A two-hand rhythmic pattern was taught and tested again eight years later. People remembered it and played it in their own personal style. The pattern survived; so did their voice.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="article-body">
+        <p>Guitar skills live in a different part of your brain than facts. It's the same part that remembers how to ride a bike. Stuff stored there doesn't really go away.</p>
+        <p>I'm proof of this too. I barely practiced for almost ten years while I focused on composing. When I came back to playing, anything I'd truly built into muscle memory was still there. Not rusty. There. A couple of weeks of practice and I was back to where I left off, technically.</p>
+      </div>
+      <div class="pullquote reveal">
+        Ten years off. Two weeks back.
+        <span class="pullquote-sub">That's what fully banking a skill actually buys you.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- === THE CATCH === -->
+  <section class="article-section">
+    <div class="wrap">
+      <h2 class="section-h">The catch</h2>
+      <div class="article-body">
+        <p>This only works for skills you actually finished learning. Half-learned skills disappear fast. Fully learned ones stick around.</p>
+        <p>That's the real point of focused practice. You're not trying to "kind of know" ten things. You're trying to fully bank one thing so it's yours forever. Then you move to the next one. Then the next.</p>
+        <p>A guitarist who fully banks one thing a month has twelve real skills at the end of the year. A guitarist who spreads thin across ten things at once has zero. Both practiced the same amount of time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- === COMMITMENT CARD === -->
+  <section class="article-section">
+    <div class="wrap">
+      <h2 class="section-h">What to do with your 30 minutes</h2>
+      <div class="article-body">
+        <p>Pick the one weakness that's been bugging you for years. Name it below.</p>
+      </div>
+    </div>
+    <div class="wrap commit-wrap">
+      <div class="commit-card reveal" id="commitCard">
+        <div class="commit-eyebrow">Your One Thing</div>
+        <h3 class="commit-title">What's the one thing you're going to fix?</h3>
+        <p class="commit-prompt">Be specific. Not "lead playing." Try "clean alternate picking at 140 bpm" or "chord changes between Em and Cmaj7 without buzzing."</p>
+        <input type="text" class="commit-input" id="commitInput" placeholder="e.g. Alternate picking at 140 bpm" maxlength="120" autocomplete="off">
+        <div class="commit-preview" id="commitPreview">
+          <div class="commit-preview-eyebrow">My commitment for the next 30 days</div>
+          <div class="commit-preview-text">
+            For 30 days, I will spend<br>
+            <span id="commitFocusMin">27</span> of my <span id="commitTotalMin">30</span> daily minutes on<br>
+            <span class="focus" id="commitText">_____</span>
+          </div>
+          <div class="commit-preview-meta">Then I move to the next thing. And the next.</div>
+          <div class="commit-actions">
+            <button class="commit-btn" id="commitCopyBtn" type="button">Copy commitment</button>
+            <button class="commit-btn" id="commitTimerBtn" type="button">Start a session ↓</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === TIMER === -->
+  <section class="article-section" id="timerSection">
+    <div class="wrap">
+      <h2 class="section-h">Run your first session right now</h2>
+      <div class="article-body">
+        <p>Reading isn't doing. The page below is a real, working session timer. It runs your focus block, chimes, then runs your maintenance block. Put your guitar in your lap. Hit start.</p>
+      </div>
+    </div>
+    <div class="wrap timer-wrap">
+      <div class="timer-card reveal" id="timerCard">
+        <div class="timer-eyebrow">Focused Session</div>
+        <h3 class="timer-title">Run the 90% Rule live</h3>
+        <p class="timer-context" id="timerContext">
+          Working on <span class="focus" id="timerThing">your one thing</span> for <span class="focus" id="timerFocusDur">27</span> min, then <span class="focus" id="timerMaintDur">3</span> min of light maintenance.
+        </p>
+        <div class="timer-phase" id="timerPhase">Ready</div>
+        <div class="timer-display" id="timerDisplay">27:00</div>
+        <div class="timer-progress"><div class="timer-progress-fill" id="timerProgress"></div></div>
+        <div class="timer-controls">
+          <button class="timer-btn primary" id="timerStartBtn" type="button">Start session</button>
+          <button class="timer-btn secondary" id="timerResetBtn" type="button" style="display:none">Reset</button>
+        </div>
+        <div class="timer-status" id="timerStatus">&nbsp;</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === METRONOME === -->
+  <section class="article-section" id="metroSection">
+    <div class="wrap">
+      <h2 class="section-h">Metronome</h2>
+      <div class="article-body">
+        <p>Same engine and sounds I use in Practice Room Pro. Pick your tempo, pick your subdivision. Click on the beat, hi-hat on every subdivision tick.</p>
+      </div>
+    </div>
+    <div class="wrap metro-wrap">
+      <div class="metro-card reveal" id="metroCard">
+        <div class="metro-eyebrow">Tempo</div>
+        <div class="metro-bpm-display"><span id="metroBpmValue">80</span><span class="unit">BPM</span></div>
+        <div class="metro-bpm-controls">
+          <button class="metro-step-btn" id="metroBpmDown" type="button" aria-label="Decrease tempo">−</button>
+          <input type="range" min="40" max="240" step="1" value="80" class="metro-bpm-slider" id="metroBpmSlider" aria-label="Tempo in BPM">
+          <button class="metro-step-btn" id="metroBpmUp" type="button" aria-label="Increase tempo">+</button>
+        </div>
+
+        <div class="metro-sub-row">
+          <div class="metro-sub-label">Subdivision</div>
+          <div class="metro-sub-pills" id="metroSubPills">
+            <button class="metro-pill active" data-sub="1" type="button">1<span class="pill-sub">Beats</span></button>
+            <button class="metro-pill" data-sub="2" type="button">2<span class="pill-sub">Eighths</span></button>
+            <button class="metro-pill" data-sub="3" type="button">3<span class="pill-sub">Triplets</span></button>
+            <button class="metro-pill" data-sub="4" type="button">4<span class="pill-sub">Sixteenths</span></button>
+            <button class="metro-pill" data-sub="6" type="button">6<span class="pill-sub">Sextuplets</span></button>
+            <button class="metro-pill" data-sub="8" type="button">8<span class="pill-sub">32nds</span></button>
+          </div>
+        </div>
+
+        <div class="metro-beats" id="metroBeats" aria-hidden="true">
+          <div class="metro-beat"></div>
+          <div class="metro-beat"></div>
+          <div class="metro-beat"></div>
+          <div class="metro-beat"></div>
+        </div>
+
+        <div class="metro-controls">
+          <button class="metro-play-btn" id="metroPlayBtn" type="button">Start metronome</button>
+        </div>
+        <div class="metro-status" id="metroStatus">&nbsp;</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- === THE BIGGER IDEA === -->
+  <section class="article-section">
+    <div class="wrap">
+      <h2 class="section-h">The bigger idea</h2>
+      <div class="article-body">
+        <p>Busy guitarists don't fail because they're busy. They fail because they practice like they're not busy. They copy routines built for teenagers with eight hours a day.</p>
+        <p>You don't have eight hours. You have thirty minutes. Practice like it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- === CTA === -->
+  <section class="cta-band-v2">
+    <div class="cta-inner-v2">
+      <div class="cta-eyebrow-v2">If you want help applying this</div>
+      <h2 class="cta-h2-v2">Practice Room Pro is built around exactly this idea</h2>
+      <p class="cta-p-v2">A structured place to pick your one thing, work it for a month, send me videos, get feedback, and bank it for real. No more spreading thin.</p>
+      <a class="cta-btn-v2" href="https://www.jonbjorkmusic.com/start">Try Practice Room Pro Free</a>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <a class="footer-logo" href="https://www.jonbjorkmusic.com/" aria-label="Jon Bjork Music">
+    <span class="footer-logo-name">Jon Bjork</span>
+    <span class="footer-logo-divider" aria-hidden="true"></span>
+    <span class="footer-logo-tag">Music</span>
+  </a>
+  <div class="footer-links">
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/">Home</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+    <a class="footer-link" href="https://youtube.com/@jonbjork" target="_blank" rel="noopener">YouTube</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Jon Bjork Music</div>
+</footer>
+
+<script>
+  /* =============================================================================
+     90% RULE — page logic
+     1.  Reveal-on-scroll
+     2.  Practice Plan Calculator
+     3.  Pick Your One Thing (commitment card)
+     4.  Live Session Timer
+     ============================================================================= */
+
+  /* ---- 1. Reveal-on-scroll ---- */
+  (function() {
+    var targets = document.querySelectorAll('.reveal, .science-grid');
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach(function(el){ el.classList.add('visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    targets.forEach(function(el){ io.observe(el); });
+  })();
+
+  /* ---- 2. Practice Plan Calculator ---- */
+  // Returns the focus % for a given total daily practice time (minutes).
+  // Anchored to the article: 30=90, 45=80, 60=70, 90=60, 120=50.
+  // Linearly interpolated between anchors. Below 30 = 90 (still very focused).
+  // Above 120 = 50 (article's floor).
+  function focusPctForMinutes(min) {
+    if (min <= 30)  return 90;
+    if (min <= 45)  return 90 - ((min - 30) / 15) * 10;   // 90 → 80
+    if (min <= 60)  return 80 - ((min - 45) / 15) * 10;   // 80 → 70
+    if (min <= 90)  return 70 - ((min - 60) / 30) * 10;   // 70 → 60
+    if (min <= 120) return 60 - ((min - 90) / 30) * 10;   // 60 → 50
+    return 50;
+  }
+
+  var calcState = {
+    totalMin: 30,
+    focusPct: 90,
+    focusMin: 27,
+    maintMin: 3
+  };
+
+  function updateCalc(totalMin) {
+    var pct = focusPctForMinutes(totalMin);
+    var roundedPct = Math.round(pct);
+    var focusMin = Math.round(totalMin * pct / 100);
+    var maintMin = totalMin - focusMin;
+
+    calcState.totalMin = totalMin;
+    calcState.focusPct = roundedPct;
+    calcState.focusMin = focusMin;
+    calcState.maintMin = maintMin;
+
+    document.getElementById('calcMin').textContent = totalMin;
+    document.getElementById('calcFocusMin').textContent = focusMin;
+    document.getElementById('calcFocusPct').textContent = roundedPct;
+    document.getElementById('calcMaintMin').textContent = maintMin;
+    document.getElementById('calcMaintPct').textContent = 100 - roundedPct;
+
+    var summary = 'With <strong>' + totalMin + ' minutes</strong>, spend <strong>' +
+      focusMin + ' of them</strong> on the one thing you\'re trying to actually get better at. ' +
+      'Use the last ' + maintMin + ' to keep your hands warm on stuff you already play well.';
+    document.getElementById('calcSummary').innerHTML = summary;
+
+    // Sync the timer + commitment card readouts
+    syncDownstreamFromCalc();
+  }
+
+  document.getElementById('calcSlider').addEventListener('input', function(e) {
+    updateCalc(parseInt(e.target.value, 10));
+  });
+
+  /* ---- 3. Pick Your One Thing ---- */
+  var commitState = { thing: '' };
+
+  function renderCommit() {
+    var t = commitState.thing.trim();
+    var display = t.length > 0 ? t : '_____';
+    document.getElementById('commitText').textContent = display;
+    document.getElementById('commitFocusMin').textContent = calcState.focusMin;
+    document.getElementById('commitTotalMin').textContent = calcState.totalMin;
+  }
+
+  function syncDownstreamFromCalc() {
+    renderCommit();
+    renderTimerContext();
+  }
+
+  document.getElementById('commitInput').addEventListener('input', function(e) {
+    commitState.thing = e.target.value;
+    renderCommit();
+    renderTimerContext();
+  });
+
+  document.getElementById('commitCopyBtn').addEventListener('click', function() {
+    var t = commitState.thing.trim() || 'one specific weakness';
+    var text = 'For 30 days, I will spend ' + calcState.focusMin +
+      ' of my ' + calcState.totalMin + ' daily minutes on ' + t +
+      '. Then I move to the next thing.\n\nFrom The 90% Rule by Jon Bjork';
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function() {
+        flashButton(document.getElementById('commitCopyBtn'), 'Copied!');
+      }).catch(function() {
+        flashButton(document.getElementById('commitCopyBtn'), 'Press Ctrl+C');
+      });
+    } else {
+      flashButton(document.getElementById('commitCopyBtn'), 'Copy not supported');
+    }
+  });
+
+  document.getElementById('commitTimerBtn').addEventListener('click', function() {
+    document.getElementById('timerSection').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  function flashButton(btn, msg) {
+    var orig = btn.textContent;
+    btn.textContent = msg;
+    btn.disabled = true;
+    setTimeout(function() {
+      btn.textContent = orig;
+      btn.disabled = false;
+    }, 1800);
+  }
+
+  /* ---- 4. Live Session Timer ---- */
+  var timer = {
+    phase: 'idle',          // idle | focus | maintenance | done
+    remaining: 0,           // seconds left in current phase
+    phaseLength: 0,         // total seconds of current phase
+    interval: null,
+    paused: false,
+    audioCtx: null
+  };
+
+  function renderTimerContext() {
+    var thing = commitState.thing.trim();
+    document.getElementById('timerThing').textContent = thing.length > 0 ? thing : 'your one thing';
+    document.getElementById('timerFocusDur').textContent = calcState.focusMin;
+    document.getElementById('timerMaintDur').textContent = calcState.maintMin;
+    if (timer.phase === 'idle') {
+      document.getElementById('timerDisplay').textContent = formatTime(calcState.focusMin * 60);
+    }
+  }
+
+  function formatTime(seconds) {
+    if (seconds < 0) seconds = 0;
+    var m = Math.floor(seconds / 60);
+    var s = seconds % 60;
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  function updateTimerDisplay() {
+    document.getElementById('timerDisplay').textContent = formatTime(timer.remaining);
+    var pct = timer.phaseLength > 0
+      ? ((timer.phaseLength - timer.remaining) / timer.phaseLength) * 100
+      : 0;
+    document.getElementById('timerProgress').style.width = pct + '%';
+  }
+
+  function setPhaseLabel(text) {
+    document.getElementById('timerPhase').textContent = text;
+  }
+
+  function setTimerStatus(text) {
+    document.getElementById('timerStatus').innerHTML = text || '&nbsp;';
+  }
+
+  function chime(kind) {
+    try {
+      if (!timer.audioCtx) {
+        var Ctx = window.AudioContext || window.webkitAudioContext;
+        if (!Ctx) return;
+        timer.audioCtx = new Ctx();
+      }
+      var ctx = timer.audioCtx;
+      // Two-tone chime — a fifth — pleasant, attention-grabbing, not jarring
+      var now = ctx.currentTime;
+      var freqs = kind === 'done' ? [660, 880, 1320] : [660, 990];
+      freqs.forEach(function(f, i) {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.frequency.value = f;
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0.0001, now + i * 0.18);
+        gain.gain.exponentialRampToValueAtTime(0.22, now + i * 0.18 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.18 + 0.9);
+        osc.connect(gain).connect(ctx.destination);
+        osc.start(now + i * 0.18);
+        osc.stop(now + i * 0.18 + 1.0);
+      });
+    } catch (e) { /* swallow */ }
+  }
+
+  function startPhase(phase) {
+    timer.phase = phase;
+    if (phase === 'focus') {
+      timer.phaseLength = calcState.focusMin * 60;
+      timer.remaining = timer.phaseLength;
+      setPhaseLabel('Focus block — your one thing');
+      document.getElementById('timerCard').classList.remove('is-maintenance', 'is-done');
+    } else if (phase === 'maintenance') {
+      timer.phaseLength = calcState.maintMin * 60;
+      timer.remaining = timer.phaseLength;
+      setPhaseLabel('Light maintenance — keep your hands warm');
+      document.getElementById('timerCard').classList.add('is-maintenance');
+      document.getElementById('timerCard').classList.remove('is-done');
+    }
+    updateTimerDisplay();
+    tickStart();
+  }
+
+  function tickStart() {
+    if (timer.interval) clearInterval(timer.interval);
+    timer.paused = false;
+    timer.interval = setInterval(function() {
+      if (timer.paused) return;
+      timer.remaining--;
+      if (timer.remaining <= 0) {
+        timer.remaining = 0;
+        updateTimerDisplay();
+        clearInterval(timer.interval);
+        timer.interval = null;
+        onPhaseEnd();
+        return;
+      }
+      updateTimerDisplay();
+    }, 1000);
+  }
+
+  function onPhaseEnd() {
+    if (timer.phase === 'focus') {
+      chime('switch');
+      setTimerStatus('Focus block complete. Maintenance starts in 3 seconds...');
+      setTimeout(function() {
+        if (calcState.maintMin <= 0) {
+          finishSession();
+        } else {
+          setTimerStatus('');
+          startPhase('maintenance');
+        }
+      }, 3000);
+    } else if (timer.phase === 'maintenance') {
+      finishSession();
+    }
+  }
+
+  function finishSession() {
+    chime('done');
+    timer.phase = 'done';
+    setPhaseLabel('Session complete');
+    setTimerStatus('Well done. That\'s one day closer to fully banking it.');
+    document.getElementById('timerCard').classList.add('is-done');
+    document.getElementById('timerCard').classList.remove('is-maintenance');
+    document.getElementById('timerStartBtn').textContent = 'Start another session';
+    document.getElementById('timerStartBtn').style.display = 'inline-block';
+    document.getElementById('timerResetBtn').style.display = 'none';
+  }
+
+  document.getElementById('timerStartBtn').addEventListener('click', function() {
+    var btn = this;
+    // Resume audio context (browsers need a user gesture)
+    try {
+      if (timer.audioCtx && timer.audioCtx.state === 'suspended') timer.audioCtx.resume();
+    } catch (e) {}
+
+    if (timer.phase === 'idle' || timer.phase === 'done') {
+      // Fresh start
+      startPhase('focus');
+      btn.textContent = 'Pause';
+      document.getElementById('timerResetBtn').style.display = 'inline-block';
+      setTimerStatus('Phone away. Eyes on your hands.');
+    } else if (timer.paused) {
+      timer.paused = false;
+      btn.textContent = 'Pause';
+      setTimerStatus('');
+    } else {
+      timer.paused = true;
+      btn.textContent = 'Resume';
+      setTimerStatus('Paused.');
+    }
+  });
+
+  document.getElementById('timerResetBtn').addEventListener('click', function() {
+    if (timer.interval) clearInterval(timer.interval);
+    timer.interval = null;
+    timer.phase = 'idle';
+    timer.paused = false;
+    timer.remaining = calcState.focusMin * 60;
+    timer.phaseLength = timer.remaining;
+    setPhaseLabel('Ready');
+    setTimerStatus('');
+    document.getElementById('timerCard').classList.remove('is-maintenance', 'is-done');
+    document.getElementById('timerStartBtn').textContent = 'Start session';
+    document.getElementById('timerResetBtn').style.display = 'none';
+    updateTimerDisplay();
+  });
+
+  /* ---- 5. Metronome ----
+     Lifted directly from the virtuoso lab's shared metronome engine
+     (src/shared/metronome.js): Chris Wilson lookahead scheduling,
+     click.wav on the beat, hihat.wav on subdivisions (layered on the beat
+     when subdivision > 1). 25ms lookahead, 100ms schedule horizon.
+  */
+  var metro = {
+    bpm: 80,
+    subdivision: 1,
+    running: false,
+    audioCtx: null,
+    clickBuffer: null,
+    hihatBuffer: null,
+    audioReady: false,
+    audioLoading: false,
+    nextNoteTime: 0,
+    subdivPosition: 0,
+    beatIndex: 0,           // 0..3 for the 4-dot visualizer (cycles)
+    schedulerId: null,
+    pendingTimeouts: []
+  };
+
+  var METRO_LOOKAHEAD_MS = 25;
+  var METRO_SCHEDULE_AHEAD_SEC = 0.1;
+  var METRO_START_OFFSET = 0.1;
+  var METRO_CLICK_URL = './sounds/click.wav';
+  var METRO_HIHAT_URL = './sounds/hihat.wav';
+
+  function metroLoadSample(url) {
+    return fetch(url)
+      .then(function(r) {
+        if (!r.ok) throw new Error('Failed to fetch ' + url + ': ' + r.status);
+        return r.arrayBuffer();
+      })
+      .then(function(ab) { return metro.audioCtx.decodeAudioData(ab); });
+  }
+
+  function metroInitAudio() {
+    if (metro.audioLoading) {
+      return new Promise(function(resolve) {
+        var iv = setInterval(function() {
+          if (!metro.audioLoading) { clearInterval(iv); resolve(metro.audioReady); }
+        }, 50);
+      });
+    }
+    return new Promise(function(resolve) {
+      try {
+        if (!metro.audioCtx) {
+          var Ctx = window.AudioContext || window.webkitAudioContext;
+          if (!Ctx) { resolve(false); return; }
+          metro.audioCtx = new Ctx();
+        }
+        var ctxReadyPromise = metro.audioCtx.state === 'suspended'
+          ? metro.audioCtx.resume().catch(function(){})
+          : Promise.resolve();
+        ctxReadyPromise.then(function() {
+          if (metro.audioReady) { resolve(true); return; }
+          metro.audioLoading = true;
+          Promise.all([
+            metroLoadSample(METRO_CLICK_URL),
+            metroLoadSample(METRO_HIHAT_URL)
+          ]).then(function(arr) {
+            metro.clickBuffer = arr[0];
+            metro.hihatBuffer = arr[1];
+            metro.audioReady = true;
+            metro.audioLoading = false;
+            resolve(true);
+          }).catch(function(err) {
+            console.warn('Metronome audio load failed:', err);
+            metro.audioLoading = false;
+            resolve(false);
+          });
+        });
+      } catch (e) {
+        console.warn('Metronome audio init failed:', e);
+        metro.audioLoading = false;
+        resolve(false);
+      }
+    });
+  }
+
+  function metroPlaySample(buffer, time, volume) {
+    if (!buffer || !metro.audioCtx) return;
+    var source = metro.audioCtx.createBufferSource();
+    source.buffer = buffer;
+    if (volume !== 1) {
+      var gain = metro.audioCtx.createGain();
+      gain.gain.value = volume;
+      source.connect(gain).connect(metro.audioCtx.destination);
+    } else {
+      source.connect(metro.audioCtx.destination);
+    }
+    source.start(time);
+  }
+
+  function metroIntervalSec() {
+    return 60 / metro.bpm / Math.max(1, metro.subdivision);
+  }
+
+  function flashBeat(idx, isMainBeat) {
+    var beats = document.querySelectorAll('.metro-beat');
+    var dot = beats[idx];
+    if (!dot) return;
+    dot.classList.add(isMainBeat ? 'flash' : 'sub-flash');
+    setTimeout(function() {
+      dot.classList.remove('flash');
+      dot.classList.remove('sub-flash');
+    }, isMainBeat ? 110 : 70);
+  }
+
+  function metroLoop() {
+    if (!metro.running || !metro.audioCtx) return;
+    var horizon = metro.audioCtx.currentTime + METRO_SCHEDULE_AHEAD_SEC;
+    while (metro.nextNoteTime < horizon && metro.running) {
+      var sub = Math.max(1, metro.subdivision);
+      var isMainBeat = metro.subdivPosition === 0;
+
+      // Audio: click on main beat (with hi-hat layered when subdividing),
+      // hi-hat alone on subdivision ticks between beats.
+      if (isMainBeat) {
+        metroPlaySample(metro.clickBuffer, metro.nextNoteTime, 0.95);
+        if (sub > 1) metroPlaySample(metro.hihatBuffer, metro.nextNoteTime, 0.6);
+      } else {
+        metroPlaySample(metro.hihatBuffer, metro.nextNoteTime, 0.6);
+      }
+
+      // Visual: animate the 4-dot beat ring on each MAIN beat only.
+      // (Sub-beats happen too fast at high subdivisions to be useful visuals.)
+      // The IIFE captures beatIdx per-iteration so a single metroLoop() call
+      // that schedules multiple beats doesn't have them all flash the latest
+      // index (classic var-in-loop closure bug).
+      if (isMainBeat) {
+        (function(beatIdx) {
+          var when = metro.nextNoteTime;
+          var delayMs = Math.max(0, (when - metro.audioCtx.currentTime) * 1000);
+          var tid = setTimeout(function() { flashBeat(beatIdx, true); }, delayMs);
+          metro.pendingTimeouts.push(tid);
+        })(metro.beatIndex % 4);
+        metro.beatIndex += 1;
+      }
+
+      metro.subdivPosition = (metro.subdivPosition + 1) % sub;
+      metro.nextNoteTime += metroIntervalSec();
+    }
+  }
+
+  function metroStart() {
+    if (metro.running) return Promise.resolve(true);
+    return metroInitAudio().then(function(ok) {
+      if (!ok) {
+        setMetroStatus('Audio unavailable in this browser');
+        return false;
+      }
+      metro.subdivPosition = 0;
+      metro.beatIndex = 0;
+      metro.nextNoteTime = metro.audioCtx.currentTime + METRO_START_OFFSET;
+      metro.running = true;
+      metroLoop();
+      metro.schedulerId = setInterval(metroLoop, METRO_LOOKAHEAD_MS);
+      return true;
+    });
+  }
+
+  function metroStop() {
+    metro.running = false;
+    if (metro.schedulerId) clearInterval(metro.schedulerId);
+    metro.schedulerId = null;
+    for (var i = 0; i < metro.pendingTimeouts.length; i++) clearTimeout(metro.pendingTimeouts[i]);
+    metro.pendingTimeouts = [];
+    // Clear any lingering flash state
+    var beats = document.querySelectorAll('.metro-beat');
+    beats.forEach(function(b) { b.classList.remove('flash', 'sub-flash'); });
+  }
+
+  function setMetroStatus(text) {
+    document.getElementById('metroStatus').textContent = text || ' ';
+  }
+
+  function setMetroBpm(bpm) {
+    var clamped = Math.max(40, Math.min(240, Math.round(bpm)));
+    metro.bpm = clamped;
+    document.getElementById('metroBpmValue').textContent = clamped;
+    document.getElementById('metroBpmSlider').value = clamped;
+    // Live BPM update: the scheduling loop reads `metro.bpm` each tick, so
+    // changing it mid-play just shifts when the NEXT tick fires. No restart
+    // needed.
+  }
+
+  function setMetroSubdivision(sub) {
+    metro.subdivision = Math.max(1, Math.min(20, Math.round(sub)));
+    document.querySelectorAll('.metro-pill').forEach(function(p) {
+      var match = parseInt(p.getAttribute('data-sub'), 10) === metro.subdivision;
+      p.classList.toggle('active', match);
+    });
+    // If running, reset subdivPosition to align next tick to a main beat so
+    // the subdivision feels clean. The scheduling time stays the same.
+    if (metro.running) metro.subdivPosition = 0;
+  }
+
+  /* Metronome wiring */
+  document.getElementById('metroBpmSlider').addEventListener('input', function(e) {
+    setMetroBpm(parseInt(e.target.value, 10));
+  });
+  document.getElementById('metroBpmUp').addEventListener('click', function() {
+    setMetroBpm(metro.bpm + 1);
+  });
+  document.getElementById('metroBpmDown').addEventListener('click', function() {
+    setMetroBpm(metro.bpm - 1);
+  });
+  document.getElementById('metroSubPills').addEventListener('click', function(e) {
+    var btn = e.target.closest('.metro-pill');
+    if (!btn) return;
+    setMetroSubdivision(parseInt(btn.getAttribute('data-sub'), 10));
+  });
+  document.getElementById('metroPlayBtn').addEventListener('click', function() {
+    var btn = this;
+    if (metro.running) {
+      metroStop();
+      btn.textContent = 'Start metronome';
+      btn.classList.remove('is-running');
+      setMetroStatus('');
+    } else {
+      btn.textContent = 'Loading...';
+      btn.disabled = true;
+      metroStart().then(function(ok) {
+        btn.disabled = false;
+        if (ok) {
+          btn.textContent = 'Stop';
+          btn.classList.add('is-running');
+          setMetroStatus('');
+        } else {
+          btn.textContent = 'Start metronome';
+        }
+      });
+    }
+  });
+  // Keyboard shortcut: spacebar toggles metronome when focused on the page
+  // (skip when typing in the commitment input or other text fields).
+  document.addEventListener('keydown', function(e) {
+    if (e.code !== 'Space') return;
+    var tag = (e.target && e.target.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+    e.preventDefault();
+    document.getElementById('metroPlayBtn').click();
+  });
+
+  /* ---- 6. Persistence + Dashboard ----
+     localStorage-backed habit tracker. All progress lives in this browser.
+     Users can export to JSON via the settings gear and import on a new device.
+     Schema is versioned so future changes can migrate cleanly.
+  */
+  var STORAGE_KEY = 'jb-90rule-v1';
+  var STORAGE_VERSION = 1;
+  var CHALLENGE_LENGTH = 30;
+  var BANNER_THRESHOLD_DAYS = 7;
+
+  var data = defaultData();
+
+  function defaultData() {
+    return {
+      version: STORAGE_VERSION,
+      thing: '',
+      totalMin: 30,
+      startDate: null,        // 'YYYY-MM-DD' — set when user first types commitment
+      daysLogged: {},         // { 'YYYY-MM-DD': { note: '' } }
+      bankedSkills: [],       // [{ name: '', bankedDate: '' }]
+      prefs: { bpm: 80, subdivision: 1 },
+      bannerDismissed: false  // 'true' means user closed the sticky banner; resets each day
+    };
+  }
+
+  function loadData() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return defaultData();
+      var parsed = JSON.parse(raw);
+      // Future migrations would go here if version < STORAGE_VERSION.
+      // For now, merge into defaults so missing fields don't break the UI.
+      var merged = defaultData();
+      for (var k in parsed) if (parsed.hasOwnProperty(k)) merged[k] = parsed[k];
+      if (!merged.prefs) merged.prefs = { bpm: 80, subdivision: 1 };
+      if (!merged.daysLogged) merged.daysLogged = {};
+      if (!merged.bankedSkills) merged.bankedSkills = [];
+      return merged;
+    } catch (e) {
+      console.warn('Could not load saved data:', e);
+      return defaultData();
+    }
+  }
+
+  function saveData() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+    } catch (e) {
+      console.warn('Could not save data:', e);
+    }
+  }
+
+  function todayISO() {
+    var d = new Date();
+    var yyyy = d.getFullYear();
+    var mm = String(d.getMonth() + 1).padStart(2, '0');
+    var dd = String(d.getDate()).padStart(2, '0');
+    return yyyy + '-' + mm + '-' + dd;
+  }
+
+  function isoFromDate(dt) {
+    var yyyy = dt.getFullYear();
+    var mm = String(dt.getMonth() + 1).padStart(2, '0');
+    var dd = String(dt.getDate()).padStart(2, '0');
+    return yyyy + '-' + mm + '-' + dd;
+  }
+
+  function dateFromISO(iso) {
+    // Treat as local date to avoid timezone drift
+    var parts = iso.split('-');
+    return new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+  }
+
+  function daysBetween(iso1, iso2) {
+    var d1 = dateFromISO(iso1);
+    var d2 = dateFromISO(iso2);
+    return Math.floor((d2 - d1) / (1000 * 60 * 60 * 24));
+  }
+
+  function currentDayNumber() {
+    // 1-indexed: the day they committed is "Day 1"
+    if (!data.startDate) return 0;
+    return daysBetween(data.startDate, todayISO()) + 1;
+  }
+
+  function hasStartedChallenge() {
+    // Dashboard sticks around if they have ANY progress, even if they've
+    // temporarily cleared the commitment input (e.g. while editing it).
+    if (!data.startDate) return false;
+    var hasThing = !!data.thing && data.thing.trim().length > 0;
+    var hasLogs = data.daysLogged && Object.keys(data.daysLogged).length > 0;
+    return hasThing || hasLogs;
+  }
+
+  /* Save commitment input on every change. Set startDate the first time
+     they type anything (so they're "Day 1" from that moment forward). */
+  function saveCommitment(thingText) {
+    var trimmed = (thingText || '').trim();
+    data.thing = trimmed;
+    if (trimmed.length > 0 && !data.startDate) {
+      data.startDate = todayISO();
+    }
+    // If they cleared the commitment, leave startDate intact — they may be
+    // editing it; we don't want to lose their streak on a backspace.
+    saveData();
+    renderDashboard();
+  }
+
+  /* Mark today logged. Creates a daysLogged entry. */
+  function logToday(noteText) {
+    var today = todayISO();
+    if (!data.daysLogged[today]) {
+      data.daysLogged[today] = { note: noteText || '' };
+    } else {
+      // Already logged: update the note if provided
+      if (typeof noteText === 'string') data.daysLogged[today].note = noteText;
+    }
+    saveData();
+    renderDashboard();
+    // After logging, scroll the user toward the metronome so they
+    // immediately have a reason to start practicing.
+    setTimeout(function() {
+      var metro = document.getElementById('metroSection');
+      if (metro) metro.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 600);
+  }
+
+  function unlogToday() {
+    delete data.daysLogged[todayISO()];
+    saveData();
+    renderDashboard();
+  }
+
+  function toggleDay(iso) {
+    if (data.daysLogged[iso]) delete data.daysLogged[iso];
+    else data.daysLogged[iso] = { note: '' };
+    saveData();
+    renderDashboard();
+  }
+
+  function updateJournalForDay(iso, noteText) {
+    if (!data.daysLogged[iso]) data.daysLogged[iso] = { note: '' };
+    data.daysLogged[iso].note = noteText;
+    saveData();
+    renderJournalRecent();
+    renderHeatmap();
+  }
+
+  function logCount() {
+    return Object.keys(data.daysLogged).length;
+  }
+
+  function currentStreak() {
+    // Counts back from today: how many consecutive days (including today)
+    // have a log entry?
+    var n = 0;
+    var cursor = todayISO();
+    while (data.daysLogged[cursor]) {
+      n += 1;
+      var d = dateFromISO(cursor);
+      d.setDate(d.getDate() - 1);
+      cursor = isoFromDate(d);
+    }
+    return n;
+  }
+
+  /* === Dashboard rendering === */
+  function renderDashboard() {
+    var dash = document.getElementById('dashboard');
+    if (!hasStartedChallenge()) {
+      dash.classList.remove('active');
+      renderBanner();
+      return;
+    }
+    dash.classList.add('active');
+
+    // Day counter + the thing they're working on
+    var day = currentDayNumber();
+    var dayCapped = Math.min(day, CHALLENGE_LENGTH);
+    document.getElementById('dashDay').textContent = dayCapped;
+    document.getElementById('dashThingName').textContent = data.thing;
+
+    // Day rotating CTA pill (4 angles cycling by day)
+    var pillAngles = [
+      'Stop guessing what to work on',
+      'Get videos reviewed weekly',
+      'Where this rule becomes a routine',
+      'A structured place to bank skills'
+    ];
+    var pillIdx = (day - 1) % pillAngles.length;
+    document.getElementById('dashPillText').textContent = pillAngles[pillIdx];
+
+    // Today's check-in state
+    var loggedToday = !!data.daysLogged[todayISO()];
+    document.getElementById('checkinPrompt').style.display = loggedToday ? 'none' : 'block';
+    document.getElementById('checkinComplete').style.display = loggedToday ? 'block' : 'none';
+    if (loggedToday) {
+      document.getElementById('checkinDayDone').textContent = dayCapped;
+    }
+
+    // Heatmap stats
+    document.getElementById('statsLogged').textContent = logCount();
+    document.getElementById('statsStreak').textContent = currentStreak();
+
+    // Heatmap grid
+    renderHeatmap();
+
+    // Journal: load today's note, show recent
+    var todayEntry = data.daysLogged[todayISO()] || { note: '' };
+    var journalInput = document.getElementById('journalInput');
+    if (document.activeElement !== journalInput) {
+      journalInput.value = todayEntry.note;
+      document.getElementById('journalChars').textContent = journalInput.value.length;
+    }
+    renderJournalRecent();
+
+    // Sticky banner if they're past day 7 and haven't dismissed today
+    renderBanner();
+  }
+
+  function renderHeatmap() {
+    var grid = document.getElementById('heatmapGrid');
+    grid.innerHTML = '';
+    var today = todayISO();
+    var startISO = data.startDate || today;
+    for (var i = 0; i < CHALLENGE_LENGTH; i++) {
+      var d = dateFromISO(startISO);
+      d.setDate(d.getDate() + i);
+      var iso = isoFromDate(d);
+      var dayNum = i + 1;
+      var cell = document.createElement('button');
+      cell.className = 'heat-cell';
+      cell.type = 'button';
+      cell.setAttribute('data-iso', iso);
+      cell.setAttribute('data-day', String(dayNum));
+      cell.textContent = dayNum;
+
+      var isPast = iso < today;
+      var isToday = iso === today;
+      var isFuture = iso > today;
+      var entry = data.daysLogged[iso];
+      var hasNote = entry && entry.note && entry.note.trim().length > 0;
+
+      if (entry) cell.classList.add('logged');
+      if (isToday) cell.classList.add('today');
+      if (isFuture) cell.classList.add('future');
+      if (hasNote) cell.setAttribute('data-note', entry.note);
+
+      // Tooltip + click behaviour
+      cell.addEventListener('mouseenter', function(e) { showHeatTooltip(e.currentTarget); });
+      cell.addEventListener('mouseleave', hideHeatTooltip);
+      cell.addEventListener('click', function(e) {
+        var c = e.currentTarget;
+        var cellISO = c.getAttribute('data-iso');
+        if (cellISO > todayISO()) return; // can't log future days
+        toggleDay(cellISO);
+      });
+
+      grid.appendChild(cell);
+    }
+  }
+
+  function showHeatTooltip(cell) {
+    var iso = cell.getAttribute('data-iso');
+    var dayNum = cell.getAttribute('data-day');
+    var entry = data.daysLogged[iso];
+    var tip = document.getElementById('heatTooltip');
+    if (!tip) {
+      tip = document.createElement('div');
+      tip.id = 'heatTooltip';
+      tip.className = 'heatmap-tooltip';
+      document.body.appendChild(tip);
+    }
+    var label = 'Day ' + dayNum + ' &middot; ' + formatHumanDate(iso);
+    var body = entry && entry.note && entry.note.trim().length > 0
+      ? entry.note
+      : (entry ? '<em style="color:var(--muted)">Logged. No note.</em>' : '<em style="color:var(--dim)">Not logged yet.</em>');
+    tip.innerHTML = '<div class="day-label">' + label + '</div>' + body;
+    var rect = cell.getBoundingClientRect();
+    var scrollY = window.scrollY || window.pageYOffset;
+    tip.style.left = (rect.left + rect.width / 2 - 130) + 'px';
+    tip.style.top = (rect.bottom + scrollY + 8) + 'px';
+    tip.classList.add('show');
+  }
+  function hideHeatTooltip() {
+    var tip = document.getElementById('heatTooltip');
+    if (tip) tip.classList.remove('show');
+  }
+  function formatHumanDate(iso) {
+    var d = dateFromISO(iso);
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return months[d.getMonth()] + ' ' + d.getDate();
+  }
+
+  function renderJournalRecent() {
+    var container = document.getElementById('journalRecent');
+    container.innerHTML = '';
+    // Show the last 5 logged days that have notes, most recent first
+    var withNotes = Object.keys(data.daysLogged)
+      .filter(function(iso) {
+        var e = data.daysLogged[iso];
+        return e && e.note && e.note.trim().length > 0 && iso !== todayISO();
+      })
+      .sort(function(a, b) { return b.localeCompare(a); })
+      .slice(0, 5);
+    if (withNotes.length === 0) {
+      var empty = document.createElement('div');
+      empty.className = 'journal-empty';
+      empty.textContent = 'Notes you save will appear here. Even one line a day adds up.';
+      container.appendChild(empty);
+      return;
+    }
+    withNotes.forEach(function(iso) {
+      var entry = data.daysLogged[iso];
+      var d = dateFromISO(iso);
+      var dayNum = data.startDate ? (daysBetween(data.startDate, iso) + 1) : '';
+      var wrap = document.createElement('div');
+      wrap.className = 'journal-entry';
+      var label = document.createElement('div');
+      label.className = 'journal-entry-day';
+      label.innerHTML = (dayNum ? 'Day ' + dayNum + ' &middot; ' : '') + formatHumanDate(iso);
+      var text = document.createElement('div');
+      text.className = 'journal-entry-text';
+      text.textContent = entry.note;
+      wrap.appendChild(label);
+      wrap.appendChild(text);
+      container.appendChild(wrap);
+    });
+  }
+
+  function renderBanner() {
+    var banner = document.getElementById('stickyBanner');
+    var day = currentDayNumber();
+    var shouldShow = hasStartedChallenge() && day >= BANNER_THRESHOLD_DAYS && !isBannerDismissedForToday();
+    document.getElementById('bannerDay').textContent = day;
+    if (shouldShow) {
+      banner.classList.add('show');
+      document.body.classList.add('banner-visible');
+    } else {
+      banner.classList.remove('show');
+      document.body.classList.remove('banner-visible');
+    }
+  }
+
+  function isBannerDismissedForToday() {
+    // bannerDismissed stores the ISO date it was dismissed on. Resets daily.
+    return data.bannerDismissed === todayISO();
+  }
+
+  /* Settings panel: toggle, export, import, reset */
+  function downloadBackup() {
+    var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = '90-rule-progress-' + todayISO() + '.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+  }
+
+  function importBackup(file) {
+    var reader = new FileReader();
+    reader.onload = function() {
+      try {
+        var parsed = JSON.parse(reader.result);
+        if (typeof parsed !== 'object' || parsed === null) throw new Error('Not a valid backup');
+        // Light validation: it should look like our schema
+        if (!('thing' in parsed) || !('daysLogged' in parsed)) throw new Error('Missing required fields');
+        if (!confirm('This will replace your current progress. Continue?')) return;
+        data = parsed;
+        // Re-merge with defaults so missing fields don't crash the UI
+        var merged = defaultData();
+        for (var k in data) if (data.hasOwnProperty(k)) merged[k] = data[k];
+        data = merged;
+        saveData();
+        // Re-sync the rest of the page from the imported data
+        applyImportedPrefs();
+        renderDashboard();
+        renderCommit();
+        renderTimerContext();
+        alert('Backup imported. Welcome back.');
+      } catch (e) {
+        alert('Could not read that file. Make sure it is the .json backup downloaded from this page.');
+        console.warn('Import error:', e);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  function applyImportedPrefs() {
+    // Sync calculator
+    if (typeof data.totalMin === 'number') {
+      document.getElementById('calcSlider').value = data.totalMin;
+      updateCalc(data.totalMin);
+    }
+    // Sync commitment input
+    var commitInput = document.getElementById('commitInput');
+    if (commitInput) commitInput.value = data.thing || '';
+    commitState.thing = data.thing || '';
+    // Sync metronome prefs
+    if (data.prefs) {
+      if (typeof data.prefs.bpm === 'number') setMetroBpm(data.prefs.bpm);
+      if (typeof data.prefs.subdivision === 'number') setMetroSubdivision(data.prefs.subdivision);
+    }
+  }
+
+  function resetAllData() {
+    if (!confirm('This wipes your streak, journal, and commitment from this browser. Export a backup first if you want to keep it. Reset?')) return;
+    data = defaultData();
+    saveData();
+    location.reload();
+  }
+
+  /* Wire up settings UI */
+  document.getElementById('settingsToggle').addEventListener('click', function(e) {
+    e.stopPropagation();
+    document.getElementById('settingsPanel').classList.toggle('show');
+  });
+  document.addEventListener('click', function(e) {
+    var panel = document.getElementById('settingsPanel');
+    var toggle = document.getElementById('settingsToggle');
+    if (!panel || !toggle) return;
+    if (!panel.contains(e.target) && !toggle.contains(e.target)) {
+      panel.classList.remove('show');
+    }
+  });
+  document.getElementById('exportBtn').addEventListener('click', function() {
+    downloadBackup();
+    document.getElementById('settingsPanel').classList.remove('show');
+  });
+  document.getElementById('importBtn').addEventListener('click', function() {
+    document.getElementById('importFile').click();
+  });
+  document.getElementById('importFile').addEventListener('change', function(e) {
+    if (e.target.files && e.target.files[0]) {
+      importBackup(e.target.files[0]);
+      e.target.value = ''; // allow re-import of same filename
+      document.getElementById('settingsPanel').classList.remove('show');
+    }
+  });
+  document.getElementById('resetBtn').addEventListener('click', resetAllData);
+
+  /* Sticky banner close */
+  document.getElementById('stickyBannerClose').addEventListener('click', function() {
+    data.bannerDismissed = todayISO();
+    saveData();
+    renderBanner();
+  });
+
+  /* Check-in handlers */
+  document.getElementById('checkinYes').addEventListener('click', function() {
+    var noteEl = document.getElementById('journalInput');
+    logToday(noteEl ? noteEl.value : '');
+  });
+  document.getElementById('checkinNo').addEventListener('click', function() {
+    // Soft "not yet" — scroll to the metronome to nudge them to practice.
+    document.getElementById('metroSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  /* Journal input — save on every keystroke (debounced) */
+  var journalSaveTimer = null;
+  document.getElementById('journalInput').addEventListener('input', function(e) {
+    var val = e.target.value;
+    document.getElementById('journalChars').textContent = val.length;
+    if (journalSaveTimer) clearTimeout(journalSaveTimer);
+    journalSaveTimer = setTimeout(function() {
+      // Save the note onto today's entry (creating it if needed). Don't
+      // auto-mark today as "logged" just because they typed a note —
+      // logging stays an intentional click.
+      var today = todayISO();
+      if (data.daysLogged[today]) {
+        data.daysLogged[today].note = val;
+      } else if (val.trim().length > 0) {
+        data.daysLogged[today] = { note: val };
+      }
+      saveData();
+      var savedEl = document.getElementById('journalSaved');
+      savedEl.classList.add('show');
+      setTimeout(function() { savedEl.classList.remove('show'); }, 1500);
+      renderJournalRecent();
+      renderHeatmap();
+      renderDashboard();
+    }, 450);
+  });
+
+  /* Augment the existing commitInput handler to also persist + start the
+     challenge. We added this after the original listener so both fire. */
+  document.getElementById('commitInput').addEventListener('input', function(e) {
+    saveCommitment(e.target.value);
+  });
+
+  /* Persist metronome prefs whenever they change */
+  (function wirePrefsPersistence() {
+    var origSetBpm = setMetroBpm;
+    window.setMetroBpm = setMetroBpm = function(bpm) {
+      origSetBpm(bpm);
+      data.prefs.bpm = metro.bpm;
+      saveData();
+    };
+    var origSetSub = setMetroSubdivision;
+    window.setMetroSubdivision = setMetroSubdivision = function(sub) {
+      origSetSub(sub);
+      data.prefs.subdivision = metro.subdivision;
+      saveData();
+    };
+    var origUpdateCalc = updateCalc;
+    window.updateCalc = updateCalc = function(min) {
+      origUpdateCalc(min);
+      data.totalMin = calcState.totalMin;
+      saveData();
+    };
+  })();
+
+  /* Restore saved state on page load */
+  function restoreFromStorage() {
+    data = loadData();
+    // Restore commitment
+    if (data.thing) {
+      document.getElementById('commitInput').value = data.thing;
+      commitState.thing = data.thing;
+      renderCommit();
+    }
+    // Restore total practice minutes
+    if (typeof data.totalMin === 'number' && data.totalMin >= 15 && data.totalMin <= 180) {
+      document.getElementById('calcSlider').value = data.totalMin;
+      updateCalc(data.totalMin);
+    }
+    // Restore metronome prefs
+    if (data.prefs) {
+      if (typeof data.prefs.bpm === 'number') setMetroBpm(data.prefs.bpm);
+      if (typeof data.prefs.subdivision === 'number') setMetroSubdivision(data.prefs.subdivision);
+    }
+    renderDashboard();
+    renderTimerContext();
+  }
+
+  /* ---- Init ---- */
+  updateCalc(30);
+  renderCommit();
+  renderTimerContext();
+  restoreFromStorage();
+</script>
+
+</body>
+</html>
