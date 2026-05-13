@@ -84,7 +84,7 @@
     font-size: 0.95rem; letter-spacing: 0.22em;
     text-transform: uppercase; color: var(--white);
   }
-  .nav-right { display: flex; align-items: center; gap: 28px; }
+  .nav-right { display: flex; align-items: center; gap: 22px; }
   .nav-link {
     font-family: 'Oswald', sans-serif; font-weight: 400;
     font-size: 0.95rem; letter-spacing: 0.14em; text-transform: uppercase;
@@ -101,9 +101,66 @@
     transition: background 0.2s, transform 0.2s;
   }
   .nav-btn:hover { background: var(--purple-lt); transform: scale(1.02); }
-  @media (max-width: 800px) {
+  /* Hamburger toggle + mobile menu (matches main site pattern in base.njk) */
+  .nav-toggle {
+    display: none;
+    background: transparent; border: none; padding: 8px;
+    cursor: pointer; color: var(--white);
+    width: 40px; height: 40px;
+    align-items: center; justify-content: center;
+  }
+  .nav-toggle span {
+    display: block; position: relative;
+    width: 22px; height: 2px;
+    background: var(--white);
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+  .nav-toggle span::before,
+  .nav-toggle span::after {
+    content: ''; position: absolute; left: 0;
+    width: 22px; height: 2px; background: var(--white);
+    transition: transform 0.25s ease, top 0.25s ease;
+  }
+  .nav-toggle span::before { top: -7px; }
+  .nav-toggle span::after  { top:  7px; }
+  .nav-toggle.is-open span { background: transparent; }
+  .nav-toggle.is-open span::before { top: 0; transform: rotate(45deg); }
+  .nav-toggle.is-open span::after  { top: 0; transform: rotate(-45deg); }
+  .mobile-menu {
+    display: none;
+    position: fixed; top: 70px; left: 0; right: 0; z-index: 199;
+    background: rgba(13, 13, 13, 0.98);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    padding: 22px;
+    flex-direction: column; gap: 4px;
+    transform: translateY(-12px);
+    opacity: 0; pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+  .mobile-menu.is-open {
+    transform: translateY(0);
+    opacity: 1; pointer-events: auto;
+  }
+  body.banner-visible .mobile-menu { top: 120px; }
+  .mobile-menu .nav-link {
+    display: block;
+    padding: 18px 8px;
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-menu .nav-btn {
+    margin-top: 18px;
+    text-align: center;
+    padding: 16px 28px;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 900px) {
     nav { padding: 16px 22px; }
-    .nav-right .nav-link { display: none; }
+    .nav-right { display: none; }
+    .nav-toggle { display: flex; }
+    .mobile-menu { display: flex; }
     .nav-logo-tag { display: none; }
     .nav-logo-divider { display: none; }
   }
@@ -534,6 +591,58 @@
     background: var(--purple);
     color: var(--white);
     border-color: var(--purple);
+  }
+  .commit-btn.is-success {
+    background: var(--purple);
+    color: var(--white);
+    border-color: var(--purple-lt);
+    box-shadow: 0 0 18px rgba(124, 58, 237, 0.45);
+  }
+  /* Inline success panel that appears after Copy. Tells the user exactly
+     what happened and what to do with the copied text. */
+  .commit-copied {
+    margin-top: 22px;
+    padding: 18px 20px;
+    background: rgba(124, 58, 237, 0.12);
+    border: 1px solid var(--accent-border);
+    border-radius: 10px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: max-height 0.35s ease, opacity 0.3s ease, transform 0.3s ease, padding 0.35s ease;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .commit-copied.show {
+    max-height: 220px;
+    opacity: 1;
+    transform: translateY(0);
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  .commit-copied-head {
+    display: flex; align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .commit-copied-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 24px; height: 24px;
+    background: var(--purple);
+    border-radius: 50%;
+    color: var(--white);
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 0.9rem;
+    box-shadow: 0 0 12px rgba(124, 58, 237, 0.5);
+  }
+  .commit-copied-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 0.95rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--white);
+  }
+  .commit-copied-body {
+    font-size: 0.98rem; line-height: 1.55;
+    color: var(--off);
   }
 
   /* === TIMER === */
@@ -1572,13 +1681,17 @@
     color: var(--muted);
     white-space: nowrap;
   }
+  /* End flag: right-anchored so it stays inside the card (which has
+     overflow:hidden). The flag's right edge sits at the end of the timeline
+     (year 15 / year 8); the down-arrow lives near the right end of the flag
+     so it still points at the final year marker. */
   .longtl-end-flag {
     position: absolute;
-    top: -36px;
-    transform: translateX(-50%);
+    top: -42px;
+    right: 0;
     background: var(--purple);
     color: var(--white);
-    padding: 4px 10px;
+    padding: 5px 11px;
     border-radius: 4px;
     font-family: 'Oswald', sans-serif; font-weight: 700;
     font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase;
@@ -1589,16 +1702,16 @@
   .longtl-end-flag::after {
     content: '';
     position: absolute;
-    top: 100%; left: 50%;
-    transform: translateX(-50%);
+    top: 100%;
+    right: 8px;
     width: 0; height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
     border-top: 5px solid var(--purple);
   }
   @keyframes flagBob {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(-3px); }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
   }
 
   /* Make CTA brighter and bigger per Jon's note */
@@ -1716,11 +1829,24 @@
     <span class="nav-logo-tag">Music</span>
   </a>
   <div class="nav-right">
-    <a class="nav-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/start">Practice Room Pro</a>
     <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
-    <a class="nav-btn" href="https://www.jonbjorkmusic.com/start">Practice Room Pro</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/#about">About</a>
+    <a class="nav-btn" href="https://www.jonbjorkmusic.com/coaching">1-on-1 Coaching</a>
   </div>
+  <button class="nav-toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu" role="menu">
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/start">Practice Room Pro</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/#about">About</a>
+  <a class="nav-btn" href="https://www.jonbjorkmusic.com/coaching">1-on-1 Coaching</a>
+</div>
 
 <!-- Returning-user dashboard (shown above hero when saved progress exists) -->
 <section class="dashboard" id="dashboard" aria-label="Your 90% Rule dashboard">
@@ -1904,7 +2030,7 @@
               <div class="longtl-mk-label" style="left:33.3%">Year 5</div>
               <div class="longtl-mk" style="left:66.6%"></div>
               <div class="longtl-mk-label" style="left:66.6%">Year 10</div>
-              <div class="longtl-end-flag" style="left:100%">Still had it</div>
+              <div class="longtl-end-flag">Still had it</div>
               <div class="longtl-mk" style="left:100%"></div>
               <div class="longtl-mk-label" style="left:100%">Year 15</div>
             </div>
@@ -1927,7 +2053,7 @@
               <div class="longtl-mk-label" style="left:50%">Yr 4</div>
               <div class="longtl-mk" style="left:75%"></div>
               <div class="longtl-mk-label" style="left:75%">Yr 6</div>
-              <div class="longtl-end-flag" style="left:100%">Played in same style</div>
+              <div class="longtl-end-flag">Played in same style</div>
               <div class="longtl-mk" style="left:100%"></div>
               <div class="longtl-mk-label" style="left:100%">Yr 8</div>
             </div>
@@ -1987,6 +2113,15 @@
           <div class="commit-actions">
             <button class="commit-btn" id="commitCopyBtn" type="button">Copy commitment</button>
             <button class="commit-btn" id="commitTimerBtn" type="button">Start a session ↓</button>
+          </div>
+          <div class="commit-copied" id="commitCopied" aria-live="polite">
+            <div class="commit-copied-head">
+              <span class="commit-copied-icon" aria-hidden="true">✓</span>
+              <span class="commit-copied-title">Copied to your clipboard</span>
+            </div>
+            <div class="commit-copied-body">
+              Now paste it somewhere you'll see it daily. Phone Notes app, lock screen background, sticky note on your guitar case. Visible commitment beats invisible commitment.
+            </div>
           </div>
         </div>
       </div>
@@ -2096,10 +2231,12 @@
   </a>
   <div class="footer-links">
     <a class="footer-link" href="https://www.jonbjorkmusic.com/">Home</a>
-    <a class="footer-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/coaching">1-on-1</a>
     <a class="footer-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
     <a class="footer-link" href="https://youtube.com/@jonbjork" target="_blank" rel="noopener">YouTube</a>
   </div>
+  <a class="footer-link" href="https://www.jonbjorkmusic.com/legal">Legal</a>
   <div class="footer-copy">&copy; 2026 Jon Bjork Music</div>
 </footer>
 
@@ -2111,6 +2248,32 @@
      3.  Pick Your One Thing (commitment card)
      4.  Live Session Timer
      ============================================================================= */
+
+  /* ---- 0. Mobile menu toggle ---- */
+  (function() {
+    var toggle = document.getElementById('navToggle');
+    var menu = document.getElementById('mobileMenu');
+    if (!toggle || !menu) return;
+    function closeMenu() {
+      toggle.classList.remove('is-open');
+      menu.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
+    }
+    function openMenu() {
+      toggle.classList.add('is-open');
+      menu.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Close menu');
+    }
+    toggle.addEventListener('click', function() {
+      if (menu.classList.contains('is-open')) closeMenu(); else openMenu();
+    });
+    menu.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 900 && menu.classList.contains('is-open')) closeMenu();
+    });
+  })();
 
   /* ---- 1. Reveal-on-scroll ---- */
   (function() {
@@ -2203,19 +2366,52 @@
     renderTimerContext();
   });
 
+  /* Copy commitment: writes the formatted text to the clipboard, and shows
+     a visible success panel below the buttons so the user actually KNOWS
+     what just happened — not just a brief button-label swap. */
+  function showCopiedPanel() {
+    var btn = document.getElementById('commitCopyBtn');
+    var panel = document.getElementById('commitCopied');
+    btn.textContent = 'Copied to clipboard ✓';
+    btn.classList.add('is-success');
+    panel.classList.add('show');
+    if (showCopiedPanel._timer) clearTimeout(showCopiedPanel._timer);
+    showCopiedPanel._timer = setTimeout(function() {
+      btn.textContent = 'Copy commitment';
+      btn.classList.remove('is-success');
+      panel.classList.remove('show');
+    }, 8000);
+  }
+
+  function fallbackCopy(text) {
+    // Older browsers / restrictive contexts (file://, some embeds).
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return ok;
+    } catch (e) { return false; }
+  }
+
   document.getElementById('commitCopyBtn').addEventListener('click', function() {
     var t = commitState.thing.trim() || 'one specific weakness';
     var text = 'For 30 days, I will spend ' + calcState.focusMin +
       ' of my ' + calcState.totalMin + ' daily minutes on ' + t +
       '. Then I move to the next thing.\n\nFrom The 90% Rule by Jon Bjork';
     if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(text).then(function() {
-        flashButton(document.getElementById('commitCopyBtn'), 'Copied!');
-      }).catch(function() {
-        flashButton(document.getElementById('commitCopyBtn'), 'Press Ctrl+C');
+      navigator.clipboard.writeText(text).then(showCopiedPanel).catch(function() {
+        if (fallbackCopy(text)) showCopiedPanel();
+        else alert('Could not copy automatically. Long-press or right-click to select the text yourself.');
       });
+    } else if (fallbackCopy(text)) {
+      showCopiedPanel();
     } else {
-      flashButton(document.getElementById('commitCopyBtn'), 'Copy not supported');
+      alert('Your browser blocked the copy. Long-press to select the text manually.');
     }
   });
 
