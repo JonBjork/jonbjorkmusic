@@ -333,9 +333,10 @@
     margin-bottom: 48px;
   }
   .science-intro .eyebrow {
-    font-family: 'Oswald', sans-serif; font-weight: 400;
-    font-size: 0.85rem; letter-spacing: 0.28em; text-transform: uppercase;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 1.7rem; letter-spacing: 0.22em; text-transform: uppercase;
     color: var(--purple-lt); margin-bottom: 16px;
+    line-height: 1.1;
   }
   .science-grid {
     display: grid;
@@ -434,7 +435,7 @@
   .timeline-labels {
     display: flex; justify-content: space-between;
     margin-top: 2px;
-    font-family: 'Oswald', sans-serif; font-size: 0.7rem;
+    font-family: 'Oswald', sans-serif; font-size: 0.78rem;
     letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--dim);
   }
@@ -497,7 +498,7 @@
   }
   .commit-preview-eyebrow {
     font-family: 'Oswald', sans-serif; font-weight: 400;
-    font-size: 0.7rem; letter-spacing: 0.28em; text-transform: uppercase;
+    font-size: 0.78rem; letter-spacing: 0.28em; text-transform: uppercase;
     color: var(--purple-lt); margin-bottom: 12px;
   }
   .commit-preview-text {
@@ -753,9 +754,9 @@
   }
   .metro-pill .pill-sub {
     display: block;
-    font-family: 'Lato', sans-serif; font-weight: 300;
-    font-size: 0.65rem; letter-spacing: 0.08em;
-    color: var(--muted); margin-top: 3px;
+    font-family: 'Lato', sans-serif; font-weight: 400;
+    font-size: 0.78rem; letter-spacing: 0.04em;
+    color: var(--off); margin-top: 4px;
     text-transform: none;
   }
   .metro-pill.active .pill-sub { color: rgba(255, 255, 255, 0.75); }
@@ -1398,10 +1399,10 @@
     color: #ff8a8a;
   }
   .settings-btn-foot {
-    font-size: 0.72rem; color: var(--dim);
+    font-size: 0.8rem; color: var(--muted);
     text-align: center;
     margin-top: 14px;
-    line-height: 1.45;
+    line-height: 1.5;
   }
   .hidden-file-input { display: none; }
 
@@ -1420,9 +1421,10 @@
     transform: translateY(-4px);
   }
   .science-card-v2 .study-tag {
-    font-family: 'Oswald', sans-serif; font-weight: 400;
-    font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase;
-    color: var(--purple-lt); margin-bottom: 14px;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 1.45rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 20px;
+    line-height: 1.1;
   }
   .science-card-v2 .headline-num {
     font-family: 'Oswald', sans-serif; font-weight: 700;
@@ -1466,9 +1468,9 @@
     text-align: center;
   }
   .bm-col-label {
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 12px;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.98rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--white); margin-bottom: 14px;
   }
   .bm-stack {
     display: grid;
@@ -1503,15 +1505,15 @@
     50% { box-shadow: 0 0 18px rgba(157, 95, 245, 0.85); transform: scale(1.08); }
   }
   .bm-col-meta {
-    font-family: 'Oswald', sans-serif; font-weight: 600;
-    font-size: 0.78rem; letter-spacing: 0.06em;
-    color: var(--off);
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.05rem; letter-spacing: 0.04em;
+    color: var(--white);
   }
   .bm-col-meta .small {
     display: block;
-    font-family: 'Lato', sans-serif; font-weight: 300;
-    font-size: 0.72rem; color: var(--muted);
-    letter-spacing: 0.02em; margin-top: 4px;
+    font-family: 'Lato', sans-serif; font-weight: 400;
+    font-size: 0.9rem; color: var(--off);
+    letter-spacing: 0.02em; margin-top: 5px;
   }
   .bm-arrow {
     text-align: center;
@@ -1522,9 +1524,10 @@
     opacity: 0.7;
   }
 
-  /* Long timeline */
+  /* Long timeline — top margin gives the end-flag clear space above the bar
+     so it never overlaps the summary text */
   .longtl {
-    margin: 22px 0 6px;
+    margin: 70px 0 6px;
     position: relative;
     padding: 6px 0;
   }
@@ -1564,9 +1567,9 @@
     position: absolute;
     top: 4px;
     transform: translateX(-50%);
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--dim);
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted);
     white-space: nowrap;
   }
   .longtl-end-flag {
@@ -1578,7 +1581,7 @@
     padding: 4px 10px;
     border-radius: 4px;
     font-family: 'Oswald', sans-serif; font-weight: 700;
-    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase;
     box-shadow: 0 0 14px rgba(124, 58, 237, 0.5);
     animation: flagBob 2s ease-in-out infinite;
     white-space: nowrap;
@@ -1911,8 +1914,8 @@
 
         <div class="science-card-v2">
           <div class="study-tag">Rhythm + Style</div>
-          <div class="headline-num">8<span class="unit">years off, style intact</span></div>
-          <div class="summary">Your fingerprint survives the gap</div>
+          <div class="headline-num">8<span class="unit">years off</span></div>
+          <div class="summary">Style intact. Your fingerprint survives the gap.</div>
           <div class="longtl" aria-hidden="true">
             <div class="longtl-bar"><div class="longtl-fill"></div></div>
             <div class="longtl-markers">
