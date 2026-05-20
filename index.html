@@ -311,7 +311,11 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
       var h = nav.offsetHeight;
       document.body.style.paddingTop = h + 'px';
       if (hero) {
-        hero.style.height = 'calc(100vh - ' + h + 'px)';
+        // Use min-height so the hero grows when content (e.g. large H1 on
+        // narrow phones) is taller than the viewport, instead of clipping
+        // the top via overflow:hidden.
+        hero.style.minHeight = 'calc(100vh - ' + h + 'px)';
+        hero.style.height = '';
       }
     }
     if (document.readyState === 'loading') {

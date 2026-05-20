@@ -272,8 +272,7 @@ nav {
 /* === 4. HERO ============================================================== */
 .hero {
   position: relative;
-  height: calc(100vh - var(--nav-h));
-  min-height: 600px;
+  min-height: max(600px, calc(100vh - var(--nav-h)));
   display: flex;
   align-items: flex-end;
   overflow: hidden;
