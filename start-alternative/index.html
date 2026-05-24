@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Practice Room Pro | Built for guitarists who finish | Jon Bjork</title>
+<meta name="description" content="A smaller membership for guitarists who are tired of starting over. 17 courses with daily routines built in, 8 Practice Labs that track every minute, and direct clip feedback from me any day of the week." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    color-scheme: dark;
+    --bg:          #0d0d0d;
+    --bg-2:        #131313;
+    --card:        #181818;
+    --card-2:      #1f1f1f;
+    --line:        #2a2a2a;
+    --line-2:      #3a3a3a;
+    --navy:        #1a1040;
+    --navy-deep:   #0f0820;
+    --purple:      #7c3aed;
+    --purple-lt:   #9d5ff5;
+    --purple-pop:  #c084fc;
+    --accent-border: #4a3a9a;
+    --ink:         #ffffff;
+    --ink-2:       #e8e8e8;
+    --muted:       #aaaaaa;
+    --muted-lt:    #777777;
+    --white:       #ffffff;
+    --off:         #f4f4f4;
+    --shadow-card: 0 12px 36px rgba(0, 0, 0, 0.4);
+    --shadow-lift: 0 18px 48px rgba(124, 58, 237, 0.18);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  body {
+    margin: 0;
+    font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--ink-2);
+    background: var(--bg);
+    font-size: 17px;
+    line-height: 1.65;
+    font-weight: 400;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+
+  /* ---------- Typography ---------- */
+  h1, h2, h3, h4 {
+    font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    line-height: 1.1;
+    margin: 0 0 16px;
+    color: var(--white);
+  }
+  h1 { font-size: clamp(2.2rem, 5.6vw, 3.6rem); letter-spacing: -0.01em; }
+  h2 { font-size: clamp(1.7rem, 3.6vw, 2.4rem); }
+  h3 { font-size: clamp(1.15rem, 2vw, 1.35rem); letter-spacing: 0.005em; }
+  p  { margin: 0 0 14px; }
+
+  .eyebrow {
+    font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    color: var(--purple-lt);
+  }
+  .eyebrow-light { color: var(--purple-pop); }
+
+  /* ---------- Layout ---------- */
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .narrow { max-width: 820px; margin: 0 auto; }
+  section { padding: 88px 0; }
+  section.tight { padding: 64px 0; }
+
+  /* ---------- Buttons / CTAs ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 52px; padding: 14px 26px;
+    font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700; font-size: 0.92rem; letter-spacing: 0.18em;
+    text-transform: uppercase; text-decoration: none;
+    border-radius: 8px; border: 1px solid transparent;
+    transition: transform 0.15s ease, background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+  }
+  .btn-primary { background: var(--purple); color: var(--white); }
+  .btn-primary:hover { background: var(--purple-lt); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.32); }
+  .btn-ghost:hover { border-color: var(--white); }
+  .btn-ghost-dark { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.25); }
+  .btn-ghost-dark:hover { border-color: var(--white); }
+  .btn:focus-visible { outline: 2px solid var(--purple-pop); outline-offset: 3px; }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; align-items: center; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background: var(--navy);
+    color: var(--white);
+    text-align: center;
+    padding: 110px 0 96px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.045) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.55;
+    mask-image: radial-gradient(ellipse 1100px 700px at 50% 30%, black 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse 1100px 700px at 50% 30%, black 30%, transparent 80%);
+  }
+  .hero::after {
+    content: ''; position: absolute; top: -180px; left: 50%;
+    transform: translateX(-50%);
+    width: 900px; height: 600px;
+    background: radial-gradient(ellipse, rgba(124,58,237,0.28) 0%, rgba(124,58,237,0.08) 45%, transparent 75%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 2; max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  .hero .eyebrow { color: var(--purple-pop); margin-bottom: 28px; display: inline-block; }
+  .hero h1 {
+    color: var(--white);
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    margin-bottom: 22px;
+    text-wrap: balance;
+  }
+  .hero h1 .offer {
+    background: linear-gradient(90deg, var(--purple-lt) 0%, var(--purple-pop) 55%, #f0c5ff 100%);
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+            color: transparent;
+    display: inline-block;
+  }
+  .hero-summary {
+    font-family: 'Lato', sans-serif; font-weight: 400;
+    font-size: clamp(1.02rem, 1.6vw, 1.18rem);
+    color: rgba(255,255,255,0.82);
+    max-width: 720px; margin: 0 auto 32px;
+    line-height: 1.6;
+  }
+  .hero-ctas { margin-bottom: 14px; }
+  .price-hint {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.55); margin-top: 8px;
+  }
+
+  /* ---------- ANIMATED MOCKUP ---------- */
+  .mockup-wrap {
+    margin: 64px auto 0;
+    max-width: 760px;
+    position: relative; z-index: 2;
+    padding: 0 24px;
+  }
+  .mock-frame {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.06);
+    overflow: hidden;
+    position: relative;
+  }
+  .mock-bar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 16px;
+    background: linear-gradient(180deg, #f4f1ea, #e8e3d3);
+    border-bottom: 1px solid #d8d1bd;
+  }
+  .mock-dot {
+    width: 11px; height: 11px; border-radius: 50%;
+    background: #d3cdb9; border: 1px solid #b8b09a;
+  }
+  .mock-dot.r { background: #f08a78; border-color: #d96d59; }
+  .mock-dot.y { background: #f4c25e; border-color: #d9a637; }
+  .mock-dot.g { background: #86d18c; border-color: #5fae67; }
+  .mock-url {
+    flex: 1; margin-left: 12px;
+    background: #fff; border-radius: 6px;
+    padding: 5px 12px;
+    font-family: 'Lato', sans-serif; font-size: 11px; color: #7a7464;
+    border: 1px solid #d8d1bd;
+    text-align: center;
+  }
+  .mock-stage {
+    position: relative;
+    height: 360px;
+    background:
+      linear-gradient(180deg, #0f0820 0%, #1a1040 100%);
+    overflow: hidden;
+  }
+  .mock-view {
+    position: absolute; inset: 0;
+    padding: 22px 26px;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    display: flex; flex-direction: column;
+  }
+  .mock-view.active { opacity: 1; }
+
+  /* Shared mock UI bits */
+  .mv-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 18px;
+    color: rgba(255,255,255,0.85);
+  }
+  .mv-title {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.95rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--purple-pop);
+  }
+  .mv-sub {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .bar { height: 8px; border-radius: 4px; background: rgba(255,255,255,0.08); }
+  .bar.fill { background: linear-gradient(90deg, var(--purple) 0%, var(--purple-pop) 100%); }
+  .bar.med { height: 6px; background: rgba(255,255,255,0.12); }
+  .bar.thin { height: 4px; background: rgba(255,255,255,0.08); }
+
+  /* Virtuoso Lab — BPM + reps grid */
+  .v-bpm {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 4.6rem; line-height: 1; color: #fff;
+    text-align: center; margin-top: 14px; letter-spacing: -0.02em;
+  }
+  .v-bpm-lbl {
+    text-align: center; color: rgba(255,255,255,0.55);
+    font-family: 'Oswald', sans-serif; font-size: 0.62rem;
+    letter-spacing: 0.28em; text-transform: uppercase; margin-bottom: 18px;
+  }
+  .v-reps { display: grid; grid-template-columns: repeat(15, 1fr); gap: 6px; padding: 0 8px 8px; }
+  .v-rep {
+    aspect-ratio: 1; border-radius: 3px;
+    background: rgba(255,255,255,0.08);
+    transition: background 0.3s;
+  }
+  .v-rep.on { background: var(--purple-pop); box-shadow: 0 0 8px rgba(192,132,252,0.6); }
+
+  /* Technique Lab — rep counter */
+  .t-counter { text-align: center; margin-top: 22px; }
+  .t-num {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 3.4rem; color: var(--purple-pop); line-height: 1;
+  }
+  .t-of {
+    font-family: 'Oswald', sans-serif; color: rgba(255,255,255,0.5);
+    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+    margin-top: 8px;
+  }
+  .t-bar-wrap { margin: 28px 20px 18px; }
+  .t-bar-track { height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden; }
+  .t-bar-fill { height: 100%; width: 42%; background: linear-gradient(90deg, var(--purple), var(--purple-pop)); border-radius: 5px; }
+  .t-row { display: flex; justify-content: space-between; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-top: 10px; }
+
+  /* Systematic Chops Lab — string transition diagram */
+  .sc-strings { margin-top: 10px; padding: 14px 18px; }
+  .sc-row {
+    display: grid; grid-template-columns: 36px 1fr; gap: 14px;
+    align-items: center; margin-bottom: 12px;
+  }
+  .sc-num { font-family: 'Oswald', sans-serif; color: rgba(255,255,255,0.4); font-size: 0.8rem; letter-spacing: 0.16em; }
+  .sc-line { height: 2px; background: rgba(255,255,255,0.15); position: relative; }
+  .sc-line .pluck { position: absolute; top: -5px; width: 12px; height: 12px; background: var(--purple-pop); border-radius: 50%; box-shadow: 0 0 8px rgba(192,132,252,0.7); }
+  .sc-callout {
+    margin-top: 14px; padding: 10px 14px; text-align: center;
+    border: 1px solid rgba(192,132,252,0.4); border-radius: 8px;
+    font-family: 'Oswald', sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--purple-pop);
+  }
+
+  /* Rhythm Lab — subdivision pulse */
+  .r-staff { margin: 18px 18px 8px; padding: 22px 16px 12px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+  .r-beats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-bottom: 14px; }
+  .r-beat { border-left: 1px solid rgba(255,255,255,0.15); padding: 4px 0 0 6px; min-height: 60px; position: relative; }
+  .r-beat:first-child { border-left: none; }
+  .r-subs { display: flex; gap: 4px; margin-top: 8px; }
+  .r-sub { width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+  .r-sub.on { background: var(--purple-pop); }
+  .r-beat-lbl { font-family: 'Oswald', sans-serif; font-size: 0.65rem; color: rgba(255,255,255,0.45); letter-spacing: 0.14em; }
+  .r-meter { text-align: center; font-family: 'Oswald', sans-serif; font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--purple-pop); margin-top: 8px; }
+
+  /* Ear Lab — note + fretboard */
+  .e-prompt { text-align: center; margin: 14px 0 18px; }
+  .e-note {
+    display: inline-block; padding: 12px 28px;
+    background: rgba(124,58,237,0.18); border: 1px solid rgba(192,132,252,0.5);
+    border-radius: 999px; color: var(--purple-pop);
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.4rem;
+    letter-spacing: 0.08em;
+  }
+  .e-fret { margin: 0 18px; padding: 18px 8px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+  .e-string { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0; height: 18px; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative; }
+  .e-string:last-child { border-bottom: none; }
+  .e-cell { border-right: 1px solid rgba(255,255,255,0.06); height: 100%; position: relative; }
+  .e-cell:last-child { border-right: none; }
+  .e-dot { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 12px; height: 12px; border-radius: 50%; background: var(--purple-pop); box-shadow: 0 0 8px rgba(192,132,252,0.7); }
+
+  /* Harmony Lab — chord progression */
+  .h-chords { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 26px 18px 14px; }
+  .h-chord {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px; padding: 18px 8px; text-align: center;
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.3rem;
+    color: rgba(255,255,255,0.85);
+    transition: all 0.3s;
+  }
+  .h-chord.active { background: rgba(124,58,237,0.25); border-color: var(--purple-pop); color: var(--purple-pop); }
+  .h-lbl { text-align: center; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 14px; }
+
+  /* Fretboard Lab — scale shapes */
+  .f-neck { margin: 18px 18px 10px; padding: 14px 10px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+  .f-row { display: grid; grid-template-columns: repeat(12, 1fr); gap: 0; height: 16px; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .f-row:last-child { border-bottom: none; }
+  .f-cell { border-right: 1px solid rgba(255,255,255,0.06); height: 100%; position: relative; }
+  .f-note { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 8px; height: 8px; border-radius: 50%; background: var(--purple-pop); }
+  .f-note.root { background: #fff; box-shadow: 0 0 6px rgba(255,255,255,0.6); }
+
+  /* Target Tone Lab — chord tone target */
+  .tt-chord {
+    display: inline-block; padding: 6px 20px;
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1.1rem;
+    color: #fff;
+  }
+  .tt-flow { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 18px; margin-bottom: 18px; }
+  .tt-arrow { color: rgba(255,255,255,0.4); font-size: 1.4rem; }
+  .tt-target {
+    display: inline-block; padding: 6px 20px;
+    background: rgba(124,58,237,0.25); border: 1px solid var(--purple-pop);
+    border-radius: 6px;
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.1rem;
+    color: var(--purple-pop);
+  }
+  .tt-fret { margin: 0 18px; padding: 14px 8px; background: rgba(255,255,255,0.04); border-radius: 8px; }
+
+  /* View label below mockup */
+  .mock-label {
+    text-align: center; margin-top: 22px;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.75rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+  .mock-label .pulse {
+    display: inline-block; width: 7px; height: 7px;
+    border-radius: 50%; background: var(--purple-pop);
+    margin-right: 10px; vertical-align: middle;
+    box-shadow: 0 0 0 0 rgba(192,132,252,0.7);
+    animation: pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(192,132,252,0.7); }
+    70%  { box-shadow: 0 0 0 10px rgba(192,132,252,0); }
+    100% { box-shadow: 0 0 0 0 rgba(192,132,252,0); }
+  }
+
+  /* ---------- Section backgrounds (all dark, alternating) ---------- */
+  .section-warm   { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .section-warm-2 { background: var(--bg); }
+  .section-white  { background: var(--bg-2); }
+  .section-dark   { background: var(--navy-deep); color: var(--white); }
+  .section-dark h2, .section-dark h3 { color: var(--white); }
+
+  .pain-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+    margin-top: 40px;
+  }
+  .pain-item {
+    background: var(--card-2);
+    border-radius: 12px;
+    padding: 26px 28px;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
+    display: flex; gap: 18px; align-items: flex-start;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .pain-item:hover { border-color: var(--accent-border); transform: translateY(-2px); }
+  .pain-num {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.2rem; color: var(--purple-lt);
+    width: 32px; flex-shrink: 0;
+  }
+  .pain-text { font-size: 1.02rem; line-height: 1.5; color: var(--ink-2); margin: 0; font-weight: 300; }
+
+  /* ---------- Benefits (after) ---------- */
+  .benefit-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+    margin-top: 40px;
+  }
+  .benefit-item {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 28px 30px;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--purple);
+    display: flex; flex-direction: column; gap: 8px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .benefit-item:hover { border-color: var(--accent-border); border-left-color: var(--purple-lt); transform: translateY(-2px); }
+  .benefit-eyebrow {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--purple-lt);
+  }
+  .benefit-text { font-size: 1.04rem; line-height: 1.55; color: var(--white); margin: 0; font-weight: 400; }
+
+  /* ---------- Solution Introduction ---------- */
+  .introducing {
+    text-align: center;
+    padding: 84px 0 70px;
+  }
+  .introducing h2 {
+    font-size: clamp(1.9rem, 4vw, 2.7rem);
+    margin-bottom: 18px;
+    color: var(--white);
+  }
+  .introducing h2 .offer {
+    background: linear-gradient(90deg, var(--purple-lt) 0%, var(--purple-pop) 55%, #f0c5ff 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .introducing p {
+    max-width: 640px; margin: 0 auto;
+    font-size: 1.1rem; color: var(--muted); line-height: 1.6;
+  }
+
+  /* ---------- Origin Story ---------- */
+  .story {
+    display: grid; grid-template-columns: 280px 1fr; gap: 56px;
+    align-items: start;
+  }
+  .story-aside {
+    background: var(--navy);
+    color: var(--white);
+    border-radius: 14px;
+    padding: 36px 28px;
+    border: 1px solid var(--accent-border);
+    box-shadow: var(--shadow-lift);
+  }
+  .story-aside .eyebrow { color: var(--purple-pop); margin-bottom: 18px; display: block; }
+  .story-aside h3 { color: var(--white); font-size: 1.6rem; margin-bottom: 12px; }
+  .story-tag { font-size: 0.95rem; color: rgba(255,255,255,0.7); line-height: 1.5; margin: 0; }
+  .story-stats { margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.12); display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .stat-num { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.7rem; color: var(--purple-pop); line-height: 1; }
+  .stat-lbl { font-family: 'Oswald', sans-serif; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-top: 6px; }
+
+  .story-body h2 { color: var(--white); }
+  .story-body p {
+    font-size: 1.05rem; line-height: 1.65; color: var(--muted); margin-bottom: 16px; font-weight: 300;
+  }
+  .story-body p strong { color: var(--white); font-weight: 700; }
+  .story-body p:first-child::first-letter { color: var(--purple-lt); font-weight: 700; }
+
+  /* ---------- What's Included (Offer Stack) ---------- */
+  .stack {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 22px;
+    margin-top: 48px;
+  }
+  .stack-item {
+    background: var(--card-2);
+    border-radius: 14px;
+    padding: 32px 30px;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    display: flex; flex-direction: column; gap: 10px;
+    position: relative; overflow: hidden;
+  }
+  .stack-item:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); border-color: var(--accent-border); }
+  .stack-item::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--purple), var(--purple-pop));
+  }
+  .stack-num {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--purple-lt);
+  }
+  .stack-title { font-size: 1.2rem; margin: 4px 0 8px; color: var(--white); }
+  .stack-desc { font-size: 0.98rem; line-height: 1.55; color: var(--muted); margin: 0; font-weight: 300; }
+
+  /* ---------- Library (17 courses with box art) ---------- */
+  .lib-group { margin-top: 56px; }
+  .lib-group:first-of-type { margin-top: 40px; }
+  .lib-group-header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  .lib-group-tag {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--purple-pop);
+  }
+  .lib-group-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.5rem; color: var(--white);
+    margin: 6px 0 0;
+    letter-spacing: 0.01em;
+  }
+  .lib-grid {
+    display: grid;
+    gap: 16px;
+  }
+  .lib-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .lib-grid-6 { grid-template-columns: repeat(6, 1fr); }
+  .lib-grid-8 { grid-template-columns: repeat(4, 1fr); }
+  .lib-card {
+    background: var(--card-2);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    display: flex; flex-direction: column;
+  }
+  .lib-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-border);
+    box-shadow: 0 14px 32px rgba(124,58,237,0.15);
+  }
+  .lib-card-img {
+    width: 100%; aspect-ratio: 1 / 1;
+    object-fit: cover; display: block;
+    background: var(--card);
+  }
+  .lib-card-body {
+    padding: 14px 14px 16px;
+  }
+  .lib-card-title {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.92rem; color: var(--white);
+    line-height: 1.25; margin-bottom: 4px;
+  }
+  .lib-card-sub {
+    font-family: 'Lato', sans-serif; font-weight: 400;
+    font-size: 0.78rem; color: var(--muted);
+    line-height: 1.4;
+  }
+  @media (max-width: 1000px) {
+    .lib-grid-6 { grid-template-columns: repeat(3, 1fr); }
+    .lib-grid-8 { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .lib-grid-3, .lib-grid-6, .lib-grid-8 { grid-template-columns: repeat(2, 1fr); }
+    .lib-card-body { padding: 12px 12px 14px; }
+    .lib-card-title { font-size: 0.85rem; }
+    .lib-card-sub { font-size: 0.72rem; }
+  }
+
+  /* ---------- Pricing ---------- */
+  .price-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+    margin-top: 48px; max-width: 820px; margin-left: auto; margin-right: auto;
+  }
+  .price-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 14px; padding: 40px 36px; position: relative;
+    transition: transform 0.2s, border-color 0.2s;
+    color: var(--ink-2);
+  }
+  .price-card:hover { border-color: var(--line-2); }
+  .price-card.featured {
+    background: var(--navy); color: var(--white);
+    border-color: var(--purple);
+    box-shadow: var(--shadow-lift);
+  }
+  .price-card.featured h3 { color: var(--white); }
+  .price-badge {
+    position: absolute; top: 0; left: 36px; transform: translateY(-50%);
+    background: var(--purple); color: var(--white);
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: 999px;
+  }
+  .price-period {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 14px;
+  }
+  .price-card.featured .price-period { color: var(--purple-pop); }
+  .price-amount {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 3.6rem; line-height: 1; margin-bottom: 8px;
+    color: var(--white);
+  }
+  .price-amount sup { font-size: 0.4em; vertical-align: super; color: var(--muted); font-weight: 400; margin-right: 2px; }
+  .price-card.featured .price-amount sup { color: rgba(255,255,255,0.55); }
+  .price-note { font-size: 0.95rem; color: var(--muted); margin-bottom: 20px; }
+  .price-card.featured .price-note { color: rgba(255,255,255,0.75); }
+  .price-savings { color: var(--purple-pop); font-weight: 700; }
+  .price-trial {
+    display: inline-block; font-family: 'Oswald', sans-serif;
+    font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--line); border-radius: 999px;
+    padding: 6px 14px; margin-bottom: 26px;
+  }
+  .price-card.featured .price-trial { color: var(--purple-pop); border-color: rgba(192,132,252,0.4); }
+  .price-btn {
+    display: block; width: 100%; text-align: center;
+    min-height: 52px; padding: 16px;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 0.9rem; letter-spacing: 0.16em; text-transform: uppercase;
+    border-radius: 10px; text-decoration: none;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+    border: 1px solid transparent;
+  }
+  .price-btn-ghost { background: transparent; color: var(--muted); border-color: var(--line); }
+  .price-btn-ghost:hover { border-color: var(--muted); color: var(--white); }
+  .price-btn-purple { background: var(--purple); color: var(--white); }
+  .price-btn-purple:hover { background: var(--purple-lt); }
+  .price-btn:focus-visible { outline: 2px solid var(--purple-pop); outline-offset: 3px; }
+
+  /* ---------- FAQ ---------- */
+  .faq-list { max-width: 820px; margin: 40px auto 0; }
+  .faq-item {
+    border-bottom: 1px solid var(--line);
+  }
+  .faq-q {
+    width: 100%; text-align: left;
+    background: transparent; border: none; cursor: pointer;
+    padding: 22px 44px 22px 0;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 1.08rem; color: var(--white);
+    position: relative;
+    transition: color 0.15s;
+  }
+  .faq-q:hover { color: var(--purple-lt); }
+  .faq-q:focus-visible { outline: 2px solid var(--purple-pop); outline-offset: 4px; border-radius: 4px; }
+  .faq-q::after {
+    content: '+';
+    position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 1.6rem;
+    color: var(--purple-lt); line-height: 1;
+    transition: transform 0.2s;
+  }
+  .faq-q[aria-expanded="true"]::after { transform: translateY(-50%) rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+  .faq-q[aria-expanded="true"] + .faq-a {
+    max-height: 480px;
+    padding: 0 24px 26px 0;
+  }
+  .faq-a p { font-size: 1rem; line-height: 1.65; color: var(--muted); margin: 0; font-weight: 300; }
+
+  /* ---------- Final CTA Band ---------- */
+  .final-cta {
+    background: var(--navy);
+    color: var(--white);
+    text-align: center;
+    padding: 96px 24px;
+    position: relative; overflow: hidden;
+  }
+  .final-cta::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity: 0.5;
+    mask-image: radial-gradient(ellipse 800px 500px at 50% 50%, black 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse 800px 500px at 50% 50%, black 30%, transparent 80%);
+  }
+  .final-cta-inner { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; }
+  .final-cta h2 {
+    color: var(--white);
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 18px;
+  }
+  .final-cta h2 .offer {
+    background: linear-gradient(90deg, var(--purple-lt) 0%, var(--purple-pop) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .final-cta p {
+    color: rgba(255,255,255,0.75);
+    font-size: 1.05rem;
+    margin-bottom: 32px;
+  }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: #0a0617; color: rgba(255,255,255,0.5);
+    padding: 40px 24px; text-align: center;
+    font-size: 0.88rem;
+  }
+  footer .footer-row { margin-bottom: 12px; display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+  footer a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.15s; }
+  footer a:hover { color: var(--purple-pop); }
+  footer .copy { font-size: 0.78rem; color: rgba(255,255,255,0.35); margin-top: 16px; }
+
+  /* ---------- Reveal animation ---------- */
+  .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 880px) {
+    .pain-grid, .benefit-grid, .stack, .price-grid, .story {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .story { gap: 36px; }
+    section { padding: 64px 0; }
+    .hero { padding: 88px 0 72px; }
+    .mockup-wrap { margin-top: 48px; }
+    .mock-stage { height: 320px; }
+    .v-reps { grid-template-columns: repeat(10, 1fr); }
+    .price-card { padding: 32px 26px; }
+  }
+  @media (max-width: 520px) {
+    body { font-size: 16px; }
+    .wrap { padding: 0 18px; }
+    .hero { padding: 72px 0 64px; }
+    .hero-inner { padding: 0 18px; }
+    .mockup-wrap { padding: 0 18px; }
+    .mock-stage { height: 300px; }
+    .v-bpm { font-size: 3.6rem; }
+    .t-num { font-size: 2.8rem; }
+    .pain-item, .benefit-item, .stack-item { padding: 22px 22px; }
+    .story-aside { padding: 28px 22px; }
+    .price-card { padding: 28px 24px; }
+    .cta-row { flex-direction: column; align-items: stretch; }
+    .cta-row .btn { width: 100%; }
+  }
+
+  /* ---------- Reduced motion ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001s !important; animation-iteration-count: 1 !important; transition-duration: 0.001s !important; }
+    .mock-view { opacity: 1; }
+    .mock-view:not(.active) { display: none; }
+    .pulse { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<main>
+
+  <!-- ============================================================
+       HERO  (sections 1 → 4 + animated mockup)
+       ============================================================ -->
+  <header class="hero">
+    <div class="hero-inner">
+      <!-- 1. AUDIENCE CALLOUT -->
+      <span class="eyebrow">For Guitarists Tired Of Starting Over</span>
+
+      <!-- 2. BOLD PROMISE (offer name gradient) -->
+      <h1>Meet <span class="offer">Practice Room Pro</span>. Built for guitarists who finish.</h1>
+
+      <!-- 3. SUMMARY LINE -->
+      <p class="hero-summary">
+        Get instant access to 17 finishable courses with daily routines built in, 8 focused Practice Labs that track every minute, day-to-day clip feedback directly from me, a weekly live with me on camera, and every future 8-week intensive included.
+      </p>
+
+      <!-- 4. CTA -->
+      <div class="cta-row hero-ctas">
+        <a class="btn btn-primary" href="#pricing">Start Your 7-Day Free Trial</a>
+        <a class="btn btn-ghost" href="#whats-included">See Everything Inside</a>
+      </div>
+      <div class="price-hint">From $99/month or $999/year &nbsp;·&nbsp; Cancel anytime</div>
+    </div>
+
+    <!-- ABOVE-THE-FOLD ANIMATED MOCKUP — Practice Lab UI cycling through 8 Labs -->
+    <div class="mockup-wrap" aria-hidden="true">
+      <div class="mock-frame">
+        <div class="mock-bar">
+          <span class="mock-dot r"></span>
+          <span class="mock-dot y"></span>
+          <span class="mock-dot g"></span>
+          <span class="mock-url">practice-lab.app  /  session</span>
+        </div>
+
+        <div class="mock-stage" id="mock-stage">
+
+          <!-- View 1: Virtuoso Lab -->
+          <div class="mock-view active" data-view="Virtuoso Lab · BPM 138">
+            <div class="mv-head">
+              <span class="mv-title">Virtuoso Lab</span>
+              <span class="mv-sub">Set 3 of 5</span>
+            </div>
+            <div class="v-bpm-lbl">Tempo</div>
+            <div class="v-bpm">138</div>
+            <div class="v-reps">
+              <span class="v-rep on"></span><span class="v-rep on"></span><span class="v-rep on"></span>
+              <span class="v-rep on"></span><span class="v-rep on"></span><span class="v-rep on"></span>
+              <span class="v-rep on"></span><span class="v-rep on"></span><span class="v-rep on"></span>
+              <span class="v-rep on"></span><span class="v-rep on"></span>
+              <span class="v-rep"></span><span class="v-rep"></span><span class="v-rep"></span><span class="v-rep"></span>
+            </div>
+            <div style="text-align:center; margin-top:18px; font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--purple-pop);">
+              11 / 15 Clean Reps · BPM +1 At 15
+            </div>
+          </div>
+
+          <!-- View 2: Technique Lab -->
+          <div class="mock-view" data-view="Technique Lab · 4,287 of 10,000 reps">
+            <div class="mv-head">
+              <span class="mv-title">Technique Lab</span>
+              <span class="mv-sub">Goal: Alt-Pick Asc</span>
+            </div>
+            <div class="t-counter">
+              <div class="t-num">4,287</div>
+              <div class="t-of">of 10,000 lifetime reps</div>
+            </div>
+            <div class="t-bar-wrap">
+              <div class="t-bar-track"><div class="t-bar-fill" style="width:42.9%"></div></div>
+              <div class="t-row"><span>Today: 124</span><span>Streak: 38 Days</span></div>
+            </div>
+            <div style="margin: 18px 22px 0; padding: 12px 14px; background: rgba(255,255,255,0.04); border-radius: 8px; font-family:'Lato',sans-serif; font-size: 0.85rem; color: rgba(255,255,255,0.7); text-align: center;">
+              Chip away. Every rep counts.
+            </div>
+          </div>
+
+          <!-- View 3: Systematic Chops Lab -->
+          <div class="mock-view" data-view="Systematic Chops Lab · 2-string combo 4 → 3">
+            <div class="mv-head">
+              <span class="mv-title">Systematic Chops</span>
+              <span class="mv-sub">Combo 12 of 30</span>
+            </div>
+            <div class="sc-strings">
+              <div class="sc-row"><span class="sc-num">4</span><div class="sc-line"><span class="pluck" style="left:18%"></span><span class="pluck" style="left:38%"></span></div></div>
+              <div class="sc-row"><span class="sc-num">3</span><div class="sc-line"><span class="pluck" style="left:58%"></span><span class="pluck" style="left:78%"></span></div></div>
+              <div class="sc-row" style="opacity:0.4"><span class="sc-num">2</span><div class="sc-line"></div></div>
+              <div class="sc-row" style="opacity:0.4"><span class="sc-num">1</span><div class="sc-line"></div></div>
+            </div>
+            <div class="sc-callout">String 4 → String 3 · Down-Up Pattern</div>
+          </div>
+
+          <!-- View 4: Rhythm Lab -->
+          <div class="mock-view" data-view="Rhythm Lab · Sixteenth-note subdivisions">
+            <div class="mv-head">
+              <span class="mv-title">Rhythm Lab</span>
+              <span class="mv-sub">4/4 · Sixteenths</span>
+            </div>
+            <div class="r-staff">
+              <div class="r-beats">
+                <div class="r-beat">
+                  <div class="r-beat-lbl">1</div>
+                  <div class="r-subs"><span class="r-sub on"></span><span class="r-sub"></span><span class="r-sub"></span><span class="r-sub"></span></div>
+                </div>
+                <div class="r-beat">
+                  <div class="r-beat-lbl">2</div>
+                  <div class="r-subs"><span class="r-sub on"></span><span class="r-sub"></span><span class="r-sub on"></span><span class="r-sub"></span></div>
+                </div>
+                <div class="r-beat">
+                  <div class="r-beat-lbl">3</div>
+                  <div class="r-subs"><span class="r-sub on"></span><span class="r-sub"></span><span class="r-sub"></span><span class="r-sub on"></span></div>
+                </div>
+                <div class="r-beat">
+                  <div class="r-beat-lbl">4</div>
+                  <div class="r-subs"><span class="r-sub on"></span><span class="r-sub"></span><span class="r-sub on"></span><span class="r-sub"></span></div>
+                </div>
+              </div>
+              <div class="r-meter">Click · 96 BPM · Loop 4</div>
+            </div>
+          </div>
+
+          <!-- View 5: Ear Lab -->
+          <div class="mock-view" data-view="Ear Lab · Find the melody on the fretboard">
+            <div class="mv-head">
+              <span class="mv-title">Ear Lab</span>
+              <span class="mv-sub">Key of G · Round 7</span>
+            </div>
+            <div class="e-prompt"><span class="e-note">♪ Heard: B</span></div>
+            <div class="e-fret">
+              <div class="e-string"><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"><span class="e-dot"></span></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span></div>
+              <div class="e-string"><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span></div>
+              <div class="e-string"><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span></div>
+              <div class="e-string"><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span></div>
+              <div class="e-string"><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span></div>
+              <div class="e-string"><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span></div>
+            </div>
+            <div style="text-align:center; margin-top:14px; font-family:'Oswald',sans-serif; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--purple-pop);">Tap The Fret · 14 Of 20 Right</div>
+          </div>
+
+          <!-- View 6: Harmony Lab -->
+          <div class="mock-view" data-view="Harmony Lab · Voice-led triads">
+            <div class="mv-head">
+              <span class="mv-title">Harmony Lab</span>
+              <span class="mv-sub">Progression · I vi IV V</span>
+            </div>
+            <div class="h-chords">
+              <div class="h-chord">C</div>
+              <div class="h-chord">Am</div>
+              <div class="h-chord active">F</div>
+              <div class="h-chord">G</div>
+            </div>
+            <div style="margin: 0 18px; padding: 14px; background: rgba(255,255,255,0.04); border-radius: 8px;">
+              <div style="display:flex; justify-content: space-around; align-items:center; height: 60px;">
+                <span style="width: 14px; height: 14px; border-radius: 50%; background: var(--purple-pop); box-shadow: 0 0 8px rgba(192,132,252,0.6);"></span>
+                <span style="width: 14px; height: 14px; border-radius: 50%; background: var(--purple-pop); box-shadow: 0 0 8px rgba(192,132,252,0.6); margin-top:-10px;"></span>
+                <span style="width: 14px; height: 14px; border-radius: 50%; background: var(--purple-pop); box-shadow: 0 0 8px rgba(192,132,252,0.6); margin-top:6px;"></span>
+              </div>
+            </div>
+            <div class="h-lbl">Top Voice: A → C → C → B</div>
+          </div>
+
+          <!-- View 7: Fretboard Lab -->
+          <div class="mock-view" data-view="Fretboard Lab · A minor pentatonic, full neck">
+            <div class="mv-head">
+              <span class="mv-title">Fretboard Lab</span>
+              <span class="mv-sub">A Minor Pent · 5 Positions</span>
+            </div>
+            <div class="f-neck">
+              <div class="f-row">
+                <span class="f-cell"><span class="f-note root"></span></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span>
+              </div>
+              <div class="f-row">
+                <span class="f-cell"></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"></span><span class="f-cell"><span class="f-note root"></span></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span>
+              </div>
+              <div class="f-row">
+                <span class="f-cell"></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"></span><span class="f-cell"><span class="f-note root"></span></span><span class="f-cell"></span><span class="f-cell"></span>
+              </div>
+              <div class="f-row">
+                <span class="f-cell"></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span>
+              </div>
+              <div class="f-row">
+                <span class="f-cell"></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span>
+              </div>
+              <div class="f-row">
+                <span class="f-cell"><span class="f-note root"></span></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span><span class="f-cell"></span><span class="f-cell"><span class="f-note"></span></span><span class="f-cell"></span>
+              </div>
+            </div>
+            <div style="text-align:center; margin-top:8px; font-family:'Oswald',sans-serif; font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color: rgba(255,255,255,0.5);">White = Root · Purple = Scale Tone</div>
+          </div>
+
+          <!-- View 8: Target Tone Lab -->
+          <div class="mock-view" data-view="Target Tone Lab · Land on the 3rd of each chord">
+            <div class="mv-head">
+              <span class="mv-title">Target Tone</span>
+              <span class="mv-sub">Bar 2 · Dm7</span>
+            </div>
+            <div class="tt-flow">
+              <span class="tt-chord">Am7</span>
+              <span class="tt-arrow">→</span>
+              <span class="tt-target">Dm7 / F</span>
+              <span class="tt-arrow">→</span>
+              <span class="tt-chord">G7</span>
+            </div>
+            <div class="tt-fret">
+              <div class="e-string"><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"><span class="e-dot" style="background: rgba(192,132,252,0.4); box-shadow:none;"></span></span><span class="e-cell"></span><span class="e-cell"><span class="e-dot" style="background: rgba(192,132,252,0.4); box-shadow:none;"></span></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span></div>
+              <div class="e-string"><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"><span class="e-dot"></span></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span></div>
+              <div class="e-string"><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"><span class="e-dot" style="background: rgba(192,132,252,0.4); box-shadow:none;"></span></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span></div>
+              <div class="e-string"><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span><span class="e-cell"></span></div>
+            </div>
+            <div style="text-align:center; margin-top: 12px; font-family:'Oswald',sans-serif; font-size:0.7rem; letter-spacing:0.2em; text-transform:uppercase; color: var(--purple-pop);">Target = F (♭3 of Dm7) · Bar 2 Beat 1</div>
+          </div>
+
+        </div>
+      </div>
+      <div class="mock-label"><span class="pulse"></span><span id="mock-label-text">Virtuoso Lab · BPM 138</span></div>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       5. PAIN POINTS
+       ============================================================ -->
+  <section class="section-warm">
+    <div class="wrap">
+      <div class="narrow" style="text-align:center;">
+        <span class="eyebrow">The Real Stuck Point</span>
+        <h2>If Any Of This Sounds Like You.</h2>
+        <p style="color:var(--muted); font-size:1.05rem; max-width: 580px; margin: 0 auto; font-weight: 300;">
+          You've put in the hours. The problem is what those hours have been made of.
+        </p>
+      </div>
+
+      <div class="pain-grid">
+        <div class="pain-item reveal"><span class="pain-num">01</span><p class="pain-text">You start a new lesson every week and finish almost none of them.</p></div>
+        <div class="pain-item reveal"><span class="pain-num">02</span><p class="pain-text">Your practice time is full, but nothing in your playing actually changes.</p></div>
+        <div class="pain-item reveal"><span class="pain-num">03</span><p class="pain-text">You sit down to play and spend half the session deciding what to play.</p></div>
+        <div class="pain-item reveal"><span class="pain-num">04</span><p class="pain-text">You feel like the next video is the one that's going to fix it. It never is.</p></div>
+        <div class="pain-item reveal"><span class="pain-num">05</span><p class="pain-text">You watch yourself play back and the same problems are still there.</p></div>
+        <div class="pain-item reveal"><span class="pain-num">06</span><p class="pain-text">You wonder if you're past the age where this stuff still sticks.</p></div>
+        <div class="pain-item reveal" style="grid-column: 1 / -1; max-width: 560px; margin: 0 auto;"><span class="pain-num">07</span><p class="pain-text">You're scared you're a guitarist who collects lessons, not one who finishes them.</p></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       6. BENEFITS (THE AFTER)
+       ============================================================ -->
+  <section class="section-white">
+    <div class="wrap">
+      <div class="narrow" style="text-align:center;">
+        <span class="eyebrow">What Changes Inside Pro</span>
+        <h2>Here's What It Looks Like When It Sticks.</h2>
+        <p style="color:var(--muted); font-size:1.05rem; max-width: 580px; margin: 0 auto; font-weight: 300;">
+          One change at a time. Each one flips a real frustration into a quiet, daily win.
+        </p>
+      </div>
+
+      <div class="benefit-grid">
+        <div class="benefit-item reveal">
+          <span class="benefit-eyebrow">Instead Of Starting Over</span>
+          <p class="benefit-text">You pick one thing to work on and stay with it long enough to own it.</p>
+        </div>
+        <div class="benefit-item reveal">
+          <span class="benefit-eyebrow">Instead Of Spinning</span>
+          <p class="benefit-text">Your practice hours start showing up in your hands, not just on a log.</p>
+        </div>
+        <div class="benefit-item reveal">
+          <span class="benefit-eyebrow">Instead Of Stalling</span>
+          <p class="benefit-text">You open the app, hit Start A Session, and the work is already waiting for you.</p>
+        </div>
+        <div class="benefit-item reveal">
+          <span class="benefit-eyebrow">Instead Of Chasing</span>
+          <p class="benefit-text">You stop reaching for the next video because the routine in front of you is working.</p>
+        </div>
+        <div class="benefit-item reveal">
+          <span class="benefit-eyebrow">Instead Of Doubting</span>
+          <p class="benefit-text">You watch yourself play back and you can hear what's different.</p>
+        </div>
+        <div class="benefit-item reveal">
+          <span class="benefit-eyebrow">Instead Of Wondering</span>
+          <p class="benefit-text">Age stops being the question. Time put in is the question, and you're putting it in.</p>
+        </div>
+        <div class="benefit-item reveal" style="grid-column: 1 / -1; max-width: 560px; margin: 0 auto;">
+          <span class="benefit-eyebrow">Instead Of Collecting</span>
+          <p class="benefit-text">You become the player who picks a thing and finishes it. The pile of half-starts goes away.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       7. SOLUTION INTRODUCTION
+       ============================================================ -->
+  <section class="section-warm-2 introducing">
+    <div class="wrap">
+      <span class="eyebrow">The Solution</span>
+      <h2>Introducing <span class="offer">Practice Room Pro</span>.</h2>
+      <p>The smaller membership built around finishing one thing at a time, with the courses, the app, and the direct access you need to actually do it.</p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       8. SOLUTION DISCOVERY STORY
+       ============================================================ -->
+  <section class="section-white">
+    <div class="wrap">
+      <div class="story">
+        <aside class="story-aside">
+          <span class="eyebrow">About Me</span>
+          <h3>Jon Bjork</h3>
+          <p class="story-tag">Guitarist, coach, and composer. Building the practice system I wish I'd had at 18.</p>
+          <div class="story-stats">
+            <div>
+              <div class="stat-num">25+</div>
+              <div class="stat-lbl">Years Teaching</div>
+            </div>
+            <div>
+              <div class="stat-num">GIT</div>
+              <div class="stat-lbl">Graduate, LA</div>
+            </div>
+            <div>
+              <div class="stat-num">700+</div>
+              <div class="stat-lbl">Tracks Composed</div>
+            </div>
+            <div>
+              <div class="stat-num">1992</div>
+              <div class="stat-lbl">Started Playing</div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="story-body">
+          <span class="eyebrow">My Story With This</span>
+          <h2>How Practice Room Pro Came To Be.</h2>
+
+          <p><strong>Hi, I'm Jon, and my journey with serious guitar instruction began when I enrolled at the Guitar Institute of Technology in Los Angeles,</strong> studying with players like Brett Garsed and T.J. Helmerich. That was the first time I'd been around teachers who treated practice like a system, not a vibe.</p>
+
+          <p>Through 25 years of teaching full time, I learned that the players who actually break through aren't the ones who watch the most lessons. They're the ones who pick fewer things and stay with them long enough for the work to land. The skill always lives in time-on-task. Always.</p>
+
+          <p>It was inside lesson after lesson, watching smart and dedicated guitarists hit the same wall, that I realized the problem was almost never talent or hours. It was how the work was put together. Every student had a notebook full of half-started lessons. Almost none of them had a single course they'd finished.</p>
+
+          <p>This sparked a desire to build one place where the routines were already written, the app counted every minute, and the feedback loop was a day away instead of a year away. Where the question wasn't "what should I practice today" but "how did today's session go."</p>
+
+          <p><strong>That is why I created Practice Room Pro,</strong> to give serious players the system I wish I'd had back when I was the one stuck.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       9. WHAT'S INCLUDED (OFFER STACK)
+       ============================================================ -->
+  <section class="section-warm" id="whats-included">
+    <div class="wrap">
+      <div class="narrow" style="text-align:center;">
+        <span class="eyebrow">What's Inside</span>
+        <h2>Everything You Get On Day One.</h2>
+        <p style="color:var(--muted); font-size:1.05rem; max-width: 580px; margin: 0 auto; font-weight: 300;">
+          One membership. Every piece below opens the moment you start your trial.
+        </p>
+      </div>
+
+      <div class="stack">
+        <article class="stack-item reveal">
+          <span class="stack-num">Stack Item 01</span>
+          <h3 class="stack-title">17 Courses With Daily Routines Built In</h3>
+          <p class="stack-desc">Three 8-week intensives, six deep dives, eight full courses. Each one comes with the daily routine already written. You open it, you know what to play. The plan is already there before you pick up the guitar.</p>
+        </article>
+
+        <article class="stack-item reveal">
+          <span class="stack-num">Stack Item 02</span>
+          <h3 class="stack-title">8 Focused Practice Labs (Pro-Only)</h3>
+          <p class="stack-desc">Eight modes that each work on one skill the right way. Virtuoso Lab times your reps. Technique Lab counts them. Ear Lab strengthens the link between what you hear and where your fingers go. The app turns intention into a session every time you open it.</p>
+        </article>
+
+        <article class="stack-item reveal">
+          <span class="stack-num">Stack Item 03</span>
+          <h3 class="stack-title">Direct Clip Feedback From Me, Any Day</h3>
+          <p class="stack-desc">Post a clip or a question in the community whenever you want. I respond with text or a quick video, whichever solves your problem fastest. Real input from me day to day, instead of a forum queue or a once-a-week office hour.</p>
+        </article>
+
+        <article class="stack-item reveal">
+          <span class="stack-num">Stack Item 04</span>
+          <h3 class="stack-title">Weekly Live With Me On Camera</h3>
+          <p class="stack-desc">Every week we go live together. Part hangout, part playing through stuff, part Q&amp;A. You bring what's on your mind that week. If you can't make it live, every session stays in the classroom for the replay.</p>
+        </article>
+
+        <article class="stack-item reveal">
+          <span class="stack-num">Stack Item 05</span>
+          <h3 class="stack-title">Pro-Exclusive 8-Week Intensives</h3>
+          <p class="stack-desc">Eight weeks on one technique at a time. Step by step, day by day. You start one alongside other Pro members and finish it together. Every new intensive is included for as long as you're a member.</p>
+        </article>
+
+        <article class="stack-item reveal">
+          <span class="stack-num">Stack Item 06</span>
+          <h3 class="stack-title">Practice Lab Tracks Your Streak And Hours</h3>
+          <p class="stack-desc">Every session you log adds up. Your streak grows. Your hours stack. That visible proof is usually the difference between members who stick and players who slide back into starting over.</p>
+        </article>
+
+        <article class="stack-item reveal">
+          <span class="stack-num">Stack Item 07</span>
+          <h3 class="stack-title">A Smaller Room Of Serious Players</h3>
+          <p class="stack-desc">A small community of guitarists who chose going deep over chasing the next thing. The conversation reflects that. No giant Discord to keep up with, just the people who showed up to actually work.</p>
+        </article>
+
+        <article class="stack-item reveal">
+          <span class="stack-num">Stack Item 08</span>
+          <h3 class="stack-title">7-Day Free Trial Of Everything</h3>
+          <p class="stack-desc">Start your trial and walk straight in. Every course, every Lab, the community, the live, all of it. Pay nothing for the first 7 days. Decide from the inside whether Pro is for you.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       17 COURSES LIBRARY (with box art)
+       ============================================================ -->
+  <section class="section-white" id="library">
+    <div class="wrap">
+      <div class="narrow" style="text-align:center;">
+        <span class="eyebrow">The Course Library</span>
+        <h2>17 Courses. One Membership.</h2>
+        <p style="color:var(--muted); font-size:1.05rem; max-width: 580px; margin: 0 auto; font-weight: 300;">
+          Three 8-week intensives. Six focused Deep Dives. Eight full courses. Each one comes with a daily routine built in, so the plan is done for you. Pick one. Follow it. Finish it. They all open up the moment you join.
+        </p>
+      </div>
+
+      <div class="lib-group reveal">
+        <div class="lib-group-header">
+          <span class="lib-group-tag">8-Week Programs</span>
+          <h3 class="lib-group-title">Intensives</h3>
+        </div>
+        <div class="lib-grid lib-grid-3">
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-alt-picking-intensive.jpg" alt="8-Week Alternate Picking Intensive" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">8-Week Alternate Picking Intensive</div>
+              <div class="lib-card-sub">Build clean, accurate alternate picking</div>
+            </div>
+          </article>
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-legato-intensive.jpg" alt="8-Week Legato Intensive" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">8-Week Legato Intensive</div>
+              <div class="lib-card-sub">Develop a clean and accurate legato</div>
+            </div>
+          </article>
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-sweep-intensive.jpg" alt="8-Week Sweep Picking Intensive" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">8-Week Sweep Picking Intensive</div>
+              <div class="lib-card-sub">Build clean, controlled sweep picking</div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="lib-group reveal">
+        <div class="lib-group-header">
+          <span class="lib-group-tag">Focused Technique</span>
+          <h3 class="lib-group-title">Deep Dives</h3>
+        </div>
+        <div class="lib-grid lib-grid-6">
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-alt-picking-deep-dive.jpg" alt="Alternate Picking Deep Dive" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">Alternate Picking Deep Dive</div>
+              <div class="lib-card-sub">Techniques · Shapes · Licks</div>
+            </div>
+          </article>
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-legato-deep-dive.jpg" alt="Legato Deep Dive" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">Legato Deep Dive</div>
+              <div class="lib-card-sub">Techniques · Shapes · Licks</div>
+            </div>
+          </article>
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-sweep-deep-dive.jpg" alt="Sweep Picking Deep Dive" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">Sweep Picking Deep Dive</div>
+              <div class="lib-card-sub">Techniques · Shapes · Licks</div>
+            </div>
+          </article>
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-hybrid-deep-dive.jpg" alt="Hybrid Picking Deep Dive" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">Hybrid Picking Deep Dive</div>
+              <div class="lib-card-sub">Techniques · Shapes · Licks</div>
+            </div>
+          </article>
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-tapping-deep-dive.jpg" alt="Tapping Deep Dive" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">Tapping Deep Dive</div>
+              <div class="lib-card-sub">Technique · Scales · Arpeggios</div>
+            </div>
+          </article>
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-timing-deep-dive.jpg" alt="Timing Deep Dive" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">Timing Deep Dive</div>
+              <div class="lib-card-sub">Subdivisions · Counting · Precision</div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="lib-group reveal">
+        <div class="lib-group-header">
+          <span class="lib-group-tag">Full Courses</span>
+          <h3 class="lib-group-title">Courses</h3>
+        </div>
+        <div class="lib-grid lib-grid-8">
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-alternate-picking-mastery.jpg" alt="Alternate Picking Mastery" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">Alternate Picking Mastery</div>
+              <div class="lib-card-sub">3 Notes Per String</div>
+            </div>
+          </article>
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-playing-what-you-hear.jpg" alt="Playing What You Hear" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">Playing What You Hear</div>
+              <div class="lib-card-sub">Ear Training &amp; Fretboard</div>
+            </div>
+          </article>
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-pentatonic-picking-power.jpg" alt="Pentatonic Picking Power" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">Pentatonic Picking Power</div>
+              <div class="lib-card-sub">Technique · Ear · Fretboard</div>
+            </div>
+          </article>
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-quick-licks.jpg" alt="Quick Licks" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">Quick Licks</div>
+              <div class="lib-card-sub">Level up technique &amp; fretboard</div>
+            </div>
+          </article>
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-single-string-speed-system.jpg" alt="The Single-String Speed System" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">The Single-String Speed System</div>
+              <div class="lib-card-sub">Speed · Control · Mastery</div>
+            </div>
+          </article>
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-the-daily-ten.jpg" alt="The Daily Ten" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">The Daily Ten</div>
+              <div class="lib-card-sub">150 workouts to mastery</div>
+            </div>
+          </article>
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-10-minute-workouts.jpg" alt="10 Minute Workouts Vol 1 &amp; 2" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">10 Minute Workouts Vol 1 &amp; 2</div>
+              <div class="lib-card-sub">28 bite-sized workouts</div>
+            </div>
+          </article>
+          <article class="lib-card">
+            <img class="lib-card-img" src="assets/boxart-3nps-speed-system.jpg" alt="The 3NPS Speed System" loading="lazy" />
+            <div class="lib-card-body">
+              <div class="lib-card-title">The 3NPS Speed System</div>
+              <div class="lib-card-sub">Technique · Consistency · Velocity</div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PRICING
+       ============================================================ -->
+  <section class="section-white" id="pricing">
+    <div class="wrap">
+      <div class="narrow" style="text-align:center;">
+        <span class="eyebrow">Simple Pricing</span>
+        <h2>Start Free. Stay If It's Working.</h2>
+        <p style="color:var(--muted); font-size:1.05rem; max-width: 580px; margin: 0 auto; font-weight: 300;">
+          One membership covers everything above. Your first 7 days are completely free.
+        </p>
+      </div>
+
+      <div class="price-grid">
+        <div class="price-card">
+          <div class="price-period">Monthly</div>
+          <div class="price-amount"><sup>$</sup>99</div>
+          <div class="price-note">per month, cancel anytime</div>
+          <div class="price-trial">7-day free trial included</div>
+          <a class="price-btn price-btn-ghost" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">Start Free Trial · Monthly</a>
+        </div>
+        <div class="price-card featured">
+          <span class="price-badge">Best Value</span>
+          <div class="price-period">Annual</div>
+          <div class="price-amount"><sup>$</sup>999</div>
+          <div class="price-note">per year. <span class="price-savings">Save $189.</span></div>
+          <div class="price-trial">7-day free trial included</div>
+          <a class="price-btn price-btn-purple" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">Start Free Trial · Annual</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       10. FAQ
+       ============================================================ -->
+  <section class="section-warm">
+    <div class="wrap">
+      <div class="narrow" style="text-align:center;">
+        <span class="eyebrow">Common Questions</span>
+        <h2>Before You Join.</h2>
+      </div>
+
+      <div class="faq-list" id="faq-list">
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">How does the free trial actually work?</button>
+          <div class="faq-a"><p>You add your card and you're in. The first 7 days are free. Your first $99 charge happens exactly 7 days later. Cancel any time before then from inside your Skool profile and you pay nothing.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">I've been playing for years. Is this going to be too basic for me?</button>
+          <div class="faq-a"><p>No. I've been playing for over 30 years and I still use my own courses in my own daily practice. The Labs are built so you can dial the difficulty up as far as your hands can take it.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">I'm a complete beginner. Should I join?</button>
+          <div class="faq-a"><p>Not yet. If you can play a pentatonic scale and read tab, you're ready. If you're earlier than that, build those basics first and come back when you can.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">How is this different from your free Practice Room?</button>
+          <div class="faq-a"><p>The free Practice Room is the community and occasional Q&amp;A. Pro is where the full system lives. All 17 courses, all 8 Practice Labs, the weekly live with me on camera, and direct clip feedback any day you want it.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What happens if I cancel?</button>
+          <div class="faq-a"><p>Your access ends with your billing period. The flip side is there are no individual course purchases stacking up over time. One subscription opens all of it for as long as you're in.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What if I miss the weekly live?</button>
+          <div class="faq-a"><p>It's recorded and posted in the classroom right after. The live isn't actually the main way you get questions answered. You can post a clip or a question any day and I respond directly.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">How much time do I need to put in each week?</button>
+          <div class="faq-a"><p>If you can find 20 to 30 focused minutes a day, the system works. Practice Lab is built so small daily sessions add up more than long random ones.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Why join now instead of waiting another month?</button>
+          <div class="faq-a"><p>Because the version of you who keeps waiting another month is the same version that's been waiting another month for a while. The cost of one more month of half-starts is higher than $99.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FINAL CTA BAND
+       ============================================================ -->
+  <section class="final-cta">
+    <div class="final-cta-inner">
+      <h2>Join <span class="offer">Practice Room Pro</span>.</h2>
+      <p>From $99/month or $999/year. Your first 7 days are completely free. Cancel anytime.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">Start Your 7-Day Free Trial</a>
+        <a class="btn btn-ghost" href="#whats-included">See What's Inside</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-row">
+    <a href="https://www.jonbjorkmusic.com/">Home</a>
+    <a href="https://www.jonbjorkmusic.com/start">Practice Room Pro</a>
+    <a href="https://www.jonbjorkmusic.com/coaching">1-on-1</a>
+    <a href="https://www.jonbjorkmusic.com/courses">Courses</a>
+    <a href="https://www.skool.com/the-practice-room/about" target="_blank" rel="noopener">Free Community</a>
+    <a href="https://www.jonbjorkmusic.com/legal">Legal</a>
+  </div>
+  <div class="copy">&copy; 2026 Jon Bjork Music · Built for guitarists who finish.</div>
+</footer>
+
+<script>
+(function() {
+  // ---- Mockup cycling ----
+  var stage = document.getElementById('mock-stage');
+  var label = document.getElementById('mock-label-text');
+  if (stage && label) {
+    var views = stage.querySelectorAll('.mock-view');
+    var i = 0;
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!prefersReduced && views.length > 1) {
+      setInterval(function() {
+        views[i].classList.remove('active');
+        i = (i + 1) % views.length;
+        views[i].classList.add('active');
+        label.textContent = views[i].getAttribute('data-view');
+      }, 3500);
+    }
+  }
+
+  // ---- FAQ toggle ----
+  var faqButtons = document.querySelectorAll('.faq-q');
+  faqButtons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+  });
+
+  // ---- Reveal on scroll ----
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('in'); });
+  }
+})();
+</script>
+
+</body>
+</html>
