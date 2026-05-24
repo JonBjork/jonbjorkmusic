@@ -1425,22 +1425,23 @@
     document.querySelectorAll('.reveal, .feat').forEach(function(el) { el.classList.add('in'); });
   }
 
-  // ---- Pain Points: feature cards lit when scrolled in ----
-  var painSection = document.getElementById('pain-points');
-  if (painSection && 'IntersectionObserver' in window) {
-    var pio = new IntersectionObserver(function(entries) {
+  // ---- Auto-light feature cards on scroll for every .feat-grid ----
+  // Was Pain-Points-only; now fires for Bottleneck, Practice Lab 8 Labs, etc.
+  // Critical on mobile where there's no hover state to trigger the lit treatment.
+  var litGrids = document.querySelectorAll('.feat-grid');
+  if (litGrids.length && 'IntersectionObserver' in window) {
+    var lio = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
-        if (e.isIntersecting) {
-          var feats = painSection.querySelectorAll('.feat');
-          feats.forEach(function(f, idx) {
-            setTimeout(function() { f.classList.add('lit'); }, 500 + idx * 220);
-            setTimeout(function() { f.classList.remove('lit'); }, 500 + idx * 220 + 1400);
-          });
-          pio.unobserve(painSection);
-        }
+        if (!e.isIntersecting) return;
+        var feats = e.target.querySelectorAll('.feat');
+        feats.forEach(function(f, idx) {
+          setTimeout(function() { f.classList.add('lit'); }, 400 + idx * 180);
+          setTimeout(function() { f.classList.remove('lit'); }, 400 + idx * 180 + 1400);
+        });
+        lio.unobserve(e.target);
       });
-    }, { threshold: 0.25 });
-    pio.observe(painSection);
+    }, { threshold: 0.18 });
+    litGrids.forEach(function(g) { lio.observe(g); });
   }
 
   // ---- Price glow ----
