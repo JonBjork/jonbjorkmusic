@@ -1426,8 +1426,9 @@
   }
 
   // ---- Auto-light feature cards on scroll for every .feat-grid ----
-  // Was Pain-Points-only; now fires for Bottleneck, Practice Lab 8 Labs, etc.
-  // Critical on mobile where there's no hover state to trigger the lit treatment.
+  // On hover-capable devices (desktop): pulse, then fade — hover takes over after.
+  // On touch devices (mobile): stay lit — no hover state, so the border holds.
+  var isTouch = window.matchMedia && window.matchMedia('(hover: none)').matches;
   var litGrids = document.querySelectorAll('.feat-grid');
   if (litGrids.length && 'IntersectionObserver' in window) {
     var lio = new IntersectionObserver(function(entries) {
@@ -1436,7 +1437,9 @@
         var feats = e.target.querySelectorAll('.feat');
         feats.forEach(function(f, idx) {
           setTimeout(function() { f.classList.add('lit'); }, 400 + idx * 180);
-          setTimeout(function() { f.classList.remove('lit'); }, 400 + idx * 180 + 1400);
+          if (!isTouch) {
+            setTimeout(function() { f.classList.remove('lit'); }, 400 + idx * 180 + 1400);
+          }
         });
         lio.unobserve(e.target);
       });
