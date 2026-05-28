@@ -566,6 +566,11 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   let clickBuffer = null;
   let audioReady = false;
   let audioLoading = false;
+  let audioRecovering = false;
+  // Watchdog: track audioCtx.currentTime between scheduler ticks so we can
+  // detect a stalled context (Safari 'interrupted' state, lost audio session).
+  let lastSchedCurrentTime = -1;
+  let schedStallCount = 0;
 
   // Metronome
   const metro = {bpm:60, running:false, nextNoteTime:0, schedulerId:null};
@@ -656,34 +661,104 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   function updateTempoHint(){ /* no-op: tempo is locked, no hint element */ }
 
   // === Audio ===
-  // initAudio is called on every play. iOS Safari suspends the AudioContext
-  // after audio stops or after a short idle, so we must re-check and resume
-  // on every invocation, not just on first init. The early return on
-  // audioReady would skip the resume and produce silent playback.
+  // Safari notes:
+  //   * AudioContext has THREE non-running states: 'suspended', 'interrupted',
+  //     and 'closed'. The previous code only handled 'suspended', so any
+  //     interruption (other tab grabs audio, AirPods handoff, system sleep,
+  //     long idle) would leave the context permanently silent while the
+  //     visual scheduler kept ticking.
+  //   * Once Safari's audio session is wedged, calling resume() on the same
+  //     context often resolves successfully but state stays != 'running'.
+  //     Only a brand-new context fixes it. closing the tab does not, because
+  //     Safari shares the audio session across the process — which matches
+  //     the user-reported "quitting Safari is the only thing that helps".
+  //   * Some interruptions fire 'statechange'; some don't. We need both an
+  //     event listener AND a scheduler watchdog.
+  async function loadClickBuffer(ctx){
+    if(!ctx) return null;
+    const res = await fetch(CLICK_DATA_URI);
+    const ab = await res.arrayBuffer();
+    return await ctx.decodeAudioData(ab);
+  }
+  function attachStateChange(ctx){
+    if(!ctx || ctx._stateHandlerAttached) return;
+    ctx._stateHandlerAttached = true;
+    ctx.addEventListener('statechange', () => {
+      if(metro.running && audioCtx === ctx && ctx.state !== 'running'){
+        recoverAudio().catch(()=>{});
+      }
+    });
+  }
+  async function recycleAudio(){
+    if(audioRecovering) return false;
+    audioRecovering = true;
+    try{
+      const old = audioCtx;
+      audioReady = false;
+      clickBuffer = null;
+      if(old){ try{ await old.close(); }catch(e){} }
+      const Ctx = window.AudioContext || window.webkitAudioContext;
+      if(!Ctx){ audioCtx = null; return false; }
+      const fresh = new Ctx();
+      attachStateChange(fresh);
+      if(fresh.state !== 'running'){
+        try{ await fresh.resume(); }catch(e){}
+      }
+      audioCtx = fresh;
+      clickBuffer = await loadClickBuffer(fresh);
+      audioReady = !!clickBuffer;
+      if(metro.running){
+        // Re-seed scheduler against the new context's clock.
+        metro.nextNoteTime = fresh.currentTime + 0.1;
+      }
+      lastSchedCurrentTime = -1;
+      schedStallCount = 0;
+      return audioCtx.state === 'running' && audioReady;
+    }catch(e){
+      console.warn('Audio recycle failed', e);
+      return false;
+    }finally{
+      audioRecovering = false;
+    }
+  }
+  async function recoverAudio(){
+    if(audioRecovering) return false;
+    if(audioCtx && audioCtx.state !== 'running' && audioCtx.state !== 'closed'){
+      try{ await audioCtx.resume(); }catch(e){}
+    }
+    if(audioCtx && audioCtx.state === 'running' && audioReady) return true;
+    return await recycleAudio();
+  }
   async function initAudio(){
     if(audioLoading){while(audioLoading)await sleep(50);}
+    if(audioRecovering){while(audioRecovering)await sleep(50);}
     try{
       if(!audioCtx){
         const Ctx=window.AudioContext||window.webkitAudioContext;
         if(!Ctx)throw 'no Web Audio';
         audioCtx=new Ctx();
+        attachStateChange(audioCtx);
       }
-      // Always try to resume. Cheap if already running.
-      if(audioCtx.state==='suspended'){
+      // Resume on anything that isn't already 'running'. Safari uses
+      // 'interrupted' in addition to 'suspended'.
+      if(audioCtx.state !== 'running' && audioCtx.state !== 'closed'){
         try{await audioCtx.resume();}catch(e){}
       }
-      // Buffers only need to load once.
-      if(!audioReady){
-        audioLoading=true;
-        if(!clickBuffer){
-          const res=await fetch(CLICK_DATA_URI);
-          const ab=await res.arrayBuffer();
-          clickBuffer=await audioCtx.decodeAudioData(ab);
-        }
-        audioReady=true;
-        audioLoading=false;
+      // If still not running, the context is wedged. Recycle it.
+      if(audioCtx.state !== 'running'){
+        await recycleAudio();
       }
-      return audioCtx.state==='running';
+      // Buffers only need to load once per context.
+      if(!audioReady && audioCtx){
+        audioLoading=true;
+        try{
+          clickBuffer = await loadClickBuffer(audioCtx);
+          audioReady = !!clickBuffer;
+        }finally{
+          audioLoading=false;
+        }
+      }
+      return !!audioCtx && audioCtx.state==='running' && audioReady;
     }catch(e){
       console.warn('Audio failed',e);
       audioLoading=false;
@@ -691,16 +766,22 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     }
   }
   function playClick(time, vol){
-    if(!clickBuffer||!audioCtx)return;
-    const s=audioCtx.createBufferSource();s.buffer=clickBuffer;
-    if(vol!==undefined&&vol!==1){const g=audioCtx.createGain();g.gain.value=vol;s.connect(g);g.connect(audioCtx.destination);}
-    else s.connect(audioCtx.destination);
-    s.start(time);
+    if(!clickBuffer||!audioCtx||audioRecovering)return;
+    try{
+      const s=audioCtx.createBufferSource();s.buffer=clickBuffer;
+      if(vol!==undefined&&vol!==1){const g=audioCtx.createGain();g.gain.value=vol;s.connect(g);g.connect(audioCtx.destination);}
+      else s.connect(audioCtx.destination);
+      s.start(time);
+    }catch(e){
+      // createBufferSource / start can throw if the context was just closed
+      // out from under us. The watchdog will recycle on the next tick.
+    }
   }
 
   // === Metronome (quarter notes only) ===
   function startMetronome(){
     if(!audioReady||metro.running)return;
+    lastSchedCurrentTime = -1; schedStallCount = 0;
     metro.running=true;
     schedTick();
     metro.schedulerId=setInterval(schedTick,25);
@@ -708,10 +789,31 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   function stopMetronome(){
     metro.running=false;
     if(metro.schedulerId){clearInterval(metro.schedulerId);metro.schedulerId=null;}
+    lastSchedCurrentTime = -1; schedStallCount = 0;
   }
   function schedTick(){
-    if(!metro.running||!audioCtx)return;
-    const ahead=audioCtx.currentTime+0.1;
+    if(!metro.running||!audioCtx||audioRecovering)return;
+    // Watchdog: if the context isn't running, or currentTime hasn't advanced
+    // across several ticks, the audio session is dead. Recycle and bail; the
+    // next tick will resume scheduling against the fresh context.
+    const now = audioCtx.currentTime;
+    if(audioCtx.state !== 'running'){
+      lastSchedCurrentTime = -1; schedStallCount = 0;
+      recoverAudio().catch(()=>{});
+      return;
+    }
+    if(lastSchedCurrentTime >= 0 && now === lastSchedCurrentTime){
+      schedStallCount++;
+      if(schedStallCount >= 4){ // ~100ms with no clock advance = dead
+        lastSchedCurrentTime = -1; schedStallCount = 0;
+        recoverAudio().catch(()=>{});
+        return;
+      }
+    } else {
+      schedStallCount = 0;
+    }
+    lastSchedCurrentTime = now;
+    const ahead=now+0.1;
     while(metro.nextNoteTime<ahead){
       playClick(metro.nextNoteTime, 0.95);
       metro.nextNoteTime += 60.0/metro.bpm;
@@ -736,7 +838,14 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     try{wakeLock=await navigator.wakeLock.request('screen');wakeLock.addEventListener('release',()=>{wakeLock=null;});}catch(e){}
   }
   function releaseWakeLock(){if(wakeLock){wakeLock.release().catch(()=>{});wakeLock=null;}}
-  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&metro.running)requestWakeLock();});
+  document.addEventListener('visibilitychange',()=>{
+    if(document.visibilityState==='visible'&&metro.running){
+      requestWakeLock();
+      // Tab regaining focus is a common moment for Safari to leave a stale
+      // 'interrupted' context behind without firing statechange. Nudge it.
+      recoverAudio().catch(()=>{});
+    }
+  });
 
   // === Pause / Resume ===
   const PAUSE_ICON_SVG='<svg width="12" height="14" viewBox="0 0 12 14" fill="currentColor"><rect x="0" y="0" width="4" height="14" rx="1"/><rect x="8" y="0" width="4" height="14" rx="1"/></svg>';
