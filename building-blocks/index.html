@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>The Building Blocks Workout | Jon Bjork Music</title>
+<meta name="description" content="A complete picking and legato workout built on three-note units. Every finger combination, every string crossing, both directions. Free interactive practice console from Jon Bjork.">
+<meta property="og:title" content="The Building Blocks Workout">
+<meta property="og:description" content="Three notes at a time. Every combination, every crossing. The David Russell approach to technique that actually transfers to real passages.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0d0d0d">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZW8ZW4P5D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZZW8ZW4P5D');
+</script>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '407195623608189');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
+/></noscript>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bg:#0d0d0d; --card:#181818; --card2:#1f1f1f; --border:#2a2a2a;
+    --white:#ffffff; --off:#e8e8e8; --muted:#aaaaaa; --dim:#666666;
+    --purple:#7c3aed; --purple-lt:#9d5ff5; --navy:#1a1040; --accent-border:#4a3a9a;
+    --green:#22c55e;
+    --content-max:920px; --header-h:72px;
+    --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
+    --ease-out-smooth:cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);color:var(--white);font-family:'Lato',sans-serif;font-weight:300;
+    line-height:1.7;min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;
+    touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  }
+
+  /* === Header / Footer === */
+  .site-header{
+    position:sticky;top:0;z-index:50;background:rgba(13,13,13,0.92);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);padding:18px 24px;
+    display:flex;justify-content:center;align-items:center;height:var(--header-h);
+  }
+  .site-header-brand{display:inline-flex;align-items:center;gap:14px;text-decoration:none;line-height:1;transition:opacity 0.2s ease;}
+  .site-header-brand:hover{opacity:0.85;}
+  .site-header-name{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.4rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--white);}
+  .site-header-divider{display:inline-block;width:2px;height:24px;background:var(--white);}
+  .site-header-tag{font-family:'Oswald',sans-serif;font-weight:400;font-size:0.9rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--white);}
+
+  main{flex:1;width:100%;max-width:var(--content-max);margin:0 auto;padding:64px 24px 56px;}
+
+  footer{background:var(--bg);border-top:1px solid var(--border);padding:36px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .footer-logo{display:inline-flex;flex-direction:column;align-items:flex-start;gap:14px;text-decoration:none;line-height:1;}
+  .footer-logo-row{display:inline-flex;align-items:center;gap:16px;line-height:1;}
+  .footer-logo-name{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.4rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--white);line-height:1;}
+  .footer-logo-divider{display:inline-block;width:2px;height:28px;background:#3a3a3a;}
+  .footer-logo-tag{font-family:'Oswald',sans-serif;font-weight:400;font-size:0.9rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);line-height:1;}
+  .footer-tagline{font-family:'Oswald',sans-serif;font-weight:400;font-size:0.8rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--dim);}
+  .footer-links{display:flex;gap:28px;flex-wrap:wrap;}
+  .footer-link{font-family:'Oswald',sans-serif;font-size:0.95rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--dim);text-decoration:none;position:relative;padding-bottom:3px;transition:color 0.2s;}
+  .footer-link:hover{color:var(--white);}
+  .footer-copy{font-size:1rem;color:var(--dim);}
+
+  /* === Type === */
+  .eyebrow{font-family:'Oswald',sans-serif;font-weight:400;font-size:1.45rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--purple-lt);display:block;margin-bottom:18px;}
+  .eyebrow-section{font-size:2.4rem;margin-bottom:22px;}
+  .eyebrow-hero{font-size:clamp(1.4rem,2.6vw,2rem);margin-bottom:24px;white-space:nowrap;}
+  .section-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(2.5rem,5.5vw,4rem);letter-spacing:0.02em;text-transform:uppercase;line-height:1.0;color:var(--white);margin-bottom:28px;}
+  .section-title-card{font-size:clamp(1.6rem,4vw,2.4rem);margin-bottom:14px;}
+  .body-text{font-size:1.4rem;color:var(--muted);line-height:1.7;font-weight:300;}
+  .lead-section{margin-bottom:64px;}
+
+  /* === Hero === */
+  .hero{text-align:center;margin-bottom:72px;opacity:0;animation:fadeUp 0.9s 0.1s var(--ease-out-expo) both;}
+  .hero h1{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(3rem,8vw,5.5rem);letter-spacing:0.02em;text-transform:uppercase;line-height:0.98;color:var(--white);margin-bottom:28px;}
+  .hero-sub-stack{display:flex;flex-direction:column;gap:18px;align-items:center;max-width:680px;margin:0 auto;}
+  .hero-sub{font-size:1.45rem;color:var(--muted);max-width:640px;margin:0 auto;font-weight:300;line-height:1.6;}
+  .hero-sub-strong{font-family:'Oswald',sans-serif;font-weight:600;font-size:1.5rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--white);text-align:center;}
+  .hero-sub-summary{font-family:'Oswald',sans-serif;font-weight:500;font-size:1rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--purple-lt);text-align:center;margin-top:8px;}
+
+  /* === Cards === */
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:48px 36px;position:relative;overflow:hidden;}
+  .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--purple-lt));}
+
+  /* Principles grid */
+  .principles{text-align:center;}
+  .principles-header{margin-bottom:48px;}
+  .principles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .principle-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:44px 32px;text-align:left;position:relative;overflow:hidden;transition:border-color 0.25s,background 0.25s,transform 0.3s var(--ease-out-smooth),box-shadow 0.35s;}
+  .principle-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--purple-lt));transform:scaleX(0);transform-origin:left;transition:transform 0.35s var(--ease-out-smooth);}
+  .principle-card:hover::before{transform:scaleX(1);}
+  .principle-card:hover{border-color:var(--accent-border);background:var(--navy);transform:translateY(-4px);box-shadow:0 12px 40px -12px rgba(124,58,237,0.35);}
+  .principle-num{font-family:'Oswald',sans-serif;font-weight:700;font-size:3.5rem;color:var(--purple);opacity:0.4;line-height:1;margin-bottom:22px;transition:opacity 0.25s;}
+  .principle-card:hover .principle-num{opacity:0.85;}
+  .principle-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.55rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--white);margin-bottom:16px;line-height:1.2;}
+  .principle-body{font-size:1.3rem;color:var(--muted);line-height:1.65;font-weight:300;}
+
+  /* Video card */
+  .video-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:44px 36px 36px;position:relative;overflow:hidden;}
+  .video-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--purple-lt));}
+  .video-header{text-align:center;margin-bottom:28px;}
+  .video-header p{font-size:1.3rem;color:var(--muted);line-height:1.6;max-width:520px;margin:0 auto;}
+  .video-frame{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:10px;border:1px solid var(--border);background:var(--card2);}
+  .video-frame iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;}
+
+  /* === Console === */
+  .console{padding:40px 32px 36px;text-align:center;}
+
+  /* Mode selectors */
+  .mode-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;margin-bottom:36px;padding-bottom:28px;border-bottom:1px solid var(--border);}
+  .mode-group{display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .control-label{font-family:'Oswald',sans-serif;font-weight:500;font-size:0.78rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--purple-lt);}
+  .pill-group{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;}
+  .pill{font-family:'Oswald',sans-serif;font-weight:600;font-size:0.92rem;letter-spacing:0.06em;padding:11px 14px;background:var(--card2);color:var(--off);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.2s var(--ease-out-smooth);}
+  #combo-pills .pill{padding:11px 11px;min-width:54px;}
+  .pill:hover{border-color:var(--accent-border);background:var(--navy);color:var(--white);}
+  .pill.selected{background:var(--purple);border-color:var(--purple);color:var(--white);}
+
+  /* Pattern card */
+  .pattern{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:32px 28px 28px;margin-bottom:24px;position:relative;}
+  .pattern-meta{display:flex;justify-content:center;gap:10px;margin-bottom:22px;flex-wrap:wrap;}
+  .info-tag{display:inline-block;font-family:'Oswald',sans-serif;font-weight:500;font-size:0.92rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);background:var(--card);border:1px solid var(--border);padding:7px 16px;border-radius:6px;}
+  .info-tag.active{color:var(--white);background:rgba(124,58,237,0.18);border-color:var(--purple);}
+
+  .fretboard{display:flex;flex-direction:column;gap:18px;margin:0 auto 22px;max-width:520px;}
+  .string-line{display:grid;grid-template-columns:64px 1fr;align-items:center;gap:14px;}
+  .string-label{font-family:'Oswald',sans-serif;font-weight:600;font-size:0.85rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);text-align:right;}
+  .string-line.active .string-label{color:var(--purple-lt);}
+  .string-rail{position:relative;height:48px;background:linear-gradient(180deg,transparent 47%,var(--border) 47%,var(--border) 53%,transparent 53%);border-radius:6px;display:flex;align-items:center;justify-content:flex-start;gap:18px;padding:0 18px;}
+  .fret-dot{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex:1;position:relative;z-index:1;}
+  .fret-dot-circle{width:38px;height:38px;border-radius:50%;background:var(--card);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-weight:700;font-size:1.05rem;color:var(--off);transition:all 0.2s var(--ease-out-smooth);}
+  .fret-dot.now .fret-dot-circle{background:var(--purple);border-color:var(--purple);color:var(--white);transform:scale(1.08);box-shadow:0 6px 20px -6px rgba(124,58,237,0.6);}
+  .fret-dot.played .fret-dot-circle{background:var(--card2);border-color:var(--accent-border);color:var(--purple-lt);}
+  .fret-dot.dim{opacity:0;transition:opacity 0.18s ease;}
+  .fret-dot.dim .pick-mark, .fret-dot.dim .legato-mark{opacity:0;}
+  .fret-dot.resolution .fret-dot-circle{background:var(--purple);border-color:var(--purple-lt);color:var(--white);transform:scale(1.35);box-shadow:0 0 40px rgba(124,58,237,0.75);transition:transform 0.22s var(--ease-out-expo),box-shadow 0.22s ease;}
+  .fret-dot.resolution .pick-mark, .fret-dot.resolution .legato-mark{color:var(--white);}
+  .pick-mark{font-family:'Lato',sans-serif;font-weight:700;font-size:1.4rem;color:var(--muted);line-height:0.9;min-height:1rem;letter-spacing:0;}
+  .fret-dot.now .pick-mark{color:var(--white);}
+  .legato-mark{font-family:'Oswald',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.04em;color:var(--purple-lt);line-height:1;min-height:0.85rem;}
+  .fret-dot.now .legato-mark{color:var(--white);}
+
+  .order-row{display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
+  .order-num{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.8rem;color:var(--off);line-height:1;padding:6px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;min-width:42px;text-align:center;}
+  .order-num.now{background:var(--purple);border-color:var(--purple);color:var(--white);}
+  .order-num.played{color:var(--purple-lt);border-color:var(--accent-border);}
+  .order-num.dim{opacity:0;transition:opacity 0.18s ease;}
+  .order-num.resolution{background:var(--purple);border-color:var(--purple-lt);color:var(--white);transform:scale(1.18);box-shadow:0 0 32px rgba(124,58,237,0.55);transition:transform 0.18s var(--ease-out-expo),box-shadow 0.18s ease;}
+  .order-arrow{color:var(--dim);font-size:1.2rem;line-height:1;}
+  .order-arrow.dim{opacity:0;transition:opacity 0.18s ease;}
+
+  .pattern-cue{font-size:0.95rem;color:var(--dim);font-style:italic;margin-top:6px;min-height:1.2em;}
+
+  /* Transport */
+  .transport{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:28px;margin:6px auto 28px;padding-top:24px;border-top:1px solid var(--border);}
+  .tempo-control{display:flex;flex-direction:column;align-items:center;gap:8px;}
+  .tempo-row{display:flex;align-items:center;gap:10px;}
+  .tempo-step{width:42px;height:42px;background:var(--card2);color:var(--off);border:1px solid var(--border);border-radius:8px;font-family:'Oswald',sans-serif;font-size:1.05rem;font-weight:600;cursor:pointer;transition:all 0.2s var(--ease-out-smooth);display:flex;align-items:center;justify-content:center;}
+  .tempo-step:hover{border-color:var(--accent-border);background:var(--navy);color:var(--white);}
+  .tempo-step:active{transform:scale(0.96);}
+  .tempo-input{font-family:'Oswald',sans-serif;font-weight:700;font-size:2.4rem;color:var(--white);background:transparent;border:none;text-align:center;width:110px;line-height:1;padding:4px 0;appearance:textfield;-moz-appearance:textfield;cursor:text;}
+  .tempo-input::-webkit-outer-spin-button,.tempo-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+  .tempo-input:focus{outline:none;background:rgba(124,58,237,0.15);border-radius:6px;}
+  .tempo-unit{font-family:'Oswald',sans-serif;font-size:0.65rem;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--muted);margin-top:-2px;}
+
+  .play-btn{font-family:'Oswald',sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.18em;text-transform:uppercase;padding:18px 36px;border-radius:10px;cursor:pointer;border:none;background:var(--purple);color:var(--white);transition:all 0.2s var(--ease-out-smooth);display:inline-flex;align-items:center;gap:10px;}
+  .play-btn:hover{background:var(--purple-lt);transform:scale(1.02);}
+  .play-btn.playing{background:var(--card2);color:var(--white);border:1px solid var(--purple-lt);}
+  .play-btn .play-icon{display:inline-block;width:10px;height:12px;}
+
+  .toggle-stack{display:flex;flex-direction:column;align-items:center;gap:8px;}
+  .toggle-row{display:flex;align-items:center;gap:10px;}
+  .switch{position:relative;display:inline-block;width:42px;height:22px;}
+  .switch input{opacity:0;width:0;height:0;}
+  .slider{position:absolute;cursor:pointer;inset:0;background:var(--card2);border:1px solid var(--border);border-radius:22px;transition:0.2s;}
+  .slider:before{position:absolute;content:"";height:14px;width:14px;left:3px;top:2px;background:var(--off);border-radius:50%;transition:0.2s;}
+  .switch input:checked + .slider{background:var(--purple);border-color:var(--purple);}
+  .switch input:checked + .slider:before{transform:translateX(20px);background:var(--white);}
+  .switch-label{font-family:'Oswald',sans-serif;font-weight:500;font-size:0.85rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--off);}
+
+  .reps-display{display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .reps-num{font-family:'Oswald',sans-serif;font-weight:700;font-size:2rem;color:var(--white);line-height:1;}
+  .reps-label{font-family:'Oswald',sans-serif;font-weight:500;font-size:0.65rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--muted);}
+
+  /* Group navigation */
+  .stepper-wrap{padding-top:24px;border-top:1px solid var(--border);text-align:center;}
+  .group-meta{display:flex;justify-content:center;align-items:baseline;gap:24px;margin-bottom:18px;flex-wrap:wrap;}
+  .group-counter{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.8rem;color:var(--white);letter-spacing:0.04em;line-height:1;}
+  .group-counter .label{font-family:'Oswald',sans-serif;font-weight:500;font-size:0.78rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--purple-lt);margin-right:8px;vertical-align:middle;}
+  .group-counter .dim{color:var(--dim);font-weight:500;font-size:1.3rem;}
+  .group-mode{font-family:'Oswald',sans-serif;font-weight:500;font-size:0.82rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--muted);}
+  .nav-row{display:flex;justify-content:center;gap:10px;margin-top:6px;flex-wrap:wrap;}
+  .nav-btn{font-family:'Oswald',sans-serif;font-weight:600;font-size:0.85rem;letter-spacing:0.16em;text-transform:uppercase;padding:11px 22px;background:var(--card2);color:var(--off);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.2s;}
+  .nav-btn:hover{border-color:var(--accent-border);background:var(--navy);color:var(--white);}
+  .nav-btn:disabled{opacity:0.35;cursor:not-allowed;}
+
+  /* Buttons */
+  .btn{font-family:'Oswald',sans-serif;font-weight:600;font-size:1.1rem;letter-spacing:0.16em;text-transform:uppercase;padding:22px 50px;border-radius:10px;text-decoration:none;display:inline-block;cursor:pointer;border:none;position:relative;overflow:hidden;transition:all 0.25s var(--ease-out-smooth);}
+  .btn-purple{background:var(--purple);color:var(--white);}
+  .btn-purple:hover{background:var(--purple-lt);transform:scale(1.02);}
+  .btn-outline{background:transparent;color:var(--white);border:1.5px solid rgba(157,95,245,0.45);}
+  .btn-outline:hover{border-color:var(--purple-lt);background:rgba(124,58,237,0.08);}
+  .btn::after{content:'';position:absolute;top:0;left:-75%;width:50%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,0.18),transparent);transform:skewX(-20deg);transition:left 0.7s var(--ease-out-smooth);pointer-events:none;}
+  .btn:hover::after{left:125%;}
+
+  /* CTA box */
+  .cta-box{background:linear-gradient(135deg,var(--navy) 0%,#0d0830 50%,#120a2e 100%);border:1px solid var(--accent-border);border-radius:12px;padding:48px 32px;margin-bottom:24px;text-align:center;position:relative;overflow:hidden;}
+  .cta-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--purple-lt));}
+  .cta-eyebrow{display:block;font-family:'Oswald',sans-serif;font-weight:600;font-size:0.95rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--purple-lt);margin-bottom:14px;}
+  .cta-box h3{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(1.75rem,4.5vw,2.75rem);letter-spacing:0.02em;text-transform:uppercase;color:var(--white);margin-bottom:18px;line-height:1.05;}
+  .cta-box p{font-size:1.2rem;color:var(--muted);max-width:480px;margin:0 auto 32px;line-height:1.6;}
+
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s var(--ease-out-expo),transform 0.8s var(--ease-out-expo);}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .principles-grid .principle-card{opacity:0;transform:translateY(28px);transition:opacity 0.7s var(--ease-out-expo),transform 0.7s var(--ease-out-expo);}
+  .principles-grid.visible .principle-card{opacity:1;transform:translateY(0);}
+  .principles-grid.visible .principle-card:nth-child(1){transition-delay:0.05s;}
+  .principles-grid.visible .principle-card:nth-child(2){transition-delay:0.18s;}
+  .principles-grid.visible .principle-card:nth-child(3){transition-delay:0.31s;}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+  [hidden]{display:none !important;}
+
+  /* Responsive */
+  @media(max-width:880px){
+    .principles-grid{grid-template-columns:1fr;gap:14px;}
+    .mode-row{grid-template-columns:1fr;gap:18px;padding-bottom:22px;}
+  }
+  @media(max-width:600px){
+    main{padding:48px 16px calc(48px + env(safe-area-inset-bottom));}
+    .lead-section{margin-bottom:48px;}.hero{margin-bottom:48px;}
+    .card{padding:36px 20px;}.video-card{padding:32px 18px 22px;}
+    .console{padding:32px 18px 28px;}
+    .cta-box{padding:36px 22px;}.principle-card{padding:36px 26px;}
+    .btn{padding:18px 36px;}
+    .site-header{padding:14px 18px;height:60px;}.site-header-divider{height:18px;}
+    .pattern{padding:24px 16px 22px;}
+    .string-line{grid-template-columns:48px 1fr;gap:8px;}
+    .string-label{font-size:0.72rem;letter-spacing:0.14em;}
+    .string-rail{height:42px;gap:10px;padding:0 10px;}
+    .fret-dot-circle{width:32px;height:32px;font-size:0.92rem;}
+    .order-num{font-size:1.4rem;padding:4px 10px;min-width:34px;}
+    .transport{gap:20px;}
+    .step-chip{font-size:0.7rem;padding:6px 8px;min-width:48px;}
+    footer{flex-direction:column;align-items:center;text-align:center;gap:18px;padding:32px 20px;}
+    .footer-logo{align-items:center;}.footer-links{justify-content:center;gap:22px;}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:0.01ms !important;transition-duration:0.01ms !important;}
+    .hero,.reveal,.principles-grid .principle-card{opacity:1 !important;transform:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-header-brand" href="https://www.jonbjorkmusic.com/" aria-label="Jon Bjork Music, home">
+    <span class="site-header-name">Jon Bjork</span>
+    <span class="site-header-divider" aria-hidden="true"></span>
+    <span class="site-header-tag">Music</span>
+  </a>
+</header>
+
+<main>
+
+  <section class="hero">
+    <span class="eyebrow eyebrow-hero">Free Practice Console</span>
+    <h1>The Building<br>Blocks Workout</h1>
+    <div class="hero-sub-stack">
+      <p class="hero-sub">Three notes at a time. Every finger combination, every string crossing, both directions. The smallest unit of technique, trained on purpose.</p>
+      <p class="hero-sub-strong">This is not a lick. It's the alphabet.</p>
+      <p class="hero-sub">Long passages are these three-note shapes stacked. If you only ever drill the long passage, every new one is a new thing. Drill the alphabet and the passages get easy.</p>
+      <p class="hero-sub-summary">4 finger combinations &middot; 16 string crossings &middot; Picking or legato</p>
+    </div>
+  </section>
+
+  <section class="principles lead-section reveal" aria-labelledby="principles-title">
+    <div class="principles-header">
+      <span class="eyebrow eyebrow-section">Why this works</span>
+      <h2 class="section-title" id="principles-title">Three notes is the right unit.</h2>
+    </div>
+    <div class="principles-grid" id="principles-grid">
+      <article class="principle-card">
+        <div class="principle-num">01</div>
+        <h3 class="principle-title">Russell's principle</h3>
+        <p class="principle-body">Classical guitarist David Russell teaches that the smallest building blocks deserve their own practice time. Every long passage is these tiny units stacked. Train the units. The passages take care of themselves.</p>
+      </article>
+      <article class="principle-card">
+        <div class="principle-num">02</div>
+        <h3 class="principle-title">Cover every crossing</h3>
+        <p class="principle-body">Three notes inside a string feels nothing like three notes that cross strings. Two-plus-one and one-plus-two each have their own picking and timing problem. You have to play all of them on purpose, not just the comfortable ones.</p>
+      </article>
+      <article class="principle-card">
+        <div class="principle-num">03</div>
+        <h3 class="principle-title">One workout, two techniques</h3>
+        <p class="principle-body">The same patterns serve alternate picking and legato. Picking trains the right hand's response to each crossing. Legato trains your timing without the pick covering for you. Same shapes, two different muscles.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="video-card lead-section reveal" aria-labelledby="video-title">
+    <div class="video-header">
+      <span class="eyebrow">Watch the lesson</span>
+      <h2 class="section-title section-title-card" id="video-title">The full walkthrough</h2>
+      <p>The system explained, with the picking and legato demonstrations. Then jump into the console below.</p>
+    </div>
+    <div class="video-frame">
+      <!-- TODO: swap VIDEO_ID for the actual video once filmed -->
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
+        title="The Building Blocks Workout"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        loading="lazy"
+        allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <section id="console" class="card console lead-section reveal" aria-labelledby="console-title">
+    <span class="eyebrow">Practice console</span>
+    <h2 class="section-title section-title-card" id="console-title">Pick your shape and play.</h2>
+
+    <div class="mode-row">
+      <div class="mode-group">
+        <span class="control-label">Fingers</span>
+        <div class="pill-group" id="combo-pills">
+          <button type="button" class="pill selected" data-combo="1-2-4">1&middot;2&middot;4</button>
+          <button type="button" class="pill" data-combo="1-3-4">1&middot;3&middot;4</button>
+          <button type="button" class="pill" data-combo="2-3-4">2&middot;3&middot;4</button>
+          <button type="button" class="pill" data-combo="1-2-3">1&middot;2&middot;3</button>
+        </div>
+      </div>
+      <div class="mode-group">
+        <span class="control-label">Variation</span>
+        <div class="pill-group" id="variation-pills">
+          <button type="button" class="pill selected" data-variation="three">3-note group</button>
+          <button type="button" class="pill" data-variation="loop">4-note loop</button>
+        </div>
+      </div>
+      <div class="mode-group">
+        <span class="control-label">Technique</span>
+        <div class="pill-group" id="technique-pills">
+          <button type="button" class="pill selected" data-technique="picking">Alternate picking</button>
+          <button type="button" class="pill" data-technique="legato">Legato</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pattern">
+      <div class="pattern-meta" id="pattern-meta"></div>
+      <div class="order-row" id="order-row"></div>
+      <div class="fretboard" id="fretboard"></div>
+      <p class="pattern-cue" id="pattern-cue"></p>
+    </div>
+
+    <div class="transport">
+      <div class="tempo-control">
+        <span class="control-label">Tempo</span>
+        <div class="tempo-row">
+          <button type="button" class="tempo-step" id="bpm-down" aria-label="Decrease BPM">&minus;</button>
+          <div style="display:flex;flex-direction:column;align-items:center;line-height:1;">
+            <input type="number" class="tempo-input" id="bpm-input" value="70" min="30" max="240" inputmode="numeric">
+            <span class="tempo-unit">BPM</span>
+          </div>
+          <button type="button" class="tempo-step" id="bpm-up" aria-label="Increase BPM">+</button>
+        </div>
+      </div>
+
+      <div class="reps-display">
+        <span class="control-label">Rep</span>
+        <span class="reps-num" id="reps-num">&mdash;</span>
+        <span class="reps-label" id="reps-label">of 4</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <span class="control-label">Metronome</span>
+        <button type="button" class="play-btn" id="play-btn">
+          <span class="play-icon" aria-hidden="true">&#9654;</span>
+          <span id="play-label">Start</span>
+        </button>
+        <span class="dir-hint" id="phase-hint" style="font-size:0.78rem;color:var(--dim);font-style:italic;min-height:1.1em;text-align:center;"></span>
+      </div>
+    </div>
+
+    <div class="stepper-wrap">
+      <div class="group-meta">
+        <span class="group-counter"><span class="label">Group</span> <span id="step-counter">1</span><span class="dim"> / <span id="step-total">16</span></span></span>
+        <span class="group-mode" id="step-direction">Ascending</span>
+      </div>
+      <div class="nav-row">
+        <button type="button" class="nav-btn" id="prev-btn">&larr; Previous</button>
+        <button type="button" class="nav-btn" id="next-btn">Next &rarr;</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-box reveal">
+    <span class="cta-eyebrow">Practice Room Pro</span>
+    <h3>One workout. A whole system waits inside.</h3>
+    <p>The Building Blocks workout is a slice. Practice Room Pro is the full structured training: daily routines, 8-week Intensives for Alternate Picking, Legato, and Sweep Picking, full tabs, breakdown videos, and a community working the same material.</p>
+    <a href="https://www.jonbjorkmusic.com/start" class="btn btn-purple">Step Inside Practice Room Pro</a>
+  </div>
+
+  <div class="cta-box reveal" style="background:transparent;border:1px solid var(--border);">
+    <span class="cta-eyebrow">1-on-1 Coaching</span>
+    <h3>Stuck for years, not weeks?</h3>
+    <p>If you have been plateaued long enough that videos alone are not moving you, the 12-Week Guitar Mastery Program is built to break it. Twelve weeks. Direct coaching. A plan you stick to because someone is watching.</p>
+    <a href="https://www.jonbjorkmusic.com/coaching" class="btn btn-outline">Learn About 1-on-1 Coaching</a>
+  </div>
+
+</main>
+
+<footer>
+  <a class="footer-logo" href="https://www.jonbjorkmusic.com/" aria-label="Jon Bjork Music, home">
+    <span class="footer-logo-row">
+      <span class="footer-logo-name">Jon Bjork</span>
+      <span class="footer-logo-divider" aria-hidden="true"></span>
+      <span class="footer-logo-tag">Music</span>
+    </span>
+    <span class="footer-tagline">Guitarist &middot; Coach &middot; Composer</span>
+  </a>
+  <div class="footer-links">
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/">Home</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/coaching">1-on-1</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+    <a class="footer-link" href="https://youtube.com/@jonbjork" target="_blank" rel="noopener">YouTube</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/legal">Legal</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Jon Bjork Music</div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+
+  // === Data model ===
+  const STRINGS = [
+    { id:'E', label:'Low E' },
+    { id:'A', label:'A' },
+    { id:'D', label:'D' },
+    { id:'G', label:'G' },
+    { id:'B', label:'B' },
+    { id:'e', label:'High e' }
+  ];
+  const COMBOS = {
+    '1-2-4':[1,2,4],
+    '1-3-4':[1,3,4],
+    '2-3-4':[2,3,4],
+    '1-2-3':[1,2,3]
+  };
+
+  // Generate 3-note groups for a given combo and direction.
+  // Each group: { fingers:[f1,f2,f3], stringIdx:[si1,si2,si3], crossing:'3+0'|'2+1'|'1+2', label:'...' }
+  function gen3Note(comboKey, direction){
+    const baseFingers = COMBOS[comboKey];
+    const fingers = direction === 'asc' ? baseFingers.slice() : baseFingers.slice().reverse();
+    const strings = direction === 'asc'
+      ? STRINGS.map((_,i)=>i)
+      : STRINGS.map((_,i)=>i).reverse();
+    const out = [];
+    for(let i=0; i<strings.length; i++){
+      const s0 = strings[i];
+      const s1 = strings[i+1];
+      // 3 on s0
+      out.push({
+        fingers:[fingers[0],fingers[1],fingers[2]],
+        stringIdx:[s0,s0,s0],
+        crossing:'3+0',
+        label:`3 on ${STRINGS[s0].id}`
+      });
+      if(s1 !== undefined){
+        // 2 on s0 + 1 on s1: fingers [b,c,a]
+        out.push({
+          fingers:[fingers[1],fingers[2],fingers[0]],
+          stringIdx:[s0,s0,s1],
+          crossing:'2+1',
+          label:`2 on ${STRINGS[s0].id} + 1 on ${STRINGS[s1].id}`
+        });
+        // 1 on s0 + 2 on s1: fingers [c,a,b]
+        out.push({
+          fingers:[fingers[2],fingers[0],fingers[1]],
+          stringIdx:[s0,s1,s1],
+          crossing:'1+2',
+          label:`1 on ${STRINGS[s0].id} + 2 on ${STRINGS[s1].id}`
+        });
+      }
+    }
+    return out;
+  }
+
+  // Generate 4-note loops. Source = ascending 3-note groups.
+  // Each source (a,b,c) becomes cycle (a,b,c,b) over strings (s_a,s_b,s_c,s_b).
+  // For each source, expose 4 rotations.
+  function gen4NoteLoops(comboKey){
+    const sources = gen3Note(comboKey, 'asc');
+    const loops = [];
+    sources.forEach((src, srcIdx)=>{
+      const cycleF = [src.fingers[0], src.fingers[1], src.fingers[2], src.fingers[1]];
+      const cycleS = [src.stringIdx[0], src.stringIdx[1], src.stringIdx[2], src.stringIdx[1]];
+      for(let r=0; r<4; r++){
+        loops.push({
+          fingers:[cycleF[r%4], cycleF[(r+1)%4], cycleF[(r+2)%4], cycleF[(r+3)%4]],
+          stringIdx:[cycleS[r%4], cycleS[(r+1)%4], cycleS[(r+2)%4], cycleS[(r+3)%4]],
+          crossing:src.crossing,
+          sourceIdx:srcIdx,
+          rotation:r,
+          label:`${src.label} (loop ${r+1}/4)`
+        });
+      }
+    });
+    return loops;
+  }
+
+  // === State ===
+  const state = {
+    combo:'1-2-4',
+    variation:'three',
+    technique:'picking',
+    direction:'asc',
+    position:0,
+    bpm:70,
+    playing:false,
+    currentNoteIdx:-1,
+    currentRep:0,         // 0-indexed: 0..repsPerGroup-1
+    phase:'idle',         // 'idle' | 'countin' | 'pattern' | 'resolution'
+    resolutionPos:null    // group index being resolved (set during resolution beat; null otherwise)
+  };
+
+  // Local storage (key bumped to v2: removed autoadvance/repsTarget)
+  const LS_KEY = 'bbw_settings_v2';
+  function saveSettings(){
+    try{
+      localStorage.setItem(LS_KEY, JSON.stringify({
+        combo:state.combo, variation:state.variation,
+        technique:state.technique, bpm:state.bpm
+      }));
+    }catch(e){}
+  }
+  function loadSettings(){
+    try{
+      const raw = localStorage.getItem(LS_KEY);
+      if(!raw) return;
+      const s = JSON.parse(raw);
+      if(s.combo && COMBOS[s.combo]) state.combo = s.combo;
+      if(s.variation === 'three' || s.variation === 'loop') state.variation = s.variation;
+      if(s.technique === 'picking' || s.technique === 'legato') state.technique = s.technique;
+      if(typeof s.bpm === 'number' && s.bpm >= 30 && s.bpm <= 240) state.bpm = s.bpm;
+    }catch(e){}
+  }
+  loadSettings();
+
+  // Computed
+  function getSequence(){
+    return state.variation === 'three'
+      ? gen3Note(state.combo, state.direction)
+      : gen4NoteLoops(state.combo);
+  }
+  function notesPerGroup(){
+    return state.variation === 'three' ? 3 : 4;
+  }
+  function repsPerGroup(){
+    // 3-note groups: 4 reps + resolution = 13 beats.
+    // 4-note loops: 3 reps + resolution = 13 beats.
+    return state.variation === 'three' ? 4 : 3;
+  }
+
+  // === DOM refs ===
+  const $ = id => document.getElementById(id);
+  const els = {
+    comboPills:$('combo-pills'),
+    variationPills:$('variation-pills'),
+    techniquePills:$('technique-pills'),
+    patternMeta:$('pattern-meta'),
+    orderRow:$('order-row'),
+    fretboard:$('fretboard'),
+    patternCue:$('pattern-cue'),
+    bpmInput:$('bpm-input'),
+    bpmUp:$('bpm-up'),
+    bpmDown:$('bpm-down'),
+    playBtn:$('play-btn'),
+    playLabel:$('play-label'),
+    repsNum:$('reps-num'),
+    repsLabel:$('reps-label'),
+    phaseHint:$('phase-hint'),
+    stepCounter:$('step-counter'),
+    stepTotal:$('step-total'),
+    stepDirection:$('step-direction'),
+    prevBtn:$('prev-btn'),
+    nextBtn:$('next-btn'),
+    principlesGrid:$('principles-grid')
+  };
+
+  // === Rendering ===
+  function render(){
+    const seq = getSequence();
+    if(state.position >= seq.length) state.position = 0;
+    const group = seq[state.position];
+
+    // Meta tags
+    const crossLabel = group.crossing === '3+0' ? 'Single string' : (group.crossing === '2+1' ? '2 + 1 crossing' : '1 + 2 crossing');
+    const dirLabel = state.variation === 'three'
+      ? (state.direction === 'asc' ? 'Ascending' : 'Descending')
+      : 'Looped';
+    els.patternMeta.innerHTML = `
+      <span class="info-tag active">${group.label}</span>
+      <span class="info-tag">${crossLabel}</span>
+      <span class="info-tag">${dirLabel}</span>
+    `;
+
+    renderPatternArea();
+
+    // Cue text
+    let cue;
+    if(state.technique === 'picking'){
+      cue = state.variation === 'three'
+        ? 'Strict alternate picking. Pick strokes flip every rep — odd reps go D-U-D, even reps go U-D-U.'
+        : 'Strict alternate picking. Four notes per loop means picking stays D-U-D-U every rep.';
+    } else {
+      cue = state.direction === 'desc'
+        ? 'Pick on every string change. Pull-off descending within a string.'
+        : 'Pick on every string change. Hammer ascending within a string.';
+    }
+    els.patternCue.textContent = cue;
+
+    // Group counter
+    els.stepCounter.textContent = (state.position + 1);
+    els.stepTotal.textContent = seq.length;
+    els.stepDirection.textContent = state.variation === 'three'
+      ? (state.direction === 'asc' ? 'Ascending' : 'Descending')
+      : 'Loops';
+
+    els.prevBtn.disabled = state.position === 0;
+    els.nextBtn.disabled = state.position === seq.length - 1;
+
+    // Reps label
+    els.repsLabel.textContent = `of ${repsPerGroup()}`;
+    updateRepDisplay();
+
+    // Direction control
+    addDirectionToggle();
+  }
+
+  function renderPatternArea(){
+    const seq = getSequence();
+    // During the resolution beat, render the group that just resolved (captured in state.resolutionPos),
+    // not the group state.position has already advanced to for the next audio tick.
+    const renderPos = (state.phase === 'resolution' && state.resolutionPos != null)
+      ? state.resolutionPos : state.position;
+    const group = seq[renderPos];
+    const usedStrings = Array.from(new Set(group.stringIdx)).sort((a,b)=>a-b);
+
+    const isResolution = state.phase === 'resolution';
+    const isActiveBeat = state.phase !== 'idle' && state.phase !== 'countin';
+
+    // Order row
+    els.orderRow.innerHTML = '';
+    group.fingers.forEach((f, i)=>{
+      if(i > 0){
+        const arrow = document.createElement('span');
+        arrow.className = 'order-arrow' + (isResolution ? ' dim' : '');
+        arrow.innerHTML = '&rarr;';
+        els.orderRow.appendChild(arrow);
+      }
+      const num = document.createElement('span');
+      let cls = 'order-num';
+      if(i === state.currentNoteIdx && isActiveBeat) cls += ' now';
+      else if(state.phase === 'pattern' && state.currentNoteIdx >= 0 && i < state.currentNoteIdx) cls += ' played';
+      if(isResolution){
+        if(i === state.currentNoteIdx) cls += ' resolution';
+        else cls += ' dim';
+      }
+      num.className = cls;
+      num.textContent = f;
+      els.orderRow.appendChild(num);
+    });
+
+    // Fretboard
+    els.fretboard.innerHTML = '';
+    usedStrings.slice().reverse().forEach(si => {
+      const row = document.createElement('div');
+      row.className = 'string-line';
+      if(group.stringIdx[state.currentNoteIdx] === si && isActiveBeat) row.classList.add('active');
+      const label = document.createElement('div');
+      label.className = 'string-label';
+      label.textContent = STRINGS[si].label;
+      const rail = document.createElement('div');
+      rail.className = 'string-rail';
+      group.fingers.forEach((f, i)=>{
+        if(group.stringIdx[i] !== si){
+          const blank = document.createElement('div');
+          blank.className = 'fret-dot';
+          blank.style.visibility = 'hidden';
+          const c = document.createElement('div');
+          c.className = 'fret-dot-circle';
+          c.textContent = f;
+          blank.appendChild(c);
+          rail.appendChild(blank);
+          return;
+        }
+        const dot = document.createElement('div');
+        dot.className = 'fret-dot';
+        if(i === state.currentNoteIdx && isActiveBeat) dot.classList.add('now');
+        else if(state.phase === 'pattern' && state.currentNoteIdx >= 0 && i < state.currentNoteIdx) dot.classList.add('played');
+        if(isResolution){
+          if(i === state.currentNoteIdx) dot.classList.add('resolution');
+          else dot.classList.add('dim');
+        }
+        const circle = document.createElement('div');
+        circle.className = 'fret-dot-circle';
+        circle.textContent = f;
+        dot.appendChild(circle);
+        const mark = document.createElement('div');
+        if(state.technique === 'picking'){
+          mark.className = 'pick-mark';
+          mark.textContent = pickStroke(i, state.currentRep);
+        } else {
+          mark.className = 'legato-mark';
+          mark.textContent = legatoMark(group, i);
+        }
+        dot.appendChild(mark);
+        rail.appendChild(dot);
+      });
+      row.appendChild(label);
+      row.appendChild(rail);
+      els.fretboard.appendChild(row);
+    });
+  }
+
+  // Strict alternate picking across the whole performance.
+  // Rep 0 starts on D. Each rep contributes notesPerRep attacks.
+  // Display the stroke for note `noteIndex` within rep `rep`.
+  // Symbols match standard guitar / violin notation:
+  //   ⊓ (U+2293)  = downstroke / down-bow
+  //   ∨ (U+2228)  = upstroke   / up-bow
+  function pickStroke(noteIndex, rep){
+    const n = notesPerGroup();
+    const absAttack = rep * n + noteIndex;
+    return absAttack % 2 === 0 ? '⊓' : '∨';
+  }
+
+  // Legato: marker shows the TECHNIQUE used to play note `i` (relative to note i-1).
+  // First note of group: blank (initial pick). String change: blank (re-pick). Same string: H (ascending) or P (descending).
+  function legatoMark(group, i){
+    if(i === 0) return '';
+    if(group.stringIdx[i] !== group.stringIdx[i-1]) return '';
+    return group.fingers[i] > group.fingers[i-1] ? 'H' : 'P';
+  }
+
+  function updateRepDisplay(){
+    if(state.phase === 'idle'){
+      els.repsNum.textContent = '—';
+    } else if(state.phase === 'countin'){
+      els.repsNum.textContent = '—';
+    } else if(state.phase === 'resolution'){
+      els.repsNum.textContent = repsPerGroup();
+    } else {
+      els.repsNum.textContent = state.currentRep + 1;
+    }
+  }
+  function updatePhaseHint(text){
+    if(els.phaseHint) els.phaseHint.textContent = text || '';
+  }
+
+  function addDirectionToggle(){
+    // Only show for the 3-note variation. Mounted just above the nav row.
+    let host = document.getElementById('direction-toggle-host');
+    if(!host){
+      host = document.createElement('div');
+      host.id = 'direction-toggle-host';
+      host.style.marginTop = '14px';
+      host.style.marginBottom = '4px';
+      host.style.textAlign = 'center';
+      const navRow = document.querySelector('.nav-row');
+      navRow.parentNode.insertBefore(host, navRow);
+    }
+    if(state.variation !== 'three'){
+      host.innerHTML = '';
+      return;
+    }
+    host.innerHTML = `
+      <div style="display:inline-flex;gap:6px;align-items:center;">
+        <span class="control-label" style="margin-right:6px;">Direction</span>
+        <button type="button" class="pill ${state.direction === 'asc' ? 'selected' : ''}" data-dir="asc">Ascending</button>
+        <button type="button" class="pill ${state.direction === 'desc' ? 'selected' : ''}" data-dir="desc">Descending</button>
+      </div>
+    `;
+    host.querySelectorAll('button').forEach(b => {
+      b.addEventListener('click', ()=>{
+        if(b.dataset.dir === state.direction) return;
+        state.direction = b.dataset.dir;
+        state.position = 0;
+        resetPlayheadForGroupChange();
+        render();
+      });
+    });
+  }
+
+  // === Navigation ===
+  function jumpTo(idx){
+    const seq = getSequence();
+    state.position = Math.max(0, Math.min(seq.length - 1, idx));
+    resetPlayheadForGroupChange();
+    render();
+  }
+  function next(){ jumpTo(state.position + 1); }
+  function prev(){ jumpTo(state.position - 1); }
+
+  // === Audio metronome ===
+  // Uses the same click sample as /speedbuilder/ for sonic consistency across lead magnets.
+  let audioCtx = null;
+  let clickBuffer = null;
+  let clickPromise = null;   // single in-flight load — both primeAudio and start() await this
+  let nextTickTime = 0;
+  let tickIndex = 0;         // monotonic beat counter since play started
+  let groupTickStart = 0;    // tick index at which the current group's beat 0 falls
+  let schedulerTimer = null;
+  const LOOKAHEAD_MS = 25;
+  const SCHEDULE_AHEAD = 0.12;
+  const COUNTIN_BEATS = 4;
+
+  function loadClick(ctx){
+    if(clickPromise) return clickPromise;
+    clickPromise = fetch('click.wav', { cache:'force-cache' })
+      .then(r => r.arrayBuffer())
+      .then(ab => ctx.decodeAudioData(ab))
+      .then(buf => { clickBuffer = buf; return buf; })
+      .catch(e => {
+        console.warn('Click sample failed to load', e);
+        clickPromise = null;   // allow a retry on the next start
+        return null;
+      });
+    return clickPromise;
+  }
+
+  async function ensureAudio(){
+    if(!audioCtx){
+      const C = window.AudioContext || window.webkitAudioContext;
+      if(!C) return null;
+      audioCtx = new C();
+    }
+    if(audioCtx.state === 'suspended' || audioCtx.state === 'interrupted'){
+      try{ await audioCtx.resume(); }catch(e){}
+    }
+    if(!clickBuffer){
+      await loadClick(audioCtx);
+    }
+    return audioCtx;
+  }
+
+  // Match /speedbuilder/ exactly: single gain across every click, no accent variation, no synth fallback.
+  // If the WAV failed to load, stay silent rather than substituting a different sound.
+  function playClick(time){
+    if(!audioCtx || !clickBuffer) return;
+    try{
+      const src = audioCtx.createBufferSource();
+      src.buffer = clickBuffer;
+      const gain = audioCtx.createGain();
+      gain.gain.value = 0.95;
+      src.connect(gain).connect(audioCtx.destination);
+      src.start(time);
+    }catch(e){}
+  }
+
+  // === Scheduler with phase machine ===
+  // Layout per group: (rep 0 notes) (rep 1 notes) ... (rep R-1 notes) (resolution beat).
+  //   3-note groups: R=4, N=3 → 13 beats per group.
+  //   4-note loops:   R=3, N=4 → 13 beats per group.
+  // Initial count-in: 4 beats before the first group.
+  // No count-in between groups — the resolution beat IS the segue.
+  function scheduler(){
+    if(!state.playing || !audioCtx) return;
+    const beatDur = 60 / state.bpm;
+    while(nextTickTime < audioCtx.currentTime + SCHEDULE_AHEAD){
+      scheduleTick(tickIndex, nextTickTime);
+      tickIndex++;
+      nextTickTime += beatDur;
+    }
+    schedulerTimer = setTimeout(scheduler, LOOKAHEAD_MS);
+  }
+
+  function scheduleTick(tick, audioTime){
+    const delaySec = audioTime - audioCtx.currentTime;
+    const visualMs = Math.max(0, delaySec * 1000);
+
+    // --- Count-in ---
+    if(tick < COUNTIN_BEATS){
+      playClick(audioTime);
+      const n = tick + 1;
+      setTimeout(()=>{
+        state.phase = 'countin';
+        state.currentNoteIdx = -1;
+        updateRepDisplay();
+        updatePhaseHint(`Count-in ${n} of ${COUNTIN_BEATS}`);
+        renderPatternArea();
+      }, visualMs);
+      return;
+    }
+
+    // --- Pattern / Resolution ---
+    const t = tick - groupTickStart;
+    const N = notesPerGroup();
+    const R = repsPerGroup();
+
+    if(t < R * N){
+      const rep = Math.floor(t / N);
+      const note = t % N;
+      playClick(audioTime);
+      setTimeout(()=>{
+        state.phase = 'pattern';
+        state.currentRep = rep;
+        state.currentNoteIdx = note;
+        updateRepDisplay();
+        updatePhaseHint(`Rep ${rep + 1} of ${R}`);
+        renderPatternArea();
+      }, visualMs);
+    } else if(t === R * N){
+      // Resolution beat — re-attack the first note of THIS group and hold for one beat.
+      playClick(audioTime);
+
+      // Capture the resolving group's index BEFORE advancing position. The resolution render
+      // needs to display the just-completed group's first note, not the next group's.
+      const resolvingPos = state.position;
+      setTimeout(()=>{
+        state.phase = 'resolution';
+        // currentRep = R so pickStroke computes absAttack = R*N (the 13th attack), which lands
+        // on a downstroke in strict alternation. The rep DISPLAY ignores this and shows "R of R"
+        // because updateRepDisplay() special-cases the resolution phase.
+        state.currentRep = R;
+        state.currentNoteIdx = 0;
+        state.resolutionPos = resolvingPos;
+        updateRepDisplay();
+        updatePhaseHint('Resolve · hold');
+        renderPatternArea();
+      }, visualMs);
+
+      // Audio scheduling needs position advanced now so the next scheduled tick lands on the new group.
+      const seq = getSequence();
+      if(state.position < seq.length - 1){
+        state.position += 1;
+        groupTickStart = tick + 1;
+        // Repaint the chrome (counter, meta tags, cue) shortly before the new group's first beat.
+        setTimeout(()=>{
+          if(!state.playing) return;
+          state.resolutionPos = null;
+          state.currentNoteIdx = -1;
+          state.currentRep = 0;
+          render();
+          updatePhaseHint('Next group…');
+        }, visualMs + (60 / state.bpm) * 1000 * 0.85);
+      } else {
+        // Last group — let the resolution ring out, then stop.
+        setTimeout(()=>{
+          if(state.playing) stop();
+        }, visualMs + (60 / state.bpm) * 1000);
+      }
+    }
+  }
+
+  async function start(){
+    const ctx = await ensureAudio();
+    if(!ctx) return;
+    state.playing = true;
+    state.phase = 'countin';
+    state.currentNoteIdx = -1;
+    state.currentRep = 0;
+    tickIndex = 0;
+    groupTickStart = COUNTIN_BEATS;   // first group begins at tick 4
+    nextTickTime = ctx.currentTime + 0.08;
+    els.playBtn.classList.add('playing');
+    els.playLabel.textContent = 'Stop';
+    updatePhaseHint('Count-in 1 of 4');
+    updateRepDisplay();
+    renderPatternArea();
+    scheduler();
+  }
+  function stop(){
+    state.playing = false;
+    if(schedulerTimer){ clearTimeout(schedulerTimer); schedulerTimer = null; }
+    state.phase = 'idle';
+    state.currentNoteIdx = -1;
+    state.currentRep = 0;
+    state.resolutionPos = null;
+    els.playBtn.classList.remove('playing');
+    els.playLabel.textContent = 'Start';
+    updatePhaseHint('');
+    render();
+  }
+
+  // === Event wiring ===
+  function selectPill(group, attr, value){
+    group.querySelectorAll('.pill').forEach(p => {
+      p.classList.toggle('selected', p.dataset[attr] === value);
+    });
+  }
+
+  function resetPlayheadForGroupChange(){
+    state.currentNoteIdx = -1;
+    state.currentRep = 0;
+    state.resolutionPos = null;
+    state.phase = state.playing ? state.phase : 'idle';
+    // If currently playing, snap the new group to start on the next beat.
+    if(state.playing){
+      groupTickStart = tickIndex;
+    }
+  }
+
+  els.comboPills.addEventListener('click', e => {
+    const b = e.target.closest('.pill');
+    if(!b) return;
+    state.combo = b.dataset.combo;
+    state.position = 0;
+    resetPlayheadForGroupChange();
+    selectPill(els.comboPills, 'combo', state.combo);
+    saveSettings();
+    render();
+  });
+
+  els.variationPills.addEventListener('click', e => {
+    const b = e.target.closest('.pill');
+    if(!b) return;
+    state.variation = b.dataset.variation;
+    state.position = 0;
+    resetPlayheadForGroupChange();
+    selectPill(els.variationPills, 'variation', state.variation);
+    saveSettings();
+    render();
+  });
+
+  els.techniquePills.addEventListener('click', e => {
+    const b = e.target.closest('.pill');
+    if(!b) return;
+    state.technique = b.dataset.technique;
+    selectPill(els.techniquePills, 'technique', state.technique);
+    saveSettings();
+    render();
+  });
+
+  function setBpm(v){
+    const n = Math.max(30, Math.min(240, Math.round(v) || 70));
+    state.bpm = n;
+    els.bpmInput.value = n;
+    saveSettings();
+  }
+  els.bpmUp.addEventListener('click', ()=> setBpm(state.bpm + 5));
+  els.bpmDown.addEventListener('click', ()=> setBpm(state.bpm - 5));
+  els.bpmInput.addEventListener('input', e => {
+    const v = parseInt(e.target.value, 10);
+    if(!isNaN(v)) state.bpm = Math.max(30, Math.min(240, v));
+    saveSettings();
+  });
+  els.bpmInput.addEventListener('blur', e => setBpm(parseInt(e.target.value, 10)));
+
+  els.playBtn.addEventListener('click', ()=>{
+    if(state.playing) stop(); else start();
+  });
+  els.prevBtn.addEventListener('click', prev);
+  els.nextBtn.addEventListener('click', next);
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', e => {
+    if(e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if(e.key === ' '){
+      e.preventDefault();
+      if(state.playing) stop(); else start();
+    } else if(e.key === 'ArrowRight'){
+      next();
+    } else if(e.key === 'ArrowLeft'){
+      prev();
+    }
+  });
+
+  // Reveal on scroll
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if(en.isIntersecting) en.target.classList.add('visible');
+    });
+  }, { threshold:0.18 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Initial sync
+  selectPill(els.comboPills, 'combo', state.combo);
+  selectPill(els.variationPills, 'variation', state.variation);
+  selectPill(els.techniquePills, 'technique', state.technique);
+  els.bpmInput.value = state.bpm;
+  render();
+
+  // Preload the click sample on first user gesture (browsers require a gesture before AudioContext can start).
+  // We don't auto-start playback — just decode the buffer so the first Start press has zero latency.
+  function primeAudio(){
+    ensureAudio().catch(()=>{});
+    window.removeEventListener('pointerdown', primeAudio);
+    window.removeEventListener('keydown', primeAudio);
+  }
+  window.addEventListener('pointerdown', primeAudio, { once:true });
+  window.addEventListener('keydown', primeAudio, { once:true });
+
+})();
+</script>
+</body>
+</html>
