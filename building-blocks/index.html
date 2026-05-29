@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>The Building Blocks Workout | Jon Bjork Music</title>
-<meta name="description" content="A complete picking and legato workout built on three-note units. Every finger combination, every string crossing, both directions. Free interactive practice console from Jon Bjork.">
-<meta property="og:title" content="The Building Blocks Workout">
-<meta property="og:description" content="Three notes at a time. Every combination, every crossing. The David Russell approach to technique that actually transfers to real passages.">
+<title>The Lego Blocks Workout | Jon Bjork Music</title>
+<meta name="description" content="A complete picking and legato workout built on three-note units. Every finger combination, every string crossing, both directions. Free from Jon Bjork.">
+<meta property="og:title" content="The Lego Blocks Workout">
+<meta property="og:description" content="Three notes at a time. Every combination, every crossing. Practice the smaller units and any lick built from them gets easier.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#0d0d0d">
 
@@ -106,19 +106,6 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:48px 36px;position:relative;overflow:hidden;}
   .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--purple-lt));}
 
-  /* Principles grid */
-  .principles{text-align:center;}
-  .principles-header{margin-bottom:48px;}
-  .principles-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-  .principle-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:44px 32px;text-align:left;position:relative;overflow:hidden;transition:border-color 0.25s,background 0.25s,transform 0.3s var(--ease-out-smooth),box-shadow 0.35s;}
-  .principle-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--purple-lt));transform:scaleX(0);transform-origin:left;transition:transform 0.35s var(--ease-out-smooth);}
-  .principle-card:hover::before{transform:scaleX(1);}
-  .principle-card:hover{border-color:var(--accent-border);background:var(--navy);transform:translateY(-4px);box-shadow:0 12px 40px -12px rgba(124,58,237,0.35);}
-  .principle-num{font-family:'Oswald',sans-serif;font-weight:700;font-size:3.5rem;color:var(--purple);opacity:0.4;line-height:1;margin-bottom:22px;transition:opacity 0.25s;}
-  .principle-card:hover .principle-num{opacity:0.85;}
-  .principle-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.55rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--white);margin-bottom:16px;line-height:1.2;}
-  .principle-body{font-size:1.3rem;color:var(--muted);line-height:1.65;font-weight:300;}
-
   /* Video card */
   .video-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:44px 36px 36px;position:relative;overflow:hidden;}
   .video-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--purple-lt));}
@@ -164,15 +151,6 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   .legato-mark{font-family:'Oswald',sans-serif;font-weight:700;font-size:0.85rem;letter-spacing:0.04em;color:var(--purple-lt);line-height:1;min-height:0.85rem;}
   .fret-dot.now .legato-mark{color:var(--white);}
 
-  .order-row{display:flex;justify-content:center;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap;}
-  .order-num{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.8rem;color:var(--off);line-height:1;padding:6px 14px;background:var(--card);border:1px solid var(--border);border-radius:8px;min-width:42px;text-align:center;}
-  .order-num.now{background:var(--purple);border-color:var(--purple);color:var(--white);}
-  .order-num.played{color:var(--purple-lt);border-color:var(--accent-border);}
-  .order-num.dim{opacity:0;transition:opacity 0.18s ease;}
-  .order-num.resolution{background:var(--purple);border-color:var(--purple-lt);color:var(--white);transform:scale(1.18);box-shadow:0 0 32px rgba(124,58,237,0.55);transition:transform 0.18s var(--ease-out-expo),box-shadow 0.18s ease;}
-  .order-arrow{color:var(--dim);font-size:1.2rem;line-height:1;}
-  .order-arrow.dim{opacity:0;transition:opacity 0.18s ease;}
-
   .pattern-cue{font-size:0.95rem;color:var(--dim);font-style:italic;margin-top:6px;min-height:1.2em;}
 
   /* Transport */
@@ -206,6 +184,13 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   .reps-num{font-family:'Oswald',sans-serif;font-weight:700;font-size:2rem;color:var(--white);line-height:1;}
   .reps-label{font-family:'Oswald',sans-serif;font-weight:500;font-size:0.65rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--muted);}
 
+  /* Progress bar */
+  .progress-bar-wrap{margin:6px auto 22px;max-width:560px;}
+  .progress-bar-meta{display:flex;justify-content:space-between;align-items:baseline;font-family:'Oswald',sans-serif;font-size:0.78rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+  .progress-bar-meta .label{color:var(--purple-lt);margin-right:10px;}
+  .progress-bar{height:6px;background:#2f2f2f;border-radius:3px;overflow:hidden;}
+  .progress-bar-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--purple),var(--purple-lt));border-radius:3px;transition:width 0.3s var(--ease-out-smooth);}
+
   /* Group navigation */
   .stepper-wrap{padding-top:24px;border-top:1px solid var(--border);text-align:center;}
   .group-meta{display:flex;justify-content:center;align-items:baseline;gap:24px;margin-bottom:18px;flex-wrap:wrap;}
@@ -227,28 +212,58 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   .btn::after{content:'';position:absolute;top:0;left:-75%;width:50%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,0.18),transparent);transform:skewX(-20deg);transition:left 0.7s var(--ease-out-smooth);pointer-events:none;}
   .btn:hover::after{left:125%;}
 
+  /* Calendar card */
+  .calendar-card{padding:48px 36px 36px;text-align:center;}
+  .cal-head{margin-bottom:26px;}
+  .streak-badge{display:inline-flex;align-items:baseline;gap:14px;margin-bottom:28px;padding:14px 24px;background:var(--card2);border:1px solid var(--border);border-radius:12px;}
+  .streak-num{font-family:'Oswald',sans-serif;font-weight:700;font-size:3.2rem;color:var(--purple-lt);line-height:1;}
+  .streak-tag{font-family:'Oswald',sans-serif;font-weight:500;font-size:0.82rem;color:var(--muted);letter-spacing:0.22em;text-transform:uppercase;}
+
+  .cal-wrap{display:flex;justify-content:center;align-items:flex-start;gap:8px;margin:0 auto 6px;max-width:540px;}
+  .cal-dow{display:grid;grid-template-rows:repeat(7,1fr);gap:4px;font-family:'Oswald',sans-serif;font-size:0.62rem;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;align-self:stretch;}
+  .cal-dow span{display:flex;align-items:center;height:auto;}
+  .cal-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(7,1fr);grid-auto-flow:column;gap:4px;flex:1;}
+  .cal-cell{aspect-ratio:1;background:#2a2a2a;border-radius:2px;transition:background 0.15s ease,transform 0.15s ease;}
+  .cal-cell:hover{transform:scale(1.15);}
+  .cal-cell.practiced{background:var(--purple);}
+  .cal-cell.practiced:hover{background:var(--purple-lt);}
+  .cal-cell.today{outline:1.5px solid var(--purple-lt);outline-offset:1px;}
+  .cal-cell.future{background:#1a1a1a;opacity:0.5;}
+  .cal-foot{display:flex;justify-content:space-between;max-width:540px;margin:0 auto 26px;padding-left:24px;font-family:'Oswald',sans-serif;font-size:0.7rem;color:var(--dim);letter-spacing:0.22em;text-transform:uppercase;}
+
+  .cal-actions{display:inline-flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;}
+  .cal-btn{font-family:'Oswald',sans-serif;font-weight:600;font-size:0.82rem;letter-spacing:0.16em;text-transform:uppercase;padding:11px 20px;background:var(--card2);color:var(--off);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all 0.2s;display:inline-block;text-align:center;}
+  .cal-btn:hover{border-color:var(--accent-border);background:var(--navy);color:var(--white);}
+  .cal-info{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--card2);border:1px solid var(--border);color:var(--muted);font-family:'Lato',sans-serif;font-style:italic;font-weight:700;font-size:0.9rem;cursor:help;user-select:none;}
+  .cal-info:hover,.cal-info:focus{color:var(--white);border-color:var(--purple-lt);outline:none;}
+
+  @media(max-width:600px){
+    .cal-wrap{gap:4px;}
+    .cal-foot{padding-left:14px;}
+    .streak-num{font-size:2.6rem;}
+    .cal-actions{flex-direction:column;align-items:stretch;}
+    .cal-actions .cal-btn{padding:13px 20px;}
+    .cal-info{align-self:center;}
+  }
+
   /* CTA box */
   .cta-box{background:linear-gradient(135deg,var(--navy) 0%,#0d0830 50%,#120a2e 100%);border:1px solid var(--accent-border);border-radius:12px;padding:48px 32px;margin-bottom:24px;text-align:center;position:relative;overflow:hidden;}
   .cta-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--purple),var(--purple-lt));}
   .cta-eyebrow{display:block;font-family:'Oswald',sans-serif;font-weight:600;font-size:0.95rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--purple-lt);margin-bottom:14px;}
   .cta-box h3{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(1.75rem,4.5vw,2.75rem);letter-spacing:0.02em;text-transform:uppercase;color:var(--white);margin-bottom:18px;line-height:1.05;}
-  .cta-box p{font-size:1.2rem;color:var(--muted);max-width:480px;margin:0 auto 32px;line-height:1.6;}
+  .cta-box p{font-size:1.2rem;color:var(--muted);max-width:520px;margin:0 auto 24px;line-height:1.6;}
+  .cta-list{list-style:none;padding:0;margin:0 auto 32px;max-width:460px;text-align:left;display:flex;flex-direction:column;gap:10px;}
+  .cta-list li{font-size:1.1rem;color:var(--off);line-height:1.5;padding-left:26px;position:relative;}
+  .cta-list li::before{content:'';position:absolute;left:4px;top:0.7em;width:10px;height:2px;background:var(--purple-lt);border-radius:1px;}
 
   /* Reveal */
   .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s var(--ease-out-expo),transform 0.8s var(--ease-out-expo);}
   .reveal.visible{opacity:1;transform:translateY(0);}
-  .principles-grid .principle-card{opacity:0;transform:translateY(28px);transition:opacity 0.7s var(--ease-out-expo),transform 0.7s var(--ease-out-expo);}
-  .principles-grid.visible .principle-card{opacity:1;transform:translateY(0);}
-  .principles-grid.visible .principle-card:nth-child(1){transition-delay:0.05s;}
-  .principles-grid.visible .principle-card:nth-child(2){transition-delay:0.18s;}
-  .principles-grid.visible .principle-card:nth-child(3){transition-delay:0.31s;}
-
   @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
   [hidden]{display:none !important;}
 
   /* Responsive */
   @media(max-width:880px){
-    .principles-grid{grid-template-columns:1fr;gap:14px;}
     .mode-row{grid-template-columns:1fr;gap:18px;padding-bottom:22px;}
   }
   @media(max-width:600px){
@@ -256,7 +271,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     .lead-section{margin-bottom:48px;}.hero{margin-bottom:48px;}
     .card{padding:36px 20px;}.video-card{padding:32px 18px 22px;}
     .console{padding:32px 18px 28px;}
-    .cta-box{padding:36px 22px;}.principle-card{padding:36px 26px;}
+    .cta-box{padding:36px 22px;}
     .btn{padding:18px 36px;}
     .site-header{padding:14px 18px;height:60px;}.site-header-divider{height:18px;}
     .pattern{padding:24px 16px 22px;}
@@ -272,7 +287,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   }
   @media(prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:0.01ms !important;transition-duration:0.01ms !important;}
-    .hero,.reveal,.principles-grid .principle-card{opacity:1 !important;transform:none !important;}
+    .hero,.reveal{opacity:1 !important;transform:none !important;}
   }
 </style>
 </head>
@@ -289,37 +304,11 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
 <main>
 
   <section class="hero">
-    <span class="eyebrow eyebrow-hero">Free Practice Console</span>
-    <h1>The Building<br>Blocks Workout</h1>
+    <h1>The Lego<br>Blocks Workout</h1>
     <div class="hero-sub-stack">
-      <p class="hero-sub">Three notes at a time. Every finger combination, every string crossing, both directions. The smallest unit of technique, trained on purpose.</p>
-      <p class="hero-sub-strong">This is not a lick. It's the alphabet.</p>
-      <p class="hero-sub">Long passages are these three-note shapes stacked. If you only ever drill the long passage, every new one is a new thing. Drill the alphabet and the passages get easy.</p>
+      <p class="hero-sub">Three notes at a time. Every finger combination, every string crossing, both directions.</p>
+      <p class="hero-sub">You can break down most longer licks and find the smaller units they're stacked from. Practice only the long passage and every new passage feels like a new thing. Practice the smaller units and every lick built on them gets better.</p>
       <p class="hero-sub-summary">4 finger combinations &middot; 16 string crossings &middot; Picking or legato</p>
-    </div>
-  </section>
-
-  <section class="principles lead-section reveal" aria-labelledby="principles-title">
-    <div class="principles-header">
-      <span class="eyebrow eyebrow-section">Why this works</span>
-      <h2 class="section-title" id="principles-title">Three notes is the right unit.</h2>
-    </div>
-    <div class="principles-grid" id="principles-grid">
-      <article class="principle-card">
-        <div class="principle-num">01</div>
-        <h3 class="principle-title">Russell's principle</h3>
-        <p class="principle-body">Classical guitarist David Russell teaches that the smallest building blocks deserve their own practice time. Every long passage is these tiny units stacked. Train the units. The passages take care of themselves.</p>
-      </article>
-      <article class="principle-card">
-        <div class="principle-num">02</div>
-        <h3 class="principle-title">Cover every crossing</h3>
-        <p class="principle-body">Three notes inside a string feels nothing like three notes that cross strings. Two-plus-one and one-plus-two each have their own picking and timing problem. You have to play all of them on purpose, not just the comfortable ones.</p>
-      </article>
-      <article class="principle-card">
-        <div class="principle-num">03</div>
-        <h3 class="principle-title">One workout, two techniques</h3>
-        <p class="principle-body">The same patterns serve alternate picking and legato. Picking trains the right hand's response to each crossing. Legato trains your timing without the pick covering for you. Same shapes, two different muscles.</p>
-      </article>
     </div>
   </section>
 
@@ -327,13 +316,13 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     <div class="video-header">
       <span class="eyebrow">Watch the lesson</span>
       <h2 class="section-title section-title-card" id="video-title">The full walkthrough</h2>
-      <p>The system explained, with the picking and legato demonstrations. Then jump into the console below.</p>
+      <p>The system explained, with the picking and legato demonstrations. Then jump into the workout below.</p>
     </div>
     <div class="video-frame">
       <!-- TODO: swap VIDEO_ID for the actual video once filmed -->
       <iframe
         src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
-        title="The Building Blocks Workout"
+        title="The Lego Blocks Workout"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
         loading="lazy"
@@ -342,7 +331,6 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   </section>
 
   <section id="console" class="card console lead-section reveal" aria-labelledby="console-title">
-    <span class="eyebrow">Practice console</span>
     <h2 class="section-title section-title-card" id="console-title">Pick your shape and play.</h2>
 
     <div class="mode-row">
@@ -373,7 +361,6 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
 
     <div class="pattern">
       <div class="pattern-meta" id="pattern-meta"></div>
-      <div class="order-row" id="order-row"></div>
       <div class="fretboard" id="fretboard"></div>
       <p class="pattern-cue" id="pattern-cue"></p>
     </div>
@@ -388,6 +375,14 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
             <span class="tempo-unit">BPM</span>
           </div>
           <button type="button" class="tempo-step" id="bpm-up" aria-label="Increase BPM">+</button>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <span class="control-label">Subdivision</span>
+        <div class="pill-group" id="subdivision-pills">
+          <button type="button" class="pill selected" data-sub="off">Off</button>
+          <button type="button" class="pill" data-sub="eighths">8ths</button>
         </div>
       </div>
 
@@ -407,6 +402,14 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
       </div>
     </div>
 
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-meta">
+        <span><span class="label">Through this fingering</span><span id="progress-time">0:00 / 0:00</span></span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-bar-fill" id="progress-fill"></div></div>
+    </div>
+
     <div class="stepper-wrap">
       <div class="group-meta">
         <span class="group-counter"><span class="label">Group</span> <span id="step-counter">1</span><span class="dim"> / <span id="step-total">16</span></span></span>
@@ -419,10 +422,47 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     </div>
   </section>
 
+  <section class="card calendar-card lead-section reveal" aria-labelledby="calendar-title">
+    <div class="cal-head">
+      <span class="eyebrow">Don't break the chain</span>
+      <h2 class="section-title section-title-card" id="calendar-title">Show up. Every day.</h2>
+    </div>
+
+    <div class="streak-badge">
+      <span class="streak-num" id="streak-num">0</span>
+      <span class="streak-tag"><span id="streak-label">days</span> in a row</span>
+    </div>
+
+    <div class="cal-wrap">
+      <div class="cal-dow" aria-hidden="true">
+        <span></span><span>M</span><span></span><span>W</span><span></span><span>F</span><span></span>
+      </div>
+      <div class="cal-grid" id="cal-grid" role="img" aria-label="Practice calendar, last 12 weeks"></div>
+    </div>
+    <div class="cal-foot">
+      <span id="cal-from">12 weeks ago</span>
+      <span>Today</span>
+    </div>
+
+    <div class="cal-actions">
+      <button type="button" class="cal-btn" id="backup-btn">&darr; Download backup</button>
+      <label class="cal-btn" for="restore-input">&uarr; Restore from backup</label>
+      <input type="file" id="restore-input" accept=".json,application/json" hidden>
+      <span class="cal-info" tabindex="0" role="note"
+            aria-label="Your streak lives in your browser. If you clear browser data, switch devices, or use private mode, you lose it. Back up at least weekly."
+            title="Your streak lives in your browser. If you clear browser data, switch devices, or use private mode, you lose it. Back up at least weekly.">i</span>
+    </div>
+  </section>
+
   <div class="cta-box reveal">
     <span class="cta-eyebrow">Practice Room Pro</span>
-    <h3>One workout. A whole system waits inside.</h3>
-    <p>The Building Blocks workout is a slice. Practice Room Pro is the full structured training: daily routines, 8-week Intensives for Alternate Picking, Legato, and Sweep Picking, full tabs, breakdown videos, and a community working the same material.</p>
+    <h3>Everything I teach. Plus me, every day.</h3>
+    <ul class="cta-list">
+      <li>I'm in the community every day, answering questions with video or text</li>
+      <li>Weekly live Q&amp;A streams</li>
+      <li>Every course I've made, plus the Practice Lab app</li>
+      <li>8-week Intensives in Alternate Picking, Legato, and Sweep Picking</li>
+    </ul>
     <a href="https://www.jonbjorkmusic.com/start" class="btn btn-purple">Step Inside Practice Room Pro</a>
   </div>
 
@@ -542,6 +582,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     variation:'three',
     technique:'picking',
     direction:'asc',
+    subdivision:'off',    // 'off' | 'eighths'
     position:0,
     bpm:70,
     playing:false,
@@ -551,13 +592,14 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     resolutionPos:null    // group index being resolved (set during resolution beat; null otherwise)
   };
 
-  // Local storage (key bumped to v2: removed autoadvance/repsTarget)
-  const LS_KEY = 'bbw_settings_v2';
+  // Local storage (key bumped to v3: added subdivision)
+  const LS_KEY = 'bbw_settings_v3';
   function saveSettings(){
     try{
       localStorage.setItem(LS_KEY, JSON.stringify({
         combo:state.combo, variation:state.variation,
-        technique:state.technique, bpm:state.bpm
+        technique:state.technique, bpm:state.bpm,
+        subdivision:state.subdivision
       }));
     }catch(e){}
   }
@@ -570,6 +612,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
       if(s.variation === 'three' || s.variation === 'loop') state.variation = s.variation;
       if(s.technique === 'picking' || s.technique === 'legato') state.technique = s.technique;
       if(typeof s.bpm === 'number' && s.bpm >= 30 && s.bpm <= 240) state.bpm = s.bpm;
+      if(s.subdivision === 'off' || s.subdivision === 'eighths') state.subdivision = s.subdivision;
     }catch(e){}
   }
   loadSettings();
@@ -595,8 +638,8 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     comboPills:$('combo-pills'),
     variationPills:$('variation-pills'),
     techniquePills:$('technique-pills'),
+    subdivisionPills:$('subdivision-pills'),
     patternMeta:$('pattern-meta'),
-    orderRow:$('order-row'),
     fretboard:$('fretboard'),
     patternCue:$('pattern-cue'),
     bpmInput:$('bpm-input'),
@@ -607,6 +650,9 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     repsNum:$('reps-num'),
     repsLabel:$('reps-label'),
     phaseHint:$('phase-hint'),
+    progressFill:$('progress-fill'),
+    progressTime:$('progress-time'),
+    progressPct:$('progress-pct'),
     stepCounter:$('step-counter'),
     stepTotal:$('step-total'),
     stepDirection:$('step-direction'),
@@ -614,6 +660,36 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     nextBtn:$('next-btn'),
     principlesGrid:$('principles-grid')
   };
+
+  // === Progress / timer ===
+  function ticksPerGroup(){
+    return repsPerGroup() * notesPerGroup() + subPerBeat();
+  }
+  function totalSequenceTicks(){
+    return getSequence().length * ticksPerGroup();
+  }
+  function elapsedSequenceTicks(){
+    const tpg = ticksPerGroup();
+    const partial = state.playing ? Math.max(0, tickIndex - groupTickStart) : 0;
+    // Clamp partial so it never reads beyond a single group's worth (during count-in before pattern, tickIndex < groupTickStart, so Math.max yields 0).
+    return state.position * tpg + Math.min(partial, tpg);
+  }
+  function formatTime(seconds){
+    if(!isFinite(seconds) || seconds < 0) seconds = 0;
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${m}:${s.toString().padStart(2, '0')}`;
+  }
+  function updateProgress(){
+    if(!els.progressFill) return;
+    const total = totalSequenceTicks();
+    const elapsed = elapsedSequenceTicks();
+    const td = tickDur();
+    const pct = total > 0 ? Math.min(100, (elapsed / total) * 100) : 0;
+    els.progressFill.style.width = pct + '%';
+    if(els.progressTime) els.progressTime.textContent = `${formatTime(elapsed * td)} / ${formatTime(total * td)}`;
+    if(els.progressPct) els.progressPct.textContent = Math.round(pct) + '%';
+  }
 
   // === Rendering ===
   function render(){
@@ -660,6 +736,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     // Reps label
     els.repsLabel.textContent = `of ${repsPerGroup()}`;
     updateRepDisplay();
+    updateProgress();
 
     // Direction control
     addDirectionToggle();
@@ -676,28 +753,6 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
 
     const isResolution = state.phase === 'resolution';
     const isActiveBeat = state.phase !== 'idle' && state.phase !== 'countin';
-
-    // Order row
-    els.orderRow.innerHTML = '';
-    group.fingers.forEach((f, i)=>{
-      if(i > 0){
-        const arrow = document.createElement('span');
-        arrow.className = 'order-arrow' + (isResolution ? ' dim' : '');
-        arrow.innerHTML = '&rarr;';
-        els.orderRow.appendChild(arrow);
-      }
-      const num = document.createElement('span');
-      let cls = 'order-num';
-      if(i === state.currentNoteIdx && isActiveBeat) cls += ' now';
-      else if(state.phase === 'pattern' && state.currentNoteIdx >= 0 && i < state.currentNoteIdx) cls += ' played';
-      if(isResolution){
-        if(i === state.currentNoteIdx) cls += ' resolution';
-        else cls += ' dim';
-      }
-      num.className = cls;
-      num.textContent = f;
-      els.orderRow.appendChild(num);
-    });
 
     // Fretboard
     els.fretboard.innerHTML = '';
@@ -830,11 +885,149 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   function next(){ jumpTo(state.position + 1); }
   function prev(){ jumpTo(state.position - 1); }
 
+  // === Practice tracking (the "chain") ===
+  const PRACTICE_KEY = 'bbw_practice_days_v1';
+
+  function isoDate(d){
+    return `${d.getFullYear()}-${(d.getMonth()+1).toString().padStart(2,'0')}-${d.getDate().toString().padStart(2,'0')}`;
+  }
+  function todayISO(){ return isoDate(new Date()); }
+  function loadPracticeDays(){
+    try{ return JSON.parse(localStorage.getItem(PRACTICE_KEY) || '[]'); }
+    catch(e){ return []; }
+  }
+  function savePracticeDays(days){
+    try{ localStorage.setItem(PRACTICE_KEY, JSON.stringify(days)); }catch(e){}
+  }
+  let _markedToday = false;   // session-level guard; cheap
+  function markPracticedToday(){
+    if(_markedToday) return;
+    const today = todayISO();
+    const days = loadPracticeDays();
+    if(!days.includes(today)){
+      days.push(today);
+      days.sort();
+      savePracticeDays(days);
+    }
+    _markedToday = true;
+    renderCalendar();
+  }
+  function computeStreak(days){
+    if(!days.length) return 0;
+    const set = new Set(days);
+    const today = new Date(); today.setHours(0,0,0,0);
+    // Anchor on today if practiced today, otherwise yesterday (allows a 1-day grace).
+    let cursor = new Date(today);
+    if(!set.has(isoDate(cursor))){
+      cursor.setDate(cursor.getDate() - 1);
+      if(!set.has(isoDate(cursor))) return 0;
+    }
+    let streak = 0;
+    while(set.has(isoDate(cursor))){
+      streak++;
+      cursor.setDate(cursor.getDate() - 1);
+    }
+    return streak;
+  }
+
+  function renderCalendar(){
+    const grid = document.getElementById('cal-grid');
+    if(!grid) return;
+    const days = loadPracticeDays();
+    const set = new Set(days);
+
+    // Anchor: this week's Sunday. Go back 11 more weeks → 12 weeks total.
+    const today = new Date(); today.setHours(0,0,0,0);
+    const dow = today.getDay();
+    const thisSunday = new Date(today);
+    thisSunday.setDate(thisSunday.getDate() - dow);
+    const start = new Date(thisSunday);
+    start.setDate(start.getDate() - 7 * 11);
+
+    grid.innerHTML = '';
+    for(let i = 0; i < 84; i++){
+      const d = new Date(start);
+      d.setDate(d.getDate() + i);
+      d.setHours(0,0,0,0);
+      const iso = isoDate(d);
+      const cell = document.createElement('div');
+      cell.className = 'cal-cell';
+      if(d > today) cell.classList.add('future');
+      else if(set.has(iso)) cell.classList.add('practiced');
+      if(d.getTime() === today.getTime()) cell.classList.add('today');
+      cell.title = iso + (set.has(iso) ? ' · practiced' : (d > today ? '' : ' · no practice'));
+      grid.appendChild(cell);
+    }
+
+    const streak = computeStreak(days);
+    const streakNum = document.getElementById('streak-num');
+    const streakLabel = document.getElementById('streak-label');
+    if(streakNum) streakNum.textContent = streak;
+    if(streakLabel) streakLabel.textContent = streak === 1 ? 'day' : 'days';
+
+    const calFrom = document.getElementById('cal-from');
+    if(calFrom){
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      calFrom.textContent = `${months[start.getMonth()]} ${start.getDate()}`;
+    }
+  }
+
+  // === Backup / restore ===
+  function downloadBackup(){
+    const data = { _app:'lego-blocks', _exportedAt:new Date().toISOString() };
+    for(let i = 0; i < localStorage.length; i++){
+      const k = localStorage.key(i);
+      if(k && k.startsWith('bbw_')) data[k] = localStorage.getItem(k);
+    }
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type:'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `lego-blocks-backup-${todayISO()}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(()=> URL.revokeObjectURL(url), 1000);
+  }
+  function restoreBackup(file){
+    const reader = new FileReader();
+    reader.onload = e => {
+      let data;
+      try{ data = JSON.parse(e.target.result); }
+      catch(err){ alert('Could not read backup file: ' + err.message); return; }
+      let restored = 0;
+      for(const k in data){
+        if(k.startsWith('bbw_')){
+          localStorage.setItem(k, data[k]);
+          restored++;
+        }
+      }
+      if(restored === 0){
+        alert('No Lego Blocks backup data found in that file.');
+        return;
+      }
+      _markedToday = false;
+      loadSettings();
+      if(typeof selectPill === 'function'){
+        selectPill(els.comboPills, 'combo', state.combo);
+        selectPill(els.variationPills, 'variation', state.variation);
+        selectPill(els.techniquePills, 'technique', state.technique);
+        selectPill(els.subdivisionPills, 'sub', state.subdivision);
+      }
+      els.bpmInput.value = state.bpm;
+      renderCalendar();
+      render();
+      alert(`Restored ${restored} item${restored===1?'':'s'} from backup.`);
+    };
+    reader.readAsText(file);
+  }
+
   // === Audio metronome ===
-  // Uses the same click sample as /speedbuilder/ for sonic consistency across lead magnets.
+  // Click sample from /speedbuilder/, hihat sample from /legato/.
   let audioCtx = null;
   let clickBuffer = null;
-  let clickPromise = null;   // single in-flight load — both primeAudio and start() await this
+  let hihatBuffer = null;
+  let samplesPromise = null; // single in-flight parallel load for both samples
   let nextTickTime = 0;
   let tickIndex = 0;         // monotonic beat counter since play started
   let groupTickStart = 0;    // tick index at which the current group's beat 0 falls
@@ -843,18 +1036,23 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   const SCHEDULE_AHEAD = 0.12;
   const COUNTIN_BEATS = 4;
 
-  function loadClick(ctx){
-    if(clickPromise) return clickPromise;
-    clickPromise = fetch('click.wav', { cache:'force-cache' })
+  function loadSamples(ctx){
+    if(samplesPromise) return samplesPromise;
+    const load = url => fetch(url, { cache:'force-cache' })
       .then(r => r.arrayBuffer())
-      .then(ab => ctx.decodeAudioData(ab))
-      .then(buf => { clickBuffer = buf; return buf; })
+      .then(ab => ctx.decodeAudioData(ab));
+    samplesPromise = Promise.all([load('click.wav'), load('hihat.wav')])
+      .then(([click, hihat]) => {
+        clickBuffer = click;
+        hihatBuffer = hihat;
+        return true;
+      })
       .catch(e => {
-        console.warn('Click sample failed to load', e);
-        clickPromise = null;   // allow a retry on the next start
-        return null;
+        console.warn('Audio samples failed to load', e);
+        samplesPromise = null;
+        return false;
       });
-    return clickPromise;
+    return samplesPromise;
   }
 
   async function ensureAudio(){
@@ -866,25 +1064,27 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     if(audioCtx.state === 'suspended' || audioCtx.state === 'interrupted'){
       try{ await audioCtx.resume(); }catch(e){}
     }
-    if(!clickBuffer){
-      await loadClick(audioCtx);
+    if(!clickBuffer || !hihatBuffer){
+      await loadSamples(audioCtx);
     }
     return audioCtx;
   }
 
-  // Match /speedbuilder/ exactly: single gain across every click, no accent variation, no synth fallback.
-  // If the WAV failed to load, stay silent rather than substituting a different sound.
-  function playClick(time){
-    if(!audioCtx || !clickBuffer) return;
+  function playSample(buf, time, gain){
+    if(!audioCtx || !buf) return;
     try{
       const src = audioCtx.createBufferSource();
-      src.buffer = clickBuffer;
-      const gain = audioCtx.createGain();
-      gain.gain.value = 0.95;
-      src.connect(gain).connect(audioCtx.destination);
+      src.buffer = buf;
+      const g = audioCtx.createGain();
+      g.gain.value = gain;
+      src.connect(g).connect(audioCtx.destination);
       src.start(time);
     }catch(e){}
   }
+  // Match /speedbuilder/ exactly: single gain across every click, no accent variation, no synth fallback.
+  function playClick(time){ playSample(clickBuffer, time, 0.95); }
+  // Same hihat gain as /legato/ uses (0.6).
+  function playHihat(time){ playSample(hihatBuffer, time, 0.6); }
 
   // === Scheduler with phase machine ===
   // Layout per group: (rep 0 notes) (rep 1 notes) ... (rep R-1 notes) (resolution beat).
@@ -892,13 +1092,19 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   //   4-note loops:   R=3, N=4 → 13 beats per group.
   // Initial count-in: 4 beats before the first group.
   // No count-in between groups — the resolution beat IS the segue.
+  // Ticks-per-beat depends on subdivision. When 8ths is on, the tick rate doubles so each
+  // note in the pattern lines up with an 8th note. The CLICK still fires on every quarter
+  // beat; the HIHAT fires on every tick (8th). Resolution always holds for one full beat,
+  // which means subPerBeat ticks (= 2 when 8ths, 1 when off).
+  function subPerBeat(){ return state.subdivision === 'eighths' ? 2 : 1; }
+  function tickDur(){ return (60 / state.bpm) / subPerBeat(); }
+
   function scheduler(){
     if(!state.playing || !audioCtx) return;
-    const beatDur = 60 / state.bpm;
     while(nextTickTime < audioCtx.currentTime + SCHEDULE_AHEAD){
       scheduleTick(tickIndex, nextTickTime);
       tickIndex++;
-      nextTickTime += beatDur;
+      nextTickTime += tickDur();
     }
     schedulerTimer = setTimeout(scheduler, LOOKAHEAD_MS);
   }
@@ -906,17 +1112,21 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   function scheduleTick(tick, audioTime){
     const delaySec = audioTime - audioCtx.currentTime;
     const visualMs = Math.max(0, delaySec * 1000);
+    const SPB = subPerBeat();
+    const isBeatTick = (tick % SPB === 0);
+    const COUNTIN_TICKS = COUNTIN_BEATS * SPB;
 
-    // --- Count-in ---
-    if(tick < COUNTIN_BEATS){
-      playClick(audioTime);
-      const n = tick + 1;
+    // --- Count-in --- (always 4 quarter beats, regardless of subdivision; no hihat in countin)
+    if(tick < COUNTIN_TICKS){
+      if(isBeatTick) playClick(audioTime);
+      const beatNum = Math.floor(tick / SPB) + 1;
       setTimeout(()=>{
         state.phase = 'countin';
         state.currentNoteIdx = -1;
         updateRepDisplay();
-        updatePhaseHint(`Count-in ${n} of ${COUNTIN_BEATS}`);
+        if(isBeatTick) updatePhaseHint(`Count-in ${beatNum} of ${COUNTIN_BEATS}`);
         renderPatternArea();
+        updateProgress();
       }, visualMs);
       return;
     }
@@ -926,10 +1136,14 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     const N = notesPerGroup();
     const R = repsPerGroup();
 
+    // Audio for every pattern / resolution tick: click on the beat, hihat on every tick when 8ths.
+    if(isBeatTick) playClick(audioTime);
+    if(state.subdivision === 'eighths') playHihat(audioTime);
+
     if(t < R * N){
+      // Pattern — one note per tick (so notes advance at the 8th rate when subdiv is on).
       const rep = Math.floor(t / N);
       const note = t % N;
-      playClick(audioTime);
       setTimeout(()=>{
         state.phase = 'pattern';
         state.currentRep = rep;
@@ -937,33 +1151,32 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
         updateRepDisplay();
         updatePhaseHint(`Rep ${rep + 1} of ${R}`);
         renderPatternArea();
+        updateProgress();
       }, visualMs);
     } else if(t === R * N){
-      // Resolution beat — re-attack the first note of THIS group and hold for one beat.
-      playClick(audioTime);
-
-      // Capture the resolving group's index BEFORE advancing position. The resolution render
-      // needs to display the just-completed group's first note, not the next group's.
+      // First tick of resolution — re-attack the first note.
       const resolvingPos = state.position;
       setTimeout(()=>{
         state.phase = 'resolution';
-        // currentRep = R so pickStroke computes absAttack = R*N (the 13th attack), which lands
-        // on a downstroke in strict alternation. The rep DISPLAY ignores this and shows "R of R"
-        // because updateRepDisplay() special-cases the resolution phase.
+        // currentRep = R so pickStroke uses absAttack = R*N (always a downstroke).
         state.currentRep = R;
         state.currentNoteIdx = 0;
         state.resolutionPos = resolvingPos;
         updateRepDisplay();
         updatePhaseHint('Resolve · hold');
         renderPatternArea();
+        updateProgress();
+        // First resolution of the session = real practice happened today.
+        markPracticedToday();
       }, visualMs);
 
-      // Audio scheduling needs position advanced now so the next scheduled tick lands on the new group.
+      // Advance position now so subsequent scheduled ticks land in the new group.
+      // The resolution + hold occupies SPB ticks total (= one quarter beat).
       const seq = getSequence();
       if(state.position < seq.length - 1){
         state.position += 1;
-        groupTickStart = tick + 1;
-        // Repaint the chrome (counter, meta tags, cue) shortly before the new group's first beat.
+        groupTickStart = tick + SPB;
+        const beatMs = (60 / state.bpm) * 1000;
         setTimeout(()=>{
           if(!state.playing) return;
           state.resolutionPos = null;
@@ -971,14 +1184,15 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
           state.currentRep = 0;
           render();
           updatePhaseHint('Next group…');
-        }, visualMs + (60 / state.bpm) * 1000 * 0.85);
+        }, visualMs + beatMs * 0.85);
       } else {
-        // Last group — let the resolution ring out, then stop.
+        const beatMs = (60 / state.bpm) * 1000;
         setTimeout(()=>{
           if(state.playing) stop();
-        }, visualMs + (60 / state.bpm) * 1000);
+        }, visualMs + beatMs);
       }
     }
+    // t > R*N: the hold tick(s) — audio handled above, no visual change (resolution note still shown).
   }
 
   async function start(){
@@ -989,7 +1203,8 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     state.currentNoteIdx = -1;
     state.currentRep = 0;
     tickIndex = 0;
-    groupTickStart = COUNTIN_BEATS;   // first group begins at tick 4
+    // First group begins right after the count-in. Count-in length in ticks scales with subdivision.
+    groupTickStart = COUNTIN_BEATS * subPerBeat();
     nextTickTime = ctx.currentTime + 0.08;
     els.playBtn.classList.add('playing');
     els.playLabel.textContent = 'Stop';
@@ -1023,10 +1238,8 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     state.currentRep = 0;
     state.resolutionPos = null;
     state.phase = state.playing ? state.phase : 'idle';
-    // If currently playing, snap the new group to start on the next beat.
-    if(state.playing){
-      groupTickStart = tickIndex;
-    }
+    // Snap the within-group tick offset to zero so the progress bar reads cleanly.
+    groupTickStart = tickIndex;
   }
 
   els.comboPills.addEventListener('click', e => {
@@ -1060,18 +1273,35 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     render();
   });
 
+  els.subdivisionPills.addEventListener('click', e => {
+    const b = e.target.closest('.pill');
+    if(!b) return;
+    if(state.subdivision === b.dataset.sub) return;
+    state.subdivision = b.dataset.sub;
+    selectPill(els.subdivisionPills, 'sub', state.subdivision);
+    saveSettings();
+    updateProgress();   // total time depends on subdivision; refresh the timer
+    // Subdivision changes the tick rate — restart from count-in so the timing realigns cleanly.
+    if(state.playing){
+      stop();
+      start();
+    }
+  });
+
   function setBpm(v){
     const n = Math.max(30, Math.min(240, Math.round(v) || 70));
     state.bpm = n;
     els.bpmInput.value = n;
     saveSettings();
+    updateProgress();   // total time depends on BPM
   }
-  els.bpmUp.addEventListener('click', ()=> setBpm(state.bpm + 5));
-  els.bpmDown.addEventListener('click', ()=> setBpm(state.bpm - 5));
+  els.bpmUp.addEventListener('click', ()=> setBpm(state.bpm + 1));
+  els.bpmDown.addEventListener('click', ()=> setBpm(state.bpm - 1));
   els.bpmInput.addEventListener('input', e => {
     const v = parseInt(e.target.value, 10);
     if(!isNaN(v)) state.bpm = Math.max(30, Math.min(240, v));
     saveSettings();
+    updateProgress();
   });
   els.bpmInput.addEventListener('blur', e => setBpm(parseInt(e.target.value, 10)));
 
@@ -1094,6 +1324,27 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     }
   });
 
+  // Backup / restore wiring
+  const backupBtn = document.getElementById('backup-btn');
+  const restoreInput = document.getElementById('restore-input');
+  if(backupBtn) backupBtn.addEventListener('click', downloadBackup);
+  if(restoreInput) restoreInput.addEventListener('change', e => {
+    const f = e.target.files && e.target.files[0];
+    if(f) restoreBackup(f);
+    e.target.value = ''; // allow re-uploading the same file
+  });
+
+  // Date-rollover guard: if the page is left open across midnight, reset the today flag.
+  let lastSeenDate = todayISO();
+  setInterval(()=>{
+    const now = todayISO();
+    if(now !== lastSeenDate){
+      lastSeenDate = now;
+      _markedToday = false;
+      renderCalendar();
+    }
+  }, 60_000);
+
   // Reveal on scroll
   const io = new IntersectionObserver(entries => {
     entries.forEach(en => {
@@ -1106,8 +1357,10 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   selectPill(els.comboPills, 'combo', state.combo);
   selectPill(els.variationPills, 'variation', state.variation);
   selectPill(els.techniquePills, 'technique', state.technique);
+  selectPill(els.subdivisionPills, 'sub', state.subdivision);
   els.bpmInput.value = state.bpm;
   render();
+  renderCalendar();
 
   // Preload the click sample on first user gesture (browsers require a gesture before AudioContext can start).
   // We don't auto-start playback — just decode the buffer so the first Start press has zero latency.
