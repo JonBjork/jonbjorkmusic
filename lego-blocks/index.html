@@ -581,7 +581,6 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     combo:'1-2-4',
     variation:'three',
     technique:'picking',
-    direction:'asc',
     subdivision:'off',    // 'off' | 'eighths'
     position:0,
     bpm:70,
@@ -591,6 +590,9 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     phase:'idle',         // 'idle' | 'countin' | 'pattern' | 'resolution'
     resolutionPos:null    // group index being resolved (set during resolution beat; null otherwise)
   };
+
+  // The 3-note variation now flows continuously: 16 ascending + 16 descending = 32 groups per combo.
+  const ASC_LEN = 16;
 
   // Local storage (key bumped to v3: added subdivision)
   const LS_KEY = 'bbw_settings_v3';
@@ -618,10 +620,14 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   loadSettings();
 
   // Computed
+  // For the 3-note variation, the full workout flows ascending then descending in one continuous
+  // sequence (32 groups). The resolution beat at the end of group 16 (3-on-e [1,2,4]) acts as the
+  // pivot into group 17 (3-on-e [4,2,1]), then the descending traversal mirrors the ascending one.
   function getSequence(){
-    return state.variation === 'three'
-      ? gen3Note(state.combo, state.direction)
-      : gen4NoteLoops(state.combo);
+    if(state.variation === 'three'){
+      return [...gen3Note(state.combo, 'asc'), ...gen3Note(state.combo, 'desc')];
+    }
+    return gen4NoteLoops(state.combo);
   }
   function notesPerGroup(){
     return state.variation === 'three' ? 3 : 4;
@@ -697,10 +703,12 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     if(state.position >= seq.length) state.position = 0;
     const group = seq[state.position];
 
-    // Meta tags
+    // Meta tags. For the 3-note variation, direction is derived from position:
+    // groups 1-16 are ascending, 17-32 are descending.
     const crossLabel = group.crossing === '3+0' ? 'Single string' : (group.crossing === '2+1' ? '2 + 1 crossing' : '1 + 2 crossing');
+    const descending = state.variation === 'three' && state.position >= ASC_LEN;
     const dirLabel = state.variation === 'three'
-      ? (state.direction === 'asc' ? 'Ascending' : 'Descending')
+      ? (descending ? 'Descending' : 'Ascending')
       : 'Looped';
     els.patternMeta.innerHTML = `
       <span class="info-tag active">${group.label}</span>
@@ -717,7 +725,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
         ? 'Strict alternate picking. Pick strokes flip every rep — odd reps go D-U-D, even reps go U-D-U.'
         : 'Strict alternate picking. Four notes per loop means picking stays D-U-D-U every rep.';
     } else {
-      cue = state.direction === 'desc'
+      cue = descending
         ? 'Pick on every string change. Pull-off descending within a string.'
         : 'Pick on every string change. Hammer ascending within a string.';
     }
@@ -726,9 +734,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     // Group counter
     els.stepCounter.textContent = (state.position + 1);
     els.stepTotal.textContent = seq.length;
-    els.stepDirection.textContent = state.variation === 'three'
-      ? (state.direction === 'asc' ? 'Ascending' : 'Descending')
-      : 'Loops';
+    els.stepDirection.textContent = state.variation === 'three' ? dirLabel : 'Loops';
 
     els.prevBtn.disabled = state.position === 0;
     els.nextBtn.disabled = state.position === seq.length - 1;
@@ -737,9 +743,6 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     els.repsLabel.textContent = `of ${repsPerGroup()}`;
     updateRepDisplay();
     updateProgress();
-
-    // Direction control
-    addDirectionToggle();
   }
 
   function renderPatternArea(){
@@ -839,40 +842,6 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   }
   function updatePhaseHint(text){
     if(els.phaseHint) els.phaseHint.textContent = text || '';
-  }
-
-  function addDirectionToggle(){
-    // Only show for the 3-note variation. Mounted just above the nav row.
-    let host = document.getElementById('direction-toggle-host');
-    if(!host){
-      host = document.createElement('div');
-      host.id = 'direction-toggle-host';
-      host.style.marginTop = '14px';
-      host.style.marginBottom = '4px';
-      host.style.textAlign = 'center';
-      const navRow = document.querySelector('.nav-row');
-      navRow.parentNode.insertBefore(host, navRow);
-    }
-    if(state.variation !== 'three'){
-      host.innerHTML = '';
-      return;
-    }
-    host.innerHTML = `
-      <div style="display:inline-flex;gap:6px;align-items:center;">
-        <span class="control-label" style="margin-right:6px;">Direction</span>
-        <button type="button" class="pill ${state.direction === 'asc' ? 'selected' : ''}" data-dir="asc">Ascending</button>
-        <button type="button" class="pill ${state.direction === 'desc' ? 'selected' : ''}" data-dir="desc">Descending</button>
-      </div>
-    `;
-    host.querySelectorAll('button').forEach(b => {
-      b.addEventListener('click', ()=>{
-        if(b.dataset.dir === state.direction) return;
-        state.direction = b.dataset.dir;
-        state.position = 0;
-        resetPlayheadForGroupChange();
-        render();
-      });
-    });
   }
 
   // === Navigation ===
