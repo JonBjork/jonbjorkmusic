@@ -212,6 +212,12 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   .btn::after{content:'';position:absolute;top:0;left:-75%;width:50%;height:100%;background:linear-gradient(120deg,transparent,rgba(255,255,255,0.18),transparent);transform:skewX(-20deg);transition:left 0.7s var(--ease-out-smooth);pointer-events:none;}
   .btn:hover::after{left:125%;}
 
+  /* Slim Pro link inside the workout card */
+  .pro-link{text-align:center;margin:24px auto 0;padding-top:20px;border-top:1px solid var(--border);font-size:0.95rem;color:var(--dim);max-width:540px;}
+  .pro-link em{font-style:italic;}
+  .pro-link a{color:var(--purple-lt);text-decoration:none;font-weight:500;border-bottom:1px solid transparent;transition:border-color 0.2s ease,color 0.2s ease;}
+  .pro-link a:hover{border-bottom-color:var(--purple-lt);color:var(--white);}
+
   /* Calendar card */
   .calendar-card{padding:48px 36px 36px;text-align:center;}
   .cal-head{margin-bottom:26px;}
@@ -255,6 +261,28 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   .cta-list{list-style:none;padding:0;margin:0 auto 32px;max-width:460px;text-align:left;display:flex;flex-direction:column;gap:10px;}
   .cta-list li{font-size:1.1rem;color:var(--off);line-height:1.5;padding-left:26px;position:relative;}
   .cta-list li::before{content:'';position:absolute;left:4px;top:0.7em;width:10px;height:2px;background:var(--purple-lt);border-radius:1px;}
+
+  /* Celebration modal */
+  .celebration-overlay{position:fixed;inset:0;background:rgba(13,13,13,0.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;animation:fadeIn 0.32s ease;}
+  .celebration-card{background:linear-gradient(160deg,var(--card) 0%,var(--navy) 100%);border:1px solid var(--accent-border);border-radius:14px;padding:48px 40px;max-width:540px;width:100%;text-align:center;position:relative;overflow:hidden;animation:popIn 0.4s var(--ease-out-expo);}
+  .celebration-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--purple),var(--purple-lt));}
+  .celebration-check{display:inline-flex;align-items:center;justify-content:center;width:54px;height:54px;background:var(--purple);border-radius:50%;color:var(--white);font-size:1.7rem;font-weight:700;margin-bottom:18px;box-shadow:0 8px 24px -8px rgba(124,58,237,0.6);}
+  .celebration-card .eyebrow{margin-bottom:10px;}
+  .celebration-card h3{font-family:'Oswald',sans-serif;font-weight:700;font-size:2.2rem;color:var(--white);letter-spacing:0.02em;text-transform:uppercase;margin:4px 0 14px;line-height:1;}
+  .celebration-stats{font-family:'Oswald',sans-serif;font-weight:500;font-size:1rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--purple-lt);margin-bottom:6px;}
+  .celebration-stats .cel-dot{color:var(--dim);margin:0 8px;}
+  .celebration-streak{font-size:1rem;color:var(--muted);margin-bottom:28px;}
+  .celebration-pitch{background:rgba(13,13,13,0.45);border:1px solid var(--border);border-radius:10px;padding:22px 22px 24px;margin-bottom:24px;}
+  .celebration-pitch p{font-size:1rem;color:var(--off);margin-bottom:18px;line-height:1.55;}
+  .celebration-pitch .btn{padding:16px 32px;font-size:0.95rem;}
+  .celebration-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+  @keyframes popIn{from{opacity:0;transform:scale(0.94);}to{opacity:1;transform:scale(1);}}
+  @media(max-width:600px){
+    .celebration-card{padding:36px 24px 28px;}
+    .celebration-card h3{font-size:1.8rem;}
+    .celebration-pitch{padding:18px;}
+    .celebration-pitch .btn{padding:14px 22px;}
+  }
 
   /* Reveal */
   .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.8s var(--ease-out-expo),transform 0.8s var(--ease-out-expo);}
@@ -319,9 +347,8 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
       <p>The system explained, with the picking and legato demonstrations. Then jump into the workout below.</p>
     </div>
     <div class="video-frame">
-      <!-- TODO: swap VIDEO_ID for the actual video once filmed -->
       <iframe
-        src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
+        src="https://www.youtube-nocookie.com/embed/8qCzIq6C458"
         title="The Lego Blocks Workout"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
@@ -420,6 +447,8 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
         <button type="button" class="nav-btn" id="next-btn">Next &rarr;</button>
       </div>
     </div>
+
+    <p class="pro-link"><em>This is one drill from <a href="https://www.jonbjorkmusic.com/start">Practice Room Pro</a>. See the full system &rarr;</em></p>
   </section>
 
   <section class="card calendar-card lead-section reveal" aria-labelledby="calendar-title">
@@ -464,6 +493,29 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
       <li>8-week Intensives in Alternate Picking, Legato, and Sweep Picking</li>
     </ul>
     <a href="https://www.jonbjorkmusic.com/start" class="btn btn-purple">Step Inside Practice Room Pro</a>
+  </div>
+
+  <!-- Celebration modal: appears when the user completes a full sequence end-to-end. -->
+  <div class="celebration-overlay" id="celebration" hidden role="dialog" aria-modal="true" aria-labelledby="celebration-title">
+    <div class="celebration-card">
+      <span class="celebration-check" aria-hidden="true">&#10003;</span>
+      <span class="eyebrow">Sequence complete</span>
+      <h3 id="celebration-title">Nice run.</h3>
+      <p class="celebration-stats">
+        <span id="cel-combo">1·2·4</span> <span class="cel-dot">&middot;</span> <span id="cel-bpm">70 BPM</span> <span class="cel-dot">&middot;</span> <span id="cel-time">0:00</span>
+      </p>
+      <p class="celebration-streak"><span id="cel-streak">0</span> <span id="cel-streak-label">days</span> in a row.</p>
+
+      <div class="celebration-pitch">
+        <p>You just ran one drill end to end. Inside Practice Room Pro the whole system is structured this way &mdash; with me in the room to answer your questions.</p>
+        <a href="https://www.jonbjorkmusic.com/start" class="btn btn-purple">Step Inside Practice Room Pro</a>
+      </div>
+
+      <div class="celebration-actions">
+        <button type="button" class="cal-btn" id="cel-restart">Run it again</button>
+        <button type="button" class="cal-btn" id="cel-close">Close</button>
+      </div>
+    </div>
   </div>
 
   <div class="cta-box reveal" style="background:transparent;border:1px solid var(--border);">
@@ -854,6 +906,24 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   function next(){ jumpTo(state.position + 1); }
   function prev(){ jumpTo(state.position - 1); }
 
+  // === Celebration modal ===
+  function showCelebration(elapsedSec){
+    const el = document.getElementById('celebration');
+    if(!el) return;
+    const variation = state.variation === 'three' ? '3-note' : '4-note loops';
+    document.getElementById('cel-combo').textContent = `${state.combo.replace(/-/g, '·')} · ${variation}`;
+    document.getElementById('cel-bpm').textContent = state.bpm + ' BPM';
+    document.getElementById('cel-time').textContent = formatTime(elapsedSec);
+    const streak = computeStreak(loadPracticeDays());
+    document.getElementById('cel-streak').textContent = streak;
+    document.getElementById('cel-streak-label').textContent = streak === 1 ? 'day' : 'days';
+    el.hidden = false;
+  }
+  function hideCelebration(){
+    const el = document.getElementById('celebration');
+    if(el) el.hidden = true;
+  }
+
   // === Practice tracking (the "chain") ===
   const PRACTICE_KEY = 'bbw_practice_days_v1';
 
@@ -1001,6 +1071,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   let tickIndex = 0;         // monotonic beat counter since play started
   let groupTickStart = 0;    // tick index at which the current group's beat 0 falls
   let schedulerTimer = null;
+  let sessionStartAudio = null;  // audioCtx.currentTime at start of the current session, for the celebration timer
   const LOOKAHEAD_MS = 25;
   const SCHEDULE_AHEAD = 0.12;
   const COUNTIN_BEATS = 4;
@@ -1155,9 +1226,15 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
           updatePhaseHint('Next group…');
         }, visualMs + beatMs * 0.85);
       } else {
+        // Last group of the sequence — let the resolution ring out, then celebrate.
         const beatMs = (60 / state.bpm) * 1000;
+        const sessionEndAudio = audioCtx.currentTime + delaySec + (60 / state.bpm);
+        const sessionStart = sessionStartAudio;
         setTimeout(()=>{
-          if(state.playing) stop();
+          if(!state.playing) return;
+          const elapsedSec = sessionStart != null ? (audioCtx.currentTime - sessionStart) : 0;
+          stop();
+          showCelebration(elapsedSec);
         }, visualMs + beatMs);
       }
     }
@@ -1175,6 +1252,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     // First group begins right after the count-in. Count-in length in ticks scales with subdivision.
     groupTickStart = COUNTIN_BEATS * subPerBeat();
     nextTickTime = ctx.currentTime + 0.08;
+    sessionStartAudio = ctx.currentTime;
     els.playBtn.classList.add('playing');
     els.playLabel.textContent = 'Stop';
     updatePhaseHint('Count-in 1 of 4');
@@ -1291,6 +1369,25 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     } else if(e.key === 'ArrowLeft'){
       prev();
     }
+  });
+
+  // Celebration modal interactions
+  const celEl = document.getElementById('celebration');
+  const celClose = document.getElementById('cel-close');
+  const celRestart = document.getElementById('cel-restart');
+  if(celClose) celClose.addEventListener('click', hideCelebration);
+  if(celRestart) celRestart.addEventListener('click', ()=>{
+    hideCelebration();
+    state.position = 0;
+    resetPlayheadForGroupChange();
+    render();
+    start();
+  });
+  if(celEl) celEl.addEventListener('click', e => {
+    if(e.target === celEl) hideCelebration();   // click on backdrop closes
+  });
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape' && celEl && !celEl.hidden) hideCelebration();
   });
 
   // Backup / restore wiring
