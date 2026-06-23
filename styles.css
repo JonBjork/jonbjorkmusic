@@ -867,3 +867,8 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   .notes-grid .note-card { opacity: 1 !important; transform: none !important; }
 }
+
+/* --- Pro cross-sell note on course sales pages --- */
+.pro-note { margin-top: 22px; font-size: 1rem; color: var(--muted); line-height: 1.5; }
+.pro-note a { color: var(--purple-lt); text-decoration: none; font-weight: 600; border-bottom: 1px solid transparent; transition: border-color 0.2s ease; }
+.pro-note a:hover { border-color: var(--purple-lt); }
