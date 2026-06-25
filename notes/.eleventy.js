@@ -3,6 +3,9 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("essays", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/essays/*.md").reverse();
   });
+  eleventyConfig.addCollection("licks", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/licks/*.md").reverse();
+  });
   eleventyConfig.addFilter("monthYear", function(date) {
     const d = new Date(date);
     const months = ["January","February","March","April","May","June",

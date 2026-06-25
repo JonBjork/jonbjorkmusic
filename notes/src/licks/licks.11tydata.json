@@ -1,0 +1,4 @@
+{
+  "layout": "lick.njk",
+  "permalink": "/licks/{{ page.fileSlug }}/"
+}

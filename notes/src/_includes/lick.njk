@@ -1,0 +1,73 @@
+---
+layout: base.njk
+ogType: article
+---
+<style>
+  .lick-video { position: relative; width: 100%; aspect-ratio: 16 / 9; margin: 0 0 44px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: #000; }
+  .lick-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .lick-h2 { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: clamp(1.6rem, 3.5vw, 2.2rem); letter-spacing: 0.02em; text-transform: uppercase; color: var(--white); margin-bottom: 20px; }
+  .lick-tab { margin: 52px 0; }
+  .lick-tab img { display: block; width: 100%; height: auto; background: #fff; border-radius: 10px; padding: 18px; box-sizing: border-box; }
+  .lick-tab-download { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.95rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple-lt); text-decoration: none; transition: color 0.2s; }
+  .lick-tab-download:hover { color: var(--white); }
+  .lick-files { margin: 52px 0; padding: 32px; border: 1px dashed var(--border); border-radius: 12px; background: var(--card); }
+  .lick-files h3 { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1.3rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--white); margin-bottom: 10px; }
+  .lick-files p { color: var(--muted); font-size: 1.05rem; margin-bottom: 22px; line-height: 1.6; }
+  .lick-files-btn { display: inline-block; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white); background: transparent; border: 1.5px solid var(--purple-lt); padding: 14px 28px; border-radius: 10px; text-decoration: none; transition: background 0.2s, color 0.2s; }
+  .lick-files-btn:hover { background: var(--purple-lt); color: var(--white); }
+  .lick-coaching { margin-top: 40px; text-align: center; color: var(--muted); font-family: 'Lato', sans-serif; font-size: 1.05rem; line-height: 1.6; }
+  .lick-coaching a { color: var(--purple-lt); text-decoration: underline; text-underline-offset: 3px; }
+  .lick-coaching a:hover { color: var(--white); }
+  .lick-back { margin-top: 56px; text-align: center; }
+  .lick-back a { font-family: 'Oswald', sans-serif; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.9rem; color: var(--dim); text-decoration: none; transition: color 0.2s; }
+  .lick-back a:hover { color: var(--white); }
+</style>
+<article>
+  <header class="essay-header">
+    <span class="essay-eyebrow"><a href="/licks/">Licks</a></span>
+    <h1 class="essay-title">{{ title }}</h1>
+    <div class="essay-meta">
+      {%- if technique %}{{ technique }}{% endif -%}
+      {%- if key %} &middot; {{ key }}{% endif -%}
+      {%- if tempo %} &middot; {{ tempo }} BPM{% endif -%}
+    </div>
+  </header>
+
+  {% if youtube %}
+  <div class="lick-video">
+    <iframe src="https://www.youtube.com/embed/{{ youtube }}" title="{{ title }}" loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen></iframe>
+  </div>
+  {% endif %}
+
+  {% if content %}
+  <div class="essay-body">
+    {{ content | safe }}
+  </div>
+  {% endif %}
+
+  {% if tab_image %}
+  <div class="lick-tab">
+    <h2 class="lick-h2">The Tab</h2>
+    <img src="{{ tab_image }}" alt="{{ title }} guitar tab">
+    <a class="lick-tab-download" href="{{ tab_image }}" download>Download the tab (PNG) &#8595;</a>
+  </div>
+  {% endif %}
+
+  <div class="lick-files">
+    <h3>Get every lick — free</h3>
+    <p>Drop your email and I'll send you the entire Lick of the Day library: the Guitar Pro and MIDI files for every lick, ready to open, slow down, and study. New licks added all the time.</p>
+    <a class="lick-files-btn" href="{{ download_url or 'https://sunny-musician-9538.kit.com/6d6291a73f' }}">{{ download_label or 'Email me the full lick library' }}</a>
+  </div>
+
+  <div class="essay-cta">
+    <h3>Go further with Practice Room Pro</h3>
+    <p>The full lesson library, weekly live Q&amp;A, and the new technique intensives. Get my input on your playing alongside other committed players.</p>
+    <a href="https://www.jonbjorkmusic.com/start">Try Free for 7 Days</a>
+  </div>
+
+  <p class="lick-coaching">Want a personal transformation with one-on-one access?<br><a href="https://www.jonbjorkmusic.com/coaching">See the 12-Week Mastery Program &#8594;</a></p>
+
+  <p class="lick-back"><a href="/licks/">&#8592; Back to all licks</a></p>
+</article>

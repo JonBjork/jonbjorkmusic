@@ -1,0 +1,27 @@
+---
+layout: base.njk
+title: Lick Library
+description: Free guitar licks with full video lessons and downloadable tabs. New licks added regularly.
+permalink: /licks/
+---
+<header class="notes-header">
+  <h1>Lick Library</h1>
+  <p>Free guitar licks with a full video lesson and downloadable tab for each one. Pick a technique, learn the lick, take it to your own playing.</p>
+</header>
+<ul class="notes-list">
+  {% for lick in collections.licks %}
+  <li class="notes-list-item">
+    <a href="{{ lick.url }}">
+      <h2>{{ lick.data.title }}</h2>
+      {% if lick.data.summary %}<p>{{ lick.data.summary }}</p>{% endif %}
+      <div class="notes-list-foot">
+        <span class="meta">
+          {%- if lick.data.technique %}{{ lick.data.technique }}{% endif -%}
+          {%- if lick.data.key %} &middot; {{ lick.data.key }}{% endif -%}
+        </span>
+        <span class="notes-list-read">Open lesson &#8594;</span>
+      </div>
+    </a>
+  </li>
+  {% endfor %}
+</ul>

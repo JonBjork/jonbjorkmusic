@@ -21,3 +21,24 @@ collections:
       - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, picker_utc: false }
       - { label: "Summary", name: "summary", widget: "string", hint: "One or two sentences shown on the library page." }
       - { label: "Body", name: "body", widget: "markdown" }
+
+  - name: "licks"
+    label: "Licks"
+    label_singular: "Lick"
+    folder: "notes/src/licks"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    fields:
+      - { label: "Title", name: "title", widget: "string", hint: "e.g. Lick Of The Day #1: G Minor Hybrid Picking" }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, picker_utc: false }
+      - { label: "Technique", name: "technique", widget: "string", hint: "e.g. Hybrid Picking, Legato, Sweep Picking" }
+      - { label: "Key", name: "key", widget: "string", required: false, hint: "e.g. G Minor" }
+      - { label: "Tempo (BPM)", name: "tempo", widget: "number", required: false, value_type: "int", min: 20, max: 400 }
+      - { label: "YouTube video ID", name: "youtube", widget: "string", hint: "Just the ID, the part after watch?v= . e.g. 3WPdi-QDau4" }
+      - { label: "Tab image", name: "tab_image", widget: "image", required: false, hint: "Upload the one-page tab PNG." }
+      - { label: "Summary", name: "summary", widget: "string", hint: "One or two sentences shown on the library page." }
+      - { label: "Source files button link", name: "download_url", widget: "string", required: false, hint: "Link for the Guitar Pro/MIDI button (e.g. your Kit opt-in form). Leave blank for now." }
+      - { label: "Source files button label", name: "download_label", widget: "string", required: false, hint: "Override the button text. Leave blank for the default." }
+      - { label: "Body", name: "body", widget: "markdown", hint: "Your note under the video." }
