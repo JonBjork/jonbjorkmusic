@@ -4,7 +4,9 @@ module.exports = function(eleventyConfig) {
     return collectionApi.getFilteredByGlob("src/essays/*.md").reverse();
   });
   eleventyConfig.addCollection("licks", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/licks/*.md").reverse();
+    return collectionApi.getFilteredByGlob("src/licks/*.md").sort(function(a, b) {
+      return (parseInt(b.fileSlug, 10) || 0) - (parseInt(a.fileSlug, 10) || 0);
+    });
   });
   eleventyConfig.addFilter("monthYear", function(date) {
     const d = new Date(date);

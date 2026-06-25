@@ -21,6 +21,9 @@ ogType: article
   .lick-back { margin-top: 56px; text-align: center; }
   .lick-back a { font-family: 'Oswald', sans-serif; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.9rem; color: var(--dim); text-decoration: none; transition: color 0.2s; }
   .lick-back a:hover { color: var(--white); }
+  .lick-contact { margin: 28px 0 4px; font-family: 'Lato', sans-serif; font-size: 1.05rem; color: var(--muted); }
+  .lick-contact a { color: var(--purple-lt); text-decoration: underline; text-underline-offset: 3px; }
+  .lick-contact a:hover { color: var(--white); }
 </style>
 <article>
   <header class="essay-header">
@@ -46,6 +49,8 @@ ogType: article
     {{ content | safe }}
   </div>
   {% endif %}
+
+  <p class="lick-contact"><a href="mailto:jon@jonbjorkmusic.com?subject=Question about {{ title | urlencode }}">Got a question about this lick? Email me &#8594;</a></p>
 
   {% if tab_image %}
   <div class="lick-tab">
