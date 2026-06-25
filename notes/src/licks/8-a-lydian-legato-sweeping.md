@@ -14,4 +14,4 @@ This one uses the **A Lydian** mode and will work on your legato and sweep-picki
 
 Make sure to watch the whole video for some extra tips!
 
-— Jon
+Jon

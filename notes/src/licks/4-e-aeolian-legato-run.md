@@ -14,4 +14,4 @@ Yet another E Aeolian lick. This one uses mostly **legato**, only picking when c
 
 As always, check out the whole video so you don't miss any practice advice.
 
-— Jon
+Jon

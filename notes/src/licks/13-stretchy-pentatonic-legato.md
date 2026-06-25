@@ -10,8 +10,8 @@ download_url: ""
 download_label: ""
 ---
 
-Be a bit careful with this one — it contains some quite large stretches.
+Be a bit careful with this one, it contains some quite large stretches.
 
 It's a great-sounding sequence, and you can apply it to the remaining four positions too. Let me know if you have any questions!
 
-— Jon
+Jon

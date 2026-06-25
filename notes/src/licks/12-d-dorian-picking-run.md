@@ -12,6 +12,6 @@ download_label: ""
 
 This one can really help your picking technique.
 
-Make sure to watch the whole video so you understand the importance of putting in the time — and staying patient while you do.
+Make sure to watch the whole video so you understand the importance of putting in the time, and staying patient while you do.
 
-— Jon
+Jon

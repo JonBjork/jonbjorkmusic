@@ -14,4 +14,4 @@ Here's a neoclassical-sounding one in **A minor**.
 
 I've added diagrams at the spots where I think they'll help you understand what you're playing better. Let me know if you have any questions.
 
-— Jon
+Jon

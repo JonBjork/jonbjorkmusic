@@ -14,4 +14,4 @@ This one will help you with **position shifts** and going from alternate picking
 
 As always, let me know if you have any questions.
 
-— Jon
+Jon

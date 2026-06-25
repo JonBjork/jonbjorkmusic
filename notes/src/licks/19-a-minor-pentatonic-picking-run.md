@@ -14,4 +14,4 @@ Hey! This **minor pentatonic** picking run will stretch your fingers and your pi
 
 Let me know if you have any questions!
 
-— Jon
+Jon

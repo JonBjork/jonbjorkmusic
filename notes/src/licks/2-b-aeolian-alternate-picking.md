@@ -12,6 +12,6 @@ download_label: ""
 
 Hey! This lick helps you visualize two adjacent **3-notes-per-string** positions at once, and of course builds up your overall alternate picking ability along the way.
 
-As always, watch the full video for the practice advice — and let me know if I can help you out by sending me an email.
+As always, watch the full video for the practice advice, and let me know if I can help you out by sending me an email.
 
-— Jon
+Jon

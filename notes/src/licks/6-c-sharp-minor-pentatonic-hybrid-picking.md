@@ -5,7 +5,7 @@ techniques: ["Hybrid Picking"]
 key: "C# Minor Pentatonic"
 youtube: "FmH9IBVNRyU"
 tab_image: /notes/images/lotd-6-c-sharp-minor-pentatonic-hybrid-picking.png
-summary: "A C# minor pentatonic lick for working hybrid picking into your playing — and it sounds great."
+summary: "A C# minor pentatonic lick for working hybrid picking into your playing, and it sounds great."
 download_url: ""
 download_label: ""
 ---
@@ -14,4 +14,4 @@ This one will help you integrate some **hybrid picking** into your playing, and 
 
 Let me know if you have any questions!
 
-— Jon
+Jon

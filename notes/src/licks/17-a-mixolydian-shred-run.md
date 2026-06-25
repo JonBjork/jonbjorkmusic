@@ -12,6 +12,6 @@ download_label: ""
 
 This one works a few different techniques and is a lot of fun, even played slowly.
 
-Make sure to catch all the practice advice in the video — and if you like the video on YouTube, you'll get extra shred powers 😬
+Make sure to catch all the practice advice in the video, and if you like the video on YouTube, you'll get extra shred powers 😬
 
-— Jon
+Jon

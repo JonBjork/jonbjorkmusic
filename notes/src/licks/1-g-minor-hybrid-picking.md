@@ -15,4 +15,4 @@ Hey! This one works on your ability to play 2-1-2 arpeggios with hybrid picking.
 
 Watch the video for the full breakdown, grab the tab below, and let me know if you have any issues.
 
-— Jon
+Jon

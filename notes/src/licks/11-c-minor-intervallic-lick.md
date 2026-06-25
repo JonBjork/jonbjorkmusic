@@ -10,8 +10,8 @@ download_url: ""
 download_label: ""
 ---
 
-Make sure to try this one over a **Bb7** chord (or any **Bb Mixolydian** context) as well — the same notes take on a completely different colour.
+Make sure to try this one over a **Bb7** chord (or any **Bb Mixolydian** context) as well, the same notes take on a completely different colour.
 
 As always, let me know if you have any questions.
 
-— Jon
+Jon

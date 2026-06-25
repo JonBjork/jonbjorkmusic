@@ -14,4 +14,4 @@ Hey! This one contains two very **Yngwie-inspired** melodic sequences.
 
 Let me know if you have any questions!
 
-— Jon
+Jon

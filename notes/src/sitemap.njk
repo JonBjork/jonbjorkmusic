@@ -1,0 +1,22 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://www.jonbjorkmusic.com/</loc></url>
+  <url><loc>https://www.jonbjorkmusic.com/courses</loc></url>
+  <url><loc>https://www.jonbjorkmusic.com/coaching</loc></url>
+  <url><loc>https://www.jonbjorkmusic.com/start</loc></url>
+  <url><loc>https://www.jonbjorkmusic.com/notes/</loc></url>
+  <url><loc>https://www.jonbjorkmusic.com/licks/</loc></url>
+  {%- for tech in collections.techniques %}
+  <url><loc>https://www.jonbjorkmusic.com/licks/technique/{{ tech.slug }}/</loc></url>
+  {%- endfor %}
+  {%- for lick in collections.licks %}
+  <url><loc>https://www.jonbjorkmusic.com{{ lick.url }}</loc></url>
+  {%- endfor %}
+  {%- for essay in collections.essays %}
+  <url><loc>https://www.jonbjorkmusic.com{{ essay.url }}</loc></url>
+  {%- endfor %}
+</urlset>

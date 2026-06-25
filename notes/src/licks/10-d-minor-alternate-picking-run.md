@@ -12,4 +12,4 @@ download_label: ""
 
 This lick will work your **alternate picking**, especially if you follow my practice advice in the video.
 
-— Jon
+Jon

@@ -10,6 +10,6 @@ download_url: ""
 download_label: ""
 ---
 
-This one uses one of my favourite things in a **Dorian** tonality — check out the explanation in the video.
+This one uses one of my favourite things in a **Dorian** tonality, check out the explanation in the video.
 
-— Jon
+Jon

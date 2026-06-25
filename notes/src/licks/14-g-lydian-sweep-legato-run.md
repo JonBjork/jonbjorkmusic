@@ -14,4 +14,4 @@ Make sure to really study the **diagrams** in the tab so you understand what you
 
 Let me know if you have any questions!
 
-— Jon
+Jon
