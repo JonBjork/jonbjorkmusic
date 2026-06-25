@@ -1,7 +1,7 @@
 ---
 title: "Lick Of The Day #10: D Minor Alternate Picking Run"
 date: 2026-06-25
-technique: "Alternate Picking"
+techniques: ["Alternate Picking"]
 key: "D Minor"
 youtube: "33gT1fyfRKA"
 tab_image: /notes/images/lotd-10-d-minor-alternate-picking-run.png

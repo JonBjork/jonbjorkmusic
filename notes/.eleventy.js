@@ -8,6 +8,27 @@ module.exports = function(eleventyConfig) {
       return (parseInt(b.fileSlug, 10) || 0) - (parseInt(a.fileSlug, 10) || 0);
     });
   });
+  function techSlug(s) {
+    return String(s).toLowerCase().replace(/&/g, ' ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  }
+  eleventyConfig.addFilter("techSlug", techSlug);
+  eleventyConfig.addCollection("techniques", function(collectionApi) {
+    var licks = collectionApi.getFilteredByGlob("src/licks/*.md");
+    var map = {};
+    licks.forEach(function(l) {
+      (l.data.techniques || []).forEach(function(t) {
+        var slug = techSlug(t);
+        if (!map[slug]) map[slug] = { name: t, slug: slug, licks: [] };
+        map[slug].licks.push(l);
+      });
+    });
+    return Object.keys(map).map(function(k) { return map[k]; })
+      .sort(function(a, b) { return a.name.localeCompare(b.name); })
+      .map(function(g) {
+        g.licks.sort(function(a, b) { return (parseInt(b.fileSlug, 10) || 0) - (parseInt(a.fileSlug, 10) || 0); });
+        return g;
+      });
+  });
   eleventyConfig.addFilter("monthYear", function(date) {
     const d = new Date(date);
     const months = ["January","February","March","April","May","June",

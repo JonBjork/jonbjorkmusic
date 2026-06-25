@@ -1,7 +1,7 @@
 ---
 title: "Lick Of The Day #2: B Aeolian Alternate Picking"
 date: 2026-06-25
-technique: "Alternate Picking"
+techniques: ["Alternate Picking"]
 key: "B Aeolian"
 youtube: "svRybrw0HYQ"
 tab_image: /notes/images/lotd-2-b-aeolian-alternate-picking.png

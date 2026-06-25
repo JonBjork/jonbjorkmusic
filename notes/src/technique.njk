@@ -1,0 +1,33 @@
+---
+layout: base.njk
+pagination:
+  data: collections.techniques
+  size: 1
+  alias: tech
+permalink: "/licks/technique/{{ tech.slug }}/"
+eleventyComputed:
+  title: "{{ tech.name }} Licks"
+  description: "Free {{ tech.name }} guitar licks, each with a full video lesson and a downloadable tab."
+---
+<header class="notes-header">
+  <h1>{{ tech.name }} Licks</h1>
+  <p>Every {{ tech.name }} lick in the library, each with a full video lesson and a downloadable tab.</p>
+  <p style="margin-top: 22px;"><a class="notes-list-read" href="/licks/">&#8592; All licks</a></p>
+</header>
+<ul class="notes-list">
+  {% for lick in tech.licks %}
+  <li class="notes-list-item">
+    <a href="{{ lick.url }}">
+      <h2>{{ lick.data.title }}</h2>
+      {% if lick.data.summary %}<p>{{ lick.data.summary }}</p>{% endif %}
+      <div class="notes-list-foot">
+        <span class="meta">
+          {%- for t in lick.data.techniques %}{{ t }}{% if not loop.last %} &middot; {% endif %}{% endfor -%}
+          {%- if lick.data.key %} &middot; {{ lick.data.key }}{% endif -%}
+        </span>
+        <span class="notes-list-read">Open lesson &#8594;</span>
+      </div>
+    </a>
+  </li>
+  {% endfor %}
+</ul>

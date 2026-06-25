@@ -33,7 +33,20 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string", hint: "e.g. Lick Of The Day #1: G Minor Hybrid Picking" }
       - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, picker_utc: false }
-      - { label: "Technique", name: "technique", widget: "string", hint: "e.g. Hybrid Picking, Legato, Sweep Picking" }
+      - label: "Techniques"
+        name: "techniques"
+        widget: "select"
+        multiple: true
+        hint: "Pick one or more — these become the clickable tags. Add new options in admin/config.yml if a technique is missing."
+        options:
+          - "Alternate Picking"
+          - "Legato"
+          - "Sweep Picking"
+          - "Hybrid Picking"
+          - "Economy Picking"
+          - "Tapping"
+          - "String Skipping"
+          - "Bending & Vibrato"
       - { label: "Key", name: "key", widget: "string", required: false, hint: "e.g. G Minor" }
       - { label: "Tempo (BPM)", name: "tempo", widget: "number", required: false, value_type: "int", min: 20, max: 400 }
       - { label: "YouTube video ID", name: "youtube", widget: "string", hint: "Just the ID, the part after watch?v= . e.g. 3WPdi-QDau4" }

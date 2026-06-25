@@ -1,7 +1,7 @@
 ---
 title: "Lick Of The Day #4: E Aeolian Legato Run"
 date: 2026-06-25
-technique: "Legato"
+techniques: ["Legato"]
 key: "E Aeolian"
 youtube: "5ooxGieJ_HY"
 tab_image: /notes/images/lotd-4-e-aeolian-legato-run.png

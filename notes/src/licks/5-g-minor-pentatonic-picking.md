@@ -1,7 +1,7 @@
 ---
 title: "Lick Of The Day #5: G Minor Pentatonic Picking"
 date: 2026-06-25
-technique: "Alternate Picking"
+techniques: ["Alternate Picking"]
 key: "G Minor Pentatonic"
 youtube: "k9lU7C0gQrM"
 tab_image: /notes/images/lotd-5-g-minor-pentatonic-picking.png

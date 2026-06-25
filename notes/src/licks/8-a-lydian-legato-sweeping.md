@@ -1,7 +1,7 @@
 ---
 title: "Lick Of The Day #8: A Lydian Legato & Sweeping"
 date: 2026-06-25
-technique: "Legato & Sweep"
+techniques: ["Legato", "Sweep Picking"]
 key: "A Lydian"
 youtube: "H3b5OEpqlds"
 tab_image: /notes/images/lotd-8-a-lydian-legato-sweeping.png

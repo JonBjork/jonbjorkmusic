@@ -24,13 +24,15 @@ ogType: article
   .lick-contact { margin: 28px 0 4px; font-family: 'Lato', sans-serif; font-size: 1.05rem; color: var(--muted); }
   .lick-contact a { color: var(--purple-lt); text-decoration: underline; text-underline-offset: 3px; }
   .lick-contact a:hover { color: var(--white); }
+  .essay-meta a { color: var(--purple-lt); text-decoration: none; }
+  .essay-meta a:hover { color: var(--white); text-decoration: underline; text-underline-offset: 3px; }
 </style>
 <article>
   <header class="essay-header">
     <span class="essay-eyebrow"><a href="/licks/">Licks</a></span>
     <h1 class="essay-title">{{ title }}</h1>
     <div class="essay-meta">
-      {%- if technique %}{{ technique }}{% endif -%}
+      {%- for t in techniques %}<a href="/licks/technique/{{ t | techSlug }}/">{{ t }}</a>{% if not loop.last %} &middot; {% endif %}{% endfor -%}
       {%- if key %} &middot; {{ key }}{% endif -%}
       {%- if tempo %} &middot; {{ tempo }} BPM{% endif -%}
     </div>

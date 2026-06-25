@@ -1,7 +1,7 @@
 ---
 title: "Lick Of The Day #1: G Minor Hybrid Picking"
 date: 2026-06-25
-technique: "Hybrid Picking"
+techniques: ["Hybrid Picking"]
 key: "G Minor"
 tempo: 160
 youtube: "3WPdi-QDau4"

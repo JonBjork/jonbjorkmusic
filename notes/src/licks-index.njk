@@ -4,9 +4,21 @@ title: Lick Library
 description: Free guitar licks with full video lessons and downloadable tabs. New licks added regularly.
 permalink: /licks/
 ---
+<style>
+  .tag-bar { display: flex; flex-wrap: wrap; gap: 10px; margin: 4px 0 0; }
+  .tag-chip { font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--card); border: 1px solid var(--border); padding: 8px 16px; border-radius: 999px; text-decoration: none; transition: color 0.2s, border-color 0.2s, background 0.2s; }
+  .tag-chip:hover { color: var(--white); border-color: var(--purple-lt); }
+  .tag-chip.is-active { color: var(--white); background: var(--purple); border-color: var(--purple); }
+</style>
 <header class="notes-header">
   <h1>Lick Library</h1>
-  <p>Free guitar licks with a full video lesson and downloadable tab for each one. Pick a technique, learn the lick, take it to your own playing.</p>
+  <p>Free guitar licks with a full video lesson and downloadable tab for each one. Browse by technique, or scroll the whole collection below.</p>
+  <div class="tag-bar">
+    <a class="tag-chip is-active" href="/licks/">All</a>
+    {% for tech in collections.techniques %}
+    <a class="tag-chip" href="/licks/technique/{{ tech.slug }}/">{{ tech.name }}</a>
+    {% endfor %}
+  </div>
 </header>
 <ul class="notes-list">
   {% for lick in collections.licks %}
@@ -16,7 +28,7 @@ permalink: /licks/
       {% if lick.data.summary %}<p>{{ lick.data.summary }}</p>{% endif %}
       <div class="notes-list-foot">
         <span class="meta">
-          {%- if lick.data.technique %}{{ lick.data.technique }}{% endif -%}
+          {%- for t in lick.data.techniques %}{{ t }}{% if not loop.last %} &middot; {% endif %}{% endfor -%}
           {%- if lick.data.key %} &middot; {{ lick.data.key }}{% endif -%}
         </span>
         <span class="notes-list-read">Open lesson &#8594;</span>

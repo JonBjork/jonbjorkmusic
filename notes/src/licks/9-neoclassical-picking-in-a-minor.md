@@ -1,7 +1,7 @@
 ---
 title: "Lick Of The Day #9: Neoclassical Picking In A Minor"
 date: 2026-06-25
-technique: "Alternate Picking"
+techniques: ["Alternate Picking"]
 key: "A Minor"
 youtube: "O1mTGuyx5Fs"
 tab_image: /notes/images/lotd-9-neoclassical-picking-in-a-minor.png

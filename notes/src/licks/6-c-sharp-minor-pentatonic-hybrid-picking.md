@@ -1,7 +1,7 @@
 ---
 title: "Lick Of The Day #6: C# Minor Pentatonic Hybrid Picking"
 date: 2026-06-25
-technique: "Hybrid Picking"
+techniques: ["Hybrid Picking"]
 key: "C# Minor Pentatonic"
 youtube: "FmH9IBVNRyU"
 tab_image: /notes/images/lotd-6-c-sharp-minor-pentatonic-hybrid-picking.png

@@ -1,7 +1,7 @@
 ---
 title: "Lick Of The Day #7: C Major Neoclassical Run"
 date: 2026-06-25
-technique: "Alternate Picking & Sweep"
+techniques: ["Alternate Picking", "Sweep Picking"]
 key: "C Major"
 youtube: "ITPR_pfHzqg"
 tab_image: /notes/images/lotd-7-c-major-neoclassical-run.png

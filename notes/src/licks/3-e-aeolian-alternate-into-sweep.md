@@ -1,7 +1,7 @@
 ---
 title: "Lick Of The Day #3: E Aeolian Alternate Into Sweep"
 date: 2026-06-25
-technique: "Alternate Picking & Sweep"
+techniques: ["Alternate Picking", "Sweep Picking"]
 key: "E Aeolian"
 youtube: "uNKpx4etyng"
 tab_image: /notes/images/lotd-3-e-aeolian-alternate-into-sweep.png
