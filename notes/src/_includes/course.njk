@@ -1,0 +1,71 @@
+---
+layout: base.njk
+wide: true
+ogType: article
+---
+<style>
+  .course { display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: start; }
+  .course-nav { position: sticky; top: 24px; border: 1px solid var(--border); border-radius: 12px; background: var(--card); padding: 22px 18px; }
+  .course-nav-title { font-family:'Oswald',sans-serif; font-weight:600; font-size:.95rem; letter-spacing:.12em; text-transform:uppercase; color:var(--white); margin-bottom:4px; }
+  .course-back { display:inline-block; font-family:'Oswald',sans-serif; font-weight:500; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); text-decoration:none; margin-bottom:18px; transition:color .2s; }
+  .course-back:hover { color:var(--white); }
+  .course-sec { font-family:'Oswald',sans-serif; font-weight:600; font-size:.8rem; letter-spacing:.14em; text-transform:uppercase; color:var(--purple-lt); margin:18px 0 8px; }
+  .course-sec:first-of-type { margin-top:0; }
+  .course-lesson { display:block; font-family:'Lato',sans-serif; font-size:1rem; line-height:1.35; color:var(--muted); text-decoration:none; padding:9px 12px; border-radius:8px; transition:background .2s, color .2s; }
+  .course-lesson:hover { color:var(--white); background:rgba(255,255,255,.04); }
+  .course-lesson.is-active { color:var(--white); background:var(--purple); }
+  .course-main { min-width:0; }
+  .course-video { position:relative; width:100%; aspect-ratio:16/9; margin:0 0 36px; border-radius:12px; overflow:hidden; border:1px solid var(--border); background:#000; }
+  .course-video iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .course-video-missing { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:var(--dim); font-family:'Oswald',sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:.9rem; }
+  .course-pager { display:flex; justify-content:space-between; gap:16px; margin:48px 0 0; padding-top:28px; border-top:1px solid var(--border); }
+  .course-pager a { font-family:'Oswald',sans-serif; font-weight:600; font-size:.9rem; letter-spacing:.08em; text-transform:uppercase; color:var(--purple-lt); text-decoration:none; max-width:48%; transition:color .2s; }
+  .course-pager a:hover { color:var(--white); }
+  .course-pager .nxt { margin-left:auto; text-align:right; }
+  .course-coaching { margin-top:40px; text-align:center; color:var(--muted); font-family:'Lato',sans-serif; font-size:1.05rem; line-height:1.6; }
+  .course-coaching a { color:var(--purple-lt); text-decoration:underline; text-underline-offset:3px; }
+  .course-coaching a:hover { color:var(--white); }
+  @media (max-width: 820px) {
+    .course { grid-template-columns:1fr; gap:28px; }
+    .course-nav { position:static; }
+  }
+</style>
+{% set prev = collections.picking | getPreviousCollectionItem %}
+{% set next = collections.picking | getNextCollectionItem %}
+<div class="course">
+  <aside class="course-nav">
+    <div class="course-nav-title">Alternate Picking</div>
+    <a class="course-back" href="/alternate-picking/">&#8592; Course overview</a>
+    {% for sec in collections.pickingSections %}
+    <div class="course-sec">{{ sec.name }}</div>
+    {% for l in sec.lessons %}
+    <a class="course-lesson{% if l.url == page.url %} is-active{% endif %}" href="{{ l.url }}">{{ l.data.title }}</a>
+    {% endfor %}
+    {% endfor %}
+  </aside>
+  <main class="course-main">
+    <header class="essay-header" style="margin-bottom:36px; padding-bottom:28px;">
+      <h1 class="essay-title">{{ title }}</h1>
+      {% if duration %}<div class="essay-meta">{{ duration }}</div>{% endif %}
+    </header>
+    <div class="course-video">
+      {% if youtube %}
+      <iframe src="https://www.youtube.com/embed/{{ youtube }}" title="{{ title }}" loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      {% else %}
+      <div class="course-video-missing">Video coming soon</div>
+      {% endif %}
+    </div>
+    {% if content %}<div class="essay-body">{{ content | safe }}</div>{% endif %}
+    <nav class="course-pager">
+      {% if prev %}<a class="prv" href="{{ prev.url }}">&#8592; {{ prev.data.title }}</a>{% endif %}
+      {% if next %}<a class="nxt" href="{{ next.url }}">{{ next.data.title }} &#8594;</a>{% endif %}
+    </nav>
+    <div class="essay-cta">
+      <h3>Go further with Practice Room Pro</h3>
+      <p>The full lesson library, weekly live Q&amp;A, and technique intensives. Get my input on your playing alongside other committed players.</p>
+      <a href="https://www.jonbjorkmusic.com/start?ref=picking">Try Free for 7 Days</a>
+    </div>
+    <p class="course-coaching">Want a personal transformation with one-on-one access?<br><a href="https://www.jonbjorkmusic.com/coaching?ref=picking">See the 12-Week Mastery Program &#8594;</a></p>
+  </main>
+</div>

@@ -29,6 +29,24 @@ module.exports = function(eleventyConfig) {
         return g;
       });
   });
+  eleventyConfig.addCollection("picking", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/picking/*.md").sort(function(a, b) {
+      return (a.data.order || 0) - (b.data.order || 0);
+    });
+  });
+  eleventyConfig.addCollection("pickingSections", function(collectionApi) {
+    var lessons = collectionApi.getFilteredByGlob("src/picking/*.md").sort(function(a, b) {
+      return (a.data.order || 0) - (b.data.order || 0);
+    });
+    var order = [];
+    var map = {};
+    lessons.forEach(function(l) {
+      var s = l.data.section || "Lessons";
+      if (!map[s]) { map[s] = { name: s, lessons: [] }; order.push(s); }
+      map[s].lessons.push(l);
+    });
+    return order.map(function(s) { return map[s]; });
+  });
   eleventyConfig.addFilter("monthYear", function(date) {
     const d = new Date(date);
     const months = ["January","February","March","April","May","June",

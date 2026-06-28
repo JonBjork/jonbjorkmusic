@@ -14,6 +14,7 @@
     cp -r admin build/admin && \
     rsync -a notes/_site/notes/ build/notes/ && \
     if [ -d notes/_site/licks ]; then mkdir -p build/licks && rsync -a notes/_site/licks/ build/licks/; fi && \
+    if [ -d notes/_site/alternate-picking ]; then mkdir -p build/alternate-picking && rsync -a notes/_site/alternate-picking/ build/alternate-picking/; fi && \
     if [ -d notes/_site/images ]; then rsync -a notes/_site/images/ build/notes/images/; fi && \
     if [ -f notes/_site/sitemap.xml ]; then cp notes/_site/sitemap.xml build/sitemap.xml; fi
   """

@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="/styles.css">
 <style>
   .notes-wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 72px; }
+  .notes-wrap-wide { max-width: 1100px; }
   .notes-header { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
   .notes-header h1 { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: clamp(2.8rem, 7vw, 4.5rem); letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.0; color: var(--white); margin-bottom: 20px; }
   .notes-header p { font-size: 1.2rem; color: var(--muted); line-height: 1.6; max-width: 580px; }
@@ -98,7 +99,7 @@
   <a class="nav-btn" href="https://www.jonbjorkmusic.com/coaching?ref=nav">1-on-1 Coaching</a>
 </div>
 
-<div class="notes-wrap">
+<div class="notes-wrap{% if wide %} notes-wrap-wide{% endif %}">
   {{ content | safe }}
 </div>
 
