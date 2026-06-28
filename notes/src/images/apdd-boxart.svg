@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="Alternate Picking Deep Dive, free course">
+  <defs>
+    <linearGradient id="apdd-g" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#9d5ff5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="#0d0d0d"/>
+  <rect x="0" y="0" width="1200" height="7" fill="url(#apdd-g)"/>
+  <g font-family="'Oswald','Arial Narrow',Arial,sans-serif" text-anchor="middle">
+    <text x="600" y="288" fill="#ffffff" font-size="96" font-weight="700" letter-spacing="6">ALTERNATE PICKING</text>
+    <text x="600" y="415" fill="#9d5ff5" font-size="132" font-weight="700" letter-spacing="12">DEEP DIVE</text>
+    <text x="600" y="520" fill="#aaaaaa" font-size="38" font-weight="600" letter-spacing="14">FREE COURSE</text>
+  </g>
+</svg>
