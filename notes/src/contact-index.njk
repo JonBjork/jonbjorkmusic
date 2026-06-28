@@ -1,0 +1,38 @@
+---
+layout: base.njk
+title: "Contact"
+description: "Questions about a lesson, a course, or working together one on one? Send me a message and I'll get back to you."
+permalink: /contact/
+---
+<style>
+  .contact-form { max-width: 580px; margin: 4px 0 0; }
+  .contact-field { margin-bottom: 22px; }
+  .contact-field label { display:block; font-family:'Oswald',sans-serif; font-weight:600; font-size:.85rem; letter-spacing:.12em; text-transform:uppercase; color:var(--white); margin-bottom:8px; }
+  .contact-field input, .contact-field textarea { width:100%; box-sizing:border-box; background:var(--card); border:1px solid var(--border); border-radius:10px; padding:14px 16px; color:var(--white); font-family:'Lato',sans-serif; font-size:1.05rem; line-height:1.5; transition:border-color .2s; }
+  .contact-field input:focus, .contact-field textarea:focus { outline:none; border-color:var(--purple-lt); }
+  .contact-field textarea { min-height:180px; resize:vertical; }
+  .contact-submit { font-family:'Oswald',sans-serif; font-weight:600; font-size:1.05rem; letter-spacing:.14em; text-transform:uppercase; background:var(--purple); color:var(--white); border:0; padding:16px 38px; border-radius:10px; cursor:pointer; transition:background .2s; }
+  .contact-submit:hover { background:var(--purple-lt); }
+  .contact-hp { position:absolute; left:-9999px; }
+</style>
+<header class="notes-header">
+  <h1>Contact</h1>
+  <p>Questions about a lesson, a course, or working together one on one? Drop me a message below and I'll get back to you.</p>
+</header>
+<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact/thanks/" class="contact-form">
+  <input type="hidden" name="form-name" value="contact">
+  <p class="contact-hp"><label>Leave this field empty: <input name="bot-field"></label></p>
+  <div class="contact-field">
+    <label for="c-name">Name</label>
+    <input id="c-name" type="text" name="name" required>
+  </div>
+  <div class="contact-field">
+    <label for="c-email">Email</label>
+    <input id="c-email" type="email" name="email" required>
+  </div>
+  <div class="contact-field">
+    <label for="c-message">Message</label>
+    <textarea id="c-message" name="message" required></textarea>
+  </div>
+  <button class="contact-submit" type="submit">Send message</button>
+</form>

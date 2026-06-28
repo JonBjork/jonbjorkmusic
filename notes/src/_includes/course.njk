@@ -29,6 +29,9 @@ ogType: article
   .course-files p { color:var(--muted); font-size:1.05rem; margin-bottom:22px; line-height:1.6; }
   .course-files-btn { display:inline-block; font-family:'Oswald',sans-serif; font-weight:600; font-size:1rem; letter-spacing:.12em; text-transform:uppercase; color:var(--white); background:transparent; border:1.5px solid var(--purple-lt); padding:14px 28px; border-radius:10px; text-decoration:none; transition:background .2s, color .2s; }
   .course-files-btn:hover { background:var(--purple-lt); color:var(--white); }
+  .course-contact { margin-top:44px; padding-top:28px; border-top:1px solid var(--border); color:var(--muted); font-family:'Lato',sans-serif; font-size:1.08rem; line-height:1.6; }
+  .course-contact a { color:var(--purple-lt); text-decoration:underline; text-underline-offset:3px; }
+  .course-contact a:hover { color:var(--white); }
   .course-coaching { margin-top:40px; text-align:center; color:var(--muted); font-family:'Lato',sans-serif; font-size:1.05rem; line-height:1.6; }
   .course-coaching a { color:var(--purple-lt); text-decoration:underline; text-underline-offset:3px; }
   .course-coaching a:hover { color:var(--white); }
@@ -64,6 +67,7 @@ ogType: article
     </div>
     {% endif %}
     {% if content %}<div class="essay-body">{{ content | safe }}</div>{% endif %}
+    <p class="course-contact">Questions about this lesson? <a href="https://www.jonbjorkmusic.com/contact">Get in touch &#8594;</a></p>
     <div class="essay-cta">
       <h3>Go further with Practice Room Pro</h3>
       <p>The full lesson library, weekly live Q&amp;A, and technique intensives. Get my input on your playing alongside other committed players.</p>
