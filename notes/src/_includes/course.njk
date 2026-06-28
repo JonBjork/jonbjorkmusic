@@ -5,7 +5,7 @@ ogType: article
 ---
 <style>
   .course { display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: start; }
-  .course-nav { border: 1px solid var(--border); border-radius: 12px; background: var(--card); padding: 22px 18px; }
+  .course-nav { position: sticky; top: calc(var(--nav-h) + 20px); border: 1px solid var(--border); border-radius: 12px; background: var(--card); padding: 22px 18px; }
   .course-nav-title { font-family:'Oswald',sans-serif; font-weight:600; font-size:.95rem; letter-spacing:.12em; text-transform:uppercase; color:var(--white); margin-bottom:4px; }
   .course-back { display:inline-block; font-family:'Oswald',sans-serif; font-weight:500; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); text-decoration:none; margin-bottom:18px; transition:color .2s; }
   .course-back:hover { color:var(--white); }
@@ -18,10 +18,12 @@ ogType: article
   .course-video { position:relative; width:100%; aspect-ratio:16/9; margin:0 0 36px; border-radius:12px; overflow:hidden; border:1px solid var(--border); background:#000; }
   .course-video iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
   .course-video-missing { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:var(--dim); font-family:'Oswald',sans-serif; letter-spacing:.1em; text-transform:uppercase; font-size:.9rem; }
-  .course-pager { display:flex; justify-content:space-between; gap:16px; margin:48px 0 0; padding-top:28px; border-top:1px solid var(--border); }
-  .course-pager a { font-family:'Oswald',sans-serif; font-weight:600; font-size:.9rem; letter-spacing:.08em; text-transform:uppercase; color:var(--purple-lt); text-decoration:none; max-width:48%; transition:color .2s; }
-  .course-pager a:hover { color:var(--white); }
-  .course-pager .nxt { margin-left:auto; text-align:right; }
+  .course .essay-body > *:first-child { margin-top:0; }
+  .course .essay-body ul, .course .essay-body ol { margin:1.2em 0 1.7em; padding-left:1.4em; }
+  .course .essay-body li { margin-bottom:.55em; line-height:1.65; padding-left:.2em; }
+  .course .essay-body li::marker { color:var(--purple-lt); }
+  .course .essay-body hr { border:0; border-top:1px solid var(--border); margin:2.6em 0; }
+  .course .essay-body img { display:block; box-sizing:border-box; max-width:100%; height:auto; background:#fff; padding:16px; border-radius:10px; border:1px solid var(--border); margin:1.8em 0; }
   .course-files { margin:48px 0; padding:32px; border:1px dashed var(--border); border-radius:12px; background:var(--card); }
   .course-files h3 { font-family:'Oswald',sans-serif; font-weight:600; font-size:1.3rem; letter-spacing:.02em; text-transform:uppercase; color:var(--white); margin-bottom:10px; }
   .course-files p { color:var(--muted); font-size:1.05rem; margin-bottom:22px; line-height:1.6; }
@@ -35,8 +37,6 @@ ogType: article
     .course-nav { position:static; }
   }
 </style>
-{% set prev = collections.picking | getPreviousCollectionItem %}
-{% set next = collections.picking | getNextCollectionItem %}
 <div class="course">
   <aside class="course-nav">
     <div class="course-nav-title">Alternate Picking</div>
@@ -64,10 +64,6 @@ ogType: article
     </div>
     {% endif %}
     {% if content %}<div class="essay-body">{{ content | safe }}</div>{% endif %}
-    <nav class="course-pager">
-      {% if prev %}<a class="prv" href="{{ prev.url }}">&#8592; {{ prev.data.title }}</a>{% endif %}
-      {% if next %}<a class="nxt" href="{{ next.url }}">{{ next.data.title }} &#8594;</a>{% endif %}
-    </nav>
     <div class="essay-cta">
       <h3>Go further with Practice Room Pro</h3>
       <p>The full lesson library, weekly live Q&amp;A, and technique intensives. Get my input on your playing alongside other committed players.</p>
