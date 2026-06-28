@@ -5,7 +5,7 @@ ogType: article
 ---
 <style>
   .course { display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: start; }
-  .course-nav { position: sticky; top: 24px; border: 1px solid var(--border); border-radius: 12px; background: var(--card); padding: 22px 18px; }
+  .course-nav { border: 1px solid var(--border); border-radius: 12px; background: var(--card); padding: 22px 18px; }
   .course-nav-title { font-family:'Oswald',sans-serif; font-weight:600; font-size:.95rem; letter-spacing:.12em; text-transform:uppercase; color:var(--white); margin-bottom:4px; }
   .course-back { display:inline-block; font-family:'Oswald',sans-serif; font-weight:500; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); text-decoration:none; margin-bottom:18px; transition:color .2s; }
   .course-back:hover { color:var(--white); }
@@ -22,6 +22,11 @@ ogType: article
   .course-pager a { font-family:'Oswald',sans-serif; font-weight:600; font-size:.9rem; letter-spacing:.08em; text-transform:uppercase; color:var(--purple-lt); text-decoration:none; max-width:48%; transition:color .2s; }
   .course-pager a:hover { color:var(--white); }
   .course-pager .nxt { margin-left:auto; text-align:right; }
+  .course-files { margin:48px 0; padding:32px; border:1px dashed var(--border); border-radius:12px; background:var(--card); }
+  .course-files h3 { font-family:'Oswald',sans-serif; font-weight:600; font-size:1.3rem; letter-spacing:.02em; text-transform:uppercase; color:var(--white); margin-bottom:10px; }
+  .course-files p { color:var(--muted); font-size:1.05rem; margin-bottom:22px; line-height:1.6; }
+  .course-files-btn { display:inline-block; font-family:'Oswald',sans-serif; font-weight:600; font-size:1rem; letter-spacing:.12em; text-transform:uppercase; color:var(--white); background:transparent; border:1.5px solid var(--purple-lt); padding:14px 28px; border-radius:10px; text-decoration:none; transition:background .2s, color .2s; }
+  .course-files-btn:hover { background:var(--purple-lt); color:var(--white); }
   .course-coaching { margin-top:40px; text-align:center; color:var(--muted); font-family:'Lato',sans-serif; font-size:1.05rem; line-height:1.6; }
   .course-coaching a { color:var(--purple-lt); text-decoration:underline; text-underline-offset:3px; }
   .course-coaching a:hover { color:var(--white); }
@@ -48,14 +53,16 @@ ogType: article
       <h1 class="essay-title">{{ title }}</h1>
       {% if duration %}<div class="essay-meta">{{ duration }}</div>{% endif %}
     </header>
+    {% if youtube %}
     <div class="course-video">
-      {% if youtube %}
       <iframe src="https://www.youtube.com/embed/{{ youtube }}" title="{{ title }}" loading="lazy"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      {% else %}
-      <div class="course-video-missing">Video coming soon</div>
-      {% endif %}
     </div>
+    {% elif not no_video %}
+    <div class="course-video">
+      <div class="course-video-missing">Video coming soon</div>
+    </div>
+    {% endif %}
     {% if content %}<div class="essay-body">{{ content | safe }}</div>{% endif %}
     <nav class="course-pager">
       {% if prev %}<a class="prv" href="{{ prev.url }}">&#8592; {{ prev.data.title }}</a>{% endif %}
