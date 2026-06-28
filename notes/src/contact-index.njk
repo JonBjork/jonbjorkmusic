@@ -13,13 +13,17 @@ permalink: /contact/
   .contact-field textarea { min-height:180px; resize:vertical; }
   .contact-submit { font-family:'Oswald',sans-serif; font-weight:600; font-size:1.05rem; letter-spacing:.14em; text-transform:uppercase; background:var(--purple); color:var(--white); border:0; padding:16px 38px; border-radius:10px; cursor:pointer; transition:background .2s; }
   .contact-submit:hover { background:var(--purple-lt); }
+  .contact-submit:disabled { opacity:.6; cursor:default; }
+  .contact-success { max-width:580px; border:1px solid var(--border); background:var(--card); border-radius:12px; padding:32px; }
+  .contact-success h2 { font-family:'Oswald',sans-serif; font-weight:700; font-size:1.6rem; letter-spacing:.02em; text-transform:uppercase; color:var(--white); margin-bottom:12px; }
+  .contact-success p { color:var(--muted); font-size:1.1rem; line-height:1.6; }
   .contact-hp { position:absolute; left:-9999px; }
 </style>
 <header class="notes-header">
   <h1>Contact</h1>
   <p>Questions about a lesson, a course, or working together one on one? Drop me a message below and I'll get back to you.</p>
 </header>
-<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact/thanks/" class="contact-form">
+<form name="contact" id="contactForm" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/contact/thanks/" class="contact-form">
   <input type="hidden" name="form-name" value="contact">
   <p class="contact-hp"><label>Leave this field empty: <input name="bot-field"></label></p>
   <div class="contact-field">
@@ -36,3 +40,31 @@ permalink: /contact/
   </div>
   <button class="contact-submit" type="submit">Send message</button>
 </form>
+<div class="contact-success" id="contactSuccess" hidden>
+  <h2>Message sent</h2>
+  <p>Thanks for reaching out. I read every message myself, and I'll get back to you as soon as I can.</p>
+</div>
+<script>
+(function(){
+  var form = document.getElementById('contactForm');
+  if (!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var btn = form.querySelector('.contact-submit');
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
+    var body = new URLSearchParams(new FormData(form)).toString();
+    fetch('/', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: body })
+      .then(function(r){
+        if (!r.ok) throw new Error();
+        form.style.display = 'none';
+        var ok = document.getElementById('contactSuccess');
+        ok.hidden = false;
+        ok.scrollIntoView({ behavior:'smooth', block:'center' });
+      })
+      .catch(function(){
+        if (btn) { btn.disabled = false; btn.textContent = 'Send message'; }
+        alert('Sorry, something went wrong sending your message. Please email jon@jonbjorkmusic.com directly.');
+      });
+  });
+})();
+</script>
