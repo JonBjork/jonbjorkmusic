@@ -829,9 +829,8 @@
     .nav-logo-row { gap: 22px; }
     .nav-logo-divider { height: 50px; }
     .nav-tagline { display: none; }
-    .nav-right { display: none; }
-    .nav-toggle { display: flex; }
-    .mobile-menu { display: flex; }
+    .nav-right { display: flex; }
+    .nav-btn { padding: 16px 28px; font-size: 1rem; border-radius: 10px; }
     .about-wrap { grid-template-columns: 1fr; gap: 48px; }
     .feat-grid, .feat-grid.cols-2 { grid-template-columns: 1fr; gap: 14px; }
     .plat-grid { grid-template-columns: 1fr; }
@@ -842,8 +841,9 @@
   @media (max-width: 520px) {
     body { font-size: 1rem; }
     .wrap { padding: 0 18px; }
-    nav { padding: 20px 18px; }
+    nav { padding: 18px 16px; gap: 12px; }
     .nav-logo-divider, .nav-logo-tag { display: none; }
+    .nav-btn { padding: 13px 18px; font-size: 0.82rem; letter-spacing: 0.1em; white-space: nowrap; }
     .hero { padding: 56px 18px 52px; }
     .feat-body, .plat-card, .step { padding: 26px 24px; }
     .includes-card { padding: 30px 26px; }
@@ -888,26 +888,9 @@
     <span class="nav-tagline">Guitarist &middot; Coach &middot; Composer</span>
   </a>
   <div class="nav-right">
-    <a class="nav-link" href="https://www.jonbjorkmusic.com/start?ref=looper">Practice Room Pro</a>
-    <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
-    <a class="nav-link" href="https://www.jonbjorkmusic.com/licks/">Licks</a>
-    <a class="nav-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
-    <a class="nav-link" href="https://www.jonbjorkmusic.com/contact">Contact</a>
     <a class="nav-btn" href="#get">Get the Looper</a>
   </div>
-  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-    <span></span>
-  </button>
 </nav>
-
-<div class="mobile-menu" id="mobileMenu" role="menu">
-  <a class="nav-link" href="https://www.jonbjorkmusic.com/start?ref=looper">Practice Room Pro</a>
-  <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
-  <a class="nav-link" href="https://www.jonbjorkmusic.com/licks/">Licks</a>
-  <a class="nav-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
-  <a class="nav-link" href="https://www.jonbjorkmusic.com/contact">Contact</a>
-  <a class="nav-btn" href="#get">Get the Looper</a>
-</div>
 
 <main>
 
