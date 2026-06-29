@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Practice Lab Looper | Jon Bjork</title>
+<meta name="description" content="Turn any YouTube video into a focused workout. Loop it, slow it, and drill it with a built-in speed trainer that raises the tempo as you go. A Chrome extension built by a guitar teacher. $5/month." />
+
+<meta property="og:title" content="Practice Lab Looper — Stop watching YouTube videos. Start practicing them." />
+<meta property="og:description" content="Loop any tricky passage, slow it down without dropping the pitch, and let the speed trainer climb the tempo rep by rep. $5/month." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.jonbjorkmusic.com/looper" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet" />
+
+<style>
+  /* =============================================================================
+     /looper — Practice Lab Looper sales page
+     Built on the jonbjorkmusic.com design system (matches /start Pro page)
+     Single CTA throughout: Get the Looper — $5/month
+     ============================================================================= */
+  :root {
+    color-scheme: dark;
+    --bg:            #0d0d0d;
+    --bg-2:          #131313;
+    --card:          #181818;
+    --card-2:        #1f1f1f;
+    --line:          #2a2a2a;
+    --line-2:        #3a3a3a;
+    --navy:          #1a1040;
+    --navy-deep:     #0f0820;
+    --navy-lt:       #2d2060;
+    --purple:        #7c3aed;
+    --purple-lt:     #9d5ff5;
+    --purple-pop:    #c084fc;
+    --accent-border: #4a3a9a;
+    --white:         #ffffff;
+    --off:           #e8e8e8;
+    --muted:         #aaaaaa;
+    --dim:           #666666;
+
+    --fs-body:       1.4rem;
+    --fs-eyebrow:    1.05rem;
+    --fs-title:      clamp(2.4rem, 5vw, 4rem);
+    --fs-hero-h1:    clamp(2.8rem, 7vw, 5.4rem);
+    --fs-hero-sub:   1.45rem;
+    --fs-card-title: 1.35rem;
+    --fs-card-body:  1.2rem;
+    --fs-btn:        1.05rem;
+
+    --nav-h:          190px;
+    --fs-nav-name:    4.55rem;
+    --fs-nav-tag:     1.5rem;
+    --fs-nav-tagline: 1.1rem;
+    --fs-nav-link:    1.6rem;
+    --fs-nav-btn:     1.4rem;
+
+    --shadow-card:   0 12px 36px rgba(0, 0, 0, 0.45);
+    --shadow-lift:   0 18px 48px rgba(124, 58, 237, 0.18);
+    --ease-out-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (max-width: 1680px) {
+    :root {
+      --nav-h: 162px;
+      --fs-nav-name: 3.85rem;
+      --fs-nav-tag: 1.35rem;
+      --fs-nav-tagline: 1rem;
+      --fs-nav-link: 1.4rem;
+      --fs-nav-btn: 1.25rem;
+    }
+  }
+  @media (max-width: 900px) {
+    :root {
+      --nav-h: 100px;
+      --fs-nav-name: 2.8rem;
+      --fs-nav-tag: 1.2rem;
+    }
+  }
+  @media (max-width: 480px) {
+    :root {
+      --nav-h: 88px;
+      --fs-nav-name: 2.3rem;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--off);
+    background: var(--bg);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    font-weight: 400;
+    padding-top: var(--nav-h);
+    overflow-x: hidden;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+
+  /* ---------- Typography ---------- */
+  h1, h2, h3, h4 {
+    font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    line-height: 1.04;
+    margin: 0 0 18px;
+    color: var(--white);
+  }
+  h1 { font-size: var(--fs-hero-h1); letter-spacing: -0.01em; line-height: 1.02; }
+  h2 { font-size: var(--fs-title); line-height: 1.05; }
+  h3 { font-size: 1.55rem; letter-spacing: 0.005em; }
+  p  { margin: 0 0 16px; }
+
+  .section-tag, .eyebrow {
+    font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.28em;
+    color: var(--purple-lt);
+    display: inline-block;
+    margin-bottom: 22px;
+  }
+  .section-body {
+    color: var(--muted);
+    font-size: var(--fs-body);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ---------- Layout ---------- */
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+  .narrow { max-width: 880px; margin: 0 auto; }
+  section { padding: 104px 0; }
+  section.tight { padding: 64px 0; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 56px; padding: 18px 38px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600; font-size: var(--fs-btn); letter-spacing: 0.16em;
+    text-transform: uppercase; text-decoration: none;
+    border-radius: 10px; border: 1.5px solid transparent;
+    cursor: pointer;
+    position: relative; overflow: hidden;
+    transition: background-color 0.25s var(--ease-out-smooth), border-color 0.25s, color 0.25s, transform 0.25s var(--ease-out-smooth);
+  }
+  .btn-purple { background: var(--purple); color: var(--white); }
+  .btn-purple:hover { background: var(--purple-lt); transform: scale(1.02); }
+  .btn-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.3); }
+  .btn-outline:hover { border-color: var(--white); }
+  .btn-lg { min-height: 64px; padding: 20px 46px; font-size: 1.15rem; }
+  .btn::after {
+    content: ''; position: absolute; top: 0; left: -75%;
+    width: 50%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.7s var(--ease-out-smooth);
+    pointer-events: none;
+  }
+  .btn:hover::after { left: 125%; }
+  .btn:focus-visible { outline: 2px solid var(--purple-pop); outline-offset: 3px; }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; align-items: center; }
+
+  /* Small reassurance line that sits under a CTA */
+  .cta-trust {
+    font-size: 0.98rem; color: var(--muted); font-weight: 300;
+    margin-top: 16px;
+  }
+
+  /* ============================================================
+     SITE NAV  (matches the rest of jonbjorkmusic.com)
+     ============================================================ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: rgba(13, 13, 13, 0.95);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 40px 78px;
+    animation: navDrop 0.5s var(--ease-out-smooth) both;
+  }
+  @keyframes navDrop {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+  .nav-logo {
+    display: inline-flex; flex-direction: column; align-items: flex-start;
+    gap: 20px; text-decoration: none; line-height: 1;
+  }
+  .nav-logo-row { display: inline-flex; align-items: center; gap: 30px; line-height: 1; }
+  .nav-logo-name {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: var(--fs-nav-name); letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--white); line-height: 1;
+  }
+  .nav-logo-divider { display: inline-block; width: 3px; height: 78px; background: var(--white); }
+  .nav-logo-tag {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: var(--fs-nav-tag); letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--white); line-height: 1;
+  }
+  .nav-tagline {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: var(--fs-nav-tagline); letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--purple-lt); line-height: 1;
+  }
+  .nav-right { display: flex; align-items: center; gap: 62px; }
+  .nav-link {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: var(--fs-nav-link);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    position: relative; padding-bottom: 4px;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--white); }
+  .nav-link::after {
+    content: ''; position: absolute; left: 0; bottom: 0;
+    width: 100%; height: 1px; background: var(--purple-lt);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s var(--ease-out-smooth);
+  }
+  .nav-link:hover::after { transform: scaleX(1); }
+  .nav-btn {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: var(--fs-nav-btn);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--purple); color: var(--white);
+    padding: 26px 56px; border-radius: 12px;
+    text-decoration: none; display: inline-block;
+    position: relative; overflow: hidden;
+    transition: all 0.25s var(--ease-out-smooth);
+  }
+  .nav-btn:hover { background: var(--purple-lt); transform: scale(1.02); }
+  .nav-btn::after {
+    content: ''; position: absolute; top: 0; left: -75%;
+    width: 50%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.7s var(--ease-out-smooth);
+    pointer-events: none;
+  }
+  .nav-btn:hover::after { left: 125%; }
+
+  .nav-toggle {
+    display: none;
+    background: transparent; border: none; padding: 8px;
+    cursor: pointer; color: var(--white);
+    width: 40px; height: 40px;
+    align-items: center; justify-content: center;
+  }
+  .nav-toggle span {
+    display: block; position: relative;
+    width: 22px; height: 2px; background: var(--white);
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+  .nav-toggle span::before, .nav-toggle span::after {
+    content: ''; position: absolute; left: 0;
+    width: 22px; height: 2px; background: var(--white);
+    transition: transform 0.25s ease, top 0.25s ease;
+  }
+  .nav-toggle span::before { top: -7px; }
+  .nav-toggle span::after  { top:  7px; }
+  .nav-toggle.is-open span { background: transparent; }
+  .nav-toggle.is-open span::before { top: 0; transform: rotate(45deg); }
+  .nav-toggle.is-open span::after  { top: 0; transform: rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 199;
+    background: rgba(13, 13, 13, 0.98);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 24px;
+    flex-direction: column; gap: 4px;
+    transform: translateY(-12px);
+    opacity: 0; pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+  .mobile-menu.is-open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .mobile-menu .nav-link {
+    display: block; padding: 20px 8px;
+    font-size: 1.2rem; border-bottom: 1px solid var(--line);
+  }
+  .mobile-menu .nav-btn {
+    margin-top: 20px; text-align: center;
+    padding: 18px 32px; font-size: 1.1rem;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero-wrap { position: relative; overflow: hidden; background: var(--bg); }
+  .hero-wrap::before {
+    content: ''; position: absolute; top: -220px; left: 50%;
+    transform: translateX(-50%); width: 1000px; height: 700px;
+    background: radial-gradient(ellipse, rgba(124,58,237,0.22) 0%, rgba(26,16,64,0.10) 50%, transparent 75%);
+    pointer-events: none; z-index: 0;
+  }
+  .hero-wrap::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 1200px 800px at 50% 30%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 1200px 800px at 50% 30%, black 30%, transparent 80%);
+  }
+  .hero {
+    position: relative; display: block;
+    padding: 96px 32px 84px;
+    max-width: 980px; margin: 0 auto;
+    text-align: center;
+    z-index: 1;
+  }
+  .hero-tag {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--purple-lt);
+    margin-bottom: 28px; display: inline-block;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.15s var(--ease-out-smooth) forwards, tagPulse 3s 0.8s ease-in-out infinite;
+  }
+  .hero h1 {
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.25s var(--ease-out-smooth) forwards;
+  }
+  .hero h1 .offer {
+    background: linear-gradient(90deg, var(--purple-lt) 0%, var(--purple-pop) 55%, #f0c5ff 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    display: inline-block;
+  }
+  .hero-sub {
+    margin: 0 auto 36px; max-width: 740px;
+    color: var(--muted);
+    font-size: var(--fs-hero-sub);
+    line-height: 1.7; font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.45s var(--ease-out-smooth) forwards;
+  }
+  .hero-sub strong { color: var(--white); font-weight: 700; }
+  .hero-video {
+    opacity: 0;
+    animation: fadeUp 0.6s 0.55s var(--ease-out-smooth) forwards;
+  }
+  .hero-ctas {
+    justify-content: center;
+    margin-top: 40px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.7s var(--ease-out-smooth) forwards;
+  }
+  .hero .cta-trust {
+    opacity: 0;
+    animation: fadeUp 0.6s 0.8s var(--ease-out-smooth) forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes tagPulse {
+    0%, 100% { text-shadow: none; }
+    50%      { text-shadow: 0 0 16px rgba(192,132,252,0.55), 0 0 28px rgba(192,132,252,0.25); }
+  }
+
+  /* ---------- VIDEO PLACEHOLDER / EMBED ---------- */
+  .video-frame {
+    position: relative; width: 100%; max-width: 880px;
+    margin: 44px auto 0;
+    aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--accent-border); background: #000;
+    box-shadow: 0 0 60px rgba(124,58,237,0.22), 0 30px 80px rgba(0,0,0,0.55);
+  }
+  .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  /* Placeholder state (until a real video is dropped in) */
+  .video-ph {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 18px;
+    background:
+      radial-gradient(ellipse 600px 360px at 50% 40%, rgba(124,58,237,0.18), transparent 70%),
+      linear-gradient(180deg, #141016, #0a0a0d);
+  }
+  .video-ph .play {
+    width: 84px; height: 84px; border-radius: 50%;
+    background: var(--purple); display: grid; place-items: center;
+    box-shadow: 0 0 0 0 rgba(124,58,237,0.5);
+    animation: pulse 2.6s ease-out infinite;
+  }
+  .video-ph .play::after {
+    content: ''; display: block;
+    width: 0; height: 0; margin-left: 6px;
+    border-left: 26px solid #fff;
+    border-top: 16px solid transparent; border-bottom: 16px solid transparent;
+  }
+  .video-ph .ph-label {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    font-size: 0.85rem; color: rgba(255,255,255,0.65);
+  }
+  .video-ph .ph-sub { font-size: 0.92rem; color: var(--dim); max-width: 360px; text-align: center; }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(124,58,237,0.55); }
+    70%  { box-shadow: 0 0 0 24px rgba(124,58,237,0); }
+    100% { box-shadow: 0 0 0 0 rgba(124,58,237,0); }
+  }
+
+  /* ---------- HERO CHECKLIST (pill row) ---------- */
+  .perfect-for {
+    max-width: 820px; margin: 56px auto 0;
+    text-align: center;
+    opacity: 0; animation: fadeUp 0.6s 0.95s var(--ease-out-smooth) forwards;
+  }
+  .perfect-for .pf-label {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 20px;
+  }
+  .pf-pills { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .pf-pill {
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 0.95rem; letter-spacing: 0.06em;
+    color: var(--off);
+    background: var(--card-2); border: 1px solid var(--line);
+    border-radius: 999px; padding: 11px 22px;
+    display: inline-flex; align-items: center; gap: 9px;
+    transition: border-color 0.2s, color 0.2s, transform 0.2s;
+  }
+  .pf-pill::before {
+    content: '✓'; color: var(--purple-lt); font-weight: 700; font-size: 0.9rem;
+  }
+  .pf-pill:hover { border-color: var(--accent-border); transform: translateY(-2px); }
+
+  /* ---------- STAT BAND ---------- */
+  .band {
+    background: var(--bg-2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 32px 24px; text-align: center;
+  }
+  .band p {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); margin: 0;
+  }
+  .band p .dot { color: var(--purple-lt); margin: 0 14px; }
+
+  /* ---------- SECTION BACKGROUNDS ---------- */
+  .section-card { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .section-bg2  { background: var(--bg-2); }
+  .section-bg   { background: var(--bg); }
+
+  /* ---------- CENTERED HEADER ---------- */
+  .features-header { text-align: center; max-width: 820px; margin: 0 auto; }
+  .features-header h2 { margin-bottom: 18px; }
+  .features-header .section-body { margin: 0 auto; max-width: 700px; }
+
+  /* ---------- PROBLEM SECTION ---------- */
+  .problem-inner { max-width: 820px; margin: 0 auto; text-align: center; }
+  .problem-inner .section-body { font-size: 1.5rem; line-height: 1.6; color: var(--off); margin: 0 auto 28px; max-width: 720px; }
+  .problem-kicker {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(1.7rem, 3.6vw, 2.6rem);
+    line-height: 1.2; color: var(--white);
+    max-width: 760px; margin: 8px auto 0;
+  }
+  .problem-kicker .hl {
+    background: linear-gradient(90deg, var(--purple-lt), var(--purple-pop));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+
+  /* ---------- FEATURE CARDS (with GIF media slot) ---------- */
+  .feat {
+    background: var(--card-2); border: 1px solid var(--line); border-radius: 12px;
+    padding: 0; overflow: hidden;
+    transition: border-color 0.4s ease, background 0.4s ease, transform 0.25s ease;
+    position: relative;
+    opacity: 0; transform: translateY(14px);
+    display: flex; flex-direction: column;
+  }
+  .feat.in { opacity: 1; transform: none; transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.25s, background 0.25s; }
+  .feat::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--purple), var(--purple-lt));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; z-index: 3;
+  }
+  .feat:hover::before { transform: scaleX(1); }
+  .feat:hover { border-color: var(--accent-border); background: var(--card); transform: translateY(-4px); }
+  .feat-body { padding: 30px 30px 34px; display: flex; flex-direction: column; }
+  .feat-num {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 2.4rem;
+    color: var(--line-2); line-height: 1; margin-bottom: 18px;
+    transition: color 0.4s;
+  }
+  .feat:hover .feat-num { color: var(--purple-lt); }
+  .feat.lit .feat-num { color: var(--purple-lt); }
+  .feat.lit { border-color: var(--purple); }
+  .feat-title {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: var(--fs-card-title);
+    letter-spacing: 0.04em; color: var(--white); margin-bottom: 14px;
+    line-height: 1.25;
+  }
+  .feat-desc { font-size: var(--fs-card-body); color: var(--muted); line-height: 1.6; font-weight: 300; }
+
+  /* GIF media slot on top of a feature card */
+  .feat-media {
+    position: relative; width: 100%; aspect-ratio: 16 / 10;
+    background:
+      radial-gradient(ellipse 400px 220px at 50% 30%, rgba(124,58,237,0.14), transparent 70%),
+      linear-gradient(180deg, #15121a, #0c0c0f);
+    border-bottom: 1px solid var(--line);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    overflow: hidden;
+  }
+  .feat-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .feat-media .ph-chip {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    border: 1px dashed rgba(157,95,245,0.4); border-radius: 6px;
+    padding: 7px 14px;
+  }
+  .feat-media .ph-mini { font-size: 0.78rem; color: var(--dim); }
+
+  .feat-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+    margin-top: 56px;
+  }
+  .feat-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .feat-grid .feat:nth-child(1) { transition-delay: 0.04s; }
+  .feat-grid .feat:nth-child(2) { transition-delay: 0.11s; }
+  .feat-grid .feat:nth-child(3) { transition-delay: 0.18s; }
+  .feat-grid .feat:nth-child(4) { transition-delay: 0.25s; }
+  .feat-grid .feat:nth-child(5) { transition-delay: 0.32s; }
+  .feat-grid .feat:nth-child(6) { transition-delay: 0.39s; }
+
+  /* ---------- SPEED TRAINER SECTION ---------- */
+  .speed-wrap {
+    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .speed-copy .section-body { margin-bottom: 18px; }
+  .speed-copy .section-body strong { color: var(--white); font-weight: 700; }
+  .speed-pull {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 1.35rem; color: var(--purple-lt);
+    line-height: 1.4; margin: 6px 0 26px;
+  }
+
+  /* Animated tempo-climb visual (replaces a GIF, runs in pure CSS) */
+  .climber {
+    background: var(--card); border: 1px solid var(--accent-border);
+    border-radius: 16px; padding: 34px 32px;
+    box-shadow: var(--shadow-lift);
+  }
+  .climber-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .climber-head .c-label {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.78rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--purple-pop);
+  }
+  .climber-head .c-reps { font-family: 'Oswald', sans-serif; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .ladder { display: flex; flex-direction: column-reverse; gap: 10px; }
+  .rung {
+    display: flex; align-items: center; gap: 16px;
+  }
+  .rung .pct {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.05rem; color: var(--dim); width: 58px; text-align: right;
+    transition: color 0.4s;
+  }
+  .rung .track {
+    position: relative; flex: 1; height: 16px;
+    background: var(--card-2); border: 1px solid var(--line); border-radius: 999px;
+    overflow: hidden;
+  }
+  .rung .fill {
+    position: absolute; inset: 0; width: 0;
+    background: linear-gradient(90deg, var(--purple), var(--purple-lt));
+    border-radius: 999px;
+  }
+  .rung .check {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1rem;
+    color: var(--purple-lt); width: 22px; opacity: 0; transition: opacity 0.3s;
+  }
+  /* climbing animation: each rung fills, locks, lights its label and check */
+  .rung .fill { animation: rungFill 9s ease-in-out infinite; }
+  .rung:nth-child(1) .fill { animation-delay: 0s;    }
+  .rung:nth-child(2) .fill { animation-delay: 0.5s;  }
+  .rung:nth-child(3) .fill { animation-delay: 1.0s;  }
+  .rung:nth-child(4) .fill { animation-delay: 1.5s;  }
+  .rung:nth-child(5) .fill { animation-delay: 2.0s;  }
+  .rung:nth-child(6) .fill { animation-delay: 2.5s;  }
+  @keyframes rungFill {
+    0%    { width: 0; }
+    7%    { width: 100%; }
+    33%   { width: 100%; }
+    40%   { width: 0; }
+    100%  { width: 0; }
+  }
+  .rung .pct { animation: pctLight 9s ease-in-out infinite; }
+  .rung .check { animation: checkLight 9s ease-in-out infinite; }
+  .rung:nth-child(1) .pct, .rung:nth-child(1) .check { animation-delay: 0s;   }
+  .rung:nth-child(2) .pct, .rung:nth-child(2) .check { animation-delay: 0.5s; }
+  .rung:nth-child(3) .pct, .rung:nth-child(3) .check { animation-delay: 1.0s; }
+  .rung:nth-child(4) .pct, .rung:nth-child(4) .check { animation-delay: 1.5s; }
+  .rung:nth-child(5) .pct, .rung:nth-child(5) .check { animation-delay: 2.0s; }
+  .rung:nth-child(6) .pct, .rung:nth-child(6) .check { animation-delay: 2.5s; }
+  @keyframes pctLight {
+    0%, 6%   { color: var(--dim); }
+    8%, 36%  { color: var(--purple-lt); }
+    40%,100% { color: var(--dim); }
+  }
+  @keyframes checkLight {
+    0%, 6%   { opacity: 0; }
+    9%, 36%  { opacity: 1; }
+    42%,100% { opacity: 0; }
+  }
+  .climber-foot {
+    margin-top: 24px; text-align: center;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.8rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .climber-foot .pulse-dot {
+    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--purple-pop); margin-right: 9px; vertical-align: middle;
+    box-shadow: 0 0 0 0 rgba(192,132,252,0.7);
+    animation: pulse 2.4s ease-out infinite;
+  }
+
+  /* ---------- WHY THIS ONE (teacher) ---------- */
+  .about-wrap {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 360px 1fr; gap: 80px;
+    align-items: start;
+  }
+  .about-bio p { color: var(--muted); font-size: var(--fs-body); line-height: 1.7; margin-bottom: 18px; font-weight: 300; }
+  .about-bio p strong { color: var(--white); font-weight: 700; }
+  .about-portrait {
+    background: var(--navy);
+    border: 1px solid var(--accent-border);
+    border-radius: 14px;
+    padding: 36px 32px;
+    box-shadow: var(--shadow-lift);
+  }
+  .about-portrait .eyebrow { color: var(--purple-pop); margin-bottom: 14px; }
+  .about-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+    margin-top: 36px;
+  }
+  .stat-item {
+    opacity: 0; transform: translateY(14px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .stat-item:nth-child(1) { transition-delay: 0.05s; }
+  .stat-item:nth-child(2) { transition-delay: 0.18s; }
+  .stat-item:nth-child(3) { transition-delay: 0.31s; }
+  #about-stats.counted .stat-item { opacity: 1; transform: none; }
+  .a-stat-num { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 2.6rem; color: var(--purple-pop); line-height: 1; }
+  .a-stat-lbl { font-family: 'Oswald', sans-serif; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-top: 8px; }
+
+  /* ---------- PLATFORM SUPPORT ---------- */
+  .plat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 56px; }
+  .plat-card {
+    background: var(--card-2); border: 1px solid var(--line); border-radius: 12px;
+    padding: 38px 34px; transition: border-color 0.25s, transform 0.25s;
+  }
+  .plat-card:hover { border-color: var(--accent-border); transform: translateY(-4px); }
+  .plat-card .plat-name {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.45rem; color: var(--white); margin-bottom: 6px;
+  }
+  .plat-card .plat-status {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--purple-lt); margin-bottom: 18px; display: inline-block;
+  }
+  .plat-card p { font-size: var(--fs-card-body); color: var(--muted); line-height: 1.6; font-weight: 300; margin: 0; }
+
+  /* ---------- HOW IT WORKS (steps) ---------- */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 56px; }
+  .step {
+    background: var(--card-2); border: 1px solid var(--line); border-radius: 12px;
+    padding: 34px 30px; position: relative;
+  }
+  .step-num {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1rem;
+    width: 44px; height: 44px; border-radius: 50%;
+    display: grid; place-items: center;
+    background: var(--navy); border: 1px solid var(--accent-border);
+    color: var(--purple-pop); margin-bottom: 20px;
+  }
+  .step-title { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1.15rem; color: var(--white); margin-bottom: 10px; }
+  .step p { font-size: 1.1rem; color: var(--muted); line-height: 1.6; font-weight: 300; margin: 0; }
+  .devices-note {
+    max-width: 820px; margin: 40px auto 0; text-align: center;
+    font-size: 1.15rem; color: var(--muted); line-height: 1.7; font-weight: 300;
+  }
+  .devices-note strong { color: var(--white); font-weight: 700; }
+
+  /* ---------- OFFER / INCLUDES CARD ---------- */
+  .offer-block { max-width: 760px; margin: 0 auto; text-align: center; }
+  .price-tag {
+    display: inline-flex; align-items: baseline; gap: 6px;
+    font-family: 'Oswald', sans-serif; color: var(--white);
+    margin: 6px 0 4px;
+  }
+  .price-tag .amt { font-weight: 700; font-size: 4.6rem; line-height: 1; }
+  .price-tag .amt sup { font-size: 0.34em; vertical-align: super; color: var(--muted); font-weight: 400; }
+  .price-tag .per { font-size: 1.2rem; letter-spacing: 0.06em; color: var(--muted); }
+  .includes-card {
+    max-width: 620px; margin: 36px auto 40px; text-align: left;
+    background: var(--card); border: 1px solid var(--accent-border);
+    border-radius: 14px; padding: 36px 40px;
+  }
+  .includes-list { list-style: none; padding: 0; margin: 0; }
+  .includes-list li {
+    color: var(--off); font-size: var(--fs-card-body); line-height: 1.55;
+    padding: 15px 0 15px 34px; position: relative;
+    border-bottom: 1px solid var(--line);
+  }
+  .includes-list li:last-child { border-bottom: none; }
+  .includes-list li::before { content: '✓'; position: absolute; left: 0; top: 15px; color: var(--purple-lt); font-weight: 700; font-size: 1.1rem; }
+  .includes-list li strong { color: var(--white); font-weight: 700; }
+
+  /* ---------- WHY $5 ---------- */
+  .why5-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+  .why5-inner .section-body { margin: 0 auto 22px; }
+  .why5-inner .section-body strong { color: var(--white); font-weight: 700; }
+  .why5-kicker {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: clamp(1.4rem, 2.8vw, 1.9rem); line-height: 1.4;
+    color: var(--purple-lt); max-width: 680px; margin: 12px auto 0;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-header { text-align: center; margin-bottom: 48px; }
+  .faq-list { max-width: 880px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--line); }
+  .faq-q {
+    width: 100%; text-align: left;
+    background: transparent; border: none; cursor: pointer;
+    padding: 26px 50px 26px 0;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 1.25rem; color: var(--white);
+    position: relative; transition: color 0.15s;
+  }
+  .faq-q:hover { color: var(--purple-lt); }
+  .faq-q:focus-visible { outline: 2px solid var(--purple-pop); outline-offset: 4px; border-radius: 4px; }
+  .faq-q::after {
+    content: '+'; position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 1.9rem;
+    color: var(--purple-lt); line-height: 1; transition: transform 0.3s ease;
+  }
+  .faq-q[aria-expanded="true"]::after { transform: translateY(-50%) rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.35s ease; }
+  .faq-q[aria-expanded="true"] + .faq-a { max-height: 560px; padding: 0 24px 30px 0; }
+  .faq-a p { font-size: var(--fs-body); line-height: 1.7; color: var(--muted); margin: 0; font-weight: 300; }
+
+  /* ---------- CTA BAND ---------- */
+  .cta-band {
+    background: linear-gradient(135deg, var(--navy-deep), var(--navy));
+    padding: 120px 24px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-band::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 900px 600px at 50% 50%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 900px 600px at 50% 50%, black 30%, transparent 80%);
+  }
+  .cta-band-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+  .cta-band h2 { font-size: clamp(2.4rem, 5vw, 3.6rem); color: var(--white); margin-bottom: 20px; }
+  .cta-band h2 .accent {
+    background: linear-gradient(90deg, var(--purple-lt), var(--purple-pop));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .cta-band p { color: var(--off); font-size: var(--fs-body); margin-bottom: 40px; font-weight: 300; }
+
+  /* ---------- FOOTER ---------- */
+  footer { background: #0a0a0a; color: var(--muted); padding: 56px 24px 40px; text-align: center; font-size: 1rem; }
+  .footer-row { margin-bottom: 18px; display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
+  .footer-row a { color: var(--off); text-decoration: none; font-weight: 400; transition: color 0.15s; }
+  .footer-row a:hover { color: var(--purple-lt); }
+  .footer-copy { font-size: 0.88rem; color: var(--dim); margin-top: 14px; }
+
+  /* ---------- REVEAL ---------- */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.8s var(--ease-out-smooth), transform 0.8s var(--ease-out-smooth); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1680px) {
+    nav { padding: 34px 62px; }
+    .nav-logo { gap: 16px; margin-right: 48px; }
+    .nav-logo-row { gap: 26px; }
+    .nav-logo-divider { height: 68px; }
+    .nav-tagline { letter-spacing: 0.26em; }
+    .nav-right { gap: 34px; }
+    .nav-btn { padding: 22px 46px; border-radius: 11px; }
+  }
+  @media (max-width: 1040px) {
+    .speed-wrap { grid-template-columns: 1fr; gap: 44px; }
+  }
+  @media (max-width: 900px) {
+    nav { padding: 26px 24px; }
+    .nav-logo { gap: 11px; }
+    .nav-logo-row { gap: 22px; }
+    .nav-logo-divider { height: 50px; }
+    .nav-tagline { display: none; }
+    .nav-right { display: none; }
+    .nav-toggle { display: flex; }
+    .mobile-menu { display: flex; }
+    .about-wrap { grid-template-columns: 1fr; gap: 48px; }
+    .feat-grid, .feat-grid.cols-2 { grid-template-columns: 1fr; gap: 14px; }
+    .plat-grid { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    section { padding: 80px 0; }
+    .hero { padding: 72px 24px 60px; }
+  }
+  @media (max-width: 520px) {
+    body { font-size: 1rem; }
+    .wrap { padding: 0 18px; }
+    nav { padding: 20px 18px; }
+    .nav-logo-divider, .nav-logo-tag { display: none; }
+    .hero { padding: 56px 18px 52px; }
+    .feat-body, .plat-card, .step { padding: 26px 24px; }
+    .includes-card { padding: 30px 26px; }
+    .climber { padding: 28px 24px; }
+    .price-tag .amt { font-size: 3.8rem; }
+    .cta-row { flex-direction: column; align-items: stretch; }
+    .cta-row .btn { width: 100%; }
+    .about-stats { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .a-stat-num { font-size: 1.8rem; }
+    .faq-q { font-size: 1.1rem; padding: 22px 40px 22px 0; }
+    .problem-inner .section-body { font-size: 1.25rem; }
+  }
+
+  /* ---------- REDUCED MOTION ---------- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001s !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001s !important;
+    }
+    .hero-tag, .hero h1, .hero-sub, .hero-video, .hero-ctas, .hero .cta-trust, .perfect-for { opacity: 1; animation: none; }
+    .reveal, .feat, .stat-item { opacity: 1; transform: none; }
+    .rung .fill { width: 100%; animation: none; }
+    .rung .pct { color: var(--purple-lt); animation: none; }
+    .rung .check { opacity: 1; animation: none; }
+    .video-ph .play, .climber-foot .pulse-dot { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- =============================================================================
+     SITE NAV
+     ============================================================================= -->
+<nav>
+  <a class="nav-logo" href="https://www.jonbjorkmusic.com/" aria-label="Jon Bjork Music — Guitarist, Coach, Composer">
+    <span class="nav-logo-row">
+      <span class="nav-logo-name">Jon Bjork</span>
+      <span class="nav-logo-divider" aria-hidden="true"></span>
+      <span class="nav-logo-tag">Music</span>
+    </span>
+    <span class="nav-tagline">Guitarist &middot; Coach &middot; Composer</span>
+  </a>
+  <div class="nav-right">
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/start?ref=looper">Practice Room Pro</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/licks/">Licks</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/contact">Contact</a>
+    <a class="nav-btn" href="#get">Get the Looper</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" role="menu">
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/start?ref=looper">Practice Room Pro</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/licks/">Licks</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/contact">Contact</a>
+  <a class="nav-btn" href="#get">Get the Looper</a>
+</div>
+
+<main>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <header class="hero-wrap">
+    <section class="hero">
+      <span class="hero-tag">A Chrome Extension by Jon Bjork</span>
+      <h1>Stop Watching<br>YouTube Videos.<br><span class="offer">Start Practicing Them.</span></h1>
+      <p class="hero-sub">Turn any <strong>YouTube</strong> video into a focused workout. Loop it, slow it, drill it until it's yours. The built-in speed trainer automatically increases the tempo after every successful set of repetitions.</p>
+
+      <!-- VSL: 2–3 min demo. Replace the .video-ph block with an <iframe> embed. -->
+      <div class="video-frame hero-video reveal">
+        <div class="video-ph">
+          <div class="play" aria-hidden="true"></div>
+          <div class="ph-label">Demo Video — Placeholder</div>
+          <div class="ph-sub">2–3 min: a real tricky passage getting looped, slowed, and drilled.</div>
+        </div>
+        <!-- When ready, swap the placeholder above for:
+        <iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Practice Lab Looper demo" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        -->
+      </div>
+
+      <div class="cta-row hero-ctas">
+        <a class="btn btn-purple btn-lg" href="#get">Get the Looper — $5/month</a>
+      </div>
+      <p class="cta-trust">Cancel anytime, no lock-in. Not for you? Request a refund within 7 days.</p>
+
+      <div class="perfect-for">
+        <div class="pf-label">Perfect for practicing from</div>
+        <div class="pf-pills">
+          <span class="pf-pill">YouTube lessons</span>
+          <span class="pf-pill">Solos</span>
+          <span class="pf-pill">Live performances</span>
+          <span class="pf-pill">Backing tracks</span>
+          <span class="pf-pill">YouTube Shorts</span>
+          <span class="pf-pill">Instagram clips</span>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <!-- ============================================================
+       STAT BAND
+       ============================================================ -->
+  <div class="band">
+    <p>Loop It <span class="dot">·</span> Slow It <span class="dot">·</span> Drill It <span class="dot">·</span> Build It Back To Full Speed</p>
+  </div>
+
+  <!-- ============================================================
+       THE PROBLEM
+       ============================================================ -->
+  <section class="section-bg" id="problem">
+    <div class="wrap">
+      <div class="problem-inner reveal">
+        <span class="section-tag">The Real Problem</span>
+        <h2 style="margin-bottom: 26px;">Stop Rewinding<br>The Same Four Seconds.</h2>
+        <p class="section-body">You find the lick. You miss the start. You overshoot the end. You rewind, and you miss it again. Five minutes later you've barely practiced. You've just been operating a video player.</p>
+        <p class="problem-kicker">That's not a practice problem. <span class="hl">That's a tools problem.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHAT IT DOES
+       ============================================================ -->
+  <section class="section-card" id="what-it-does">
+    <div class="wrap">
+      <div class="features-header reveal">
+        <span class="section-tag">What It Does</span>
+        <h2>Everything You Need To Drill A Passage,<br>In The Video You're Already Watching.</h2>
+      </div>
+
+      <div class="feat-grid">
+        <div class="feat">
+          <div class="feat-media"><span class="ph-chip">GIF · Loop appearing</span><span class="ph-mini">Setting a loop on a YouTube passage</span></div>
+          <div class="feat-body">
+            <div class="feat-num">01</div>
+            <div class="feat-title">Loop The Exact Part</div>
+            <div class="feat-desc">Set a loop on any tricky passage and play it back on repeat. No more scrubbing the timeline to find the same four seconds.</div>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="feat-media"><span class="ph-chip">GIF · Tempo dropping</span><span class="ph-mini">Slowing the video, pitch held</span></div>
+          <div class="feat-body">
+            <div class="feat-num">02</div>
+            <div class="feat-title">Slow It Down, Keep The Pitch</div>
+            <div class="feat-desc">Slow the video to a tempo you can actually play, with the pitch held where it is. No dropping into a muddy low key, just the same notes at a slower speed.</div>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="feat-media"><span class="ph-chip">GIF · Pitch shift</span><span class="ph-mini">Matching the video to your tuning</span></div>
+          <div class="feat-body">
+            <div class="feat-num">03</div>
+            <div class="feat-title">Match Your Tuning</div>
+            <div class="feat-desc">Shift the pitch to match your guitar, with fine-tune correction for the in-between cases. Play along without retuning.</div>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="feat-media"><span class="ph-chip">GIF · Tempo climbing</span><span class="ph-mini">The speed trainer raising BPM, rep by rep</span></div>
+          <div class="feat-body">
+            <div class="feat-num">04</div>
+            <div class="feat-title">Built-In Speed Trainer</div>
+            <div class="feat-desc">The one a generic looper doesn't have. Take any saved loop and the Looper raises the tempo for you, rep by rep, until you're at full speed. This is where the real practice begins.</div>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="feat-media"><span class="ph-chip">GIF · Loading a saved loop</span><span class="ph-mini">Yesterday's loop reopening right where you left it</span></div>
+          <div class="feat-body">
+            <div class="feat-num">05</div>
+            <div class="feat-title">Save Your Loops</div>
+            <div class="feat-desc">Build a library of the passages you're working on. Jump back into any of them with one click, and the video reopens right where you left it. Yesterday's loop is waiting for you today.</div>
+          </div>
+        </div>
+        <div class="feat">
+          <div class="feat-media"><span class="ph-chip">GIF · Tagging &amp; color status</span><span class="ph-mini">Organizing the loop library</span></div>
+          <div class="feat-body">
+            <div class="feat-num">06</div>
+            <div class="feat-title">Organize How You Practice</div>
+            <div class="feat-desc">Tag each loop with your own labels — alternate picking, blues, thrash rhythm, whatever fits how you practice. Use the color status to know where you are on each loop at a glance, so your library stays a practice plan instead of a pile of bookmarks.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SPEED TRAINER  (the moat)
+       ============================================================ -->
+  <section class="section-bg" id="speed-trainer">
+    <div class="wrap">
+      <div class="speed-wrap">
+        <div class="speed-copy reveal">
+          <span class="section-tag">The Part That Builds Speed</span>
+          <h2>Most Tools Stop At "Slow It Down."<br>That's Where The Work Starts.</h2>
+          <p class="speed-pull">You'll probably use this more than every other feature combined.</p>
+          <p class="section-body">Anybody can slow a video down. Building it back to full speed is where progress is won or lost, and that's where most players stall. They jump the tempo too soon, it falls apart, and they never find out how close they were.</p>
+          <p class="section-body">The speed trainer does the climbing for you. Set a starting tempo and tell it how many reps you want at each level. Play your reps, and when you've earned it, the Looper bumps the tempo and keeps going. <strong>No stopwatch, no metronome math, no remembering where you left off yesterday.</strong> Clean repetitions and automatic progression until you reach full speed.</p>
+          <p class="section-body">Picture a real session. You find a lick, set the loop, drop it to 50%, and play five clean reps. The Looper takes you to 55%, you play five more, then 60%, and it keeps climbing. Thirty minutes later you've actually practiced, instead of dragging a timeline around.</p>
+          <p class="section-body" style="color: var(--off);">That's the difference between owning a passage and watching someone else play it.</p>
+        </div>
+
+        <!-- Animated tempo-climb visual (pure CSS, no asset needed) -->
+        <div class="climber reveal" aria-hidden="true">
+          <div class="climber-head">
+            <span class="c-label">Speed Trainer</span>
+            <span class="c-reps">5 clean reps / level</span>
+          </div>
+          <div class="ladder">
+            <div class="rung"><span class="pct">50%</span><span class="track"><span class="fill"></span></span><span class="check">✓</span></div>
+            <div class="rung"><span class="pct">60%</span><span class="track"><span class="fill"></span></span><span class="check">✓</span></div>
+            <div class="rung"><span class="pct">70%</span><span class="track"><span class="fill"></span></span><span class="check">✓</span></div>
+            <div class="rung"><span class="pct">80%</span><span class="track"><span class="fill"></span></span><span class="check">✓</span></div>
+            <div class="rung"><span class="pct">90%</span><span class="track"><span class="fill"></span></span><span class="check">✓</span></div>
+            <div class="rung"><span class="pct">100%</span><span class="track"><span class="fill"></span></span><span class="check">✓</span></div>
+          </div>
+          <div class="climber-foot"><span class="pulse-dot"></span>Tempo climbs automatically as you earn it</div>
+        </div>
+      </div>
+
+      <div class="reveal" style="text-align:center; margin-top: 64px;">
+        <a class="btn btn-purple btn-lg" href="#get">Get the Looper — $5/month</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHY THIS ONE  (built by a teacher)
+       ============================================================ -->
+  <section class="section-card" id="why-this-one">
+    <div class="wrap">
+      <div class="about-wrap">
+        <aside class="about-portrait reveal">
+          <span class="eyebrow">Built By A Teacher</span>
+          <h3 style="color:var(--white); font-size:1.9rem; margin-bottom:14px;">Jon Bjork</h3>
+          <p style="color:var(--off); font-size:1.05rem; line-height:1.55; margin:0; font-weight:300;">Guitarist, coach, and composer. I built the Looper to be the practice tool I always wished my students had.</p>
+          <div class="about-stats" id="about-stats">
+            <div class="stat-item">
+              <div class="a-stat-num" data-count="25" data-suffix="+">0+</div>
+              <div class="a-stat-lbl">Years Teaching</div>
+            </div>
+            <div class="stat-item">
+              <div class="a-stat-num" id="stat-git">GIT</div>
+              <div class="a-stat-lbl">Graduate, LA</div>
+            </div>
+            <div class="stat-item">
+              <div class="a-stat-num" data-count="700" data-suffix="+">0+</div>
+              <div class="a-stat-lbl">Tracks Composed</div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="reveal">
+          <span class="section-tag">Why This One</span>
+          <h2>Built By A Guitar Teacher,<br>Not A Playback Button.</h2>
+          <div class="about-bio" style="margin-top: 18px;">
+            <p>I'm Jon Bjork, and I've spent 25 years teaching guitar. In that time I've watched thousands of hours disappear into rewinding videos instead of actually practicing. The Looper is the tool I always wished my students had.</p>
+            <p><strong>Everything in it is built around one principle. Perfect repetitions beat random repetitions.</strong></p>
+            <p>A passage doesn't get fast by playing it fast, it gets fast by playing it clean and climbing the tempo with the reps in between. The saved loops and the speed trainer are that method, built into the video you're already watching. You're not slowing a video down. You're running a real practice progression on the exact part you're stuck on.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PLATFORM SUPPORT
+       ============================================================ -->
+  <section class="section-bg" id="platforms">
+    <div class="wrap">
+      <div class="features-header reveal">
+        <span class="section-tag">Where It Works</span>
+        <h2>Learn From The Videos<br>You're Already Watching.</h2>
+      </div>
+      <div class="plat-grid reveal">
+        <div class="plat-card">
+          <div class="plat-name">YouTube &amp; YouTube Shorts</div>
+          <span class="plat-status">Fully Supported</span>
+          <p>Loop, slow, pitch-shift, save your loops, and run the speed trainer right where you're already learning.</p>
+        </div>
+        <div class="plat-card">
+          <div class="plat-name">Instagram</div>
+          <span class="plat-status">Also Supported</span>
+          <p>Instagram changes how its player works fairly often, so keeping the extension compatible is part of the ongoing maintenance — and one of the reasons this is a subscription rather than a one-time buy. When Instagram shifts, I update to keep it running.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       HOW IT WORKS
+       ============================================================ -->
+  <section class="section-card" id="how-it-works">
+    <div class="wrap">
+      <div class="features-header reveal">
+        <span class="section-tag">How It Works</span>
+        <h2>Buy It. Install It.<br>You're Practicing.</h2>
+      </div>
+      <div class="steps reveal">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-title">Buy On This Page</div>
+          <p>Checkout takes a minute.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-title">Get Your Key</div>
+          <p>You'll get a license key by email, with a link to install the extension.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-title">Paste &amp; Play</div>
+          <p>Install it, paste your key, and you're practicing.</p>
+        </div>
+      </div>
+      <p class="devices-note reveal">Works on up to <strong>3 devices</strong> on one subscription. Got a new laptop? Deactivate an old device yourself in a couple of clicks and free up the slot. No emailing me, no waiting. You can also save your whole loop library and move it to another computer you practice on, so your setup comes with you. Updates are included automatically for as long as your subscription is active.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       THE OFFER  (single CTA destination)
+       ============================================================ -->
+  <section class="section-bg" id="get">
+    <div class="wrap">
+      <div class="offer-block reveal">
+        <span class="section-tag">Get The Looper</span>
+        <h2>One Tool. One Price.<br>Start Practicing Today.</h2>
+        <div class="price-tag"><span class="amt"><sup>$</sup>5</span><span class="per">/ month</span></div>
+
+        <div class="includes-card">
+          <ul class="includes-list">
+            <li><strong>Loop, slow &amp; pitch-shift</strong> any supported video, with the pitch held as you slow it down.</li>
+            <li><strong>The built-in speed trainer</strong> that climbs the tempo for you, rep by rep, to full speed.</li>
+            <li><strong>A saved loop library</strong> with tags and color status, so your practice plan is always one click away.</li>
+            <li><strong>Up to 3 devices</strong> on one subscription, managed by you.</li>
+            <li><strong>Every future update</strong> included automatically, for as long as you're subscribed.</li>
+          </ul>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn btn-purple btn-lg" href="https://jonbjorkmusic.lemonsqueezy.com/checkout/buy/e50d117b-364f-4b2d-8707-cb0376f4ebfa" data-checkout>Get the Looper — $5/month</a>
+        </div>
+        <p class="cta-trust">Cancel anytime, no lock-in. Works on up to 3 devices. Not for you? Request a refund within 7 days.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHY $5
+       ============================================================ -->
+  <section class="section-card" id="why-5">
+    <div class="wrap">
+      <div class="why5-inner reveal">
+        <span class="section-tag">Why It's $5 A Month</span>
+        <h2>Less Than A Set Of Strings.</h2>
+        <p class="section-body">I wanted this to cost less than a set of strings. Affordable enough for any serious guitarist, and sustainable enough that I can keep improving it every month. <strong>Your subscription includes every future update and improvement automatically</strong>, so the tool you buy today keeps getting better while you use it.</p>
+        <p class="why5-kicker">The goal isn't to charge you every month. It's to keep making the tool better every month.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FINAL CTA
+       ============================================================ -->
+  <section class="cta-band">
+    <div class="cta-band-inner">
+      <h2>Practice The Hard Part,<br><span class="accent">Not The Timeline.</span></h2>
+      <p>$5 a month. Cancel anytime. Not for you? Request a refund within 7 days.</p>
+      <div class="cta-row">
+        <a class="btn btn-purple btn-lg" href="https://jonbjorkmusic.lemonsqueezy.com/checkout/buy/e50d117b-364f-4b2d-8707-cb0376f4ebfa" data-checkout>Get the Looper — $5/month</a>
+      </div>
+      <p class="cta-trust" style="color: rgba(255,255,255,0.6);">Cancel anytime, no lock-in. Works on up to 3 devices.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FAQ
+       ============================================================ -->
+  <section class="section-bg">
+    <div class="wrap">
+      <div class="faq-header reveal">
+        <span class="section-tag">Common Questions</span>
+        <h2>Before You Buy.</h2>
+      </div>
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Is there a free trial?</button>
+          <div class="faq-a"><p>No. The price is low on purpose, and you can cancel anytime. If it's not for you, request a refund within 7 days of buying and I'll take care of it. The risk is about as small as it gets.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Which browsers does it work on?</button>
+          <div class="faq-a"><p>It's a Chrome extension, built and tested for Chrome. It also installs on other Chromium browsers like Edge, Brave, Arc, and Opera, which generally run Chrome extensions fine. You'll get the install link and your license key immediately after purchase.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Can I use it on more than one computer?</button>
+          <div class="faq-a"><p>Yes, up to 3 devices on one subscription. You can deactivate a device yourself anytime to free up a slot for a new one.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Do I need to upload videos?</button>
+          <div class="faq-a"><p>No. The Looper works directly on supported sites, so you practice using the videos you're already watching. Nothing to upload, nothing to import.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Does it work on Instagram?</button>
+          <div class="faq-a"><p>Yes. YouTube and YouTube Shorts are fully supported, and Instagram works too. Instagram changes its player fairly often, so I update the extension to keep it compatible as part of regular maintenance.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Can I use it with my own video files?</button>
+          <div class="faq-a"><p>Not right now. The Looper works on supported streaming sites, with YouTube fully supported and Instagram supported too. Loading your own local video files isn't part of it today, though it's the kind of thing future updates could add.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">How do I cancel?</button>
+          <div class="faq-a"><p>Anytime, from your account. No lock-in. Canceling stops any future billing. If you want your most recent payment back, request a refund within 7 days of buying and I'll sort it out.</p></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-row">
+    <a href="https://www.jonbjorkmusic.com/">Home</a>
+    <a href="https://www.jonbjorkmusic.com/start?ref=looper-footer">Practice Room Pro</a>
+    <a href="https://www.jonbjorkmusic.com/courses">Courses</a>
+    <a href="https://www.jonbjorkmusic.com/contact">Contact</a>
+    <a href="https://www.jonbjorkmusic.com/legal">Legal</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Jon Bjork Music</div>
+</footer>
+
+<script>
+(function() {
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- Mobile nav toggle ----
+  var toggle = document.getElementById('navToggle');
+  var menu = document.getElementById('mobileMenu');
+  if (toggle && menu) {
+    function closeMenu() {
+      toggle.classList.remove('is-open');
+      menu.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
+    }
+    function openMenu() {
+      toggle.classList.add('is-open');
+      menu.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Close menu');
+    }
+    toggle.addEventListener('click', function() {
+      if (menu.classList.contains('is-open')) { closeMenu(); } else { openMenu(); }
+    });
+    menu.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 900 && menu.classList.contains('is-open')) closeMenu();
+    });
+  }
+
+  // ---- FAQ accordion ----
+  document.querySelectorAll('.faq-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+  });
+
+  // ---- Reveal on scroll ----
+  var io = null;
+  if ('IntersectionObserver' in window) {
+    io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          if (e.target.classList.contains('reveal')) io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+    document.querySelectorAll('.feat').forEach(function(el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal, .feat').forEach(function(el) { el.classList.add('in'); });
+  }
+
+  // ---- Auto-light feature cards on scroll ----
+  var isTouch = window.matchMedia && window.matchMedia('(hover: none)').matches;
+  var litGrids = document.querySelectorAll('.feat-grid');
+  if (litGrids.length && 'IntersectionObserver' in window) {
+    var lio = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (!e.isIntersecting) return;
+        var feats = e.target.querySelectorAll('.feat');
+        feats.forEach(function(f, idx) {
+          setTimeout(function() { f.classList.add('lit'); }, 400 + idx * 160);
+          if (!isTouch) {
+            setTimeout(function() { f.classList.remove('lit'); }, 400 + idx * 160 + 1400);
+          }
+        });
+        lio.unobserve(e.target);
+      });
+    }, { threshold: 0.18 });
+    litGrids.forEach(function(g) { lio.observe(g); });
+  }
+
+  // ---- About stats counter ----
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+  function animateCount(el, target, suffix, duration) {
+    var start = performance.now();
+    function step(now) {
+      var t = Math.min(1, (now - start) / duration);
+      var val = Math.round(easeOut(t) * target);
+      el.textContent = val + (suffix || '');
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var statsContainer = document.getElementById('about-stats');
+  if (statsContainer && 'IntersectionObserver' in window) {
+    var sio = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          statsContainer.classList.add('counted');
+          if (!prefersReduced) {
+            statsContainer.querySelectorAll('[data-count]').forEach(function(el) {
+              var target = parseInt(el.getAttribute('data-count'), 10);
+              var suffix = el.getAttribute('data-suffix') || '';
+              animateCount(el, target, suffix, 1400);
+            });
+          }
+          sio.unobserve(statsContainer);
+        }
+      });
+    }, { threshold: 0.3 });
+    sio.observe(statsContainer);
+  } else if (statsContainer) {
+    statsContainer.classList.add('counted');
+  }
+})();
+</script>
+
+</body>
+</html>
