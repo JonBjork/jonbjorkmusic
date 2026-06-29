@@ -727,7 +727,8 @@ footer {
   .nav-logo-row { gap: 26px; }
   .nav-logo-divider { height: 68px; }
   .nav-tagline { letter-spacing: 0.26em; }
-  .nav-right { gap: 50px; }
+  .nav-logo { margin-right: 48px; }
+  .nav-right { gap: 34px; }
   .nav-btn { padding: 22px 46px; border-radius: 11px; }
   .hero-content { padding-top: 80px; }
 }
