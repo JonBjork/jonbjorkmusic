@@ -106,14 +106,16 @@
     font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif;
     font-weight: 700;
     letter-spacing: -0.005em;
-    line-height: 1.04;
+    line-height: 1.12;
     margin: 0 0 18px;
     color: var(--white);
+    text-wrap: balance;
   }
-  h1 { font-size: var(--fs-hero-h1); letter-spacing: -0.01em; line-height: 1.02; }
-  h2 { font-size: var(--fs-title); line-height: 1.05; }
-  h3 { font-size: 1.55rem; letter-spacing: 0.005em; }
-  p  { margin: 0 0 16px; }
+  h1 { font-size: var(--fs-hero-h1); letter-spacing: -0.01em; line-height: 1.08; }
+  h2 { font-size: var(--fs-title); line-height: 1.12; }
+  h3 { font-size: 1.55rem; letter-spacing: 0.005em; line-height: 1.2; }
+  p  { margin: 0 0 16px; text-wrap: pretty; }
+  .section-body, .feat-desc, .hero-sub, .plat-card p, .step p, .devices-note { text-wrap: pretty; }
 
   .section-tag, .eyebrow {
     font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif;
@@ -497,7 +499,7 @@
   }
   .feat:hover::before { transform: scaleX(1); }
   .feat:hover { border-color: var(--accent-border); background: var(--card); transform: translateY(-4px); }
-  .feat-body { padding: 30px 30px 34px; display: flex; flex-direction: column; }
+  .feat-body { padding: 34px 32px 38px; display: flex; flex-direction: column; }
   .feat-num {
     font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 2.4rem;
     color: var(--line-2); line-height: 1; margin-bottom: 18px;
@@ -512,7 +514,7 @@
     letter-spacing: 0.04em; color: var(--white); margin-bottom: 14px;
     line-height: 1.25;
   }
-  .feat-desc { font-size: var(--fs-card-body); color: var(--muted); line-height: 1.6; font-weight: 300; }
+  .feat-desc { font-size: var(--fs-card-body); color: var(--muted); line-height: 1.7; font-weight: 300; }
 
   /* GIF media slot on top of a feature card */
   .feat-media {
@@ -551,7 +553,7 @@
     display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 64px; align-items: center;
     max-width: 1100px; margin: 0 auto;
   }
-  .speed-copy .section-body { margin-bottom: 18px; }
+  .speed-copy .section-body { margin-bottom: 22px; }
   .speed-copy .section-body strong { color: var(--white); font-weight: 700; }
   .speed-pull {
     font-family: 'Oswald', sans-serif; font-weight: 600;
@@ -915,7 +917,7 @@
   <header class="hero-wrap">
     <section class="hero">
       <span class="hero-tag">A Chrome Extension by Jon Bjork</span>
-      <h1>Stop Watching<br>YouTube Videos.<br><span class="offer">Start Practicing Them.</span></h1>
+      <h1>Stop Watching YouTube Videos.<br><span class="offer">Start Practicing Them.</span></h1>
       <p class="hero-sub">Turn any <strong>YouTube</strong> video into a focused workout. Loop it, slow it, drill it until it's yours. The built-in speed trainer automatically increases the tempo after every successful set of repetitions.</p>
 
       <!-- VSL: 2–3 min demo. Replace the .video-ph block with an <iframe> embed. -->
@@ -963,7 +965,7 @@
     <div class="wrap">
       <div class="problem-inner reveal">
         <span class="section-tag">The Real Problem</span>
-        <h2 style="margin-bottom: 26px;">Stop Rewinding<br>The Same Four Seconds.</h2>
+        <h2 style="margin-bottom: 26px;">Stop Rewinding The Same Four Seconds.</h2>
         <p class="section-body">You find the lick. You miss the start. You overshoot the end. You rewind, and you miss it again. Five minutes later you've barely practiced. You've just been operating a video player.</p>
         <p class="problem-kicker">That's not a practice problem. <span class="hl">That's a tools problem.</span></p>
       </div>
@@ -977,7 +979,7 @@
     <div class="wrap">
       <div class="features-header reveal">
         <span class="section-tag">What It Does</span>
-        <h2>Everything You Need To Drill A Passage,<br>In The Video You're Already Watching.</h2>
+        <h2>Everything You Need To Drill A Passage, In The Video You're Already Watching.</h2>
       </div>
 
       <div class="feat-grid">
@@ -1041,7 +1043,7 @@
       <div class="speed-wrap">
         <div class="speed-copy reveal">
           <span class="section-tag">The Part That Builds Speed</span>
-          <h2>Most Tools Stop At "Slow It Down."<br>That's Where The Work Starts.</h2>
+          <h2>Most Tools Stop At "Slow It Down." That's Where The Work Starts.</h2>
           <p class="speed-pull">You'll probably use this more than every other feature combined.</p>
           <p class="section-body">Anybody can slow a video down. Building it back to full speed is where progress is won or lost, and that's where most players stall. They jump the tempo too soon, it falls apart, and they never find out how close they were.</p>
           <p class="section-body">The speed trainer does the climbing for you. Set a starting tempo and tell it how many reps you want at each level. Play your reps, and when you've earned it, the Looper bumps the tempo and keeps going. <strong>No stopwatch, no metronome math, no remembering where you left off yesterday.</strong> Clean repetitions and automatic progression until you reach full speed.</p>
@@ -1101,7 +1103,7 @@
 
         <div class="reveal">
           <span class="section-tag">Why This One</span>
-          <h2>Built By A Guitar Teacher,<br>Not A Playback Button.</h2>
+          <h2>Built By A Guitar Teacher, Not A Playback Button.</h2>
           <div class="about-bio" style="margin-top: 18px;">
             <p>I'm Jon Bjork, and I've spent 25 years teaching guitar. In that time I've watched thousands of hours disappear into rewinding videos instead of actually practicing. The Looper is the tool I always wished my students had.</p>
             <p><strong>Everything in it is built around one principle. Perfect repetitions beat random repetitions.</strong></p>
@@ -1119,7 +1121,7 @@
     <div class="wrap">
       <div class="features-header reveal">
         <span class="section-tag">Where It Works</span>
-        <h2>Learn From The Videos<br>You're Already Watching.</h2>
+        <h2>Learn From The Videos You're Already Watching.</h2>
       </div>
       <div class="plat-grid reveal">
         <div class="plat-card">
@@ -1143,7 +1145,7 @@
     <div class="wrap">
       <div class="features-header reveal">
         <span class="section-tag">How It Works</span>
-        <h2>Buy It. Install It.<br>You're Practicing.</h2>
+        <h2>Buy It. Install It. You're Practicing.</h2>
       </div>
       <div class="steps reveal">
         <div class="step">
@@ -1173,7 +1175,7 @@
     <div class="wrap">
       <div class="offer-block reveal">
         <span class="section-tag">Get The Looper</span>
-        <h2>One Tool. One Price.<br>Start Practicing Today.</h2>
+        <h2>One Tool. One Price. Start Practicing Today.</h2>
         <div class="price-tag"><span class="amt"><sup>$</sup>5</span><span class="per">/ month</span></div>
 
         <div class="includes-card">
