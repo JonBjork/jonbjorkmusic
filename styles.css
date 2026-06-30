@@ -92,7 +92,7 @@
   --ease-out-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-@media (max-width: 1280px) {
+@media (max-width: 1680px) {
   :root {
     --nav-h: 162px;
     --fs-nav-name: 3.85rem;
@@ -721,13 +721,14 @@ footer {
 
 
 /* === 15. RESPONSIVE OVERRIDES ============================================= */
-@media (max-width: 1280px) {
+@media (max-width: 1680px) {
   nav { padding: 34px 62px; }
   .nav-logo { gap: 16px; }
   .nav-logo-row { gap: 26px; }
   .nav-logo-divider { height: 68px; }
   .nav-tagline { letter-spacing: 0.26em; }
-  .nav-right { gap: 50px; }
+  .nav-logo { margin-right: 48px; }
+  .nav-right { gap: 34px; }
   .nav-btn { padding: 22px 46px; border-radius: 11px; }
   .hero-content { padding-top: 80px; }
 }
