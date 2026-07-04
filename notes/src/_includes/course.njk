@@ -50,6 +50,7 @@ ogType: article
     <a class="course-lesson{% if l.url == page.url %} is-active{% endif %}" href="{{ l.url }}">{{ l.data.title }}</a>
     {% endfor %}
     {% endfor %}
+    {% set plMode = "compact" %}{% include "practice-log.njk" %}
   </aside>
   <main class="course-main">
     <header class="essay-header" style="margin-bottom:36px; padding-bottom:28px;">

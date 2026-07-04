@@ -1,0 +1,129 @@
+{# Practice log / streak chain. Set plMode = "full" or "compact" before including.
+   Data lives in the visitor's browser (localStorage) — no accounts, no server. #}
+<style>
+  .pl { font-family:'Lato',sans-serif; }
+  .pl-full { margin:56px 0 8px; padding:32px; border:1px solid var(--border); border-radius:12px; background:var(--card); }
+  .pl-title { font-family:'Oswald',sans-serif; font-weight:600; font-size:1.3rem; letter-spacing:.02em; text-transform:uppercase; color:var(--white); margin-bottom:6px; }
+  .pl-msg { color:var(--muted); font-size:1.05rem; line-height:1.6; margin-bottom:22px; }
+  .pl-stats { display:flex; gap:36px; margin-bottom:24px; }
+  .pl-stat-num { font-family:'Oswald',sans-serif; font-weight:600; font-size:2rem; color:var(--white); line-height:1.1; }
+  .pl-stat-lbl { font-family:'Oswald',sans-serif; font-weight:500; font-size:.75rem; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin-top:2px; }
+  .pl-grid { display:grid; grid-template-columns:repeat(14, 1fr); gap:6px; max-width:420px; margin-bottom:24px; }
+  .pl-day { aspect-ratio:1; border-radius:4px; background:rgba(255,255,255,.06); }
+  .pl-day.is-done { background:var(--purple-lt); }
+  .pl-day.is-today { outline:1.5px solid var(--purple-lt); outline-offset:1px; }
+  .pl-btn { display:inline-block; font-family:'Oswald',sans-serif; font-weight:600; font-size:.95rem; letter-spacing:.12em; text-transform:uppercase; color:var(--white); background:var(--purple); border:0; padding:14px 28px; border-radius:10px; cursor:pointer; transition:background .2s; }
+  .pl-btn:hover { background:var(--purple-lt); }
+  .pl-btn.is-done { background:transparent; border:1.5px solid var(--border); color:var(--muted); }
+  .pl-note { color:var(--dim); font-size:.85rem; margin-top:14px; }
+  .pl-compact { margin-top:20px; padding-top:18px; border-top:1px solid var(--border); }
+  .pl-compact .pl-title { font-size:.95rem; letter-spacing:.12em; }
+  .pl-compact .pl-msg { font-size:.92rem; margin-bottom:12px; }
+  .pl-compact .pl-btn { font-size:.8rem; padding:10px 16px; width:100%; text-align:center; }
+</style>
+{% if plMode == "full" %}
+<div class="pl pl-full" data-pl="full">
+  <div class="pl-title">Your practice chain</div>
+  <p class="pl-msg" data-pl-msg></p>
+  <div class="pl-stats">
+    <div><div class="pl-stat-num" data-pl-current>0</div><div class="pl-stat-lbl">Current streak</div></div>
+    <div><div class="pl-stat-num" data-pl-best>0</div><div class="pl-stat-lbl">Best streak</div></div>
+    <div><div class="pl-stat-num" data-pl-total>0</div><div class="pl-stat-lbl">Total days</div></div>
+  </div>
+  <div class="pl-grid" data-pl-grid aria-hidden="true"></div>
+  <button class="pl-btn" type="button" data-pl-btn>I practiced today</button>
+  <p class="pl-note">Saved in this browser only &mdash; no account needed.</p>
+</div>
+{% else %}
+<div class="pl pl-compact" data-pl="compact">
+  <div class="pl-title">Practice chain</div>
+  <p class="pl-msg" data-pl-msg></p>
+  <button class="pl-btn" type="button" data-pl-btn>I practiced today</button>
+</div>
+{% endif %}
+<script>
+(function () {
+  var KEY = 'jb-practice-log-picking';
+  var root = document.querySelector('[data-pl]');
+  if (!root) return;
+
+  function localISO(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  function load() {
+    try { var a = JSON.parse(localStorage.getItem(KEY)); return Array.isArray(a) ? a : []; }
+    catch (e) { return []; }
+  }
+  function save(days) { try { localStorage.setItem(KEY, JSON.stringify(days)); } catch (e) {} }
+  function addDays(iso, n) {
+    var p = iso.split('-');
+    var d = new Date(+p[0], +p[1] - 1, +p[2] + n);
+    return localISO(d);
+  }
+  function streaks(days, today) {
+    var set = {};
+    days.forEach(function (d) { set[d] = 1; });
+    // current: consecutive run ending today, or ending yesterday if today unmarked
+    var cur = 0, cursor = set[today] ? today : addDays(today, -1);
+    while (set[cursor]) { cur++; cursor = addDays(cursor, -1); }
+    // best: scan all
+    var best = 0, sorted = days.slice().sort(), run = 0, prev = null;
+    sorted.forEach(function (d) {
+      run = (prev && addDays(prev, 1) === d) ? run + 1 : 1;
+      if (run > best) best = run;
+      prev = d;
+    });
+    return { current: cur, best: best, total: days.length };
+  }
+  function message(s, doneToday) {
+    if (s.total === 0) return 'Mark your first day and start the chain. Thirty minutes today is all it takes.';
+    if (doneToday) {
+      if (s.current === 1) return 'Day 1 done. Come back tomorrow and make it two.';
+      return 'Day ' + s.current + ' done. See you tomorrow.';
+    }
+    if (s.current > 0) return 'You’re on a ' + s.current + '-day chain — practice today to keep it alive.';
+    return 'The chain reset — that’s fine. Every streak starts with day one.';
+  }
+  function render() {
+    var days = load();
+    var today = localISO(new Date());
+    var doneToday = days.indexOf(today) !== -1;
+    var s = streaks(days, today);
+    var msg = root.querySelector('[data-pl-msg]');
+    if (msg) msg.textContent = message(s, doneToday);
+    var btn = root.querySelector('[data-pl-btn]');
+    if (btn) {
+      btn.textContent = doneToday ? 'Done today ✓ (tap to undo)' : 'I practiced today';
+      btn.classList.toggle('is-done', doneToday);
+    }
+    var cur = root.querySelector('[data-pl-current]');
+    if (cur) cur.textContent = s.current;
+    var best = root.querySelector('[data-pl-best]');
+    if (best) best.textContent = s.best;
+    var total = root.querySelector('[data-pl-total]');
+    if (total) total.textContent = s.total;
+    var grid = root.querySelector('[data-pl-grid]');
+    if (grid) {
+      grid.innerHTML = '';
+      var set = {};
+      days.forEach(function (d) { set[d] = 1; });
+      for (var i = 27; i >= 0; i--) {
+        var iso = addDays(today, -i);
+        var cell = document.createElement('div');
+        cell.className = 'pl-day' + (set[iso] ? ' is-done' : '') + (iso === today ? ' is-today' : '');
+        cell.title = iso;
+        grid.appendChild(cell);
+      }
+    }
+  }
+  root.querySelector('[data-pl-btn]').addEventListener('click', function () {
+    var days = load();
+    var today = localISO(new Date());
+    var i = days.indexOf(today);
+    if (i === -1) days.push(today); else days.splice(i, 1);
+    save(days);
+    render();
+  });
+  render();
+})();
+</script>
