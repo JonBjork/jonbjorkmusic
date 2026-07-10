@@ -170,6 +170,15 @@
   }
   .btn:hover::after { left: 125%; }
   .btn:focus-visible { outline: 2px solid var(--purple-pop); outline-offset: 3px; }
+  .btn-gleam::after { animation: gleamSweep 3.4s var(--ease-out-smooth) infinite; }
+  @keyframes gleamSweep {
+    0% { left: -75%; }
+    55% { left: 125%; }
+    100% { left: 125%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-gleam::after { animation: none; }
+  }
   .cta-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; align-items: center; }
 
   /* ============================================================
@@ -1392,7 +1401,7 @@
       <span class="section-tag">Not Ready Yet?</span>
       <h2 style="margin-top:14px;">See How I Teach First.</h2>
       <p class="section-body" style="margin-top:18px;">Try the free 10-Minute Speed Builder. It's a daily workout that tightens the sync between your picking hand and your fretting hand, and it's built to come back to every day. If my way of teaching clicks with you, Pro will be here when you're ready.</p>
-      <a style="display:inline-block; margin-top:24px; color:var(--purple-lt); font-size:1.05rem; text-decoration:none; border-bottom:1px solid currentColor; padding-bottom:2px;" href="https://www.jonbjorkmusic.com/speedbuilder?ref=start">Start the free Speed Builder &#8594;</a>
+      <a class="btn btn-purple btn-gleam" style="margin-top:28px;" href="https://www.jonbjorkmusic.com/speedbuilder?ref=start">Start the Free Speed Builder</a>
     </div>
   </section>
 
