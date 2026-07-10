@@ -9,6 +9,12 @@ permalink: /licks/
   .tag-chip { font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); background: var(--card); border: 1px solid var(--border); padding: 8px 16px; border-radius: 999px; text-decoration: none; transition: color 0.2s, border-color 0.2s, background 0.2s; }
   .tag-chip:hover { color: var(--white); border-color: var(--purple-lt); }
   .tag-chip.is-active { color: var(--white); background: var(--purple); border-color: var(--purple); }
+  .licks-optin { margin: 36px 0 44px; padding: 28px 32px; border: 1px dashed var(--border); border-radius: 12px; background: var(--card); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; }
+  .licks-optin-copy { flex: 1 1 340px; }
+  .licks-optin h2 { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1.25rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--white); margin: 0 0 8px; }
+  .licks-optin p { color: var(--muted); font-size: 1rem; line-height: 1.6; margin: 0; }
+  .licks-optin-btn { flex: 0 0 auto; display: inline-block; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.98rem; letter-spacing: 0.12em; text-transform: uppercase; background: var(--purple); color: var(--white); padding: 14px 28px; border-radius: 10px; text-decoration: none; transition: background 0.2s; }
+  .licks-optin-btn:hover { background: var(--purple-lt); }
 </style>
 <header class="notes-header">
   <h1>Lick Library</h1>
@@ -20,6 +26,13 @@ permalink: /licks/
     {% endfor %}
   </div>
 </header>
+<div class="licks-optin">
+  <div class="licks-optin-copy">
+    <h2>Get every lick, free</h2>
+    <p>Drop your email and I'll send you the entire library: the Guitar Pro and MIDI files for every lick, ready to open, slow down, and study. New licks added all the time.</p>
+  </div>
+  <a class="licks-optin-btn" href="https://sunny-musician-9538.kit.com/6d6291a73f">Email me the full lick library</a>
+</div>
 <ul class="notes-list">
   {% for lick in collections.licks %}
   <li class="notes-list-item">
