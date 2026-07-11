@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Get My Personal Help | Jon Bjork Music</title>
+<meta name="description" content="Stuck on something in your playing? Tell me where you are and I'll reply personally with a concrete next step. Free, no catch.">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZW8ZW4P5D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZZW8ZW4P5D');
+</script>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '407195623608189');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', { content_name: 'Ask Jon' });
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>
+  /* =============================================================================
+     PAGE-SPECIFIC STYLES — /ask  (Get My Personal Help)
+     Only styles unique to this page. Shared styles come from /styles.css.
+     Form styles mirror /contact and /coaching/apply.
+     ============================================================================= */
+
+  .ask-wrap { max-width: 680px; margin: 0 auto; padding: 72px 24px 100px; }
+
+  .ask-header h1 {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.15;
+    font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+    margin: 0 0 16px;
+  }
+  .ask-header p { color: var(--muted); font-size: 1.15rem; line-height: 1.65; margin: 0 0 8px; }
+
+  .ask-form { margin-top: 36px; }
+  .ask-field { margin-bottom: 24px; }
+  .ask-field label { display:block; font-family:'Oswald',sans-serif; font-weight:600; font-size:.85rem; letter-spacing:.12em; text-transform:uppercase; color:var(--white); margin-bottom:8px; }
+  .ask-field input, .ask-field textarea {
+    width:100%; box-sizing:border-box; background:var(--card); border:1px solid var(--border);
+    border-radius:10px; padding:14px 16px; color:var(--white);
+    font-family:'Lato',sans-serif; font-size:1.05rem; line-height:1.5; transition:border-color .2s;
+  }
+  .ask-field input:focus, .ask-field textarea:focus { outline:none; border-color:var(--purple-lt); }
+  .ask-field textarea { min-height:160px; resize:vertical; }
+
+  .ask-consent { display:flex; align-items:flex-start; gap:10px; margin-bottom:28px; }
+  .ask-consent input { width:18px; height:18px; margin-top:3px; accent-color: var(--purple); flex:none; }
+  .ask-consent label { color:var(--muted); font-size:.98rem; line-height:1.5; }
+
+  .ask-submit {
+    font-family:'Oswald',sans-serif; font-weight:600; font-size:1.05rem; letter-spacing:.14em;
+    text-transform:uppercase; background:var(--purple); color:var(--white); border:0;
+    padding:16px 38px; border-radius:10px; cursor:pointer; transition:background .2s;
+  }
+  .ask-submit:hover { background:var(--purple-lt); }
+  .ask-submit:disabled { opacity:.6; cursor:default; }
+  .ask-note { margin-top:16px; color:var(--muted); font-size:.95rem; line-height:1.5; }
+
+  .ask-success { border:1px solid var(--border); background:var(--card); border-radius:12px; padding:32px; margin-top:36px; }
+  .ask-success h2 { font-family:'Oswald',sans-serif; font-weight:700; font-size:1.6rem; letter-spacing:.02em; text-transform:uppercase; color:var(--white); margin:0 0 12px; }
+  .ask-success p { color:var(--muted); font-size:1.1rem; line-height:1.6; margin:0 0 10px; }
+  .ask-success a { color: var(--purple-lt); font-weight:600; text-decoration:underline; text-underline-offset:3px; }
+  .ask-hp { position:absolute; left:-9999px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="https://www.jonbjorkmusic.com/" aria-label="Jon Bjork Music — Guitarist, Coach, Composer">
+    <span class="nav-logo-row">
+      <span class="nav-logo-name">Jon Bjork</span>
+      <span class="nav-logo-divider" aria-hidden="true"></span>
+      <span class="nav-logo-tag">Music</span>
+    </span>
+    <span class="nav-tagline">Guitarist &middot; Coach &middot; Composer</span>
+  </a>
+  <div class="nav-right">
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/start?ref=nav">Practice Room Pro</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/licks/">Licks</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/#about">About</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/contact">Contact</a>
+    <a class="nav-btn" href="https://www.jonbjorkmusic.com/coaching?ref=nav">1-on-1 Coaching</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu" role="menu">
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/start?ref=nav">Practice Room Pro</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/licks/">Licks</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/#about">About</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/contact">Contact</a>
+  <a class="nav-btn" href="https://www.jonbjorkmusic.com/coaching?ref=nav">1-on-1 Coaching</a>
+</div>
+
+<main class="ask-wrap">
+
+  <header class="ask-header">
+    <div class="section-tag">Free Personal Help</div>
+    <h1>Stuck on Something? Ask Me.</h1>
+    <p>Tell me where you are with your playing and what's giving you trouble. I read every message myself and reply personally with a concrete next step, and often a free resource that fits your exact problem.</p>
+    <p>No cost, no catch. Helping guitarists get unstuck is the whole point of what I do.</p>
+  </header>
+
+  <form name="ask-jon" id="askForm" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="ask-form">
+    <input type="hidden" name="form-name" value="ask-jon">
+    <input type="hidden" name="ref" id="refField" value="">
+    <p class="ask-hp"><label>Leave this field empty: <input name="bot-field"></label></p>
+
+    <div class="ask-field">
+      <label for="q-name">Name</label>
+      <input id="q-name" type="text" name="name" required autocomplete="name">
+    </div>
+
+    <div class="ask-field">
+      <label for="q-email">Email</label>
+      <input id="q-email" type="email" name="email" required autocomplete="email">
+    </div>
+
+    <div class="ask-field">
+      <label for="q-question">What are you stuck on?</label>
+      <textarea id="q-question" name="question" required placeholder="E.g. my picking falls apart above 120 bpm, I can't make my solos sound musical, I never know what to practice..."></textarea>
+    </div>
+
+    <div class="ask-consent">
+      <input id="q-newsletter" type="checkbox" name="newsletter" value="yes">
+      <label for="q-newsletter">Also send me your practice tips by email. Free lessons and licks, unsubscribe anytime.</label>
+    </div>
+
+    <button class="ask-submit" type="submit">Send It to Jon</button>
+    <p class="ask-note">I reply personally, usually within a couple of days.</p>
+  </form>
+
+  <div class="ask-success" id="askSuccess" hidden>
+    <h2>Got it!</h2>
+    <p>Thanks for writing. I read every message myself and I'll reply personally, usually within a couple of days.</p>
+    <p>While you wait, the <a href="/alternate-picking/">free Alternate Picking Deep Dive</a> and the <a href="/licks/">lick library</a> are good places to dig in.</p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="https://www.jonbjorkmusic.com/" aria-label="Jon Bjork Music — Guitarist, Coach, Composer">
+    <span class="footer-logo-row">
+      <span class="footer-logo-name">Jon Bjork</span>
+      <span class="footer-logo-divider" aria-hidden="true"></span>
+      <span class="footer-logo-tag">Music</span>
+    </span>
+    <span class="footer-tagline">Guitarist &middot; Coach &middot; Composer</span>
+  </a>
+  <div class="footer-links">
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/">Home</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/coaching?ref=footer">1-on-1</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+    <a class="footer-link" href="https://www.jonbjorkmusic.com/start?ref=footer">The Practice Room</a>
+  </div>
+  <a class="footer-link" href="https://www.jonbjorkmusic.com/contact">Contact</a>
+  <a class="footer-link" href="https://www.jonbjorkmusic.com/legal">Legal</a>
+  <div class="footer-copy">&copy; 2026 Jon Bjork Music</div>
+</footer>
+
+<script>
+  // --- Nav spacing: measure nav and apply to body padding ---
+  (function() {
+    function syncNavSpacing() {
+      var nav = document.querySelector('nav');
+      if (!nav) return;
+      document.body.style.paddingTop = nav.offsetHeight + 'px';
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', syncNavSpacing);
+    } else {
+      syncNavSpacing();
+    }
+    window.addEventListener('load', syncNavSpacing);
+    window.addEventListener('resize', syncNavSpacing);
+  })();
+
+  // --- Mobile menu toggle (design system standard) ---
+  (function() {
+    var toggle = document.getElementById('navToggle');
+    var menu = document.getElementById('mobileMenu');
+    if (!toggle || !menu) return;
+    function closeMenu() {
+      toggle.classList.remove('is-open');
+      menu.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+    function openMenu() {
+      toggle.classList.add('is-open');
+      menu.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
+    toggle.addEventListener('click', function() {
+      if (menu.classList.contains('is-open')) closeMenu(); else openMenu();
+    });
+    menu.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', closeMenu);
+    });
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 900 && menu.classList.contains('is-open')) closeMenu();
+    });
+  })();
+
+  // --- Capture ?ref= for attribution ---
+  (function() {
+    var ref = new URLSearchParams(window.location.search).get('ref');
+    if (ref) document.getElementById('refField').value = ref;
+  })();
+
+  // --- AJAX submit (mirrors /contact) ---
+  (function(){
+    var form = document.getElementById('askForm');
+    if (!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var btn = form.querySelector('.ask-submit');
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending...'; }
+      var body = new URLSearchParams(new FormData(form)).toString();
+      fetch('/', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: body })
+        .then(function(r){
+          if (!r.ok) throw new Error();
+          if (typeof fbq === 'function') fbq('track', 'Contact', { content_name: 'Ask Jon' });
+          if (typeof gtag === 'function') gtag('event', 'generate_lead', { form: 'ask-jon' });
+          form.style.display = 'none';
+          var ok = document.getElementById('askSuccess');
+          ok.hidden = false;
+          ok.scrollIntoView({ behavior:'smooth', block:'center' });
+        })
+        .catch(function(){
+          if (btn) { btn.disabled = false; btn.textContent = 'Send It to Jon'; }
+          alert('Sorry, something went wrong sending your message. Please email jon@jonbjorkmusic.com directly.');
+        });
+    });
+  })();
+</script>
+
+</body>
+</html>
