@@ -351,6 +351,43 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   .testimonial-img:hover { border-color: var(--accent-border); }
   .testimonial-img img { width: 100%; height: auto; display: block; }
 
+  /* --- FEATURED VIDEO TESTIMONIAL (vertical short) --- */
+  .testimonial-featured { max-width: 300px; margin: 0 auto 48px; }
+  .testimonial-video {
+    position: relative; width: 100%; padding-bottom: 177.78%;
+    border-radius: 12px; overflow: hidden; cursor: pointer;
+    border: 1px solid var(--border); background: var(--card);
+    transition: border-color 0.3s;
+  }
+  .testimonial-video:hover { border-color: var(--accent-border); }
+  .testimonial-video img {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .testimonial-video .play-btn {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(124,58,237,0.9); border: none;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+    pointer-events: none;
+    animation: playPulse 2.6s var(--ease-out-smooth) infinite;
+  }
+  .testimonial-video:hover .play-btn {
+    background: var(--purple-lt); transform: translate(-50%, -50%) scale(1.08);
+    animation: none;
+  }
+  .testimonial-video .play-btn svg { width: 26px; height: 26px; fill: var(--white); margin-left: 3px; }
+  .testimonial-video iframe {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+  }
+  .testimonial-caption {
+    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 0.95rem;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--dim); text-align: center; margin-top: 16px;
+  }
+
   /* --- FAQ --- */
   .faq-list { max-width: 720px; margin: 0 auto; }
   .faq-item {
@@ -719,6 +756,14 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   <div class="text-center mb-64 reveal">
     <div class="section-tag">Results</div>
     <h2>What My Students Say</h2>
+  </div>
+
+  <div class="testimonial-featured reveal">
+    <div class="testimonial-video" onclick="this.innerHTML='<iframe src=\'https://www.youtube.com/embed/zfso0j65Hk8?autoplay=1&rel=0\' allow=\'autoplay; encrypted-media\' allowfullscreen></iframe>'">
+      <img src="https://img.youtube.com/vi/zfso0j65Hk8/oardefault.jpg" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/zfso0j65Hk8/hqdefault.jpg';" alt="Maik shares his experience as a coaching student">
+      <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg></div>
+    </div>
+    <p class="testimonial-caption">Maik &middot; Coaching Student</p>
   </div>
 
   <div class="testimonials-grid">
