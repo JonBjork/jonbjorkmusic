@@ -37,6 +37,27 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
 </head>
 <body>
 
+<!-- PROMO BAR: Practice Lab Looper -->
+<div class="promo-bar" id="promoBar" role="region" aria-label="Announcement">
+  <a href="https://www.jonbjorkmusic.com/looper?ref=promo-bar">
+    <span class="promo-new">New</span>
+    <span class="promo-text"><span class="promo-the">The </span>Practice Lab Looper<span class="promo-desc">: turn any YouTube video into a practice tool</span></span>
+    <span class="promo-cta">Try it free &#8594;</span>
+  </a>
+  <button class="promo-close" id="promoClose" aria-label="Dismiss announcement">&times;</button>
+</div>
+<script>
+(function() {
+  var dismissed = false;
+  try { dismissed = localStorage.getItem('promo-looper-dismissed') === '1'; } catch (e) {}
+  if (!dismissed) document.body.classList.add('has-promo-bar');
+  document.getElementById('promoClose').addEventListener('click', function() {
+    document.body.classList.remove('has-promo-bar');
+    try { localStorage.setItem('promo-looper-dismissed', '1'); } catch (e) {}
+  });
+})();
+</script>
+
 <nav>
   <a class="nav-logo" href="https://www.jonbjorkmusic.com/" aria-label="Jon Bjork Music — Guitarist, Coach, Composer">
     <span class="nav-logo-row">
@@ -49,7 +70,6 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   <div class="nav-right">
     <a class="nav-link" href="https://www.jonbjorkmusic.com/start?ref=nav">Practice Room Pro</a>
     <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
-    <a class="nav-link" href="https://www.jonbjorkmusic.com/looper?ref=nav">Looper</a>
     <a class="nav-link" href="https://www.jonbjorkmusic.com/licks/">Licks</a>
     <a class="nav-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
     <a class="nav-link" href="https://www.jonbjorkmusic.com/#about">About</a>
@@ -64,7 +84,6 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
 <div class="mobile-menu" id="mobileMenu" role="menu">
   <a class="nav-link" href="https://www.jonbjorkmusic.com/start?ref=nav">Practice Room Pro</a>
   <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
-  <a class="nav-link" href="https://www.jonbjorkmusic.com/looper?ref=nav">Looper</a>
   <a class="nav-link" href="https://www.jonbjorkmusic.com/licks/">Licks</a>
   <a class="nav-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
   <a class="nav-link" href="https://www.jonbjorkmusic.com/#about">About</a>
