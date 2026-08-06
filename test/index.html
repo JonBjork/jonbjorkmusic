@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The Practice Room Pro | Jon Bjork</title>
-<meta name="description" content="Where guitarists come to practice, not to watch. A room of committed players with a plan, weekly sessions, and progress you can measure. $99/month, cancel anytime." />
+<title>Practice Room Pro | Jon Bjork</title>
+<meta name="description" content="The Practice Room Pro: a practice system for intermediate guitarists. An assessment when you join, a plan built for you, weekly sessions, direct feedback from Jon, and progress you can measure." />
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZW8ZW4P5D"></script>
@@ -21,14 +21,8 @@
 
 <style>
   /* =============================================================================
-     /test — Practice Room Pro, "collective"-style mockup v2 (Aug 2026)
-     Organization AND behavior modeled on the reference page:
-     - one fixed cinematic backdrop behind everything; every section is a
-       semi-transparent dark overlay of varying strength
-     - reveal-on-scroll on each section's content
-     - scroll-snap carousels with arrow buttons (voices 1-up, room 2-up,
-       library 4-up), swipeable on touch
-     Jon's style template throughout.
+     /pro — Practice Room Pro sales page (program-first positioning, Aug 2026)
+     Assessment → plan → work → measurement · courses and Practice Lab as materials
      ============================================================================= */
   :root {
     color-scheme: dark;
@@ -40,6 +34,7 @@
     --line-2:        #3a3a3a;
     --navy:          #1a1040;
     --navy-deep:     #0f0820;
+    --navy-lt:       #2d2060;
     --purple:        #7c3aed;
     --purple-lt:     #9d5ff5;
     --purple-pop:    #c084fc;
@@ -48,11 +43,56 @@
     --off:           #e8e8e8;
     --muted:         #aaaaaa;
     --dim:           #666666;
-    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* Font sizes matching /start (site-wide consistency) */
+    --fs-body:       1.4rem;
+    --fs-eyebrow:    1.05rem;
+    --fs-title:      clamp(2.4rem, 5vw, 4rem);
+    --fs-hero-h1:    clamp(2.8rem, 7vw, 5.4rem);
+    --fs-hero-sub:   1.45rem;
+    --fs-card-title: 1.35rem;
+    --fs-card-body:  1.2rem;
+    --fs-btn:        1.05rem;
+
+    /* Nav scale matches site */
+    --nav-h:          190px;
+    --fs-nav-name:    4.55rem;
+    --fs-nav-tag:     1.5rem;
+    --fs-nav-tagline: 1.1rem;
+    --fs-nav-link:    1.6rem;
+    --fs-nav-btn:     1.4rem;
+
+    --shadow-card:   0 12px 36px rgba(0, 0, 0, 0.45);
+    --shadow-lift:   0 18px 48px rgba(124, 58, 237, 0.18);
+    --ease-out-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (max-width: 1680px) {
+    :root {
+      --nav-h: 162px;
+      --fs-nav-name: 3.85rem;
+      --fs-nav-tag: 1.35rem;
+      --fs-nav-tagline: 1rem;
+      --fs-nav-link: 1.4rem;
+      --fs-nav-btn: 1.25rem;
+    }
+  }
+  @media (max-width: 900px) {
+    :root {
+      --nav-h: 100px;
+      --fs-nav-name: 2.8rem;
+      --fs-nav-tag: 1.2rem;
+    }
+  }
+  @media (max-width: 480px) {
+    :root {
+      --nav-h: 88px;
+      --fs-nav-name: 2.3rem;
+    }
   }
 
   * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
   body {
     margin: 0;
     font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
@@ -60,408 +100,988 @@
     background: var(--bg);
     font-size: 1.05rem;
     line-height: 1.65;
+    font-weight: 400;
+    padding-top: var(--nav-h);
     overflow-x: hidden;
   }
+  img { max-width: 100%; display: block; }
   a { color: inherit; }
-  h1, h2, h3 {
+
+  /* ---------- Typography ---------- */
+  h1, h2, h3, h4 {
     font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif;
-    font-weight: 700; color: var(--white);
-    line-height: 1.05; margin: 0 0 18px;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+    line-height: 1.04;
+    margin: 0 0 18px;
+    color: var(--white);
   }
-  h1 { font-size: clamp(3rem, 7.5vw, 5.8rem); letter-spacing: -0.01em; }
-  h2 { font-size: clamp(2.2rem, 4.6vw, 3.4rem); }
-  p { margin: 0 0 16px; }
+  h1 { font-size: var(--fs-hero-h1); letter-spacing: -0.01em; line-height: 1.02; }
+  h2 { font-size: var(--fs-title); line-height: 1.05; }
+  h3 { font-size: 1.55rem; letter-spacing: 0.005em; }
+  p  { margin: 0 0 16px; }
 
-  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
-  .narrow { max-width: 780px; margin: 0 auto; }
-  section { padding: 110px 0; position: relative; }
-
-  /* ---------- Fixed cinematic backdrop (the reference's signature move) ----------
-     A position:fixed layer sits behind the whole page; sections are
-     semi-transparent overlays so the photo shows through as you scroll.
-     A gradient is baked into the layer so text stays readable everywhere. */
-  .backdrop {
-    position: fixed; inset: 0; z-index: -1;
-    background-color: var(--bg);
-    background-image:
-      linear-gradient(rgba(13,13,13,0.42), rgba(13,13,13,0.6)),
-      url('hero-jon.jpg');
-    background-size: cover; background-position: center 28%;
-    pointer-events: none;
+  .section-tag, .eyebrow {
+    font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.28em;
+    color: var(--purple-lt);
+    display: inline-block;
+    margin-bottom: 22px;
+  }
+  .section-body {
+    color: var(--muted);
+    font-size: var(--fs-body);
+    line-height: 1.7;
+    font-weight: 300;
   }
 
-  /* Per-section overlay strengths, hero lightest -> footer darkest */
-  .ov-55 { background: rgba(13,13,13,0.55); }
-  .ov-70 { background: rgba(13,13,13,0.70); }
-  .ov-74 { background: rgba(13,13,13,0.74); }
-  .ov-78 { background: rgba(13,13,13,0.78); }
-  .ov-80 { background: rgba(13,13,13,0.80); }
-  .ov-86 { background: rgba(13,13,13,0.86); }
-  .ov-88 { background: rgba(13,13,13,0.88); }
-
-  /* ---------- Reveal on scroll ---------- */
-  .rv {
-    opacity: 0; transform: translateY(24px);
-    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-  }
-  .rv.on { opacity: 1; transform: none; }
-
-  .tag {
-    font-family: 'Oswald', sans-serif; font-weight: 400;
-    font-size: 0.95rem; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--purple-lt); display: inline-block; margin-bottom: 24px;
-  }
-  .lead { color: var(--muted); font-size: 1.35rem; line-height: 1.7; font-weight: 300; }
+  /* ---------- Layout ---------- */
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+  .narrow { max-width: 880px; margin: 0 auto; }
+  section { padding: 104px 0; }
+  section.tight { padding: 64px 0; }
 
   /* ---------- Buttons ---------- */
   .btn {
-    display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 3px;
-    min-height: 62px; padding: 16px 44px;
-    font-family: 'Oswald', sans-serif; font-weight: 600;
-    font-size: 1.05rem; letter-spacing: 0.16em; text-transform: uppercase;
-    text-decoration: none; border-radius: 10px;
-    background: var(--purple); color: var(--white);
-    transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 56px; padding: 18px 38px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600; font-size: var(--fs-btn); letter-spacing: 0.16em;
+    text-transform: uppercase; text-decoration: none;
+    border-radius: 10px; border: 1.5px solid transparent;
+    cursor: pointer;
+    position: relative; overflow: hidden;
+    transition: background-color 0.25s var(--ease-out-smooth), border-color 0.25s, color 0.25s, transform 0.25s var(--ease-out-smooth);
   }
-  .btn:hover { background: var(--purple-lt); transform: scale(1.02); }
-  .btn .btn-sub {
-    font-weight: 400; font-size: 0.72rem; letter-spacing: 0.22em;
-    color: rgba(255,255,255,0.75);
+  .btn-purple { background: var(--purple); color: var(--white); }
+  .btn-purple:hover { background: var(--purple-lt); transform: scale(1.02); }
+  .btn-outline { background: transparent; color: var(--white); border-color: rgba(255,255,255,0.3); }
+  .btn-outline:hover { border-color: var(--white); }
+  .btn::after {
+    content: ''; position: absolute; top: 0; left: -75%;
+    width: 50%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.7s var(--ease-out-smooth);
+    pointer-events: none;
   }
-  .link-quiet {
-    font-family: 'Oswald', sans-serif; font-size: 0.95rem;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--muted); text-decoration: none;
-    border-bottom: 1px solid var(--line-2); padding-bottom: 3px;
-    transition: color 0.2s, border-color 0.2s;
+  .btn:hover::after { left: 125%; }
+  .btn:focus-visible { outline: 2px solid var(--purple-pop); outline-offset: 3px; }
+  .btn-gleam::after { animation: gleamSweep 3.4s var(--ease-out-smooth) infinite; }
+  @keyframes gleamSweep {
+    0% { left: -75%; }
+    55% { left: 125%; }
+    100% { left: 125%; }
   }
-  .link-quiet:hover { color: var(--white); border-color: var(--purple-lt); }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-gleam::after { animation: none; }
+  }
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; align-items: center; }
 
-  /* ---------- Minimal nav ---------- */
+  /* ============================================================
+     SITE NAV  (matches the rest of jonbjorkmusic.com)
+     ============================================================ */
   nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: rgba(13, 13, 13, 0.95);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     display: flex; justify-content: space-between; align-items: center;
-    padding: 26px 44px;
-    background: linear-gradient(180deg, rgba(13,13,13,0.85), rgba(13,13,13,0));
+    padding: 40px 78px;
+    animation: navDrop 0.5s var(--ease-out-smooth) both;
   }
-  .nav-name {
+  @keyframes navDrop {
+    from { transform: translateY(-100%); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+  }
+  .nav-logo {
+    display: inline-flex; flex-direction: column; align-items: flex-start;
+    gap: 20px; text-decoration: none; line-height: 1;
+  }
+  .nav-logo-row { display: inline-flex; align-items: center; gap: 30px; line-height: 1; }
+  .nav-logo-name {
     font-family: 'Oswald', sans-serif; font-weight: 700;
-    font-size: 1.35rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--white); text-decoration: none;
+    font-size: var(--fs-nav-name); letter-spacing: 0.06em;
+    text-transform: uppercase; color: var(--white); line-height: 1;
   }
-  .nav-name span { color: var(--purple-lt); }
-  .nav-cta {
-    font-family: 'Oswald', sans-serif; font-weight: 500;
-    font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--off); text-decoration: none;
+  .nav-logo-divider { display: inline-block; width: 3px; height: 78px; background: var(--white); }
+  .nav-logo-tag {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: var(--fs-nav-tag); letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--white); line-height: 1;
+  }
+  .nav-tagline {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: var(--fs-nav-tagline); letter-spacing: 0.28em;
+    text-transform: uppercase; color: var(--purple-lt); line-height: 1;
+  }
+  .nav-right { display: flex; align-items: center; gap: 62px; }
+  .nav-link {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: var(--fs-nav-link);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    position: relative; padding-bottom: 4px;
     transition: color 0.2s;
   }
-  .nav-cta:hover { color: var(--purple-lt); }
+  .nav-link:hover { color: var(--white); }
+  .nav-link::after {
+    content: ''; position: absolute; left: 0; bottom: 0;
+    width: 100%; height: 1px; background: var(--purple-lt);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s var(--ease-out-smooth);
+  }
+  .nav-link:hover::after { transform: scaleX(1); }
+  .nav-btn {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: var(--fs-nav-btn);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--purple); color: var(--white);
+    padding: 26px 56px; border-radius: 12px;
+    text-decoration: none; display: inline-block;
+    position: relative; overflow: hidden;
+    transition: all 0.25s var(--ease-out-smooth);
+  }
+  .nav-btn:hover { background: var(--purple-lt); transform: scale(1.02); }
+  .nav-btn::after {
+    content: ''; position: absolute; top: 0; left: -75%;
+    width: 50%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.7s var(--ease-out-smooth);
+    pointer-events: none;
+  }
+  .nav-btn:hover::after { left: 125%; }
+
+  .nav-toggle {
+    display: none;
+    background: transparent; border: none; padding: 8px;
+    cursor: pointer; color: var(--white);
+    width: 40px; height: 40px;
+    align-items: center; justify-content: center;
+  }
+  .nav-toggle span {
+    display: block; position: relative;
+    width: 22px; height: 2px; background: var(--white);
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+  .nav-toggle span::before, .nav-toggle span::after {
+    content: ''; position: absolute; left: 0;
+    width: 22px; height: 2px; background: var(--white);
+    transition: transform 0.25s ease, top 0.25s ease;
+  }
+  .nav-toggle span::before { top: -7px; }
+  .nav-toggle span::after  { top:  7px; }
+  .nav-toggle.is-open span { background: transparent; }
+  .nav-toggle.is-open span::before { top: 0; transform: rotate(45deg); }
+  .nav-toggle.is-open span::after  { top: 0; transform: rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed; top: var(--nav-h); left: 0; right: 0; z-index: 199;
+    background: rgba(13, 13, 13, 0.98);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 24px;
+    flex-direction: column; gap: 4px;
+    transform: translateY(-12px);
+    opacity: 0; pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.2s ease;
+  }
+  .mobile-menu.is-open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+  .mobile-menu .nav-link {
+    display: block; padding: 20px 8px;
+    font-size: 1.2rem; border-bottom: 1px solid var(--line);
+  }
+  .mobile-menu .nav-btn {
+    margin-top: 20px; text-align: center;
+    padding: 18px 32px; font-size: 1.1rem;
+  }
 
   /* ---------- HERO ---------- */
+  .hero-wrap { position: relative; overflow: hidden; background: var(--bg); }
+  .hero-wrap::before {
+    content: ''; position: absolute; top: -220px; left: 50%;
+    transform: translateX(-50%); width: 1000px; height: 700px;
+    background: radial-gradient(ellipse, rgba(124,58,237,0.22) 0%, rgba(26,16,64,0.10) 50%, transparent 75%);
+    pointer-events: none; z-index: 0;
+  }
+  .hero-wrap::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 1200px 800px at 50% 30%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 1200px 800px at 50% 30%, black 30%, transparent 80%);
+  }
   .hero {
-    min-height: 92vh;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    text-align: center; position: relative;
-    padding: 140px 24px 90px;
+    position: relative; display: block;
+    padding: 110px 32px 90px;
+    max-width: 960px; margin: 0 auto;
+    text-align: center;
+    z-index: 1;
   }
-  .hero-glow {
-    position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(ellipse 900px 560px at 50% 22%, rgba(124,58,237,0.16), transparent 70%);
-  }
-  .hero > * { position: relative; z-index: 1; }
-  .hero-proof {
+  .hero-tag {
     font-family: 'Oswald', sans-serif; font-weight: 400;
-    font-size: 0.9rem; letter-spacing: 0.26em; text-transform: uppercase;
-    color: var(--muted); margin: 26px 0 40px;
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--purple-lt);
+    margin-bottom: 28px; display: inline-block;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.15s var(--ease-out-smooth) forwards, tagPulse 3s 0.8s ease-in-out infinite;
   }
-  .hero-sub { max-width: 640px; color: var(--muted); font-size: 1.3rem; font-weight: 300; line-height: 1.7; margin: 0 auto; }
-  .hero-alt { margin-top: 22px; }
-
-  /* ---------- Carousels (reference behavior: snap track + arrows) ---------- */
-  .slider { position: relative; margin-top: 52px; }
-  .s-track {
-    display: flex; gap: 24px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding-bottom: 4px;
+  .hero h1 {
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.25s var(--ease-out-smooth) forwards;
   }
-  .s-track::-webkit-scrollbar { display: none; }
-  .s-item { scroll-snap-align: start; flex: 0 0 100%; max-width: 100%; }
-  .slider[data-per="2"] .s-item { flex: 0 0 calc(50% - 12px); max-width: calc(50% - 12px); }
-  .slider[data-per="4"] .s-item { flex: 0 0 calc(25% - 18px); max-width: calc(25% - 18px); }
-  .s-arrows { display: flex; gap: 12px; justify-content: center; margin-top: 30px; }
-  .s-btn {
-    width: 46px; height: 46px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    background: transparent; border: 1px solid var(--line-2);
-    color: var(--off); font-size: 1.15rem; cursor: pointer;
-    transition: border-color 0.25s, color 0.25s, background 0.25s;
+  .hero h1 .offer {
+    background: linear-gradient(90deg, var(--purple-lt) 0%, var(--purple-pop) 55%, #f0c5ff 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    display: inline-block;
   }
-  .s-btn:hover { border-color: var(--purple-lt); color: var(--purple-lt); background: rgba(124,58,237,0.08); }
-
-  /* ---------- VOICES (1-up quote carousel) ---------- */
-  .voice {
-    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-    padding: 52px 56px; text-align: center;
-    min-height: 100%;
-  }
-  .voice-mark { font-family: 'Oswald', sans-serif; font-size: 4rem; line-height: 0.5; color: var(--purple); opacity: 0.45; display: block; margin-bottom: 22px; }
-  .voice p { color: var(--off); font-weight: 300; font-size: 1.25rem; line-height: 1.75; margin: 0 auto 24px; max-width: 720px; }
-  .voice-who {
+  .hero-tagline {
     font-family: 'Oswald', sans-serif; font-weight: 600;
-    font-size: 0.85rem; letter-spacing: 0.18em; text-transform: uppercase;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    line-height: 1.25; letter-spacing: 0.01em;
+    color: var(--purple-lt);
+    margin: 0 auto 36px; max-width: 760px;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.4s var(--ease-out-smooth) forwards;
+  }
+  .hero-sub {
+    margin: 0 auto 20px; max-width: 720px;
+    color: var(--muted);
+    font-size: var(--fs-hero-sub);
+    line-height: 1.7; font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.55s var(--ease-out-smooth) forwards;
+  }
+  .hero-sub.second { margin-bottom: 44px; animation-delay: 0.65s; }
+  .hero-ctas {
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 0.6s 0.75s var(--ease-out-smooth) forwards;
+  }
+  .price-hint {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.95rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.45); margin-top: 16px;
+    opacity: 0; animation: fadeUp 0.6s 0.9s var(--ease-out-smooth) forwards;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes tagPulse {
+    0%, 100% { text-shadow: none; }
+    50%      { text-shadow: 0 0 16px rgba(192,132,252,0.55), 0 0 28px rgba(192,132,252,0.25); }
+  }
+
+  /* ---------- ANIMATED MOCKUP ---------- */
+  .mockup-wrap {
+    margin: 56px auto 0; max-width: 820px;
+    position: relative; z-index: 2;
+    padding: 0 32px;
+    opacity: 0;
+    animation: fadeUp 0.7s 1s var(--ease-out-smooth) forwards;
+  }
+  .mock-frame {
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 0 60px rgba(124,58,237,0.28), 0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px var(--accent-border);
+    overflow: hidden; position: relative;
+  }
+  .mock-bar {
+    display: flex; align-items: center; gap: 8px;
+    padding: 12px 16px;
+    background: linear-gradient(180deg, #f4f1ea, #e8e3d3);
+    border-bottom: 1px solid #d8d1bd;
+  }
+  .mock-dot { width: 11px; height: 11px; border-radius: 50%; background: #d3cdb9; border: 1px solid #b8b09a; }
+  .mock-dot.r { background: #f08a78; border-color: #d96d59; }
+  .mock-dot.y { background: #f4c25e; border-color: #d9a637; }
+  .mock-dot.g { background: #86d18c; border-color: #5fae67; }
+  .mock-url {
+    flex: 1; margin-left: 12px;
+    background: #fff; border-radius: 6px;
+    padding: 5px 12px;
+    font-family: 'Lato', sans-serif; font-size: 12px; color: #7a7464;
+    border: 1px solid #d8d1bd; text-align: center;
+  }
+  .mock-stage {
+    position: relative;
+    aspect-ratio: 1600 / 1028;
+    background: #0d0d0d;
+    overflow: hidden;
+  }
+  .mock-view {
+    position: absolute; inset: 0;
+    opacity: 0; transition: opacity 1s ease;
+  }
+  .mock-view.active { opacity: 1; }
+
+  /* Real Practice Lab screenshots — fill the stage */
+  .mock-shot {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    background: #0d0d0d;
+  }
+
+  .mock-label {
+    text-align: center; margin-top: 24px;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.28em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+  .mock-label .pulse {
+    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    background: var(--purple-pop); margin-right: 10px; vertical-align: middle;
+    box-shadow: 0 0 0 0 rgba(192,132,252,0.7);
+    animation: pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(192,132,252,0.7); }
+    70%  { box-shadow: 0 0 0 10px rgba(192,132,252,0); }
+    100% { box-shadow: 0 0 0 0 rgba(192,132,252,0); }
+  }
+
+  /* ---------- STAT BAND ---------- */
+  .band {
+    background: var(--bg-2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 32px 24px; text-align: center;
+  }
+  .band p {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: clamp(1rem, 1.6vw, 1.2rem);
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); margin: 0;
+  }
+  .band p .dot { color: var(--purple-lt); margin: 0 14px; }
+
+  /* ---------- INTENSIVE BAND ---------- */
+  .intensive-band {
+    background: linear-gradient(135deg, var(--navy-deep), var(--navy));
+    padding: 80px 24px; text-align: center;
+    border-bottom: 1px solid var(--line);
+    position: relative; overflow: hidden;
+  }
+  .intensive-band::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 600px 300px at 50% 50%, rgba(124,58,237,0.18), transparent 70%);
+  }
+  .intensive-text-col {
+    position: relative; z-index: 1;
+    max-width: 760px; margin: 0 auto;
+  }
+  .intensive-tag {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 0.85rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--purple-pop);
+    display: inline-block;
+    padding: 8px 18px;
+    background: rgba(192,132,252,0.12);
+    border: 1px solid rgba(192,132,252,0.35);
+    border-radius: 999px;
+    margin-bottom: 22px;
+  }
+  .intensive-cover {
+    display: block;
+    width: min(340px, 72%);
+    margin: 0 auto 28px;
+    border-radius: 12px;
+    border: 1px solid var(--accent-border);
+    box-shadow: 0 18px 48px rgba(0,0,0,0.55), 0 0 40px rgba(124,58,237,0.25);
+  }
+  .intensive-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(2rem, 4.4vw, 3rem);
+    color: var(--white); margin: 0 0 16px;
+    line-height: 1.1;
+  }
+  .intensive-body {
+    color: var(--off);
+    font-size: var(--fs-body);
+    line-height: 1.65; font-weight: 300;
+    max-width: 680px; margin: 0 auto 32px;
+  }
+
+  /* ---------- SECTION BACKGROUNDS ---------- */
+  .section-card { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .section-bg2  { background: var(--bg-2); }
+  .section-bg   { background: var(--bg); }
+
+  /* ---------- CENTERED HEADER (used by every section) ---------- */
+  .features-header {
+    text-align: center; max-width: 820px; margin: 0 auto;
+  }
+  .features-header h2 { margin-bottom: 18px; }
+  .features-header .section-body { margin: 0 auto; max-width: 680px; }
+
+  /* ---------- FEAT CARDS ---------- */
+  .feat {
+    background: var(--card-2); border: 1px solid var(--line); border-radius: 12px;
+    padding: 36px 32px;
+    transition: border-color 0.4s ease, background 0.4s ease, transform 0.25s ease;
+    position: relative; overflow: hidden;
+    opacity: 0; transform: translateY(14px);
+  }
+  .feat.in { opacity: 1; transform: none; transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.25s, background 0.25s; }
+  .feat::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--purple), var(--purple-lt));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease;
+  }
+  .feat:hover::before { transform: scaleX(1); }
+  .feat:hover { border-color: var(--accent-border); background: var(--card); transform: translateY(-4px); }
+  .feat-num {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 2.4rem;
+    color: var(--line-2); line-height: 1; margin-bottom: 20px;
+    transition: color 0.4s;
+  }
+  .feat:hover .feat-num { color: var(--purple-lt); }
+  .feat.lit .feat-num { color: var(--purple-lt); }
+  .feat.lit { border-color: var(--purple); }
+  .feat-num.label {
+    font-size: 0.95rem; letter-spacing: 0.22em; text-transform: uppercase;
     color: var(--purple-lt);
   }
-  .voice.voice-stat p {
-    font-family: 'Oswald', sans-serif; font-weight: 300;
-    font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.45; color: var(--white);
-  }
-  .voice.voice-stat strong { font-weight: 600; color: var(--purple-pop); }
-
-  /* ---------- SYSTEM ---------- */
-  .sys-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 52px; }
-  .sys {
-    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-    padding: 40px 36px; position: relative; overflow: hidden;
-    transition: border-color 0.3s, transform 0.3s var(--ease);
-  }
-  .sys:hover { border-color: var(--accent-border); transform: translateY(-3px); }
-  .sys-num { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 2rem; color: var(--line-2); margin-bottom: 14px; }
-  .sys:hover .sys-num { color: var(--purple-lt); }
-  .sys h3 { font-size: 1.4rem; margin-bottom: 10px; }
-  .sys p { color: var(--muted); font-weight: 300; font-size: 1.1rem; margin: 0; }
-
-  /* ---------- THE ROOM (2-up screenshot carousel, captioned like the reference) ---------- */
-  .shot-card {
-    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
-    overflow: hidden; height: 100%;
-    display: flex; flex-direction: column;
-  }
-  .shot-card img { display: block; width: 100%; height: auto; aspect-ratio: 1600 / 1028; object-fit: cover; }
-  .shot-cap {
-    padding: 16px 22px;
-    font-family: 'Oswald', sans-serif; font-weight: 500;
-    font-size: 0.9rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--off); text-align: left;
-    border-top: 1px solid var(--line);
-  }
-  .shot-cap span { color: var(--purple-lt); }
-  .room-list { list-style: none; margin: 64px 0 0; padding: 0; max-width: 640px; margin-left: auto; margin-right: auto; }
-  .room-list li {
-    display: flex; align-items: baseline; gap: 16px; text-align: left;
-    padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.09);
-    font-size: 1.22rem; font-weight: 300; color: var(--off);
-  }
-  .room-list li::before { content: '·'; color: var(--purple-pop); font-weight: 700; font-size: 1.6rem; line-height: 1; }
-  .room-stat {
-    margin-top: 44px; text-align: center;
+  .feat-title {
     font-family: 'Oswald', sans-serif; font-weight: 600;
-    font-size: 0.95rem; letter-spacing: 0.2em; text-transform: uppercase;
+    font-size: var(--fs-card-title);
+    letter-spacing: 0.04em; color: var(--white); margin-bottom: 16px;
+    line-height: 1.25;
+  }
+  .feat-desc { font-size: var(--fs-card-body); color: var(--muted); line-height: 1.65; font-weight: 300; }
+
+  .feat-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+    margin-top: 56px;
+  }
+  .feat-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .feat-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .feat-grid .feat:nth-child(1) { transition-delay: 0.04s; }
+  .feat-grid .feat:nth-child(2) { transition-delay: 0.11s; }
+  .feat-grid .feat:nth-child(3) { transition-delay: 0.18s; }
+  .feat-grid .feat:nth-child(4) { transition-delay: 0.25s; }
+  .feat-grid .feat:nth-child(5) { transition-delay: 0.32s; }
+  .feat-grid .feat:nth-child(6) { transition-delay: 0.39s; }
+  .feat-grid .feat:nth-child(7) { transition-delay: 0.46s; }
+  .feat-grid .feat:nth-child(8) { transition-delay: 0.53s; }
+
+  /* ---------- PRACTICE LAB SECTION ---------- */
+  .pl-intro { text-align: center; max-width: 880px; margin: 0 auto 32px; }
+  .pl-modes-header { text-align: center; max-width: 720px; margin: 72px auto 32px; }
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 56px; }
+  .testi-card {
+    background: var(--card-2); border: 1px solid var(--line); border-radius: 12px;
+    padding: 40px 32px;
+    position: relative;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  }
+  .testi-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-border);
+    box-shadow: 0 14px 32px rgba(124,58,237,0.12);
+  }
+  .testi-mark {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 4.6rem; line-height: 0.6;
+    color: var(--purple); opacity: 0.4;
+    display: block; margin-bottom: 10px;
+  }
+  .testi-text {
+    color: var(--off); font-size: var(--fs-card-body);
+    line-height: 1.6; margin: 0 0 24px; font-weight: 300;
+  }
+  .testi-author {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.92rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--purple-lt);
+  }
+  .quote-strip {
+    max-width: 720px; margin: 56px auto 0;
+    background: var(--card-2); border: 1px solid var(--line); border-radius: 12px;
+    padding: 32px 36px; text-align: center;
+  }
+  .quote-strip .testi-text { margin-bottom: 16px; }
+  .proof-stat {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.92rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--purple-lt); margin: 0 0 28px;
+  }
+
+  /* ---------- LIBRARY ---------- */
+  .lib-group { margin-top: 64px; }
+  .lib-group:first-of-type { margin-top: 56px; }
+  .lib-group-header { text-align: center; margin-bottom: 32px; }
+  .lib-group-tag {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 0.85rem; letter-spacing: 0.22em; text-transform: uppercase;
     color: var(--purple-pop);
   }
+  .lib-group-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.7rem; color: var(--white);
+    margin: 8px 0 0;
+  }
+  .lib-grid { display: grid; gap: 18px; }
+  .lib-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .lib-grid-6 { grid-template-columns: repeat(6, 1fr); }
+  .lib-grid-8 { grid-template-columns: repeat(4, 1fr); }
+  .lib-card {
+    background: var(--card-2); border: 1px solid var(--line);
+    border-radius: 10px; overflow: hidden;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    display: flex; flex-direction: column;
+  }
+  .lib-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-border);
+    box-shadow: 0 14px 32px rgba(124,58,237,0.18);
+  }
+  .lib-card-img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; background: var(--card); }
+  .lib-card-body { padding: 16px 16px 18px; }
+  .lib-card-title {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 1.05rem; color: var(--white);
+    line-height: 1.25; margin-bottom: 4px;
+  }
+  .lib-card-sub {
+    font-family: 'Lato', sans-serif; font-weight: 400;
+    font-size: 0.9rem; color: var(--muted); line-height: 1.45;
+  }
+  @media (max-width: 1000px) {
+    .lib-grid-6 { grid-template-columns: repeat(3, 1fr); }
+    .lib-grid-8 { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .lib-grid-3, .lib-grid-6, .lib-grid-8 { grid-template-columns: repeat(2, 1fr); }
+    .lib-card-body { padding: 14px 14px 16px; }
+    .lib-card-title { font-size: 0.95rem; }
+    .lib-card-sub { font-size: 0.82rem; }
+  }
 
-  /* ---------- TRUTH ---------- */
-  .truth { text-align: center; }
-  .truth-big {
-    font-family: 'Oswald', sans-serif; font-weight: 300;
-    font-size: clamp(1.6rem, 3.4vw, 2.4rem); line-height: 1.35;
-    color: var(--off); max-width: 760px; margin: 0 auto;
+  /* ---------- PRICING ---------- */
+  .pricing-wrap { padding: 104px 32px; max-width: 960px; margin: 0 auto; }
+  .pricing-header { text-align: center; margin-bottom: 56px; max-width: 720px; margin-left: auto; margin-right: auto; }
+  .includes-card {
+    max-width: 720px; margin: 0 auto 56px;
+    background: var(--card); border: 1px solid var(--accent-border);
+    border-radius: 14px; padding: 40px 44px;
   }
-  .truth-big strong { font-weight: 600; color: var(--white); }
-  .truth-split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 72px; text-align: left; }
-  .truth-col .tag { margin-bottom: 14px; }
-  .truth-col p { color: var(--muted); font-weight: 300; font-size: 1.2rem; margin: 0; }
+  .includes-card-tag {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--purple-pop); margin-bottom: 26px; text-align: center;
+  }
+  .includes-list { list-style: none; padding: 0; margin: 0; }
+  .includes-list li {
+    color: var(--off); font-size: var(--fs-card-body); line-height: 1.55;
+    padding: 16px 0 16px 34px; position: relative;
+    border-bottom: 1px solid var(--line);
+  }
+  .includes-list li:last-child { border-bottom: none; }
+  .includes-list li::before {
+    content: '✓'; position: absolute; left: 0; top: 16px;
+    color: var(--purple-lt); font-weight: 700; font-size: 1.1rem;
+  }
+  .includes-list li strong { color: var(--white); font-weight: 700; }
 
-  /* ---------- LIBRARY (box art carousel) ---------- */
-  .box-card { text-align: left; }
-  .box-card img {
-    display: block; width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover;
-    border-radius: 10px; border: 1px solid var(--line);
-    transition: border-color 0.3s, transform 0.3s var(--ease);
+  .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .price-card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 52px 42px; position: relative;
+    transition: border-color 0.25s;
   }
-  .box-card:hover img { border-color: var(--accent-border); transform: translateY(-3px); }
-  .box-title {
-    margin-top: 12px;
-    font-family: 'Oswald', sans-serif; font-weight: 500;
-    font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--muted); line-height: 1.4;
+  .price-card:hover { border-color: var(--line-2); }
+  .price-card.featured { background: var(--navy); border-color: var(--purple); box-shadow: var(--shadow-lift); }
+  .price-badge {
+    position: absolute; top: -1px; left: 42px;
+    background: var(--purple); color: var(--white);
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 0 0 6px 6px;
   }
-
-  /* ---------- MAP ---------- */
-  .map-frame { margin-top: 52px; }
-  .map-frame img { display: block; width: 100%; height: auto; }
-
-  /* ---------- PATHS ---------- */
-  .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 56px; align-items: start; }
-  .pathc {
-    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-    padding: 46px 40px;
-  }
-  .pathc.featured { border-color: var(--accent-border); box-shadow: 0 18px 48px rgba(124,58,237,0.14); }
-  .pathc-kicker {
-    font-family: 'Oswald', sans-serif; font-weight: 400;
-    font-size: 0.85rem; letter-spacing: 0.24em; text-transform: uppercase;
-    color: var(--dim); display: block; margin-bottom: 10px;
-  }
-  .pathc h3 { font-size: 1.8rem; margin-bottom: 22px; }
-  .pathc details {
-    border-top: 1px solid var(--line);
-  }
-  .pathc details:last-of-type { border-bottom: 1px solid var(--line); margin-bottom: 28px; }
-  .pathc summary {
-    cursor: pointer; list-style: none;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 18px 0;
-    font-family: 'Oswald', sans-serif; font-weight: 500;
-    font-size: 0.95rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--off);
-  }
-  .pathc summary::-webkit-details-marker { display: none; }
-  .pathc summary::after { content: '+'; color: var(--purple-lt); font-size: 1.5rem; font-weight: 400; transition: transform 0.25s; }
-  .pathc details[open] summary::after { transform: rotate(45deg); }
-  .pathc details p, .pathc details ul { color: var(--muted); font-weight: 300; font-size: 1.05rem; margin: 0 0 18px; }
-  .pathc details ul { padding-left: 18px; }
-  .pathc details li { margin-bottom: 6px; }
-  .pathc-price {
-    font-family: 'Oswald', sans-serif; font-size: 0.85rem;
+  .price-period {
+    font-family: 'Oswald', sans-serif; font-size: 1.1rem;
     letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--dim); margin-top: 14px;
+    color: var(--muted); margin-bottom: 24px;
+  }
+  .price-card.featured .price-period { color: var(--purple-pop); }
+  .price-amount {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 6rem;
+    color: var(--white); line-height: 1; margin-bottom: 12px;
+  }
+  .price-amount sup { font-size: 0.38em; vertical-align: super; color: var(--muted); font-weight: 400; }
+  .price-note { font-size: var(--fs-body); color: var(--muted); margin-bottom: 14px; }
+  .price-savings { color: var(--purple-pop); font-weight: 700; }
+  .price-trial {
+    display: inline-block; font-size: 0.95rem; font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+    border: 1px solid var(--line); border-radius: 6px;
+    padding: 8px 18px; margin: 22px 0 36px;
+  }
+  .price-card.featured .price-trial { color: var(--purple-pop); border-color: rgba(192,132,252,0.35); }
+  .price-btn {
+    display: block; width: 100%; text-align: center;
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.1rem; letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 22px; border-radius: 10px; text-decoration: none;
+    transition: all 0.2s; border: 1px solid transparent;
+  }
+  .price-btn-purple { background: var(--purple); color: var(--white); }
+  .price-btn-purple:hover { background: var(--purple-lt); }
+  .price-btn-ghost { background: transparent; color: var(--muted); border-color: var(--line); }
+  .price-btn-ghost:hover { color: var(--white); border-color: var(--muted); }
+  .price-btn:focus-visible { outline: 2px solid var(--purple-pop); outline-offset: 3px; }
+
+  @keyframes priceGlow {
+    0%, 100% { text-shadow: none; }
+    35%      { text-shadow: 0 0 20px rgba(157,95,245,0.85), 0 0 40px rgba(157,95,245,0.4); }
+  }
+  .price-glow.glowing { animation: priceGlow 2.2s ease-out forwards; }
+
+  /* ---------- ABOUT ---------- */
+  .about-wrap {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 360px 1fr; gap: 80px;
+    align-items: start;
+  }
+  .about-bio p { color: var(--muted); font-size: var(--fs-body); line-height: 1.7; margin-bottom: 18px; font-weight: 300; }
+  .about-bio p strong { color: var(--white); font-weight: 700; }
+  .about-portrait {
+    background: var(--navy);
+    border: 1px solid var(--accent-border);
+    border-radius: 14px;
+    padding: 36px 32px;
+    box-shadow: var(--shadow-lift);
+  }
+  .about-portrait .eyebrow { color: var(--purple-pop); margin-bottom: 14px; }
+  .about-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+    margin-top: 36px;
+  }
+  .stat-item {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .stat-item:nth-child(1) { transition-delay: 0.05s; }
+  .stat-item:nth-child(2) { transition-delay: 0.18s; }
+  .stat-item:nth-child(3) { transition-delay: 0.31s; }
+  #about-stats.counted .stat-item { opacity: 1; transform: none; }
+  .a-stat-num {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 2.6rem; color: var(--purple-pop); line-height: 1;
+  }
+  .a-stat-lbl {
+    font-family: 'Oswald', sans-serif; font-size: 0.78rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); margin-top: 8px;
   }
 
   /* ---------- FAQ ---------- */
-  .faq details { border-bottom: 1px solid var(--line); }
-  .faq details:first-of-type { border-top: 1px solid var(--line); }
-  .faq summary {
-    cursor: pointer; list-style: none;
-    display: flex; justify-content: space-between; align-items: center; gap: 20px;
-    padding: 26px 4px;
-    font-family: 'Oswald', sans-serif; font-weight: 500;
-    font-size: 1.05rem; letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--white);
+  .faq-header { text-align: center; margin-bottom: 48px; }
+  .faq-list { max-width: 880px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid var(--line); }
+  .faq-q {
+    width: 100%; text-align: left;
+    background: transparent; border: none; cursor: pointer;
+    padding: 26px 50px 26px 0;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 1.25rem; color: var(--white);
+    position: relative;
+    transition: color 0.15s;
   }
-  .faq summary::-webkit-details-marker { display: none; }
-  .faq summary::after { content: '+'; color: var(--purple-lt); font-size: 1.7rem; font-weight: 400; flex-shrink: 0; transition: transform 0.25s; }
-  .faq details[open] summary::after { transform: rotate(45deg); }
-  .faq details p { color: var(--muted); font-weight: 300; font-size: 1.15rem; padding: 0 4px 26px; margin: 0; }
-
-  /* ---------- FINAL ---------- */
-  .final { text-align: center; padding: 130px 24px; }
-  .final-glow {
-    position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(ellipse 700px 420px at 50% 60%, rgba(124,58,237,0.14), transparent 70%);
+  .faq-q:hover { color: var(--purple-lt); }
+  .faq-q:focus-visible { outline: 2px solid var(--purple-pop); outline-offset: 4px; border-radius: 4px; }
+  .faq-q::after {
+    content: '+';
+    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 1.9rem;
+    color: var(--purple-lt); line-height: 1;
+    transition: transform 0.3s ease;
   }
-  .final > * { position: relative; z-index: 1; }
-  .final .lead { max-width: 560px; margin: 0 auto 40px; }
+  .faq-q[aria-expanded="true"]::after { transform: translateY(-50%) rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+  }
+  .faq-q[aria-expanded="true"] + .faq-a {
+    max-height: 560px; padding: 0 24px 30px 0;
+  }
+  .faq-a p { font-size: var(--fs-body); line-height: 1.7; color: var(--muted); margin: 0; font-weight: 300; }
+  .faq-a a { color: var(--purple-lt); font-weight: 400; text-decoration: underline; text-underline-offset: 3px; }
 
+  /* ---------- CTA BAND ---------- */
+  .cta-band {
+    background: linear-gradient(135deg, var(--navy-deep), var(--navy));
+    padding: 120px 24px;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-band::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 900px 600px at 50% 50%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 900px 600px at 50% 50%, black 30%, transparent 80%);
+  }
+  .cta-band-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+  .cta-band h2 {
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    color: var(--white); margin-bottom: 20px;
+  }
+  .cta-band h2 .accent {
+    background: linear-gradient(90deg, var(--purple-lt), var(--purple-pop));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+  }
+  .cta-band p {
+    color: var(--off); font-size: var(--fs-body); margin-bottom: 40px;
+    font-weight: 300;
+  }
+
+  /* ---------- FOOTER ---------- */
   footer {
-    background: rgba(10,10,10,0.95); border-top: 1px solid var(--line);
-    color: var(--dim); text-align: center; padding: 44px 24px;
-    font-size: 0.95rem; position: relative;
+    background: #0a0a0a;
+    color: var(--muted);
+    padding: 56px 24px 40px;
+    text-align: center;
+    font-size: 1rem;
   }
-  footer a { color: var(--muted); text-decoration: none; margin: 0 14px; }
-  footer a:hover { color: var(--purple-lt); }
-  .footer-copy { margin-top: 16px; font-size: 0.85rem; }
+  .footer-row { margin-bottom: 18px; display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
+  .footer-row a { color: var(--off); text-decoration: none; font-weight: 400; transition: color 0.15s; }
+  .footer-row a:hover { color: var(--purple-lt); }
+  .footer-copy { font-size: 0.88rem; color: var(--dim); margin-top: 14px; }
 
-  /* ---------- Responsive ---------- */
+  /* ---------- REVEAL ---------- */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.8s var(--ease-out-smooth), transform 0.8s var(--ease-out-smooth); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1680px) {
+    nav { padding: 34px 62px; }
+    .nav-logo { gap: 16px; }
+    .nav-logo-row { gap: 26px; }
+    .nav-logo-divider { height: 68px; }
+    .nav-tagline { letter-spacing: 0.26em; }
+    .nav-logo { margin-right: 48px; }
+    .nav-right { gap: 34px; }
+    .nav-btn { padding: 22px 46px; border-radius: 11px; }
+  }
   @media (max-width: 900px) {
-    section { padding: 84px 0; }
-    .sys-grid { grid-template-columns: 1fr; }
-    .truth-split { grid-template-columns: 1fr; gap: 36px; }
-    .path-grid { grid-template-columns: 1fr; }
-    .slider[data-per="2"] .s-item { flex: 0 0 85%; max-width: 85%; }
-    .slider[data-per="4"] .s-item { flex: 0 0 44%; max-width: 44%; }
-    .voice { padding: 40px 28px; }
+    nav { padding: 26px 24px; }
+    .nav-logo { gap: 11px; }
+    .nav-logo-row { gap: 22px; }
+    .nav-logo-divider { height: 50px; }
+    .nav-tagline { display: none; }
+    .nav-right { display: none; }
+    .nav-toggle { display: flex; }
+    .mobile-menu { display: flex; }
+    .about-wrap { grid-template-columns: 1fr; gap: 48px; }
+    .feat-grid, .feat-grid.cols-2, .feat-grid.cols-4 { grid-template-columns: 1fr; gap: 14px; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .price-grid { grid-template-columns: 1fr; }
+    section { padding: 80px 0; }
+    .pricing-wrap { padding: 80px 24px; }
+    .hero { padding: 80px 24px 64px; }
+    .mockup-wrap { margin-top: 44px; padding: 0 24px; }
   }
   @media (max-width: 520px) {
-    .wrap { padding: 0 20px; }
-    nav { padding: 20px 20px; }
-    .hero { padding: 120px 18px 70px; }
-    .slider[data-per="4"] .s-item { flex: 0 0 70%; max-width: 70%; }
+    body { font-size: 1rem; }
+    .wrap { padding: 0 18px; }
+    nav { padding: 20px 18px; }
+    .nav-logo-divider, .nav-logo-tag { display: none; }
+    .hero { padding: 64px 18px 56px; }
+    .mockup-wrap { padding: 0 18px; }
+    .feat, .testi-card { padding: 28px 24px; }
+    .includes-card { padding: 32px 26px; }
+    .includes-list li { font-size: 1.05rem; padding-left: 30px; }
+    .price-card { padding: 40px 30px; }
+    .price-amount { font-size: 4.8rem; }
+    .cta-row { flex-direction: column; align-items: stretch; }
+    .cta-row .btn { width: 100%; }
+    .about-stats { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .a-stat-num { font-size: 1.8rem; }
+    .faq-q { font-size: 1.1rem; padding: 22px 40px 22px 0; }
   }
 
+  /* ---------- REDUCED MOTION ---------- */
   @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { transition-duration: 0.001s !important; }
-    html { scroll-behavior: auto; }
-    .rv { opacity: 1; transform: none; }
+    *, *::before, *::after {
+      animation-duration: 0.001s !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001s !important;
+    }
+    .mock-view { opacity: 1; }
+    .mock-view:not(.active) { display: none; }
+    .hero-tag, .hero h1, .hero-tagline, .hero-sub, .hero-ctas, .price-hint, .mockup-wrap { opacity: 1; animation: none; }
+    .reveal, .feat, .stat-item { opacity: 1; transform: none; }
+    .pulse { animation: none; }
   }
 </style>
 </head>
-
 <body>
+<script src="/promo-bar.js"></script>
 
-<div class="backdrop" aria-hidden="true"></div>
-
+<!-- =============================================================================
+     SITE NAV
+     ============================================================================= -->
 <nav>
-  <a class="nav-name" href="https://www.jonbjorkmusic.com/">Jon Bjork <span>&middot;</span> The Practice Room</a>
-  <a class="nav-cta" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">Join</a>
+  <a class="nav-logo" href="https://www.jonbjorkmusic.com/" aria-label="Jon Bjork Music — Guitarist, Coach, Composer">
+    <span class="nav-logo-row">
+      <span class="nav-logo-name">Jon Bjork</span>
+      <span class="nav-logo-divider" aria-hidden="true"></span>
+      <span class="nav-logo-tag">Music</span>
+    </span>
+    <span class="nav-tagline">Guitarist &middot; Coach &middot; Composer</span>
+  </a>
+  <div class="nav-right">
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/pro?ref=nav">Practice Room Pro</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/licks/">Licks</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/#about">About</a>
+    <a class="nav-link" href="https://www.jonbjorkmusic.com/contact">Contact</a>
+    <a class="nav-btn" href="https://www.jonbjorkmusic.com/coaching?ref=nav">1-on-1 Coaching</a>
+  </div>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu" role="menu">
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/pro?ref=nav">Practice Room Pro</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/courses">Courses</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/licks/">Licks</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/notes/">Notes</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/#about">About</a>
+  <a class="nav-link" href="https://www.jonbjorkmusic.com/contact">Contact</a>
+    <a class="nav-btn" href="https://www.jonbjorkmusic.com/coaching?ref=nav">1-on-1 Coaching</a>
+</div>
+
 
 <main>
 
   <!-- ============================================================
-       HERO — identity first, price on the CTA, one secondary path
+       HERO  (alternative layout · /start hero copy · animated Lab mockup)
        ============================================================ -->
-  <header class="hero ov-55">
-    <div class="hero-glow" aria-hidden="true"></div>
-    <span class="tag">The Practice Room Pro</span>
-    <h1>Where Guitarists Come<br>To Practice, Not To Watch.</h1>
-    <p class="hero-sub">A room of committed players with a plan, weekly sessions, feedback on their actual playing, and progress they can measure.</p>
-    <!-- TODO(Jon): swap in the real Skool member count, e.g. "140+ committed players inside" -->
-    <p class="hero-proof">Committed Players Inside &middot; Daily Check-Ins &middot; Weekly Lives</p>
-    <a class="btn" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">
-      Go Premium
-      <span class="btn-sub">$99 / month &middot; cancel anytime</span>
-    </a>
-    <p class="hero-alt"><a class="link-quiet" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">or join free and watch from inside &rarr;</a></p>
+  <header class="hero-wrap">
+    <section class="hero">
+      <span class="hero-tag">By Jon Bjork</span>
+      <h1>If You Always Change<br>What You Practice,<br>The Practice Will Never<br>Change Your Playing.</h1>
+      <p class="hero-tagline">A practice system for intermediate guitarists. Free to join.</p>
+      <p class="hero-sub">You're not short on lessons. You're buried in them. Half-started YouTube videos. Advice that doesn't line up. A new technique every time the feed refreshes.</p>
+      <p class="hero-sub second"><span class="offer-inline">Practice Room Pro</span> is the program that fixes it. You join, I look at where your playing actually is, and you get a practice plan built for you. Then we do the work: daily routines, weekly sessions, and feedback from me on your clips. Progress you can hear and measure.</p>
+
+      <div class="cta-row hero-ctas">
+        <a class="btn btn-purple" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">Join The Practice Room Free</a>
+        <a class="btn btn-outline" href="#whats-inside">See What's Inside</a>
+      </div>
+      <div class="price-hint">Free to join &nbsp;·&nbsp; Premium from $99/month or $599/year</div>
+    </section>
+
+    <!-- Animated Practice Lab mockup -->
+    <div class="mockup-wrap" aria-hidden="true">
+      <div class="mock-frame">
+        <div class="mock-bar">
+          <span class="mock-dot r"></span><span class="mock-dot y"></span><span class="mock-dot g"></span>
+          <span class="mock-url">practice-lab.app  /  session</span>
+        </div>
+        <div class="mock-stage" id="mock-stage">
+
+          <div class="mock-view active" data-view="Practice Lab · Dashboard">
+            <img class="mock-shot" src="../pro/assets/plab-dashboard.jpg" alt="Practice Lab dashboard with streak, weekly minutes, and the lab grid" loading="eager" />
+          </div>
+          <div class="mock-view" data-view="Virtuoso Lab · Tempo + Streak">
+            <img class="mock-shot" src="../pro/assets/plab-virtuoso.jpg" alt="Virtuoso Lab showing active phrase, tempo, and 0/15 streak grid" loading="lazy" />
+          </div>
+          <div class="mock-view" data-view="Technique Lab · Lifetime Rep Counter">
+            <img class="mock-shot" src="../pro/assets/plab-technique.jpg" alt="Technique Lab showing 0 of 10,000 lifetime reps progress" loading="lazy" />
+          </div>
+          <div class="mock-view" data-view="Ear Lab · Find Melodies On The Fretboard">
+            <img class="mock-shot" src="../pro/assets/plab-ear.jpg" alt="Ear Lab settings panel and fretboard showing scale notes in Ionian" loading="lazy" />
+          </div>
+          <div class="mock-view" data-view="Fretboard Lab · Scales Across The Neck">
+            <img class="mock-shot" src="../pro/assets/plab-fretboard.jpg" alt="Fretboard Lab showing a 3NPS scale shape across the neck" loading="lazy" />
+          </div>
+          <div class="mock-view" data-view="Harmony Lab · Voice-Led Triads">
+            <img class="mock-shot" src="../pro/assets/plab-harmony.jpg" alt="Harmony Lab showing I IV three-chord progression with voicing on fretboard" loading="lazy" />
+          </div>
+
+        </div>
+      </div>
+      <div class="mock-label"><span class="pulse"></span><span id="mock-label-text">Practice Lab · Dashboard</span></div>
+    </div>
   </header>
 
 
   <!-- ============================================================
-       VOICES — 1-up quote carousel, like the reference
+       STAT BAND
        ============================================================ -->
-  <section class="ov-78">
-    <div class="wrap rv">
-      <div style="text-align:center;">
-        <span class="tag">What The Members Say</span>
-        <h2>From Inside The Room.</h2>
+  <div class="band">
+    <p>A Plan Built For You <span class="dot">·</span> Feedback Any Day <span class="dot">·</span> Progress You Can Measure</p>
+  </div>
+
+
+  <!-- ============================================================
+       INTENSIVE BAND
+       ============================================================ -->
+  <section class="intensive-band tight">
+    <div class="intensive-text-col reveal">
+      <span class="intensive-tag">Happening Now Inside Pro</span>
+      <img class="intensive-cover" src="../pro/assets/boxart-alt-picking-next-step.jpg" alt="8-Week Alternate Picking Intensive: The Next Step" loading="lazy" />
+      <h2 class="intensive-title">8-Week Alternate Picking Intensive:<br>The Next Step</h2>
+      <p class="intensive-body">Our second alternate picking intensive is running right now: beyond the mechanics, into the music. Join free and watch it unfold from the inside. Go Premium to unlock the daily routine and run it with us.</p>
+      <p class="proof-stat">1,463 daily practice check-ins logged in the last two 8-week intensives</p>
+      <a class="btn btn-purple" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">Join The Practice Room Free</a>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PAIN POINTS  (alternative grid layout · /start copy)
+       ============================================================ -->
+  <section class="section-bg" id="pain-points">
+    <div class="wrap">
+      <div class="features-header reveal">
+        <span class="section-tag">The Real Problem</span>
+        <h2>You're Not Stuck<br>Because You're Lazy.</h2>
+        <p class="section-body" style="margin-top: 18px;">You're stuck because there's too much to practice, and nobody is telling you what to drop. There has never been more free guitar instruction out there. And somehow that has made it harder to get better, not easier.</p>
       </div>
-      <div class="slider" data-per="1">
-        <div class="s-track" aria-label="Member quotes" tabindex="0">
-          <div class="s-item">
-            <div class="voice">
-              <span class="voice-mark">&ldquo;</span>
-              <p>Working systematically on single- and multiple-string picking solidified my picking mechanics more than expected. I can now consistently pick 10-15 bpm faster across the strings than before, without pushing it and having my technique fall apart.</p>
-              <div class="voice-who">Acke &middot; Alternate Picking Intensive</div>
-            </div>
-          </div>
-          <div class="s-item">
-            <div class="voice">
-              <span class="voice-mark">&ldquo;</span>
-              <p>This is insane effort and I love it. I would never be able to do this much by myself. Thank you all for the inspiration and accountability, it's such a powerful force.</p>
-              <div class="voice-who">Dragisa &middot; Legato Intensive</div>
-            </div>
-          </div>
-          <div class="s-item">
-            <div class="voice">
-              <span class="voice-mark">&ldquo;</span>
-              <p>I'm at week 5, completely consistent, haven't missed a day. I find the most benefit being the consistency, keeping the schedule, and keeping the slow tempo.</p>
-              <div class="voice-who">Chris &middot; Alternate Picking Intensive</div>
-            </div>
-          </div>
-          <div class="s-item">
-            <div class="voice voice-stat">
-              <p>Half the members who started checking in were <strong>still posting daily in week 8</strong>.</p>
-              <div class="voice-who">From The Last Two 8-Week Intensives</div>
-            </div>
-          </div>
+
+      <div class="feat-grid">
+        <div class="feat">
+          <div class="feat-num">01</div>
+          <div class="feat-title">Too Many Lessons. Too Many Voices.</div>
+          <div class="feat-desc">Every channel teaches the same things in different ways. And every teacher sounds like they know what they're talking about. With no way to tell what's good from what isn't, every session starts with a choice you can't really make.</div>
         </div>
-        <div class="s-arrows">
-          <button class="s-btn" type="button" data-dir="-1" aria-label="Previous quote">&larr;</button>
-          <button class="s-btn" type="button" data-dir="1" aria-label="Next quote">&rarr;</button>
+        <div class="feat">
+          <div class="feat-num">02</div>
+          <div class="feat-title">You Start Things You Never Finish.</div>
+          <div class="feat-desc">A new video shows up and you switch to it. A new lick catches your ear and you switch again. Half-started lessons pile up. Nothing builds, because nothing got the time it needed to stick.</div>
+        </div>
+        <div class="feat">
+          <div class="feat-num">03</div>
+          <div class="feat-title">You Don't Practice Anything Enough.</div>
+          <div class="feat-desc">Fifteen minutes here, fifteen minutes there, across five different things. That keeps things going. It doesn't make them better. If one technique is holding you back, it needs real time over weeks.</div>
         </div>
       </div>
     </div>
@@ -469,35 +1089,109 @@
 
 
   <!-- ============================================================
-       THE SYSTEM — the four parts, program framing kept
+       BOTTLENECK
        ============================================================ -->
-  <section class="ov-74">
-    <div class="wrap rv">
-      <div style="text-align:center;" class="narrow">
-        <span class="tag">The System</span>
-        <h2>A Complete System For<br>Your Hands, Ears, And Practice.</h2>
-        <p class="lead">You're assessed when you join, you get a plan built for you, and every part of your playing gets worked the same way: one clear target at a time, long enough for the skill to change.</p>
+  <section class="section-card" id="bottleneck">
+    <div class="wrap">
+      <div class="features-header reveal">
+        <span class="section-tag">How Pro Works</span>
+        <h2>The Program,<br>Step By Step.</h2>
+        <p class="section-body" style="margin-top:18px;">Pro runs like a training program: you're assessed, you get a plan, we do the work together, and we check the results. One clear target at a time, worked long enough for the skill to change.</p>
       </div>
-      <div class="sys-grid">
-        <div class="sys">
-          <div class="sys-num">01</div>
-          <h3>Technique That Holds Up At Tempo</h3>
-          <p>Alternate picking, legato, sweep. Built with daily routines and tempo targets that don't let slop survive.</p>
+      <div class="feat-grid cols-4">
+        <div class="feat">
+          <div class="feat-num">01</div>
+          <div class="feat-title">The Assessment</div>
+          <div class="feat-desc">You start by showing me where you are: a short questionnaire and a few clips of your playing. An honest baseline, on record, so we both know exactly what we're fixing.</div>
         </div>
-        <div class="sys">
-          <div class="sys-num">02</div>
-          <h3>Timing You Can Trust</h3>
-          <p>Subdivisions that feel different instead of being math. Playing that sits where you put it.</p>
+        <div class="feat">
+          <div class="feat-num">02</div>
+          <div class="feat-title">Your Practice Plan</div>
+          <div class="feat-desc">From the assessment I build your plan: what to work on, in what order, and which daily routines from the library to run. One clear target beats ten random tabs.</div>
         </div>
-        <div class="sys">
-          <div class="sys-num">03</div>
-          <h3>An Ear Connected To The Fretboard</h3>
-          <p>Hear a line, find it, play it. The link between your ear and your hands, trained like any other skill.</p>
+        <div class="feat">
+          <div class="feat-num">03</div>
+          <div class="feat-title">The Work</div>
+          <div class="feat-desc">Daily routines, a weekly live session, and my feedback on your clips any day of the week. Structure and accountability, so the plan actually gets done.</div>
         </div>
-        <div class="sys">
-          <div class="sys-num">04</div>
-          <h3>A Structure That Makes It Stick</h3>
-          <p>Your plan, the Practice Lab, and check-ins that keep the work happening. Progress measured with tempo benchmarks and before/after clips.</p>
+        <div class="feat">
+          <div class="feat-num">04</div>
+          <div class="feat-title">The Measurement</div>
+          <div class="feat-desc">Tempo benchmarks and before/after clips at set points along the way. You'll know you're getting better, and you'll be able to hear the difference yourself.</div>
+        </div>
+      </div>
+      <div class="quote-strip reveal">
+        <span class="testi-mark">&ldquo;</span>
+        <p class="testi-text">This is insane effort and I love it. I would never be able to do this much by myself. Thank you all for the inspiration and accountability, it's such a powerful force.</p>
+        <div class="testi-author">Dragisa · 8-Week Legato Intensive</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PRACTICE LAB  (intro + 8 modes)
+       ============================================================ -->
+  <section class="section-bg" id="practice-lab">
+    <div class="wrap">
+      <div class="pl-intro reveal">
+        <span class="section-tag">Included With Pro</span>
+        <h2>Your <span style="color:var(--purple-lt)">Practice Lab.</span><br>Built To Make You Stick.</h2>
+        <p class="section-body" style="margin-top:18px;">The hardest part of practicing isn't technique. It's showing up every day. Practice Lab fixes that. Open the app and you're already in. The dashboard asks one question: what are we working on. Hit Start A Session, set the metronome, and the time you put in gets logged. When you want to go deeper, pick a Lab and work on the specific skill you're trying to fix. Either way, your streak and your hours add up. The work you put in actually shows up.</p>
+      </div>
+
+      <div class="pl-modes-header reveal">
+        <span class="section-tag">The Eight Labs</span>
+        <h2>Eight Focused<br>Practice Modes.</h2>
+        <p class="section-body" style="margin-top: 18px;">Each Lab works on one skill the right way. No filler. No busywork.</p>
+      </div>
+
+      <div class="feat-grid cols-4">
+        <div class="feat"><div class="feat-num">01</div><div class="feat-title">Virtuoso Lab</div><div class="feat-desc">Technique built on how your hands actually learn. Most of the improvement happens during the short rests between reps. Virtuoso Lab builds your work in small groups of clean reps with rest built in. Hit fifteen clean reps at tempo and the BPM goes up.</div></div>
+        <div class="feat"><div class="feat-num">02</div><div class="feat-title">Technique Lab</div><div class="feat-desc">Remove your weak spots through massive repetition. Pick a lifetime rep goal for the move you want to own, like ten thousand clean reps of an alternate picking shape. Chip away at it, session by session.</div></div>
+        <div class="feat"><div class="feat-num">03</div><div class="feat-title">Systematic Chops Lab</div><div class="feat-desc">Train every two-string picking combination, one at a time. Systematic Chops walks you through every combination on the neck, so you build complete coverage instead of comfort zones.</div></div>
+        <div class="feat"><div class="feat-num">04</div><div class="feat-title">Rhythm Lab</div><div class="feat-desc">Master every rhythmic subdivision. Work through one rhythm at a time so eighth-note triplets, sixteenths, and the ones in between actually feel different to you. Not math you're doing in your head.</div></div>
+        <div class="feat"><div class="feat-num">05</div><div class="feat-title">Ear Lab</div><div class="feat-desc">Learn to play what you hear. A melody plays in a key. You find it on the fretboard. The link between your ear and your hands gets stronger every session, until you stop guessing and start hearing the lines you want to play.</div></div>
+        <div class="feat"><div class="feat-num">06</div><div class="feat-title">Harmony Lab</div><div class="feat-desc">Hear harmony by playing it. Voice-led triads moving through real progressions, so chord changes stop sounding like separate grips and start sounding like music going somewhere.</div></div>
+        <div class="feat"><div class="feat-num">07</div><div class="feat-title">Fretboard Lab</div><div class="feat-desc">See scales and arpeggios across the entire neck. Stop running the same shape in the same position. Build a complete map of where every note lives and how every shape connects.</div></div>
+        <div class="feat"><div class="feat-num">08</div><div class="feat-title">Target Tone Lab</div><div class="feat-desc">Stop skating over the changes. Anchor in a pentatonic shape, pick a chord tone to target, and the Lab walks you through the progression. Your lines start outlining the harmony instead of running scales over it.</div></div>
+      </div>
+
+      <div class="reveal" style="text-align: center; margin-top: 56px;">
+        <a class="btn btn-purple" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">Join The Practice Room Free</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       TESTIMONIALS
+       ============================================================ -->
+  <section class="section-card">
+    <div class="wrap">
+      <div class="features-header reveal">
+        <span class="section-tag">What Students Say</span>
+        <h2>Serious Players.<br>Real Results.</h2>
+      </div>
+      <!-- PROOF PLACEHOLDER (Jon): when dated member results exist, add a measured-results
+           strip here, e.g. "Acke · clean 16ths 92 → 116 BPM · 8 weeks". Numbers with dates
+           beat quotes. Keep the quotes below either way. -->
+
+      <div class="testi-grid reveal">
+        <div class="testi-card">
+          <span class="testi-mark">&ldquo;</span>
+          <p class="testi-text">Working systematically on single- and multiple-string picking solidified my picking mechanics more than expected. I can now consistently pick 10-15 bpm faster across the strings than before, without pushing it and having my technique fall apart.</p>
+          <div class="testi-author">Acke · 8-Week Alternate Picking Intensive</div>
+        </div>
+        <div class="testi-card">
+          <span class="testi-mark">&ldquo;</span>
+          <p class="testi-text">During these 8 weeks I noticed I was suddenly able to play songs, especially fast ones like Master of Puppets, way more relaxed, and it was easier to keep the tempo steady. It's a feeling of being more in control. Thank you very much Jon, it was definitely worth it.</p>
+          <div class="testi-author">Christian · 8-Week Alternate Picking Intensive</div>
+        </div>
+        <div class="testi-card">
+          <span class="testi-mark">&ldquo;</span>
+          <p class="testi-text">I'm at week 5, completely consistent, haven't missed a day. I find the most benefit being the consistency, keeping the schedule, and keeping the slow tempo.</p>
+          <div class="testi-author">Chris · 8-Week Alternate Picking Intensive</div>
         </div>
       </div>
     </div>
@@ -505,84 +1199,171 @@
 
 
   <!-- ============================================================
-       THE ROOM — 2-up captioned screenshot carousel, like the reference
+       LIBRARY  (18 courses with box art — KEEP AS IS)
        ============================================================ -->
-  <section class="ov-80">
-    <div class="wrap rv" style="text-align:center;">
-      <span class="tag">The Room</span>
-      <h2>Peek Inside.</h2>
-      <p class="lead narrow">New players join every week, and the room keeps working. This is the Practice Lab every member trains in.</p>
-      <div class="slider" data-per="2">
-        <div class="s-track" aria-label="Inside the Practice Lab" tabindex="0">
-          <div class="s-item">
-            <div class="shot-card">
-              <img src="../pro/assets/plab-dashboard.jpg" alt="Practice Lab dashboard with streak, weekly minutes, and the lab grid" loading="lazy" />
-              <div class="shot-cap">Practice Lab <span>&middot;</span> Your Dashboard</div>
-            </div>
-          </div>
-          <div class="s-item">
-            <div class="shot-card">
-              <img src="../pro/assets/plab-virtuoso.jpg" alt="Virtuoso Lab showing active phrase, tempo, and streak grid" loading="lazy" />
-              <div class="shot-cap">Virtuoso Lab <span>&middot;</span> Tempo + Streaks</div>
-            </div>
-          </div>
-          <div class="s-item">
-            <div class="shot-card">
-              <img src="../pro/assets/plab-technique.jpg" alt="Technique Lab showing lifetime rep counter progress" loading="lazy" />
-              <div class="shot-cap">Technique Lab <span>&middot;</span> 10,000-Rep Counter</div>
-            </div>
-          </div>
-          <div class="s-item">
-            <div class="shot-card">
-              <img src="../pro/assets/plab-ear.jpg" alt="Ear Lab settings panel and fretboard showing scale notes" loading="lazy" />
-              <div class="shot-cap">Ear Lab <span>&middot;</span> Melodies To Fretboard</div>
-            </div>
-          </div>
-          <div class="s-item">
-            <div class="shot-card">
-              <img src="../pro/assets/plab-fretboard.jpg" alt="Fretboard Lab showing a 3NPS scale shape across the neck" loading="lazy" />
-              <div class="shot-cap">Fretboard Lab <span>&middot;</span> Scales Across The Neck</div>
-            </div>
-          </div>
-          <div class="s-item">
-            <div class="shot-card">
-              <img src="../pro/assets/plab-harmony.jpg" alt="Harmony Lab showing a chord progression voiced on the fretboard" loading="lazy" />
-              <div class="shot-cap">Harmony Lab <span>&middot;</span> Voice-Led Triads</div>
-            </div>
-          </div>
+  <section class="section-bg" id="whats-inside">
+    <div class="wrap">
+      <div class="features-header reveal">
+        <span class="section-tag">The Materials Your Plan Runs On</span>
+        <h2>18 Courses.<br>One Membership.</h2>
+        <p class="section-body" style="margin-top:18px;">Four 8-week intensives. Six focused Deep Dives. Eight full courses. Each one comes with a daily routine built in, and your practice plan tells you which one to run and when, so you never have to guess what to practice next. They all open up the moment you join.</p>
+      </div>
+
+      <div class="lib-group reveal">
+        <div class="lib-group-header">
+          <span class="lib-group-tag">8-Week Programs</span>
+          <h3 class="lib-group-title">Intensives</h3>
         </div>
-        <div class="s-arrows">
-          <button class="s-btn" type="button" data-dir="-1" aria-label="Previous screenshot">&larr;</button>
-          <button class="s-btn" type="button" data-dir="1" aria-label="Next screenshot">&rarr;</button>
+        <div class="lib-grid lib-grid-8">
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-alt-picking-intensive.jpg" alt="8-Week Alternate Picking Intensive" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">8-Week Alternate Picking Intensive</div><div class="lib-card-sub">Build clean, accurate alternate picking</div></div></article>
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-legato-intensive.jpg" alt="8-Week Legato Intensive" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">8-Week Legato Intensive</div><div class="lib-card-sub">Develop a clean and accurate legato</div></div></article>
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-sweep-intensive.jpg" alt="8-Week Sweep Picking Intensive" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">8-Week Sweep Picking Intensive</div><div class="lib-card-sub">Build clean, controlled sweep picking</div></div></article>
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-alt-picking-next-step.jpg" alt="8-Week Alternate Picking Intensive: The Next Step" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">Alternate Picking: The Next Step</div><div class="lib-card-sub">Beyond the mechanics, into the music</div></div></article>
         </div>
       </div>
-      <ul class="room-list">
-        <li>An assessment and a personal practice plan when you join</li>
-        <li>A weekly live session with me, on camera</li>
-        <li>Daily check-in threads through every 8-week intensive</li>
-        <li>Clip feedback from me, any day of the week</li>
-        <li>Wins and struggles shared openly</li>
+
+      <div class="lib-group reveal">
+        <div class="lib-group-header">
+          <span class="lib-group-tag">Focused Technique</span>
+          <h3 class="lib-group-title">Deep Dives</h3>
+        </div>
+        <div class="lib-grid lib-grid-6">
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-alt-picking-deep-dive.jpg" alt="Alternate Picking Deep Dive" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">Alternate Picking Deep Dive</div><div class="lib-card-sub">Techniques · Shapes · Licks</div></div></article>
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-legato-deep-dive.jpg" alt="Legato Deep Dive" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">Legato Deep Dive</div><div class="lib-card-sub">Techniques · Shapes · Licks</div></div></article>
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-sweep-deep-dive.jpg" alt="Sweep Picking Deep Dive" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">Sweep Picking Deep Dive</div><div class="lib-card-sub">Techniques · Shapes · Licks</div></div></article>
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-hybrid-deep-dive.jpg" alt="Hybrid Picking Deep Dive" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">Hybrid Picking Deep Dive</div><div class="lib-card-sub">Techniques · Shapes · Licks</div></div></article>
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-tapping-deep-dive.jpg" alt="Tapping Deep Dive" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">Tapping Deep Dive</div><div class="lib-card-sub">Technique · Scales · Arpeggios</div></div></article>
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-timing-deep-dive.jpg" alt="Timing Deep Dive" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">Timing Deep Dive</div><div class="lib-card-sub">Subdivisions · Counting · Precision</div></div></article>
+        </div>
+      </div>
+
+      <div class="lib-group reveal">
+        <div class="lib-group-header">
+          <span class="lib-group-tag">Full Courses</span>
+          <h3 class="lib-group-title">Courses</h3>
+        </div>
+        <div class="lib-grid lib-grid-8">
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-alternate-picking-mastery.jpg" alt="Alternate Picking Mastery" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">Alternate Picking Mastery</div><div class="lib-card-sub">3 Notes Per String</div></div></article>
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-playing-what-you-hear.jpg" alt="Playing What You Hear" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">Playing What You Hear</div><div class="lib-card-sub">Ear Training &amp; Fretboard</div></div></article>
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-pentatonic-picking-power.jpg" alt="Pentatonic Picking Power" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">Pentatonic Picking Power</div><div class="lib-card-sub">Technique · Ear · Fretboard</div></div></article>
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-quick-licks.jpg" alt="Quick Licks" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">Quick Licks</div><div class="lib-card-sub">Level up technique &amp; fretboard</div></div></article>
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-single-string-speed-system.jpg" alt="The Single-String Speed System" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">The Single-String Speed System</div><div class="lib-card-sub">Speed · Control · Mastery</div></div></article>
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-the-daily-ten.jpg" alt="The Daily Ten" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">The Daily Ten</div><div class="lib-card-sub">150 workouts to mastery</div></div></article>
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-10-minute-workouts.jpg" alt="10 Minute Workouts Vol 1 &amp; 2" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">10 Minute Workouts Vol 1 &amp; 2</div><div class="lib-card-sub">28 bite-sized workouts</div></div></article>
+          <article class="lib-card"><img class="lib-card-img" src="../pro/assets/boxart-3nps-speed-system.jpg" alt="The 3NPS Speed System" loading="lazy" /><div class="lib-card-body"><div class="lib-card-title">The 3NPS Speed System</div><div class="lib-card-sub">Technique · Consistency · Velocity</div></div></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       PRICING
+       ============================================================ -->
+  <style>
+    .sample-video { position:relative; width:100%; max-width:880px; margin:0 auto; aspect-ratio:16/9; border-radius:14px; overflow:hidden; border:1px solid var(--border); background:#000; }
+    .sample-video iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+  </style>
+
+
+  <!-- ============================================================
+       SAMPLE LESSON  (free taste of the teaching)
+       ============================================================ -->
+  <section class="section-card" id="sample-lesson">
+    <div class="wrap">
+      <div class="features-header reveal">
+        <span class="section-tag">See For Yourself</span>
+        <h2>A Real Lesson.<br>Not A Sales Pitch.</h2>
+        <p class="section-body" style="margin-top:18px;">This is one of my actual lessons, start to finish. The same way I teach everything inside Pro. Watch a few minutes and see if the approach clicks for you.</p>
+      </div>
+      <div class="sample-video reveal">
+        <iframe src="https://www.youtube.com/embed/fkafeY60egQ" title="How to find your picking motion" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <div class="reveal" style="text-align:center; margin-top:44px;">
+        <a class="btn btn-purple" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">Join The Practice Room Free</a>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="section-card pricing-wrap" id="pricing">
+    <div class="pricing-header reveal">
+      <span class="section-tag">Membership</span>
+      <h2>Simple Pricing.<br>Start Free.</h2>
+      <p class="section-body" style="margin-top:18px;">Joining The Practice Room is free. Premium opens everything below.</p>
+      <p class="section-body" style="margin-top:14px;">For perspective: a single private lesson costs about as much as a month in here, and it buys you 30 minutes. Pro gives you a practice plan built for you, clip feedback from me any day of the week, all 18 courses, and the Practice Lab, all month long.</p>
+    </div>
+
+    <div class="includes-card reveal">
+      <div class="includes-card-tag">Everything Premium Includes</div>
+      <ul class="includes-list">
+        <li><strong>An assessment and a personal practice plan.</strong> You start with a baseline, and your plan tells you what to run and when.</li>
+        <li><strong>18 courses.</strong> Four 8-Week Intensives, six Deep Dives, eight Full Courses.</li>
+        <li><strong>8 Practice Labs + Practice Log.</strong> Focused modes for the work that matters, plus a log for anything else you practice. Every session counts.</li>
+        <li><strong>Day-to-day access to me.</strong> Post a clip or a question any day. I respond with text or a quick video, whichever solves it fastest.</li>
+        <li><strong>Weekly live with me.</strong> Part hangout, part playing through stuff together, part Q&amp;A. On camera.</li>
+        <li><strong>Every future intensive.</strong> All new 8-week programs included as they launch.</li>
       </ul>
-      <p class="room-stat">1,463 daily practice check-ins logged in the last two intensives</p>
+    </div>
+
+    <div class="price-grid reveal">
+      <div class="price-card">
+        <div class="price-period">Monthly</div>
+        <div class="price-amount"><sup>$</sup>99</div>
+        <div class="price-note">per month, cancel anytime</div>
+        <a class="price-btn price-btn-ghost" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">Go Premium Monthly</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">Best Value</div>
+        <div class="price-period">Annual</div>
+        <div class="price-amount price-glow"><sup>$</sup>599</div>
+        <div class="price-note">per year. <span class="price-savings">Save $589.</span></div>
+        <a class="price-btn price-btn-purple" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">Go Premium Annual</a>
+      </div>
+    </div>
+    <div class="quote-strip reveal">
+      <span class="testi-mark">&ldquo;</span>
+      <p class="testi-text">The intensive course format forces me to spend more time, and daily time, with the guitar. And that, in itself, has made it worth the price.</p>
+      <div class="testi-author">Jonathan · 8-Week Legato Intensive</div>
     </div>
   </section>
 
 
   <!-- ============================================================
-       THE TRUTH — the enemy, then the philosophy
+       ABOUT  (Origin story)
        ============================================================ -->
-  <section class="truth ov-70">
-    <div class="wrap rv">
-      <span class="tag">The Truth</span>
-      <p class="truth-big">Guitar education has grown endless. <strong>There is no shortcut.</strong> No new tutorial replaces focused practice, honest feedback, and time.</p>
-      <div class="truth-split narrow">
-        <div class="truth-col">
-          <span class="tag">Our Philosophy</span>
-          <p>Practice with structure you can sustain, on material worth the time, and measure the result. If your playing isn't changing, your practice changes.</p>
-        </div>
-        <div class="truth-col">
-          <span class="tag">Who This Is For</span>
-          <p>Intermediate players and up, from every walk of life, done with tutorial hopping. If you're a beginner, build the basics first. This room will be here when a pentatonic scale and tab feel comfortable.</p>
+  <section class="section-bg">
+    <div class="wrap">
+      <div class="about-wrap">
+        <aside class="about-portrait reveal">
+          <span class="eyebrow">About Me</span>
+          <h3 style="color:var(--white); font-size:1.9rem; margin-bottom:14px;">Jon Bjork</h3>
+          <p style="color:var(--off); font-size:1.05rem; line-height:1.55; margin:0; font-weight:300;">Guitarist, coach, and composer. Building the practice system I wish I'd had at 18.</p>
+          <div class="about-stats" id="about-stats">
+            <div class="stat-item">
+              <div class="a-stat-num" data-count="25" data-suffix="+">0+</div>
+              <div class="a-stat-lbl">Years Teaching</div>
+            </div>
+            <div class="stat-item">
+              <div class="a-stat-num" id="stat-git">GIT</div>
+              <div class="a-stat-lbl">Graduate, LA</div>
+            </div>
+            <div class="stat-item">
+              <div class="a-stat-num" data-count="700" data-suffix="+">0+</div>
+              <div class="a-stat-lbl">Tracks Composed</div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="reveal">
+          <span class="section-tag">About Me</span>
+          <h2>Jon Bjork</h2>
+          <div class="about-bio" style="margin-top: 18px;">
+            <p><strong>Practice Room Pro is the membership I wished I'd had when I was stuck.</strong></p>
+            <p>I've been playing guitar since 1992 and studied at the Guitar Institute of Technology in Los Angeles, learning from musicians like Brett Garsed and T.J. Helmerich.</p>
+            <p>I started teaching full-time in 2001 and have worked with students at every level ever since. I've also spent years composing orchestral music, nearly 700 tracks for Epidemic Sound, heard on channels like MrBeast and Hot Ones.</p>
+            <p>My goal is simple: make the path to better playing as clear and direct as possible for every single member.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -590,147 +1371,56 @@
 
 
   <!-- ============================================================
-       THE LIBRARY — all 18 course box arts, 4-up carousel
+       FAQ
        ============================================================ -->
-  <section class="ov-86">
-    <div class="wrap rv" style="text-align:center;">
-      <span class="tag">The Library</span>
-      <h2>All 18 Courses. Included.</h2>
-      <p class="lead narrow">Intensives, Deep Dives, and full courses, every one with daily routines built in. Pro members get the whole shelf.</p>
-      <div class="slider" data-per="4">
-        <div class="s-track" aria-label="Course library" tabindex="0">
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-alt-picking-intensive.jpg" alt="8-Week Alternate Picking Intensive" loading="lazy" /><div class="box-title">8-Week Alternate Picking Intensive</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-alt-picking-next-step.jpg" alt="8-Week Alternate Picking Intensive: The Next Step" loading="lazy" /><div class="box-title">Alternate Picking: The Next Step</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-legato-intensive.jpg" alt="8-Week Legato Intensive" loading="lazy" /><div class="box-title">8-Week Legato Intensive</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-sweep-intensive.jpg" alt="8-Week Sweep Picking Intensive" loading="lazy" /><div class="box-title">8-Week Sweep Picking Intensive</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-alt-picking-deep-dive.jpg" alt="Alternate Picking Deep Dive" loading="lazy" /><div class="box-title">Alternate Picking Deep Dive</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-legato-deep-dive.jpg" alt="Legato Deep Dive" loading="lazy" /><div class="box-title">Legato Deep Dive</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-sweep-deep-dive.jpg" alt="Sweep Picking Deep Dive" loading="lazy" /><div class="box-title">Sweep Picking Deep Dive</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-hybrid-deep-dive.jpg" alt="Hybrid Picking Deep Dive" loading="lazy" /><div class="box-title">Hybrid Picking Deep Dive</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-tapping-deep-dive.jpg" alt="Tapping Deep Dive" loading="lazy" /><div class="box-title">Tapping Deep Dive</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-timing-deep-dive.jpg" alt="Timing Deep Dive" loading="lazy" /><div class="box-title">Timing Deep Dive</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-alternate-picking-mastery.jpg" alt="Alternate Picking Mastery" loading="lazy" /><div class="box-title">Alternate Picking Mastery</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-playing-what-you-hear.jpg" alt="Playing What You Hear" loading="lazy" /><div class="box-title">Playing What You Hear</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-pentatonic-picking-power.jpg" alt="Pentatonic Picking Power" loading="lazy" /><div class="box-title">Pentatonic Picking Power</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-quick-licks.jpg" alt="Quick Licks" loading="lazy" /><div class="box-title">Quick Licks</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-single-string-speed-system.jpg" alt="The Single-String Speed System" loading="lazy" /><div class="box-title">The Single-String Speed System</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-the-daily-ten.jpg" alt="The Daily Ten" loading="lazy" /><div class="box-title">The Daily Ten</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-10-minute-workouts.jpg" alt="10 Minute Workouts Vol 1 and 2" loading="lazy" /><div class="box-title">10 Minute Workouts Vol 1 &amp; 2</div></div></div>
-          <div class="s-item"><div class="box-card"><img src="../pro/assets/boxart-3nps-speed-system.jpg" alt="The 3NPS Speed System" loading="lazy" /><div class="box-title">The 3NPS Speed System</div></div></div>
-        </div>
-        <div class="s-arrows">
-          <button class="s-btn" type="button" data-dir="-1" aria-label="Previous courses">&larr;</button>
-          <button class="s-btn" type="button" data-dir="1" aria-label="Next courses">&rarr;</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       A GROWING NETWORK — member world map, dark mode
-       ============================================================ -->
-  <section class="ov-80">
-    <div class="wrap rv" style="text-align:center;">
-      <span class="tag">A Growing Network</span>
-      <h2>Players In Every Time Zone.</h2>
-      <p class="lead narrow">From Stockholm to Sydney, someone in the room is always practicing.</p>
-      <div class="map-frame">
-        <img src="world-map.svg" alt="World map showing Practice Room members across North America, South America, Europe, Africa, Asia, and Australia" loading="lazy" />
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       TWO PATHS — membership vs coaching
-       ============================================================ -->
-  <section class="ov-88">
-    <div class="wrap rv">
-      <div style="text-align:center;" class="narrow">
-        <span class="tag">Two Paths</span>
-        <h2>Choose How You Work.</h2>
-      </div>
-      <div class="path-grid">
-
-        <div class="pathc featured">
-          <span class="pathc-kicker">A Room Of Players Building Together</span>
-          <h3>The Practice Room Pro</h3>
-          <details>
-            <summary>What You Get</summary>
-            <ul>
-              <li>An assessment and a personal practice plan</li>
-              <li>All 18 courses with daily routines built in</li>
-              <li>The Practice Lab: eight focused practice modes</li>
-              <li>Weekly live session, clip feedback any day</li>
-              <li>Every future 8-week intensive included</li>
-            </ul>
-          </details>
-          <details>
-            <summary>Who It Is For</summary>
-            <p>Players who want the full program: the plan, the accountability, and me checking the work. If you practice alone and it isn't working, this is the other way.</p>
-          </details>
-          <a class="btn" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">
-            Join The Practice Room
-            <span class="btn-sub">$99 / month &middot; cancel anytime</span>
-          </a>
-          <p class="pathc-price">About the price of one private lesson</p>
-        </div>
-
-        <div class="pathc">
-          <span class="pathc-kicker">The Most Personal Way To Work With Me</span>
-          <h3>1-on-1 Coaching</h3>
-          <details>
-            <summary>What You Get</summary>
-            <ul>
-              <li>Weekly private lessons with me for 12 weeks</li>
-              <li>A custom practice plan built around you</li>
-              <li>Unlimited WhatsApp support between sessions</li>
-              <li>Full access to everything in Pro while we work</li>
-            </ul>
-          </details>
-          <details>
-            <summary>Who It Is For</summary>
-            <p>Players who want the fastest path and me in their corner every week. Spots are limited and start with a free consultation.</p>
-          </details>
-          <a class="btn" style="background:transparent;border:1.5px solid var(--line-2);" href="https://www.jonbjorkmusic.com/coaching?ref=test">
-            Learn About Coaching
-          </a>
-          <p class="pathc-price">12 weeks &middot; from $1,200</p>
-        </div>
-
-      </div>
-      <p style="text-align:center;margin-top:40px;" class="lead">Unsure which fits? <a href="https://www.jonbjorkmusic.com/contact" style="color:var(--purple-lt);">Ask me directly.</a></p>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       FAQ — trust questions
-       ============================================================ -->
-  <section class="ov-86">
-    <div class="wrap narrow faq rv">
-      <div style="text-align:center;">
-        <span class="tag">Common Questions</span>
+  <section class="section-card">
+    <div class="wrap">
+      <div class="faq-header reveal">
+        <span class="section-tag">Common Questions</span>
         <h2>Before You Join.</h2>
       </div>
-      <div style="margin-top:48px;">
-        <details>
-          <summary>Am I locked into anything?</summary>
-          <p>No. Cancel any time from your Skool profile. And canceling doesn't kick you out: you stay in the community as a free member.</p>
-        </details>
-        <details>
-          <summary>Do I get personal replies from Jon?</summary>
-          <p>Yes. Post a clip or a question any day and I respond with text or a quick video, whichever solves it fastest. The weekly live is on top of that, not instead of it.</p>
-        </details>
-        <details>
-          <summary>Who is actually inside?</summary>
-          <p>Committed intermediate and advanced players. Some are working through their first intensive, some have played for decades. What everyone shares is showing up and doing the work.</p>
-        </details>
-        <details>
-          <summary>What happens when I join?</summary>
-          <p>You start with an assessment: a short questionnaire plus a couple of clips of your playing. From that I build your practice plan. Then the rhythm is simple: run your routine, check in, and show up when you can.</p>
-        </details>
+      <div class="faq-list reveal">
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What happens when I go Premium?</button>
+          <div class="faq-a"><p>You start with an assessment: a short questionnaire plus a couple of clips of your playing. From that I build your practice plan, pointing you at the intensives, courses, and Labs that match where you are. Then the rhythm is simple: run your routine, post clips when you want my eyes on something, and join the weekly live when you can. At set points we record new clips and compare them against your baseline.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What do I get as a free member?</button>
+          <div class="faq-a"><p>The community itself, free, no card required. You get the 30-day Alternate Picking Deep Dive with a daily routine, plus a front-row seat to what happens inside: the intensives in progress, the accountability threads, and the wins as they land. The weekly lives, the session archive, and my direct feedback are Premium, and upgrading is one tap away from inside.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Can I cancel anytime? Do you offer refunds?</button>
+          <div class="faq-a"><p>Yes, you can cancel any time from inside your Skool profile. No refunds on started months. And canceling doesn't kick you out: you stay in the community as a free member.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">I'm a complete beginner. Is this for me?</button>
+          <div class="faq-a"><p>Not yet. If you can play a pentatonic scale and read tab, you're ready. If you're earlier than that, build the basics first and come back when you can.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">I've been playing for years. Is this too basic for me?</button>
+          <div class="faq-a"><p>No. I've been playing for over 30 years and I still use my own courses in my daily practice. The materials and the Practice Lab are built to give you something real to dig into at whatever level you're at.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">What if I can't make the weekly live?</button>
+          <div class="faq-a"><p>The live is recorded and posted in the classroom right after, so you can watch back any time. And the live isn't actually the main way to get questions answered. You can post a question or upload a clip in the community any day, and I respond directly with text or video. The live is more of a hangout where we talk practice, music, and whatever you bring in.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">Is there a free way to see how you teach?</button>
+          <div class="faq-a"><p>Yes. Start with the free 30-day <a href="https://www.jonbjorkmusic.com/alternate-picking/">Alternate Picking Deep Dive</a>, browse the <a href="https://www.jonbjorkmusic.com/licks/">Lick Library</a>, or run the <a href="https://www.jonbjorkmusic.com/speedbuilder/">10-Minute Speed Builder</a>. And the biggest one: The Practice Room itself is free to join, so you can watch how we work from the inside before spending anything.</p></div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">If I cancel, do I lose access to the courses?</button>
+          <div class="faq-a"><p>Yes. Access to the courses and the Practice Lab is tied to your subscription. As long as you're a Pro member, all of it is yours. If you cancel, that access ends. The flip side is there are no individual course purchases stacking up. One subscription opens all of it.</p></div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -739,26 +1429,37 @@
   <!-- ============================================================
        FINAL CTA
        ============================================================ -->
-  <section class="final ov-74">
-    <div class="final-glow" aria-hidden="true"></div>
-    <div class="rv">
-      <span class="tag">The Practice Room Pro</span>
-      <h2>Practice Like It Counts.</h2>
-      <p class="lead">Free to join and look around. $99/month for the full program. Cancel anytime.</p>
-      <a class="btn" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">
-        Join The Practice Room
-        <span class="btn-sub">$99 / month &middot; cancel anytime</span>
-      </a>
+  <section class="cta-band">
+    <div class="cta-band-inner">
+      <h2>Join Pro.<br><span class="accent">Go All In.</span></h2>
+      <p>Free to join. Premium from $99/month or $599/year. Cancel anytime.</p>
+      <div class="cta-row">
+        <a class="btn btn-purple" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">Join The Practice Room Free</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       NOT READY YET
+       ============================================================ -->
+  <section class="section-bg">
+    <div class="wrap" style="max-width:720px; text-align:center; padding-top:72px; padding-bottom:88px;">
+      <span class="section-tag">Not Ready Yet?</span>
+      <h2 style="margin-top:14px;">See How I Teach First.</h2>
+      <p class="section-body" style="margin-top:18px;">Try the free 10-Minute Speed Builder. It's a daily workout that tightens the sync between your picking hand and your fretting hand, and it's built to come back to every day. If my way of teaching clicks with you, Pro will be here when you're ready.</p>
+      <a class="btn btn-purple btn-gleam" style="margin-top:28px;" href="https://www.jonbjorkmusic.com/speedbuilder?ref=start">Start the Free Speed Builder</a>
     </div>
   </section>
 
 </main>
 
 <footer>
-  <div>
+  <div class="footer-row">
     <a href="https://www.jonbjorkmusic.com/">Home</a>
-    <a href="https://www.jonbjorkmusic.com/pro?ref=test">Practice Room Pro</a>
-    <a href="https://www.jonbjorkmusic.com/start?ref=test">Start Here</a>
+    <a href="https://www.jonbjorkmusic.com/coaching?ref=footer">1-on-1</a>
+    <a href="https://www.jonbjorkmusic.com/courses">Courses</a>
+    <a href="https://www.jonbjorkmusic.com/alternate-picking/">Free Lessons</a>
     <a href="https://www.jonbjorkmusic.com/contact">Contact</a>
     <a href="https://www.jonbjorkmusic.com/legal">Legal</a>
   </div>
@@ -766,46 +1467,145 @@
 </footer>
 
 <script>
-  // ---------- Carousels: arrows scroll the snap track by one item ----------
-  document.querySelectorAll('.slider').forEach(function (slider) {
-    var track = slider.querySelector('.s-track');
-    slider.querySelectorAll('.s-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var item = track.querySelector('.s-item');
-        if (!item) return;
-        var gap = parseFloat(getComputedStyle(track).columnGap) || 24;
-        var step = item.getBoundingClientRect().width + gap;
-        track.scrollBy({ left: step * Number(btn.dataset.dir), behavior: 'smooth' });
-      });
+(function() {
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- Mobile nav toggle ----
+  var toggle = document.getElementById('navToggle');
+  var menu = document.getElementById('mobileMenu');
+  if (toggle && menu) {
+    function closeMenu() {
+      toggle.classList.remove('is-open');
+      menu.classList.remove('is-open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
+    }
+    function openMenu() {
+      toggle.classList.add('is-open');
+      menu.classList.add('is-open');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Close menu');
+    }
+    toggle.addEventListener('click', function() {
+      if (menu.classList.contains('is-open')) { closeMenu(); } else { openMenu(); }
     });
-    // Keyboard support when the track itself is focused
-    track.addEventListener('keydown', function (e) {
-      if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
-      e.preventDefault();
-      var item = track.querySelector('.s-item');
-      var gap = parseFloat(getComputedStyle(track).columnGap) || 24;
-      var step = item.getBoundingClientRect().width + gap;
-      track.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * step, behavior: 'smooth' });
+    menu.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 900 && menu.classList.contains('is-open')) closeMenu();
+    });
+  }
+
+  // ---- Mockup view cycling ----
+  var stage = document.getElementById('mock-stage');
+  var label = document.getElementById('mock-label-text');
+  if (stage && label) {
+    var views = stage.querySelectorAll('.mock-view');
+    var i = 0;
+    if (!prefersReduced && views.length > 1) {
+      setInterval(function() {
+        views[i].classList.remove('active');
+        i = (i + 1) % views.length;
+        views[i].classList.add('active');
+        label.textContent = views[i].getAttribute('data-view');
+      }, 3500);
+    }
+  }
+
+  // ---- FAQ accordion ----
+  document.querySelectorAll('.faq-q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
     });
   });
 
-  // ---------- Reveal on scroll ----------
-  (function () {
-    var els = document.querySelectorAll('.rv');
-    if (!('IntersectionObserver' in window)) {
-      els.forEach(function (el) { el.classList.add('on'); });
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('on');
-          io.unobserve(entry.target);
+  // ---- Reveal on scroll ----
+  var io = null;
+  if ('IntersectionObserver' in window) {
+    io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          if (e.target.classList.contains('reveal')) io.unobserve(e.target);
         }
       });
-    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.08 });
-    els.forEach(function (el) { io.observe(el); });
-  })();
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+    document.querySelectorAll('.feat').forEach(function(el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal, .feat').forEach(function(el) { el.classList.add('in'); });
+  }
+
+  // ---- Auto-light feature cards on scroll for every .feat-grid ----
+  // On hover-capable devices (desktop): pulse, then fade — hover takes over after.
+  // On touch devices (mobile): stay lit — no hover state, so the border holds.
+  var isTouch = window.matchMedia && window.matchMedia('(hover: none)').matches;
+  var litGrids = document.querySelectorAll('.feat-grid');
+  if (litGrids.length && 'IntersectionObserver' in window) {
+    var lio = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (!e.isIntersecting) return;
+        var feats = e.target.querySelectorAll('.feat');
+        feats.forEach(function(f, idx) {
+          setTimeout(function() { f.classList.add('lit'); }, 400 + idx * 180);
+          if (!isTouch) {
+            setTimeout(function() { f.classList.remove('lit'); }, 400 + idx * 180 + 1400);
+          }
+        });
+        lio.unobserve(e.target);
+      });
+    }, { threshold: 0.18 });
+    litGrids.forEach(function(g) { lio.observe(g); });
+  }
+
+  // ---- Price glow ----
+  var glow = document.querySelector('.price-glow');
+  if (glow && 'IntersectionObserver' in window) {
+    var gio = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          glow.classList.add('glowing');
+          gio.unobserve(glow);
+        }
+      });
+    }, { threshold: 0.6 });
+    gio.observe(glow);
+  }
+
+  // ---- About stats counter ----
+  function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+  function animateCount(el, target, suffix, duration) {
+    var start = performance.now();
+    function step(now) {
+      var t = Math.min(1, (now - start) / duration);
+      var val = Math.round(easeOut(t) * target);
+      el.textContent = val + (suffix || '');
+      if (t < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var statsContainer = document.getElementById('about-stats');
+  if (statsContainer && 'IntersectionObserver' in window) {
+    var sio = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          statsContainer.classList.add('counted');
+          if (!prefersReduced) {
+            statsContainer.querySelectorAll('[data-count]').forEach(function(el) {
+              var target = parseInt(el.getAttribute('data-count'), 10);
+              var suffix = el.getAttribute('data-suffix') || '';
+              animateCount(el, target, suffix, 1400);
+            });
+          }
+          sio.unobserve(statsContainer);
+        }
+      });
+    }, { threshold: 0.3 });
+    sio.observe(statsContainer);
+  } else if (statsContainer) {
+    statsContainer.classList.add('counted');
+  }
+})();
 </script>
 
 </body>
