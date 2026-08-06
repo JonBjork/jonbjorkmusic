@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Practice Room Pro | Jon Bjork</title>
+<meta name="description" content="Where guitarists come to practice, not to watch. A room of committed players with a plan, weekly sessions, and progress you can measure. $99/month, cancel anytime." />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZW8ZW4P5D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZZW8ZW4P5D');
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet" />
+
+<style>
+  /* =============================================================================
+     /test — Practice Room Pro, "collective"-style mockup (Aug 2026)
+     Organization modeled on a reference page Jon likes:
+     identity hero → voices → system → the room → the truth → who it's for
+     → two paths → trust FAQ. Jon's style template throughout.
+     ============================================================================= */
+  :root {
+    color-scheme: dark;
+    --bg:            #0d0d0d;
+    --bg-2:          #131313;
+    --card:          #181818;
+    --card-2:        #1f1f1f;
+    --line:          #2a2a2a;
+    --line-2:        #3a3a3a;
+    --navy:          #1a1040;
+    --navy-deep:     #0f0820;
+    --purple:        #7c3aed;
+    --purple-lt:     #9d5ff5;
+    --purple-pop:    #c084fc;
+    --accent-border: #4a3a9a;
+    --white:         #ffffff;
+    --off:           #e8e8e8;
+    --muted:         #aaaaaa;
+    --dim:           #666666;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+    margin: 0;
+    font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--off);
+    background: var(--bg);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  h1, h2, h3 {
+    font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700; color: var(--white);
+    line-height: 1.05; margin: 0 0 18px;
+  }
+  h1 { font-size: clamp(3rem, 7.5vw, 5.8rem); letter-spacing: -0.01em; }
+  h2 { font-size: clamp(2.2rem, 4.6vw, 3.4rem); }
+  p { margin: 0 0 16px; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  .narrow { max-width: 780px; margin: 0 auto; }
+  section { padding: 110px 0; }
+
+  .tag {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.95rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--purple-lt); display: inline-block; margin-bottom: 24px;
+  }
+  .lead { color: var(--muted); font-size: 1.35rem; line-height: 1.7; font-weight: 300; }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 3px;
+    min-height: 62px; padding: 16px 44px;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 1.05rem; letter-spacing: 0.16em; text-transform: uppercase;
+    text-decoration: none; border-radius: 10px;
+    background: var(--purple); color: var(--white);
+    transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+  }
+  .btn:hover { background: var(--purple-lt); transform: scale(1.02); }
+  .btn .btn-sub {
+    font-weight: 400; font-size: 0.72rem; letter-spacing: 0.22em;
+    color: rgba(255,255,255,0.75);
+  }
+  .link-quiet {
+    font-family: 'Oswald', sans-serif; font-size: 0.95rem;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--muted); text-decoration: none;
+    border-bottom: 1px solid var(--line-2); padding-bottom: 3px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .link-quiet:hover { color: var(--white); border-color: var(--purple-lt); }
+
+  /* ---------- Minimal nav (reference-style restraint) ---------- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 26px 44px;
+    background: linear-gradient(180deg, rgba(13,13,13,0.85), rgba(13,13,13,0));
+  }
+  .nav-name {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.35rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--white); text-decoration: none;
+  }
+  .nav-name span { color: var(--purple-lt); }
+  .nav-cta {
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 0.9rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--off); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-cta:hover { color: var(--purple-lt); }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    min-height: 92vh;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; position: relative; overflow: hidden;
+    padding: 140px 24px 90px;
+    background:
+      radial-gradient(ellipse 900px 560px at 50% 18%, rgba(124,58,237,0.20), transparent 70%),
+      linear-gradient(180deg, #100a20 0%, var(--bg) 78%);
+  }
+  .hero::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 52px 52px;
+    mask-image: radial-gradient(ellipse 1100px 700px at 50% 30%, black 25%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse 1100px 700px at 50% 30%, black 25%, transparent 80%);
+  }
+  .hero > * { position: relative; z-index: 1; }
+  .hero-proof {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.9rem; letter-spacing: 0.26em; text-transform: uppercase;
+    color: var(--muted); margin: 26px 0 40px;
+  }
+  .hero-sub { max-width: 640px; color: var(--muted); font-size: 1.3rem; font-weight: 300; line-height: 1.7; margin: 0 auto; }
+  .hero-alt { margin-top: 22px; }
+
+  /* ---------- VOICES ---------- */
+  .voices { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .voice-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 52px; }
+  .voice {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 38px 32px;
+  }
+  .voice-mark { font-family: 'Oswald', sans-serif; font-size: 4rem; line-height: 0.5; color: var(--purple); opacity: 0.45; display: block; margin-bottom: 18px; }
+  .voice p { color: var(--off); font-weight: 300; font-size: 1.08rem; line-height: 1.65; margin-bottom: 20px; }
+  .voice-who {
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--purple-lt);
+  }
+
+  /* ---------- SYSTEM ---------- */
+  .sys-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; margin-top: 52px; }
+  .sys {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 40px 36px; position: relative; overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s var(--ease);
+  }
+  .sys:hover { border-color: var(--accent-border); transform: translateY(-3px); }
+  .sys-num { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 2rem; color: var(--line-2); margin-bottom: 14px; }
+  .sys:hover .sys-num { color: var(--purple-lt); }
+  .sys h3 { font-size: 1.4rem; margin-bottom: 10px; }
+  .sys p { color: var(--muted); font-weight: 300; font-size: 1.1rem; margin: 0; }
+
+  /* ---------- THE ROOM ---------- */
+  .room { background: linear-gradient(135deg, var(--navy-deep), var(--navy)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .room-list { list-style: none; margin: 44px 0 0; padding: 0; max-width: 640px; margin-left: auto; margin-right: auto; }
+  .room-list li {
+    display: flex; align-items: baseline; gap: 16px;
+    padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.09);
+    font-size: 1.22rem; font-weight: 300; color: var(--off);
+  }
+  .room-list li::before { content: '·'; color: var(--purple-pop); font-weight: 700; font-size: 1.6rem; line-height: 1; }
+  .room-stat {
+    margin-top: 44px; text-align: center;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 0.95rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--purple-pop);
+  }
+
+  /* ---------- TRUTH ---------- */
+  .truth { text-align: center; }
+  .truth-big {
+    font-family: 'Oswald', sans-serif; font-weight: 300;
+    font-size: clamp(1.6rem, 3.4vw, 2.4rem); line-height: 1.35;
+    color: var(--off); max-width: 760px; margin: 0 auto;
+  }
+  .truth-big strong { font-weight: 600; color: var(--white); }
+  .truth-split { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 72px; text-align: left; }
+  .truth-col .tag { margin-bottom: 14px; }
+  .truth-col p { color: var(--muted); font-weight: 300; font-size: 1.2rem; margin: 0; }
+
+  /* ---------- PATHS ---------- */
+  .paths-wrap { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 56px; align-items: start; }
+  .pathc {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    padding: 46px 40px;
+  }
+  .pathc.featured { border-color: var(--accent-border); box-shadow: 0 18px 48px rgba(124,58,237,0.14); }
+  .pathc-kicker {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.85rem; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--dim); display: block; margin-bottom: 10px;
+  }
+  .pathc h3 { font-size: 1.8rem; margin-bottom: 22px; }
+  .pathc details {
+    border-top: 1px solid var(--line);
+  }
+  .pathc details:last-of-type { border-bottom: 1px solid var(--line); margin-bottom: 28px; }
+  .pathc summary {
+    cursor: pointer; list-style: none;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 18px 0;
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 0.95rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--off);
+  }
+  .pathc summary::-webkit-details-marker { display: none; }
+  .pathc summary::after { content: '+'; color: var(--purple-lt); font-size: 1.5rem; font-weight: 400; transition: transform 0.25s; }
+  .pathc details[open] summary::after { transform: rotate(45deg); }
+  .pathc details p, .pathc details ul { color: var(--muted); font-weight: 300; font-size: 1.05rem; margin: 0 0 18px; }
+  .pathc details ul { padding-left: 18px; }
+  .pathc details li { margin-bottom: 6px; }
+  .pathc-price {
+    font-family: 'Oswald', sans-serif; font-size: 0.85rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--dim); margin-top: 14px;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq details:first-of-type { border-top: 1px solid var(--line); }
+  .faq summary {
+    cursor: pointer; list-style: none;
+    display: flex; justify-content: space-between; align-items: center; gap: 20px;
+    padding: 26px 4px;
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 1.05rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--white);
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: '+'; color: var(--purple-lt); font-size: 1.7rem; font-weight: 400; flex-shrink: 0; transition: transform 0.25s; }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq details p { color: var(--muted); font-weight: 300; font-size: 1.15rem; padding: 0 4px 26px; margin: 0; }
+
+  /* ---------- FINAL ---------- */
+  .final { text-align: center; padding: 130px 24px; background:
+      radial-gradient(ellipse 700px 420px at 50% 60%, rgba(124,58,237,0.16), transparent 70%), var(--bg); }
+  .final .lead { max-width: 560px; margin: 0 auto 40px; }
+
+  footer {
+    background: #0a0a0a; border-top: 1px solid var(--line);
+    color: var(--dim); text-align: center; padding: 44px 24px;
+    font-size: 0.95rem;
+  }
+  footer a { color: var(--muted); text-decoration: none; margin: 0 14px; }
+  footer a:hover { color: var(--purple-lt); }
+  .footer-copy { margin-top: 16px; font-size: 0.85rem; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px) {
+    section { padding: 84px 0; }
+    .voice-grid { grid-template-columns: 1fr; }
+    .sys-grid { grid-template-columns: 1fr; }
+    .truth-split { grid-template-columns: 1fr; gap: 36px; }
+    .path-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 520px) {
+    .wrap { padding: 0 20px; }
+    nav { padding: 20px 20px; }
+    .hero { padding: 120px 18px 70px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.001s !important; }
+  }
+</style>
+</head>
+
+<body>
+
+<nav>
+  <a class="nav-name" href="https://www.jonbjorkmusic.com/">Jon Bjork <span>&middot;</span> The Practice Room</a>
+  <a class="nav-cta" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">Join</a>
+</nav>
+
+<main>
+
+  <!-- ============================================================
+       HERO — identity first, price on the CTA, one secondary path
+       ============================================================ -->
+  <header class="hero">
+    <span class="tag">The Practice Room Pro</span>
+    <h1>Where Guitarists Come<br>To Practice, Not To Watch.</h1>
+    <p class="hero-sub">A room of committed players with a plan, weekly sessions, feedback on their actual playing, and progress they can measure.</p>
+    <!-- TODO(Jon): swap in the real Skool member count, e.g. "140+ committed players inside" -->
+    <p class="hero-proof">Committed Players Inside &middot; Daily Check-Ins &middot; Weekly Lives</p>
+    <a class="btn" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">
+      Go Premium
+      <span class="btn-sub">$99 / month &middot; cancel anytime</span>
+    </a>
+    <p class="hero-alt"><a class="link-quiet" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">or join free and watch from inside &rarr;</a></p>
+  </header>
+
+
+  <!-- ============================================================
+       VOICES — straight after the hero, like the reference
+       ============================================================ -->
+  <section class="voices">
+    <div class="wrap">
+      <div style="text-align:center;">
+        <span class="tag">What The Members Say</span>
+        <h2>From Inside The Room.</h2>
+      </div>
+      <div class="voice-grid">
+        <div class="voice">
+          <span class="voice-mark">&ldquo;</span>
+          <p>Working systematically on single- and multiple-string picking solidified my picking mechanics more than expected. I can now consistently pick 10-15 bpm faster across the strings than before, without pushing it and having my technique fall apart.</p>
+          <div class="voice-who">Acke &middot; Alternate Picking Intensive</div>
+        </div>
+        <div class="voice">
+          <span class="voice-mark">&ldquo;</span>
+          <p>This is insane effort and I love it. I would never be able to do this much by myself. Thank you all for the inspiration and accountability, it's such a powerful force.</p>
+          <div class="voice-who">Dragisa &middot; Legato Intensive</div>
+        </div>
+        <div class="voice">
+          <span class="voice-mark">&ldquo;</span>
+          <p>I'm at week 5, completely consistent, haven't missed a day. I find the most benefit being the consistency, keeping the schedule, and keeping the slow tempo.</p>
+          <div class="voice-who">Chris &middot; Alternate Picking Intensive</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       THE SYSTEM — the four parts, program framing kept
+       ============================================================ -->
+  <section>
+    <div class="wrap">
+      <div style="text-align:center;" class="narrow">
+        <span class="tag">The System</span>
+        <h2>A Complete System For<br>Your Hands, Ears, And Practice.</h2>
+        <p class="lead">You're assessed when you join, you get a plan built for you, and every part of your playing gets worked the same way: one clear target at a time, long enough for the skill to change.</p>
+      </div>
+      <div class="sys-grid">
+        <div class="sys">
+          <div class="sys-num">01</div>
+          <h3>Technique That Holds Up At Tempo</h3>
+          <p>Alternate picking, legato, sweep. Built with daily routines and tempo targets that don't let slop survive.</p>
+        </div>
+        <div class="sys">
+          <div class="sys-num">02</div>
+          <h3>Timing You Can Trust</h3>
+          <p>Subdivisions that feel different instead of being math. Playing that sits where you put it.</p>
+        </div>
+        <div class="sys">
+          <div class="sys-num">03</div>
+          <h3>An Ear Connected To The Fretboard</h3>
+          <p>Hear a line, find it, play it. The link between your ear and your hands, trained like any other skill.</p>
+        </div>
+        <div class="sys">
+          <div class="sys-num">04</div>
+          <h3>A Structure That Makes It Stick</h3>
+          <p>Your plan, the Practice Lab, and check-ins that keep the work happening. Progress measured with tempo benchmarks and before/after clips.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       THE ROOM — peek inside the community
+       ============================================================ -->
+  <section class="room">
+    <div class="wrap" style="text-align:center;">
+      <span class="tag">The Room</span>
+      <h2>Peek Inside.</h2>
+      <p class="lead narrow">New players join every week, and the room keeps working.</p>
+      <ul class="room-list">
+        <li>An assessment and a personal practice plan when you join</li>
+        <li>A weekly live session with me, on camera</li>
+        <li>Daily check-in threads through every 8-week intensive</li>
+        <li>Clip feedback from me, any day of the week</li>
+        <li>Wins and struggles shared openly</li>
+      </ul>
+      <p class="room-stat">1,463 daily practice check-ins logged in the last two intensives</p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       THE TRUTH — the enemy, then the philosophy
+       ============================================================ -->
+  <section class="truth">
+    <div class="wrap">
+      <span class="tag">The Truth</span>
+      <p class="truth-big">Guitar education has grown endless. <strong>There is no shortcut.</strong> No new tutorial replaces focused practice, honest feedback, and time.</p>
+      <div class="truth-split narrow">
+        <div class="truth-col">
+          <span class="tag">Our Philosophy</span>
+          <p>Practice with structure you can sustain, on material worth the time, and measure the result. If your playing isn't changing, your practice changes.</p>
+        </div>
+        <div class="truth-col">
+          <span class="tag">Who This Is For</span>
+          <p>Intermediate players and up, from every walk of life, done with tutorial hopping. If you're a beginner, build the basics first. This room will be here when a pentatonic scale and tab feel comfortable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       TWO PATHS — membership vs self-paced
+       ============================================================ -->
+  <section class="paths-wrap">
+    <div class="wrap">
+      <div style="text-align:center;" class="narrow">
+        <span class="tag">Two Paths</span>
+        <h2>Choose How You Work.</h2>
+      </div>
+      <div class="path-grid">
+
+        <div class="pathc featured">
+          <span class="pathc-kicker">A Room Of Players Building Together</span>
+          <h3>The Practice Room Pro</h3>
+          <details>
+            <summary>What You Get</summary>
+            <ul>
+              <li>An assessment and a personal practice plan</li>
+              <li>All 18 courses with daily routines built in</li>
+              <li>The Practice Lab: eight focused practice modes</li>
+              <li>Weekly live session, clip feedback any day</li>
+              <li>Every future 8-week intensive included</li>
+            </ul>
+          </details>
+          <details>
+            <summary>Who It Is For</summary>
+            <p>Players who want the full program: the plan, the accountability, and me checking the work. If you practice alone and it isn't working, this is the other way.</p>
+          </details>
+          <a class="btn" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">
+            Join The Practice Room
+            <span class="btn-sub">$99 / month &middot; cancel anytime</span>
+          </a>
+          <p class="pathc-price">About the price of one private lesson</p>
+        </div>
+
+        <div class="pathc">
+          <span class="pathc-kicker">Work The Material At Your Own Pace</span>
+          <h3>The Courses</h3>
+          <details>
+            <summary>What You Get</summary>
+            <ul>
+              <li>Individual courses you buy once and keep</li>
+              <li>Daily routines built into each one</li>
+              <li>Intensives, Deep Dives, and full courses</li>
+            </ul>
+          </details>
+          <details>
+            <summary>Who It Is For</summary>
+            <p>Players who want one topic, worked on their own schedule, without the membership. Everything is also included in Pro, so don't buy both.</p>
+          </details>
+          <a class="btn" style="background:transparent;border:1.5px solid var(--line-2);" href="https://www.jonbjorkmusic.com/courses?ref=test">
+            Browse The Courses
+          </a>
+        </div>
+
+      </div>
+      <p style="text-align:center;margin-top:40px;" class="lead">Unsure which fits? <a href="https://www.jonbjorkmusic.com/contact" style="color:var(--purple-lt);">Ask me directly.</a></p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FAQ — trust questions
+       ============================================================ -->
+  <section>
+    <div class="wrap narrow faq">
+      <div style="text-align:center;">
+        <span class="tag">Common Questions</span>
+        <h2>Before You Join.</h2>
+      </div>
+      <div style="margin-top:48px;">
+        <details>
+          <summary>Am I locked into anything?</summary>
+          <p>No. Cancel any time from your Skool profile. And canceling doesn't kick you out: you stay in the community as a free member.</p>
+        </details>
+        <details>
+          <summary>Do I get personal replies from Jon?</summary>
+          <p>Yes. Post a clip or a question any day and I respond with text or a quick video, whichever solves it fastest. The weekly live is on top of that, not instead of it.</p>
+        </details>
+        <details>
+          <summary>Who is actually inside?</summary>
+          <p>Committed intermediate and advanced players. Some are working through their first intensive, some have played for decades. What everyone shares is showing up and doing the work.</p>
+        </details>
+        <details>
+          <summary>What happens when I join?</summary>
+          <p>You start with an assessment: a short questionnaire plus a couple of clips of your playing. From that I build your practice plan. Then the rhythm is simple: run your routine, check in, and show up when you can.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FINAL CTA
+       ============================================================ -->
+  <section class="final">
+    <span class="tag">The Practice Room Pro</span>
+    <h2>Practice Like It Counts.</h2>
+    <p class="lead">Free to join and look around. $99/month for the full program. Cancel anytime.</p>
+    <a class="btn" href="https://www.skool.com/the-practice-room-pro/about" target="_blank" rel="noopener">
+      Join The Practice Room
+      <span class="btn-sub">$99 / month &middot; cancel anytime</span>
+    </a>
+  </section>
+
+</main>
+
+<footer>
+  <div>
+    <a href="https://www.jonbjorkmusic.com/">Home</a>
+    <a href="https://www.jonbjorkmusic.com/pro?ref=test">Practice Room Pro</a>
+    <a href="https://www.jonbjorkmusic.com/start?ref=test">Start Here</a>
+    <a href="https://www.jonbjorkmusic.com/contact">Contact</a>
+    <a href="https://www.jonbjorkmusic.com/legal">Legal</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Jon Bjork Music</div>
+</footer>
+
+</body>
+</html>
