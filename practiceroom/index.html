@@ -267,6 +267,17 @@
     color: var(--purple-pop);
   }
 
+  /* ---------- Link out to the full contents page ---------- */
+  .inside-link { margin: 40px 0 0; }
+  .inside-link a {
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 1.15rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--off); text-decoration: none;
+    border-bottom: 1px solid var(--line-2); padding-bottom: 8px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .inside-link a:hover { color: var(--purple-lt); border-color: var(--purple-lt); }
+
   /* ---------- LIBRARY (box art carousel) ---------- */
   .box-card { text-align: left; }
   .box-card img {
@@ -570,7 +581,7 @@
       <span class="tag">The Library</span>
       <h2>Every Course I've Made.<br>Included.</h2>
       <p class="lead narrow">Intensives, Deep Dives, and full courses, from alternate picking, legato and sweep to timing, ear training and fretboard speed systems. When an intensive finishes its live run in Pro, the complete package lands here too, so the shelf keeps growing.</p>
-      <p style="margin-top:-8px;"><a class="link-quiet" href="/practiceroom/inside">See what's in every course &rarr;</a></p>
+      <p class="inside-link"><a href="/practiceroom/inside">See what's in every course &rarr;</a></p>
       <div class="slider" data-per="4">
         <div class="s-track" aria-label="Course library" tabindex="0">
           <div class="s-item"><div class="box-card"><img src="/pro/assets/boxart-alt-picking-intensive.jpg" alt="8-Week Alternate Picking Intensive" loading="lazy" /><div class="box-title">8-Week Alternate Picking Intensive</div></div></div>
@@ -702,7 +713,7 @@
         </details>
         <details>
           <summary>What exactly do I get?</summary>
-          <p>Every course I've made with the tabs and Guitar Pro files, the structured practice programs, full access to the Practice Lab, and the community. Finished intensives are added as complete packages after their live runs in Pro.</p>
+          <p>Every course I've made with the tabs and Guitar Pro files, the structured practice programs, full access to the Practice Lab, and the community. Finished intensives are added as complete packages after their live runs in Pro. You can <a href="/practiceroom/inside" style="color:var(--purple-lt);">read what every course covers here</a>.</p>
         </details>
         <details>
           <summary>Are there live sessions?</summary>
