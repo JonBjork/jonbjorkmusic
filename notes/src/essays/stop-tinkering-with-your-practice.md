@@ -31,7 +31,7 @@ I've given away a lot on this site and on the channel. Free exercises. Practice 
 
 Pick a plan and follow it.
 
-And if you want everything laid out step by step, with someone watching your actual playing and telling you what to fix next, that's what [Practice Room Pro](https://www.jonbjorkmusic.com/pro) is for.
+And if you want everything laid out step by step, in one system you own, that's what [The Practice Room](https://www.jonbjorkmusic.com/practiceroom) is for.
 
 Either way, give me 365 days. Follow the plan and let time do its job.
 
