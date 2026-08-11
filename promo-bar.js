@@ -1,14 +1,17 @@
-/* Site-wide dismissible promo bar (Practice Lab Looper).
+/* Site-wide dismissible promo bar (The Practice Room launch, Aug 11-18 2026).
+   AFTER THE LAUNCH WEEK: revert to the Looper version (git history) or update the
+   copy below. Remember to also bump KEY when the message changes, otherwise
+   anyone who dismissed the previous bar never sees the new one.
    Include with: <script src="/promo-bar.js"></script> right after <body>.
-   - Skips /looper (no self-promo on the sales page)
+   - Skips /practiceroom (no self-promo on the sales page)
    - Remembers dismissal in localStorage across the whole site
    - Pushes any fixed nav / .mobile-menu down by the bar height, responsively */
 (function () {
   'use strict';
 
-  if (/^\/looper(\/|$)/.test(window.location.pathname)) return;
+  if (/^\/practiceroom(\/|$)/.test(window.location.pathname)) return;
 
-  var KEY = 'promo-looper-dismissed';
+  var KEY = 'promo-tpr-launch-dismissed';
   try { if (localStorage.getItem(KEY) === '1') return; } catch (e) {}
 
   var CSS = [
@@ -45,11 +48,11 @@
     bar.setAttribute('role', 'region');
     bar.setAttribute('aria-label', 'Announcement');
     bar.innerHTML =
-      '<a href="https://www.jonbjorkmusic.com/looper?ref=promo-bar">' +
-        '<span class="promo-new">New</span>' +
-        '<span class="promo-text"><span class="promo-the">The </span>Practice Lab Looper' +
-        '<span class="promo-desc">: turn any YouTube video into a practice tool</span></span>' +
-        '<span class="promo-cta">Try it free \u2192</span>' +
+      '<a href="https://www.jonbjorkmusic.com/practiceroom?ref=promo-bar">' +
+        '<span class="promo-new">Now Open</span>' +
+        '<span class="promo-text"><span class="promo-the">The </span>Practice Room' +
+        '<span class="promo-desc">: every course, the files and the Practice Lab, for one payment</span></span>' +
+        '<span class="promo-cta">$197 until Aug 18 \u2192</span>' +
       '</a>' +
       '<button class="promo-close" aria-label="Dismiss announcement">\u00d7</button>';
     document.body.insertBefore(bar, document.body.firstChild);
