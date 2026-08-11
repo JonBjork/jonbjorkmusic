@@ -48,7 +48,7 @@ You know what to work on. You know why, because it ties back to the music you ac
 
 The tracking can be very simple. Look back and ask: can I play this better than I did last week? If yes, you progressed, and you know what you're doing is working. If you feel no difference from last week, you have to look into how you're actually practicing this. Maybe you're doing something wrong. Maybe you need some help.
 
-When I got on a proper program at the gym, I stopped guessing. I knew exactly what to do, how to do it, and why. That's also what we do in the Practice Room Pro. If you come in there, you can send videos so I can help you get unstuck if I see something you might not. There's a free 7-day trial, so you don't really risk anything.
+When I got on a proper program at the gym, I stopped guessing. I knew exactly what to do, how to do it, and why. That's also what we do in the Practice Room Pro. If you come in there, you can send videos so I can help you get unstuck if I see something you might not. It starts as a free community, so you can join and look around before you decide anything.
 
 ## 3. You're practicing too fast
 
