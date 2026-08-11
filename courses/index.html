@@ -169,6 +169,58 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   /* --- BAND override (this page wants margin below) --- */
   .courses-band-margin { margin-bottom: 72px; }
 
+
+  /* --- THE PRACTICE ROOM BANNER (added 2026-08-11, launch) --- */
+  .tpr-band {
+    max-width: 1100px; margin: 0 auto 56px; padding: 0 48px;
+  }
+  .tpr-card {
+    position: relative; overflow: hidden;
+    background: var(--card); border: 1px solid var(--accent-border);
+    border-radius: 14px; padding: 46px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 40px; flex-wrap: wrap;
+    box-shadow: 0 18px 48px rgba(124, 58, 237, 0.16);
+  }
+  .tpr-card::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 700px 300px at 15% 0%, rgba(124,58,237,0.16), transparent 70%);
+  }
+  .tpr-copy { position: relative; z-index: 1; flex: 1 1 460px; }
+  .tpr-eyebrow {
+    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 1rem;
+    letter-spacing: 0.24em; text-transform: uppercase; color: var(--purple-lt);
+    display: block; margin-bottom: 14px;
+  }
+  .tpr-title {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.12;
+    text-transform: uppercase; letter-spacing: 0.02em;
+    color: var(--white); margin-bottom: 16px;
+  }
+  .tpr-desc { color: var(--muted); font-size: 1.15rem; line-height: 1.7; margin: 0; }
+  .tpr-desc strong { color: var(--white); font-weight: 700; }
+  .tpr-action { position: relative; z-index: 1; flex: 0 0 auto; text-align: center; }
+  .tpr-btn {
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1rem;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--purple); color: var(--white);
+    padding: 20px 40px; border-radius: 8px;
+    text-decoration: none; display: inline-block;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .tpr-btn:hover { background: var(--purple-lt); transform: scale(1.02); }
+  .tpr-note {
+    display: block; margin-top: 14px; color: var(--muted);
+    font-size: 0.95rem; line-height: 1.5;
+  }
+  .tpr-note .tpr-strike { text-decoration: line-through; opacity: 0.6; }
+  @media (max-width: 700px) {
+    .tpr-band { padding: 0 24px; }
+    .tpr-card { padding: 34px 28px; }
+    .tpr-action { flex: 1 1 100%; text-align: left; }
+  }
+
   /* --- RESPONSIVE --- */
   @media (max-width: 960px) {
     .courses-grid { grid-template-columns: repeat(2, 1fr); }
@@ -227,6 +279,21 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
 <!-- BAND -->
 <div class="band">
   <p>Instant access &nbsp;·&nbsp; Self-paced &nbsp;·&nbsp; Built for serious players</p>
+</div>
+
+<!-- THE PRACTICE ROOM BANNER -->
+<div class="tpr-band">
+  <div class="tpr-card">
+    <div class="tpr-copy">
+      <span class="tpr-eyebrow">The Complete System</span>
+      <div class="tpr-title">Every Course On This Page Is Included In The Practice Room.</div>
+      <p class="tpr-desc">All 18 of my courses, the tabs and Guitar Pro files, structured practice programs, and full access to the Practice Lab. <strong>One payment, and it's yours.</strong> The courses sold separately on this page add up to more than the room costs.</p>
+    </div>
+    <div class="tpr-action">
+      <a class="tpr-btn" href="https://www.jonbjorkmusic.com/practiceroom?ref=courses">See The Practice Room</a>
+      <span class="tpr-note">Launch price <span class="tpr-strike">$297</span> <strong>$197</strong><br>until Tuesday, August 18</span>
+    </div>
+  </div>
 </div>
 
 <!-- COURSES GRID -->
@@ -344,6 +411,21 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
       </div>
     </a>
 
+  </div>
+</div>
+
+<!-- THE PRACTICE ROOM CLOSER -->
+<div class="tpr-band" style="margin-bottom:110px;">
+  <div class="tpr-card">
+    <div class="tpr-copy">
+      <span class="tpr-eyebrow">Or Take The Whole Shelf</span>
+      <div class="tpr-title">Still Deciding Which One?</div>
+      <p class="tpr-desc">You can have all of them. The Practice Room holds every course above, plus the intensives, the files, the programs and the Practice Lab, for a single payment. Nothing renews and there's nothing to cancel.</p>
+    </div>
+    <div class="tpr-action">
+      <a class="tpr-btn" href="https://www.jonbjorkmusic.com/practiceroom?ref=courses-footer">See The Practice Room</a>
+      <span class="tpr-note">Launch price <span class="tpr-strike">$297</span> <strong>$197</strong><br>until Tuesday, August 18</span>
+    </div>
   </div>
 </div>
 
