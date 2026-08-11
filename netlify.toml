@@ -1,4 +1,14 @@
 # Netlify configuration for jonbjorkmusic.com
+
+# /pro now redirects to The Practice Room sales page (2026-08-11 front-door
+# restructure). EXACT PATH ONLY, no wildcard: /practiceroom loads its images
+# from /pro/assets/, which must keep serving. force = true because the old
+# pro/index.html still exists in the repo.
+[[redirects]]
+  from = "/pro"
+  to = "/practiceroom"
+  status = 301
+  force = true
 #
 # Strategy:
 # 1. Run Eleventy in the notes/ folder, which generates notes/_site/
