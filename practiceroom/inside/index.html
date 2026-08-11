@@ -165,14 +165,15 @@
   /* ---------- Chops Builders ---------- */
   .chops {
     background: var(--card); border: 1px solid var(--accent-border);
-    border-radius: 14px; padding: 46px 44px; margin-top: 52px;
+    border-radius: 14px; padding: 44px; margin-top: 52px;
     box-shadow: 0 18px 48px rgba(124,58,237,0.14);
+    display: flex; gap: 44px; align-items: flex-start;
   }
   .chops-art {
-    display: block; width: 100%; height: auto;
+    display: block; width: 320px; flex-shrink: 0; height: auto;
     border-radius: 10px; border: 1px solid var(--line);
-    margin-bottom: 34px;
   }
+  .chops-body { flex: 1; min-width: 0; }
   .chops h3 { font-size: 1.7rem; margin-bottom: 16px; }
   .chops > p { color: var(--muted); font-weight: 300; font-size: 1.12rem; }
   .chops-list { list-style: none; margin: 30px 0 0; padding: 0; }
@@ -233,7 +234,8 @@
     nav { padding: 18px 20px; }
     .course { flex-direction: column; gap: 16px; }
     .course img { width: 100%; height: auto; aspect-ratio: 5/4; }
-    .chops { padding: 32px 26px; }
+    .chops { padding: 32px 26px; flex-direction: column; gap: 30px; }
+    .chops-art { width: 100%; }
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { transition-duration: 0.001s !important; }
@@ -436,14 +438,16 @@
       </div>
       <div class="chops">
         <img class="chops-art" src="/pro/assets/chops-builders.jpg" alt="The Practice Room Chops Builders" loading="lazy" />
-        <h3>Play-along workouts, start to finish</h3>
-        <p>A collection of complete workouts you run with me from the first note to the last. <strong>Each one is a full 60 minutes.</strong> Put the guitar in your hands, press play, and work.</p>
-        <ul class="chops-list">
-          <li>3-Notes-Per-String Alternate Picking Workout</li>
-          <li>Legato Workout</li>
-          <li>3-String Sweep Picking Workout</li>
-          <li>5-String Sweep Picking Workout</li>
-        </ul>
+        <div class="chops-body">
+          <h3>Play-along workouts, start to finish</h3>
+          <p>Four complete workouts you run with me from the first note to the last. <strong>60 minutes each.</strong> Put the guitar in your hands, press play, and work.</p>
+          <ul class="chops-list">
+            <li>Alternate Picking</li>
+            <li>Legato</li>
+            <li>Sweep Picking, 3-string</li>
+            <li>Sweep Picking, 5-string</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
