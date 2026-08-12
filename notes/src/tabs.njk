@@ -24,6 +24,17 @@ ogType: website
   .tabs-cta { display: inline-block; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1.15rem; letter-spacing: 0.14em; text-transform: uppercase; background: var(--purple); color: var(--white); padding: 18px 44px; border-radius: 10px; text-decoration: none; transition: background 0.2s; }
   .tabs-cta:hover { background: var(--purple-lt); }
   .tabs-signoff { margin-top: 18px; font-family: 'Oswald', sans-serif; font-size: 0.95rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); }
+
+  /* --- Second offer: The Practice Room (no price numbers on this page) --- */
+  .tpr-card { max-width: 720px; margin: 72px auto 0; background: var(--card); border: 1px solid var(--accent-border); border-radius: 14px; overflow: hidden; box-shadow: 0 18px 48px rgba(124, 58, 237, 0.15); }
+  .tpr-card img { display: block; width: 100%; height: auto; }
+  .tpr-card-body { padding: 34px 36px 38px; }
+  .tpr-card-eyebrow { font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 0.92rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--purple-lt); display: block; margin-bottom: 12px; }
+  .tpr-card h2 { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.9rem; line-height: 1.15; text-transform: uppercase; letter-spacing: 0.02em; color: var(--white); margin: 0 0 16px; }
+  .tpr-card p { font-family: 'Lato', sans-serif; font-weight: 300; font-size: 1.08rem; line-height: 1.7; color: var(--muted); margin: 0 0 24px; }
+  .tpr-card-btn { display: inline-block; font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1rem; letter-spacing: 0.14em; text-transform: uppercase; background: var(--purple); color: var(--white); padding: 16px 34px; border-radius: 8px; text-decoration: none; transition: background 0.2s; }
+  .tpr-card-btn:hover { background: var(--purple-lt); }
+  @media (max-width: 600px) { .tpr-card-body { padding: 26px 22px 30px; } .tpr-card h2 { font-size: 1.55rem; } }
 </style>
 <div class="tabs-hero">
   <span class="essay-eyebrow">Practice Room Sessions</span>
@@ -47,4 +58,12 @@ ogType: website
   <a class="tabs-cta" href="https://www.skool.com/the-practice-room-pro/about">Get the Tabs &#8594;</a>
   <p class="tabs-signoff">See you in the practice room. Jon</p>
 </div>
-<p class="tabs-price" style="margin-top:44px;">Want more than the Sessions tabs? All of these are also included in <a href="https://www.jonbjorkmusic.com/practiceroom">The Practice Room</a>: every course I've made, all the tabs and Guitar Pro files, the structured practice programs, and the Practice Lab, for one payment. If you want the whole system, start there.</p>
+<div class="tpr-card">
+  <img src="/notes/images/tpr-library-wall.jpg" alt="The full course library inside The Practice Room" loading="lazy" width="1400" height="787">
+  <div class="tpr-card-body">
+    <span class="tpr-card-eyebrow">Or take the whole system</span>
+    <h2>Everything I've Made, In One Room</h2>
+    <p>These Sessions tabs are one piece of it. The Practice Room holds every course I've made, all the tabs and Guitar Pro files, the structured practice programs and the Practice Lab app. One payment, and it's yours.</p>
+    <a class="tpr-card-btn" href="https://www.jonbjorkmusic.com/practiceroom?ref=tabs">See The Practice Room &#8594;</a>
+  </div>
+</div>
