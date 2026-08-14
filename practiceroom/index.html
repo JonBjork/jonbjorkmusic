@@ -211,6 +211,30 @@
   }
   .s-btn:hover { border-color: var(--purple-lt); color: var(--purple-lt); background: rgba(124,58,237,0.08); }
 
+  /* ---------- PEER (Ben Eller endorsement band) ---------- */
+  .peer { max-width: 760px; margin: 0 auto; text-align: center; }
+  .peer-eyebrow {
+    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 0.82rem;
+    letter-spacing: 0.24em; text-transform: uppercase; color: var(--purple-lt);
+    display: block; margin-bottom: 26px;
+  }
+  .peer-quote {
+    font-family: 'Lato', sans-serif; font-weight: 300; font-size: 2.1rem;
+    line-height: 1.35; color: var(--white); margin: 0;
+  }
+  .peer-who {
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.95rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--off);
+    margin-top: 26px;
+  }
+  .peer-sub {
+    font-family: 'Lato', sans-serif; font-weight: 300; font-size: 1.02rem;
+    line-height: 1.65; color: var(--muted); margin: 34px auto 0; max-width: 620px;
+    padding-top: 26px; border-top: 1px solid var(--line);
+  }
+  .peer-sub cite { font-style: normal; color: var(--off); display: block; margin-top: 10px; font-size: 0.92rem; }
+  @media (max-width: 700px) { .peer-quote { font-size: 1.5rem; } }
+
   /* ---------- VOICES (1-up quote carousel) ---------- */
   .voice {
     background: var(--card); border: 1px solid var(--line); border-radius: 12px;
@@ -423,6 +447,21 @@
     <p class="hero-alt"><a class="link-quiet" href="#inside">or see what's inside first &darr;</a></p>
   </header>
 
+
+  <!-- ============================================================
+       PEER — Ben Eller endorsement (public YouTube comment thread)
+       ============================================================ -->
+  <section class="ov-78">
+    <div class="wrap rv">
+      <div class="peer">
+        <span class="peer-eyebrow">From the comments on Ben Eller's channel</span>
+        <p class="peer-quote">&ldquo;I'm lucky to have learned from you, buddy!&rdquo;</p>
+        <div class="peer-who">Ben Eller</div>
+        <p class="peer-sub">&ldquo;I went to Jon on your advice and it has ABSOLUTELY changed my playing. Jon is incredible! Thanks again for sending me his way!&rdquo;
+          <cite>Matt Womack, replying in the same thread</cite></p>
+      </div>
+    </div>
+  </section>
 
   <!-- ============================================================
        VOICES — proof section built around Stefan's quote
