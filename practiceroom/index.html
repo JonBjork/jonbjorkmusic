@@ -176,6 +176,43 @@
   .hero-sub { max-width: 640px; color: var(--muted); font-size: 1.3rem; font-weight: 300; line-height: 1.7; margin: 0 auto; }
   .hero-alt { margin-top: 22px; }
 
+  /* ---------- Walkthrough video (click-to-play facade) ----------
+     No YouTube iframe is loaded until the visitor clicks, so the page
+     keeps its weight. Video ID lives in data-id on .vid. */
+  .tour { padding: 30px 0 100px; }
+  .tour-head { text-align: center; margin-bottom: 36px; }
+  .tour-head h2 { margin-bottom: 12px; }
+  .tour-head p { color: var(--muted); font-size: 1.15rem; font-weight: 300; margin: 0 auto; max-width: 640px; }
+  .vid {
+    position: relative; width: 100%; aspect-ratio: 16 / 9;
+    border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line-2);
+    box-shadow: 0 30px 90px rgba(0,0,0,0.62);
+    background: #000; cursor: pointer;
+  }
+  .vid img, .vid iframe {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    display: block; border: 0; object-fit: cover;
+  }
+  .vid-play {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 94px; height: 94px; border-radius: 50%;
+    background: rgba(124,58,237,0.92);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+  }
+  .vid:hover .vid-play,
+  .vid:focus-visible .vid-play { background: var(--purple-lt); transform: translate(-50%,-50%) scale(1.07); }
+  .vid:focus-visible { outline: 2px solid var(--purple-lt); outline-offset: 4px; }
+  .vid-play svg { width: 34px; height: 34px; fill: #fff; margin-left: 5px; }
+  .vid-cap { text-align: center; color: var(--dim); font-size: 0.95rem; margin: 18px 0 0; }
+  @media (max-width: 640px) {
+    .tour { padding: 16px 0 80px; }
+    .vid-play { width: 66px; height: 66px; }
+    .vid-play svg { width: 25px; height: 25px; }
+  }
+
   /* ---------- Launch pricing ---------- */
   .strike { text-decoration: line-through; opacity: 0.55; }
   .launch-note {
@@ -450,8 +487,31 @@
       Join The Practice Room
       <span class="btn-sub"><span class="strike">$297</span> $197 until August 18 &middot; one payment &middot; it's yours</span>
     </a>
-    <p class="hero-alt"><a class="link-quiet" href="#inside">or see what's inside first &darr;</a></p>
+    <p class="hero-alt"><a class="link-quiet" href="#walkthrough">or see what's inside first &darr;</a></p>
   </header>
+
+
+  <!-- ============================================================
+       WALKTHROUGH — the YouTube tour, click-to-play facade.
+       The hero's "see what's inside first" link points here.
+       Video: https://youtu.be/eLj98HjCEh0
+       ============================================================ -->
+  <section class="tour ov-70" id="walkthrough">
+    <div class="wrap rv">
+      <div class="tour-head">
+        <span class="tag">The Walkthrough</span>
+        <h2>Have A Look Inside</h2>
+        <p>Six minutes through the actual room. The courses, how a deep dive and an intensive are laid out, and the Practice Lab running a real session.</p>
+      </div>
+      <div class="vid" id="tour-vid" data-id="eLj98HjCEh0" role="button" tabindex="0"
+           aria-label="Play the walkthrough video, Inside The Practice Room">
+        <img src="https://i.ytimg.com/vi/eLj98HjCEh0/maxresdefault.jpg"
+             alt="Inside The Practice Room" width="1280" height="720" loading="lazy" />
+        <span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+      </div>
+      <p class="vid-cap">Or <a class="link-quiet" href="https://www.youtube.com/watch?v=eLj98HjCEh0" target="_blank" rel="noopener">watch it on YouTube</a></p>
+    </div>
+  </section>
 
 
   <!-- ============================================================
@@ -924,6 +984,31 @@
       track.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * step, behavior: 'smooth' });
     });
   });
+
+  // ---------- Walkthrough: swap the poster for the real player on click ----------
+  (function () {
+    var vid = document.getElementById('tour-vid');
+    if (!vid) return;
+    function play() {
+      if (vid.dataset.loaded) return;
+      vid.dataset.loaded = '1';
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + vid.dataset.id +
+              '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      f.title = 'Inside The Practice Room';
+      f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+      f.allowFullscreen = true;
+      vid.innerHTML = '';
+      vid.appendChild(f);
+      vid.style.cursor = 'default';
+      vid.removeAttribute('role');
+      vid.removeAttribute('tabindex');
+    }
+    vid.addEventListener('click', play);
+    vid.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
+    });
+  })();
 
   // ---------- Reveal on scroll ----------
   (function () {
