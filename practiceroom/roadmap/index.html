@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Path Through The Practice Room | Jon Bjork</title>
+<meta name="description" content="The order to work through the courses and the Practice Lab inside The Practice Room. Three technique tracks, the standalone Deep Dives, the musicianship track, and where each Lab fits." />
+<meta name="robots" content="noindex, follow" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZW8ZW4P5D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZZW8ZW4P5D');
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet" />
+
+<style>
+  /* =============================================================================
+     /practiceroom/roadmap — the order to work through the room (Aug 2026)
+     MEMBER-FACING. Assumes the reader is already inside The Practice Room.
+     noindex so it doesn't surface as a stray search result for non-members.
+
+     Same design system as /practiceroom and /practiceroom/inside: fixed backdrop,
+     section overlays, reveal-on-scroll, box art shared from /pro/assets/.
+     New here: .track / .step numbered path cards, .pair Lab-pairing rows,
+     .matrix "when you're doing this, open this" grid, and a print stylesheet
+     so members can print this and stick it on the wall.
+
+     Content sources: the pinned Start Here post (three tracks, Deep Dive before
+     Intensive, "the goal isn't to complete as many courses as possible"), the
+     course library walkthrough, and the Practice Lab taglines from App.jsx.
+     Practice Lab access is a SHARED, ROTATING site password posted in the
+     Classroom. Never write "your login" or "your account" for the Lab.
+     ============================================================================= */
+  :root {
+    color-scheme: dark;
+    --bg:            #0d0d0d;
+    --card:          #181818;
+    --card-2:        #1f1f1f;
+    --line:          #2a2a2a;
+    --line-2:        #3a3a3a;
+    --purple:        #7c3aed;
+    --purple-lt:     #9d5ff5;
+    --purple-pop:    #c084fc;
+    --accent-border: #4a3a9a;
+    --white:         #ffffff;
+    --off:           #e8e8e8;
+    --muted:         #aaaaaa;
+    --dim:           #666666;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+  body {
+    margin: 0;
+    font-family: 'Lato', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--off);
+    background: var(--bg);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  h1, h2, h3 {
+    font-family: 'Oswald', 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 700; color: var(--white);
+    line-height: 1.05; margin: 0 0 18px;
+  }
+  h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); letter-spacing: -0.01em; }
+  h2 { font-size: clamp(2rem, 4.2vw, 3rem); }
+  p { margin: 0 0 16px; }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+  .narrow { max-width: 780px; margin: 0 auto; }
+  section { padding: 96px 0; position: relative; }
+
+  .backdrop {
+    position: fixed; inset: 0; z-index: -1;
+    background-color: var(--bg);
+    background-image:
+      linear-gradient(rgba(13,13,13,0.5), rgba(13,13,13,0.68)),
+      url('/pro/assets/hero-jon.jpg');
+    background-size: cover; background-position: center 28%;
+    pointer-events: none;
+  }
+  .ov-60 { background: rgba(13,13,13,0.60); }
+  .ov-78 { background: rgba(13,13,13,0.78); }
+  .ov-84 { background: rgba(13,13,13,0.84); }
+  .ov-88 { background: rgba(13,13,13,0.88); }
+
+  .rv {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  }
+  .rv.on { opacity: 1; transform: none; }
+
+  .tag {
+    font-family: 'Oswald', sans-serif; font-weight: 400;
+    font-size: 0.95rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--purple-lt); display: inline-block; margin-bottom: 20px;
+  }
+  .lead { color: var(--muted); font-size: 1.3rem; line-height: 1.7; font-weight: 300; }
+  .group-head { text-align: center; max-width: 820px; margin: 0 auto; }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 24px 44px;
+    background: linear-gradient(180deg, rgba(13,13,13,0.92), rgba(13,13,13,0));
+  }
+  .nav-name {
+    font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.25rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--white); text-decoration: none;
+  }
+  .nav-name span { color: var(--purple-lt); }
+  .nav-cta {
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 0.88rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--off); text-decoration: none; transition: color 0.2s;
+  }
+  .nav-cta:hover { color: var(--purple-lt); }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    min-height: 60vh;
+    display: flex; flex-direction: column; justify-content: center;
+    text-align: center; padding: 160px 24px 80px;
+  }
+  .hero-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 900px 500px at 50% 25%, rgba(124,58,237,0.16), transparent 70%);
+  }
+  .hero > * { position: relative; z-index: 1; }
+
+  /* ---------- Phase explainer ---------- */
+  .phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+  .phase {
+    background: var(--card); border: 1px solid var(--accent-border);
+    border-radius: 14px; padding: 32px 28px; text-align: left;
+  }
+  .phase-num {
+    font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 0.8rem;
+    letter-spacing: 0.24em; text-transform: uppercase; color: var(--purple-lt);
+    display: block; margin-bottom: 12px;
+  }
+  .phase h3 { font-size: 1.35rem; margin-bottom: 12px; }
+  .phase p { color: var(--muted); font-weight: 300; font-size: 1.02rem; margin: 0; }
+  .phase strong { color: var(--white); font-weight: 700; }
+
+  /* ---------- Track cards ---------- */
+  .tracks { display: grid; gap: 26px; margin-top: 52px; }
+  .track {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 16px; padding: 40px 38px;
+    transition: border-color 0.3s;
+  }
+  .track:hover { border-color: var(--accent-border); }
+  .track-head {
+    display: flex; align-items: center; gap: 18px;
+    padding-bottom: 22px; margin-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  .track-head h3 { font-size: 1.7rem; margin: 0; }
+  .track-badge {
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--purple-lt); background: rgba(124,58,237,0.14);
+    border: 1px solid var(--accent-border); border-radius: 999px;
+    padding: 5px 14px; white-space: nowrap;
+  }
+
+  .steps { list-style: none; margin: 0; padding: 0; }
+  .step {
+    display: flex; gap: 22px; align-items: flex-start;
+    padding: 26px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .step:last-child { border-bottom: none; padding-bottom: 4px; }
+  .step-n {
+    flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 1.1rem;
+    color: var(--purple-pop); background: rgba(124,58,237,0.14);
+    border: 1px solid var(--accent-border);
+  }
+  .step-art {
+    width: 104px; height: 96px; flex-shrink: 0;
+    object-fit: contain; border-radius: 8px;
+    background: #0b0b0b; border: 1px solid var(--line);
+  }
+  /* Steps with no box art keep the same left edge as the ones that have it. */
+  .step-art.ghost { visibility: hidden; }
+  .step-body { flex: 1; min-width: 0; }
+  .step-body h4 {
+    font-family: 'Oswald', sans-serif; font-weight: 700; color: var(--white);
+    font-size: 1.12rem; letter-spacing: 0.02em; text-transform: uppercase;
+    margin: 0 0 6px; line-height: 1.25;
+  }
+  .step-meta {
+    font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 0.76rem;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim);
+    display: block; margin-bottom: 10px;
+  }
+  .step-body p { color: var(--muted); font-weight: 300; font-size: 1.02rem; margin: 0; line-height: 1.6; }
+  .step-opts { list-style: none; margin: 14px 0 0; padding: 0; }
+  .step-opts li {
+    display: flex; align-items: baseline; gap: 12px;
+    color: var(--off); font-weight: 300; font-size: 1rem; padding: 5px 0;
+  }
+  .step-opts li::before { content: '·'; color: var(--purple-pop); font-weight: 700; font-size: 1.5rem; line-height: 0.7; }
+  .step-opts em { color: var(--muted); font-style: normal; }
+  .flag {
+    display: inline-block; margin-top: 12px;
+    font-family: 'Oswald', sans-serif; font-weight: 500;
+    font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--purple-lt);
+    background: rgba(124,58,237,0.14); border: 1px solid var(--accent-border);
+    border-radius: 999px; padding: 5px 15px; line-height: 1.4;
+  }
+
+  .pair {
+    margin-top: 26px; padding: 20px 24px;
+    background: var(--card-2); border-left: 3px solid var(--purple);
+    border-radius: 0 10px 10px 0;
+    font-size: 1.02rem; font-weight: 300; color: var(--muted);
+  }
+  .pair strong {
+    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 0.78rem;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--purple-lt);
+    display: block; margin-bottom: 8px;
+  }
+  .pair b { color: var(--white); font-weight: 700; }
+
+  /* ---------- Simple course cards (standalone dives, musicianship) ---------- */
+  .courses { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 52px; }
+  .course {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+    overflow: hidden; display: flex; gap: 22px; align-items: flex-start;
+    padding: 22px; transition: border-color 0.3s, transform 0.3s var(--ease);
+  }
+  .course:hover { border-color: var(--accent-border); transform: translateY(-3px); }
+  .course img {
+    width: 140px; height: 132px; flex-shrink: 0;
+    object-fit: contain; border-radius: 10px;
+    background: #0b0b0b; border: 1px solid var(--line);
+  }
+  .course-body h3 {
+    font-size: 1.14rem; letter-spacing: 0.02em; text-transform: uppercase;
+    margin-bottom: 8px; line-height: 1.2;
+  }
+  .course-body p { color: var(--muted); font-weight: 300; font-size: 1rem; margin: 0; line-height: 1.6; }
+
+  /* ---------- Lab matrix ---------- */
+  .matrix { margin-top: 52px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .mrow {
+    display: grid; grid-template-columns: 1fr 1.15fr; gap: 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .mrow:last-child { border-bottom: none; }
+  .mrow:nth-child(odd) { background: var(--card); }
+  .mrow:nth-child(even) { background: var(--card-2); }
+  .mrow.mhead { background: rgba(124,58,237,0.12); }
+  .mcell { padding: 20px 26px; font-weight: 300; color: var(--muted); font-size: 1.02rem; }
+  .mcell:first-child { border-right: 1px solid var(--line); color: var(--off); }
+  .mhead .mcell {
+    font-family: 'Oswald', sans-serif; font-weight: 500; font-size: 0.8rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--purple-lt);
+  }
+  .mcell b { color: var(--white); font-weight: 700; }
+
+  /* ---------- Notes ---------- */
+  .note {
+    background: var(--card-2); border-left: 3px solid var(--purple);
+    border-radius: 0 12px 12px 0; padding: 32px 36px; margin-top: 24px;
+    color: var(--off); font-size: 1.16rem; font-weight: 300; line-height: 1.7;
+  }
+  .note strong { color: var(--white); font-weight: 700; }
+  .note p:last-child { margin-bottom: 0; }
+
+  .week { list-style: none; margin: 48px 0 0; padding: 0; }
+  /* Not flex: the bold lead-in has to stay inline with the sentence that
+     follows it, and a flex container would split them into separate items. */
+  .week li {
+    position: relative; padding: 24px 0 24px 30px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 1.12rem; font-weight: 300; color: var(--off); line-height: 1.6;
+  }
+  .week li:last-child { border-bottom: none; }
+  .week li::before {
+    content: '·'; position: absolute; left: 4px; top: 22px;
+    color: var(--purple-pop); font-weight: 700;
+    font-size: 1.8rem; line-height: 1;
+  }
+  .week b { color: var(--white); font-weight: 700; }
+
+  /* ---------- CTA ---------- */
+  .btn {
+    display: inline-flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 3px; min-height: 62px; padding: 16px 44px;
+    font-family: 'Oswald', sans-serif; font-weight: 600;
+    font-size: 1.05rem; letter-spacing: 0.16em; text-transform: uppercase;
+    text-decoration: none; border-radius: 10px;
+    background: var(--purple); color: var(--white);
+    transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+  }
+  .btn:hover { background: var(--purple-lt); transform: scale(1.02); }
+  .btn .btn-sub {
+    font-weight: 400; font-size: 0.72rem; letter-spacing: 0.22em;
+    color: rgba(255,255,255,0.75);
+  }
+  .btn-ghost {
+    background: transparent; border: 1px solid var(--line-2); color: var(--off);
+  }
+  .btn-ghost:hover { background: rgba(124,58,237,0.14); border-color: var(--accent-border); }
+  .cta-row { display: flex; gap: 18px; justify-content: center; flex-wrap: wrap; }
+  .final { text-align: center; padding: 110px 24px; }
+  .final-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 700px 400px at 50% 55%, rgba(124,58,237,0.14), transparent 70%);
+  }
+  .final > * { position: relative; z-index: 1; }
+
+  footer {
+    background: rgba(10,10,10,0.95); border-top: 1px solid var(--line);
+    color: var(--dim); text-align: center; padding: 40px 24px;
+    font-size: 0.95rem; position: relative;
+  }
+  footer a { color: var(--muted); text-decoration: none; margin: 0 14px; }
+  footer a:hover { color: var(--purple-lt); }
+  .footer-copy { margin-top: 14px; font-size: 0.85rem; }
+
+  @media (max-width: 900px) {
+    section { padding: 74px 0; }
+    .phases { grid-template-columns: 1fr; }
+    .courses { grid-template-columns: 1fr; }
+    .track { padding: 32px 26px; }
+    .step-art { display: none; }
+    .mrow { grid-template-columns: 1fr; }
+    .mcell:first-child { border-right: none; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+    .mrow.mhead { display: none; }
+  }
+  @media (max-width: 520px) {
+    .wrap { padding: 0 20px; }
+    nav { padding: 18px 20px; }
+    .track-head { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .course { flex-direction: column; gap: 16px; }
+    .course img { width: 100%; height: auto; aspect-ratio: 5/4; }
+    .cta-row { flex-direction: column; align-items: stretch; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0.001s !important; }
+    html { scroll-behavior: auto; }
+    .rv { opacity: 1; transform: none; }
+  }
+
+  /* ---------- Print: members print this and put it on the wall ---------- */
+  @media print {
+    .backdrop, .hero-glow, .final-glow, nav, .step-art, .course img { display: none !important; }
+    body { background: #fff; color: #111; font-size: 11pt; }
+    /* !important throughout: the screen rules paint these white, and on paper
+       white-on-white makes headings and every bolded phrase vanish. */
+    h1, h2, h3, h4 { color: #000 !important; }
+    strong, b { color: #000 !important; }
+    h1 { font-size: 26pt; }
+    h2 { font-size: 17pt; }
+    /* The overlay classes also sit on <header>, so clear them by name rather
+       than relying on the section selector alone. */
+    section, .hero, .ov-60, .ov-78, .ov-84, .ov-88 { background: none !important; }
+    section { padding: 18pt 0; }
+    .hero { min-height: 0; padding: 0 0 12pt; }
+    .rv { opacity: 1 !important; transform: none !important; }
+    /* Tracks are taller than a page, so only the rows inside them avoid breaks.
+       Putting break-inside:avoid on .track itself just leaves blank pages. */
+    .step, .course, .phase, .note, .pair, .mrow { break-inside: avoid; page-break-inside: avoid; }
+    .track-head { break-after: avoid; page-break-after: avoid; }
+    .track, .course, .phase, .matrix { background: #fff !important; border: 1px solid #bbb !important; }
+    .mrow, .mrow:nth-child(odd), .mrow:nth-child(even) { background: #fff !important; }
+    .note, .pair { background: #f4f4f4 !important; border-left: 3px solid #7c3aed !important; color: #111; }
+    .lead, .step-body p, .course-body p, .phase p, .mcell, .pair,
+    .step-opts li, .step-opts em, .week li, .note { color: #333 !important; }
+    .step-meta { color: #777 !important; }
+    .tag, .step-n, .track-badge, .flag, .mhead .mcell, .pair strong { color: #7c3aed !important; }
+    .cta-row, footer { display: none !important; }
+    .tracks { gap: 14pt; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="backdrop" aria-hidden="true"></div>
+
+<nav>
+  <a class="nav-name" href="https://www.jonbjorkmusic.com/practiceroom">Jon Bjork <span>&middot;</span> The Practice Room</a>
+  <a class="nav-cta" href="https://www.skool.com/thepracticeroom/about">Open the classroom &rarr;</a>
+</nav>
+
+<main>
+
+  <header class="hero ov-60">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap">
+      <span class="tag">The Practice Room</span>
+      <h1>Your Path.</h1>
+      <p class="lead narrow">Twenty courses and eight Labs is a lot to walk into. This is the order I'd put them in. Pick one line, work it to the end, then come back and pick the next one.</p>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       THE ONE RULE
+       ============================================================ -->
+  <section class="ov-84">
+    <div class="wrap narrow rv">
+      <div style="text-align:center;">
+        <span class="tag">Before You Start</span>
+        <h2>One Track At A Time.</h2>
+      </div>
+      <div class="note">
+        <p>The fastest way to get nothing out of this room is to open five courses in the first week and do a bit of each. Everything in here is built to be finished, and finishing one thing beats sampling six.</p>
+        <p>So pick one technique to start with. If you can't decide, pick the one that's the reason you skip certain songs.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       HOW A TRACK IS BUILT
+       ============================================================ -->
+  <section class="ov-78">
+    <div class="wrap rv">
+      <div class="group-head">
+        <span class="tag">The Shape Of It</span>
+        <h2>Every Track Runs In Three Phases.</h2>
+        <p class="lead">Same shape whichever technique you choose. Roughly four months from the first day of a Deep Dive to the end of an Intensive.</p>
+      </div>
+      <div class="phases">
+        <div class="phase">
+          <span class="phase-num">Phase 1</span>
+          <h3>The Deep Dive</h3>
+          <p><strong>30 minutes a day for 30 days.</strong> It builds correct practice habits, fixes the problems you already have with the technique, and if it's new to you, it teaches you to play it correctly from the beginning. Do this before the Intensive.</p>
+        </div>
+        <div class="phase">
+          <span class="phase-num">Phase 2</span>
+          <h3>The Intensive</h3>
+          <p><strong>Eight weeks, a new 60-minute routine every week.</strong> You're never repeating the same hour twice. The routine is already built, so your only job is to show up and run it.</p>
+        </div>
+        <div class="phase">
+          <span class="phase-num">Phase 3</span>
+          <h3>Keep It Alive</h3>
+          <p><strong>The application material.</strong> Speed Systems, Chops Builders and the daily workouts take the technique you just built and put it to work while you move on to the next track.</p>
+        </div>
+      </div>
+      <div class="note">
+        Underneath all three phases sits <strong>the Practice Lab</strong>. The Lab doesn't replace a course. It's where you take the one thing in this week's routine that keeps falling apart. There's a full map of which Lab to open further down.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       THE THREE MAIN TRACKS
+       ============================================================ -->
+  <section class="ov-84">
+    <div class="wrap rv">
+      <div class="group-head">
+        <span class="tag">Pick One</span>
+        <h2>The Three Main Tracks.</h2>
+        <p class="lead">Alternate picking, legato and sweep picking each have a Deep Dive and an Intensive behind them. These are the long roads.</p>
+      </div>
+
+      <div class="tracks">
+
+        <!-- TRACK 1 -->
+        <div class="track">
+          <div class="track-head">
+            <h3>Alternate Picking</h3>
+            <span class="track-badge">The longest road</span>
+          </div>
+          <ul class="steps">
+            <li class="step">
+              <span class="step-n">1</span>
+              <img class="step-art" src="/pro/assets/boxart-alt-picking-deep-dive.jpg" alt="Alternate Picking Deep Dive" loading="lazy" />
+              <div class="step-body">
+                <h4>Alternate Picking Deep Dive</h4>
+                <span class="step-meta">30 days &middot; 30 minutes a day</span>
+                <p>The mechanics first, then the essential patterns. Get the hand right before you ask it to go fast.</p>
+              </div>
+            </li>
+            <li class="step">
+              <span class="step-n">2</span>
+              <img class="step-art" src="/pro/assets/boxart-alt-picking-intensive.jpg" alt="8-Week Alternate Picking Intensive" loading="lazy" />
+              <div class="step-body">
+                <h4>8-Week Alternate Picking Intensive</h4>
+                <span class="step-meta">8 weeks &middot; a new 60-minute routine each week</span>
+                <p>Accuracy first, then evenness and control. Eight weeks of structured work on one technique.</p>
+              </div>
+            </li>
+            <li class="step">
+              <span class="step-n">3</span>
+              <span class="step-art ghost" aria-hidden="true"></span>
+              <div class="step-body">
+                <h4>Then Choose Where To Apply It</h4>
+                <span class="step-meta">Pick one, finish it, then pick another</span>
+                <p>Four ways to take what you built into real playing. Any order works, so choose by what you want to play.</p>
+                <ul class="step-opts">
+                  <li><b>The Single-String Speed System</b> <em>&nbsp;the Yngwie groups-of-four sequence, all over the neck</em></li>
+                  <li><b>The 3NPS Speed System</b> <em>&nbsp;the lego blocks behind most three-notes-per-string runs</em></li>
+                  <li><b>Alternate Picking Mastery: 3 NPS</b> <em>&nbsp;the same idea taken deeper, with a wider set of exercises</em></li>
+                  <li><b>Pentatonic Picking Power</b> <em>&nbsp;a daily system for pentatonic picking, using the Looping Method</em></li>
+                </ul>
+              </div>
+            </li>
+            <li class="step">
+              <span class="step-n">4</span>
+              <img class="step-art" src="/pro/assets/boxart-alt-picking-next-step.jpg" alt="Alternate Picking: The Next Step" loading="lazy" />
+              <div class="step-body">
+                <h4>Alternate Picking: The Next Step</h4>
+                <span class="step-meta">8 weeks &middot; the follow-up intensive</span>
+                <p>Beyond the mechanics and into the music. This is where accuracy, speed and control turn into actual playing.</p>
+                <span class="flag">Running live in Pro right now &middot; joins the room when that run finishes</span>
+              </div>
+            </li>
+          </ul>
+          <div class="pair">
+            <strong>In the Practice Lab</strong>
+            Run new patterns through the <b>Virtuoso Lab</b> while they're still fragile. Use the <b>Systematic Chops Lab</b> for the two-string combinations that trip you up, and the <b>Technique Lab</b> for the one shape that never quite cleans up.
+          </div>
+        </div>
+
+        <!-- TRACK 2 -->
+        <div class="track">
+          <div class="track-head">
+            <h3>Legato</h3>
+            <span class="track-badge">Deep Dive &rarr; Intensive</span>
+          </div>
+          <ul class="steps">
+            <li class="step">
+              <span class="step-n">1</span>
+              <img class="step-art" src="/pro/assets/boxart-legato-deep-dive.jpg" alt="Legato Deep Dive" loading="lazy" />
+              <div class="step-body">
+                <h4>Legato Deep Dive</h4>
+                <span class="step-meta">30 days &middot; 30 minutes a day</span>
+                <p>Smooth legato technique and the essential shapes, built to elevate your lead playing.</p>
+              </div>
+            </li>
+            <li class="step">
+              <span class="step-n">2</span>
+              <img class="step-art" src="/pro/assets/boxart-legato-intensive.jpg" alt="8-Week Legato Intensive" loading="lazy" />
+              <div class="step-body">
+                <h4>8-Week Legato Intensive</h4>
+                <span class="step-meta">8 weeks &middot; a new 60-minute routine each week</span>
+                <p>Develop a clean and accurate legato. Accuracy first, then evenness and control, week by week.</p>
+              </div>
+            </li>
+            <li class="step">
+              <span class="step-n">3</span>
+              <img class="step-art" src="/pro/assets/chops-builders.jpg" alt="Chops Builders" loading="lazy" />
+              <div class="step-body">
+                <h4>The Legato Chops Builder</h4>
+                <span class="step-meta">A 60-minute play-along routine</span>
+                <p>One of the four Chops Builders. I walk you through how the hour works and what to watch for, then the hour is yours to run whenever you want to keep the technique warm.</p>
+              </div>
+            </li>
+          </ul>
+          <div class="pair">
+            <strong>In the Practice Lab</strong>
+            The <b>Virtuoso Lab</b> is built for exactly this kind of work, where the difficulty is control rather than raw speed. Send your weakest shape to the <b>Technique Lab</b> and grind the reps there.
+          </div>
+        </div>
+
+        <!-- TRACK 3 -->
+        <div class="track">
+          <div class="track-head">
+            <h3>Sweep Picking</h3>
+            <span class="track-badge">Deep Dive &rarr; Intensive</span>
+          </div>
+          <ul class="steps">
+            <li class="step">
+              <span class="step-n">1</span>
+              <img class="step-art" src="/pro/assets/boxart-sweep-deep-dive.jpg" alt="Sweep Picking Deep Dive" loading="lazy" />
+              <div class="step-body">
+                <h4>Sweep Picking Deep Dive</h4>
+                <span class="step-meta">30 days &middot; 30 minutes a day</span>
+                <p>The essential patterns, how the shapes apply, and the start of real speed and fluidity.</p>
+              </div>
+            </li>
+            <li class="step">
+              <span class="step-n">2</span>
+              <img class="step-art" src="/pro/assets/boxart-sweep-intensive.jpg" alt="8-Week Sweep Picking Intensive" loading="lazy" />
+              <div class="step-body">
+                <h4>8-Week Sweep Picking Intensive</h4>
+                <span class="step-meta">8 weeks &middot; a new 60-minute routine each week</span>
+                <p>Clean, controlled sweep picking, from the foundation all the way through to real-world application.</p>
+              </div>
+            </li>
+            <li class="step">
+              <span class="step-n">3</span>
+              <img class="step-art" src="/pro/assets/chops-builders.jpg" alt="Chops Builders" loading="lazy" />
+              <div class="step-body">
+                <h4>The Sweep Chops Builders</h4>
+                <span class="step-meta">Two 60-minute play-along routines</span>
+                <p>Run the 3-string hour first and get it solid before you move to the 5-string hour. These are the routines you come back to once the intensive is behind you.</p>
+              </div>
+            </li>
+          </ul>
+          <div class="pair">
+            <strong>In the Practice Lab</strong>
+            Use the <b>Fretboard Lab</b> to see the arpeggio shapes across the neck, then take one shape at a time into the <b>Virtuoso Lab</b> and hold the tempo down until it's clean.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       THE STANDALONE DEEP DIVES
+       ============================================================ -->
+  <section class="ov-78">
+    <div class="wrap rv">
+      <div class="group-head">
+        <span class="tag">30 Days Each</span>
+        <h2>The Standalone Deep Dives.</h2>
+        <p class="lead">These don't have an intensive behind them. Run one between tracks, or alongside a track if you've got the time.</p>
+      </div>
+      <div class="courses">
+        <div class="course">
+          <img src="/pro/assets/boxart-timing-deep-dive.jpg" alt="Timing Deep Dive" loading="lazy" />
+          <div class="course-body">
+            <h3>Timing Deep Dive</h3>
+            <p>Subdivisions, counting and precision. This is the one I'd run alongside another track, because timing makes every other technique sound better. Pair it with the Rhythm Lab.</p>
+          </div>
+        </div>
+        <div class="course">
+          <img src="/pro/assets/boxart-hybrid-deep-dive.jpg" alt="Hybrid Picking Deep Dive" loading="lazy" />
+          <div class="course-body">
+            <h3>Hybrid Picking Deep Dive</h3>
+            <p>The mechanics of hybrid picking and the essential patterns. Easiest to add once your alternate picking is already solid.</p>
+          </div>
+        </div>
+        <div class="course">
+          <img src="/pro/assets/boxart-tapping-deep-dive.jpg" alt="Tapping Deep Dive" loading="lazy" />
+          <div class="course-body">
+            <h3>Tapping Deep Dive</h3>
+            <p>The mechanics of tapping and the essential patterns, applied to scales and arpeggios. Shorter than the other Deep Dives, so it fits into a gap.</p>
+          </div>
+        </div>
+        <div class="course">
+          <img src="/pro/assets/boxart-quick-licks.jpg" alt="Quick Licks" loading="lazy" />
+          <div class="course-body">
+            <h3>Quick Licks</h3>
+            <p>This one isn't a Deep Dive, but it belongs here. The fun one. When a track starts feeling like homework, take what you've built and play something musical with it.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       MUSICIANSHIP TRACK
+       ============================================================ -->
+  <section class="ov-84">
+    <div class="wrap rv">
+      <div class="group-head">
+        <span class="tag">Runs Alongside</span>
+        <h2>The Musicianship Track.</h2>
+        <p class="lead">This one doesn't wait its turn. Your ear and your fretboard knowledge can develop at the same time as your hands, and they should.</p>
+      </div>
+      <div class="courses">
+        <div class="course">
+          <img src="/pro/assets/boxart-playing-what-you-hear.jpg" alt="Playing What You Hear" loading="lazy" />
+          <div class="course-body">
+            <h3>Playing What You Hear</h3>
+            <p>Start here for the ear, before you open the Ear Lab. It's an organized program for developing your ear and your fretboard knowledge together. The biggest gains come from singing the solfeggio syllables out loud, so do that part properly even when it feels silly.</p>
+          </div>
+        </div>
+        <div class="course">
+          <img src="/pro/assets/boxart-minor-pentatonic.jpg" alt="Nailing The Minor Pentatonic: 12 Weeks, 12 Keys" loading="lazy" />
+          <div class="course-body">
+            <h3>Nailing The Minor Pentatonic</h3>
+            <p>Twelve weeks, one key a week, all the way around the fretboard. Single strings, string groups, string skipping, every picking style, legato, tapping, bends and slides, with fretboard triangulation and solfege running through it.</p>
+          </div>
+        </div>
+      </div>
+      <div class="note">
+        The <strong>Ear Lab</strong> is a companion to Playing What You Hear, not the way in. Work the course, then use the Lab to keep the skill sharp between sessions.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       THE LAB MATRIX
+       ============================================================ -->
+  <section class="ov-88">
+    <div class="wrap rv">
+      <div class="group-head">
+        <span class="tag">The App</span>
+        <h2>Which Lab, And When.</h2>
+        <p class="lead">The courses tell you what to practice. The Practice Lab is where you take the one thing that isn't working.</p>
+      </div>
+      <div class="matrix">
+        <div class="mrow mhead">
+          <div class="mcell">What you're doing</div>
+          <div class="mcell">What to open</div>
+        </div>
+        <div class="mrow">
+          <div class="mcell">Any day, whatever you're working on</div>
+          <div class="mcell"><b>The Practice Log.</b> A metronome that logs your practice. The <b>Dashboard</b> holds the streak, the stats and the 28-day heatmap.</div>
+        </div>
+        <div class="mrow">
+          <div class="mcell">A Deep Dive, learning something new</div>
+          <div class="mcell"><b>Virtuoso Lab.</b> Technique, built on the science of motor learning. Fifteen perfect reps with rests between, then the tempo ceiling lifts.</div>
+        </div>
+        <div class="mrow">
+          <div class="mcell">An 8-week Intensive</div>
+          <div class="mcell">A <b>practice log built for that intensive</b>, so the week's routine and your log line up.</div>
+        </div>
+        <div class="mrow">
+          <div class="mcell">One shape that keeps falling apart</div>
+          <div class="mcell"><b>Technique Lab.</b> Remove your weak spots through massive repetition, counted toward a lifetime rep goal. Cycle mode turns it into a programmable practice loop.</div>
+        </div>
+        <div class="mrow">
+          <div class="mcell">The Timing Deep Dive, or anything that feels rushed</div>
+          <div class="mcell"><b>Rhythm Lab.</b> Master every rhythmic subdivision. Cells for the one-beat building blocks, Phrases for longer figures.</div>
+        </div>
+        <div class="mrow">
+          <div class="mcell">Picking-hand precision, string crossing</div>
+          <div class="mcell"><b>Systematic Chops Lab.</b> Train every two-string picking combination, one at a time, tagged inside, outside or mixed.</div>
+        </div>
+        <div class="mrow">
+          <div class="mcell">Playing What You Hear</div>
+          <div class="mcell"><b>Ear Lab.</b> Learn to play what you hear. Use it as the companion to the course.</div>
+        </div>
+        <div class="mrow">
+          <div class="mcell">Improvising, and your lines miss the chord</div>
+          <div class="mcell"><b>Target Tone Lab.</b> Anchor in a pentatonic shape, target the chord tones. Then <b>Harmony Lab</b> to learn to hear harmony through application.</div>
+        </div>
+        <div class="mrow">
+          <div class="mcell">You know the shape but not where else it lives</div>
+          <div class="mcell"><b>Fretboard Lab.</b> See scales and arpeggios across the neck.</div>
+        </div>
+        <div class="mrow">
+          <div class="mcell">You have 20 minutes and no plan</div>
+          <div class="mcell"><b>Quick Session.</b> Pick for me, choose a technique, or build your own.</div>
+        </div>
+      </div>
+      <div class="note">
+        <p><strong>Getting into the Lab:</strong> the link and the current password are posted in the Classroom. It's a shared password for everyone in the room and it rotates every few weeks, so if it stops working, go and grab the new one. Nothing has expired and you haven't lost anything.</p>
+        <p>One more thing. If the Virtuoso Lab tells you you're better off pausing, take it seriously. It only says that when your accurate reps have stopped holding together, and the reps you've already banked consolidate overnight. Stopping there is the productive move.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       WHAT A WEEK LOOKS LIKE
+       ============================================================ -->
+  <section class="ov-78">
+    <div class="wrap narrow rv">
+      <div style="text-align:center;">
+        <span class="tag">Day To Day</span>
+        <h2>What This Looks Like In A Week.</h2>
+      </div>
+      <ul class="week">
+        <li><b>The routine from your current course is the practice session.</b> Almost every program in here has its routine built in, so you're not designing anything. Open it and run it.</li>
+        <li><b>Ten extra minutes in a Lab on the thing that broke.</b> There's always one bar, one shape or one string crossing that falls apart. That's the Lab's job, not the routine's.</li>
+        <li><b>Log it.</b> The streak and the heatmap on the Dashboard are how you find out whether you practiced this week or only meant to.</li>
+        <li><b>Post the sticking point in the room.</b> The whole reason the community is there is so you're not guessing on your own between sessions.</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CLOSING
+       ============================================================ -->
+  <section class="ov-88">
+    <div class="wrap narrow rv">
+      <div style="text-align:center;">
+        <span class="tag">One Last Thing</span>
+        <h2>Finishing Isn't The Point.</h2>
+      </div>
+      <div class="note">
+        The goal isn't to complete as many courses as possible. <strong>The goal is to become a better guitar player.</strong> If one Deep Dive and one Intensive is all you get through this year, and your picking hand comes out the other side clean and fast, that's the room doing its job.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FINAL CTA
+       ============================================================ -->
+  <section class="final ov-60">
+    <div class="final-glow" aria-hidden="true"></div>
+    <div class="rv">
+      <span class="tag">The Practice Room</span>
+      <h2>Pick Your Track And Start.</h2>
+      <p class="lead narrow" style="margin-bottom:36px;">Everything above is waiting in the Classroom. Tell me in the room which track you're taking and I'll keep an eye on how it goes.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://www.skool.com/thepracticeroom/about">
+          Open The Classroom
+          <span class="btn-sub">Courses &middot; Practice Lab &middot; community</span>
+        </a>
+        <a class="btn btn-ghost" href="https://www.jonbjorkmusic.com/practiceroom/inside">
+          See Every Course
+          <span class="btn-sub">What each one covers</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>
+    <a href="https://www.jonbjorkmusic.com/">Home</a>
+    <a href="https://www.jonbjorkmusic.com/practiceroom">The Practice Room</a>
+    <a href="https://www.jonbjorkmusic.com/practiceroom/inside">What's Inside</a>
+    <a href="https://www.jonbjorkmusic.com/contact">Contact</a>
+  </div>
+  <div class="footer-copy">&copy; 2026 Jon Bjork Music</div>
+</footer>
+
+<script>
+  (function () {
+    var els = document.querySelectorAll('.rv');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach(function (el) { el.classList.add('on'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('on');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
