@@ -1,7 +1,6 @@
-/* Site-wide dismissible promo bar (The Practice Room launch, Aug 11-18 2026).
-   AFTER THE LAUNCH WEEK: revert to the Looper version (git history) or update the
-   copy below. Remember to also bump KEY when the message changes, otherwise
-   anyone who dismissed the previous bar never sees the new one.
+/* Site-wide dismissible promo bar (The Practice Room, evergreen from Aug 19 2026).
+   Remember to bump KEY whenever the message changes, otherwise anyone who
+   dismissed the previous bar never sees the new one.
    Include with: <script src="/promo-bar.js"></script> right after <body>.
    - Skips /practiceroom (no self-promo on the sales page)
    - Remembers dismissal in localStorage across the whole site
@@ -11,7 +10,7 @@
 
   if (/^\/practiceroom(\/|$)/.test(window.location.pathname)) return;
 
-  var KEY = 'promo-tpr-launch-dismissed';
+  var KEY = 'promo-tpr-evergreen-dismissed';
   try { if (localStorage.getItem(KEY) === '1') return; } catch (e) {}
 
   var CSS = [
@@ -52,7 +51,7 @@
         '<span class="promo-new">Now Open</span>' +
         '<span class="promo-text"><span class="promo-the">The </span>Practice Room' +
         '<span class="promo-desc">: every course, the files and the Practice Lab, for one payment</span></span>' +
-        '<span class="promo-cta">$197 until Aug 18 \u2192</span>' +
+        '<span class="promo-cta">$297 one payment \u2192</span>' +
       '</a>' +
       '<button class="promo-close" aria-label="Dismiss announcement">\u00d7</button>';
     document.body.insertBefore(bar, document.body.firstChild);
