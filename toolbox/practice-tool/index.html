@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guitar Technique Toolbox &mdash; Practice Tool | Jon Bjork</title>
+<meta name="description" content="The practice tool that goes with the Guitar Technique Toolbox: metronome, subdivision visualiser, the diagnostic, all thirteen tools, and a practice log you can export.">
+<meta name="robots" content="noindex, nofollow">
+<style>
+:root{
+  --purple:#7C3AED; --purple-lt:#8B5CF6; --purple-dk:#6D28D9;
+  --navy:#1A1040; --lav:#F1EBFC; --lav2:#F7F4FD;
+  --ink:#111; --ink2:#333; --ink3:#6B6B6B; --rule:#DDD; --rule2:#EDEAF4;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:190px}
+body{margin:0;background:#fff;color:var(--ink2);
+  font-family:"Helvetica Neue",Helvetica,Arial,"Liberation Sans",sans-serif;
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;color:var(--ink)}
+p{margin:0 0 .7em}
+a{color:var(--purple);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:860px;margin:0 auto;padding:0 24px}
+
+/* header */
+.bar{background:var(--navy);color:#fff;padding:16px 0}
+.bar .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.bar .b{font-weight:700;font-size:19px;letter-spacing:.02em}
+.bar .b span{font-weight:400;font-size:13px;color:#C4B5FD;margin-left:8px;letter-spacing:.14em}
+.bar .roles{color:var(--purple-lt);font-weight:700;font-size:12px;letter-spacing:.12em}
+.strip{height:6px;background:var(--purple)}
+
+.hero{padding:44px 0 30px;text-align:center}
+.hero .kick{color:var(--purple);font-weight:700;font-size:12px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
+.hero h1{font-size:clamp(30px,5.4vw,50px);line-height:1.05;text-transform:uppercase;letter-spacing:-.01em}
+.hero .sub{margin-top:14px;font-size:18px;color:var(--ink2)}
+.hero .note{margin-top:8px;font-size:14px;color:var(--ink3)}
+
+/* metronome */
+.metro{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.97);
+  border-bottom:1px solid var(--rule);backdrop-filter:blur(6px)}
+.metro .wrap{padding-top:12px;padding-bottom:12px}
+.mrow{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.bpmbox{display:flex;align-items:baseline;gap:8px;min-width:118px}
+.bpm{font-size:34px;font-weight:700;color:var(--ink);line-height:1;font-variant-numeric:tabular-nums}
+.bpml{font-size:11px;letter-spacing:.14em;color:var(--ink3);font-weight:700}
+.btn{border:1px solid var(--rule);background:#fff;color:var(--ink2);border-radius:6px;
+  padding:7px 11px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.btn:hover{border-color:var(--purple);color:var(--purple)}
+.btn.play{background:var(--purple);border-color:var(--purple);color:#fff;min-width:78px;font-size:14px}
+.btn.play.on{background:var(--navy);border-color:var(--navy)}
+input[type=range]{flex:1;min-width:150px;accent-color:var(--purple)}
+.subs{display:flex;gap:5px;flex-wrap:wrap}
+.sub{border:1px solid var(--rule);border-radius:5px;padding:5px 9px;font-size:12px;font-weight:700;
+  cursor:pointer;background:#fff;color:var(--ink3)}
+.sub.on{background:var(--purple);border-color:var(--purple);color:#fff}
+.viz{display:flex;gap:5px;margin-top:11px;flex-wrap:wrap}
+.dot{flex:1;min-width:11px;height:26px;border-radius:4px;background:var(--rule2);cursor:pointer;
+  border:1px solid transparent;transition:transform .05s}
+.dot.beat{background:#DED3F5}
+.dot.acc{background:var(--purple-lt)}
+.dot.now{background:var(--navy);transform:scaleY(1.16)}
+.mhint{font-size:12px;color:var(--ink3);margin-top:7px}
+
+/* bands */
+.band{padding:52px 0;border-top:1px solid var(--rule2)}
+.band.alt{background:var(--lav2)}
+.eyebrow{color:var(--purple);font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+h2{font-size:clamp(24px,3.6vw,34px);line-height:1.12;padding-bottom:10px;position:relative;margin-bottom:14px}
+h2::after{content:"";position:absolute;left:0;bottom:0;width:112px;height:3px;background:var(--purple)}
+.dek{color:var(--ink2);max-width:620px;margin-bottom:22px}
+
+/* diagnostic */
+.dx{border-top:2px solid var(--purple)}
+.dx-row{padding:16px 0;border-bottom:1px solid var(--rule2)}
+.dx-q{font-weight:700;color:var(--ink);font-size:17px;margin-bottom:9px}
+.dx-q .qm{color:var(--purple);margin-right:7px}
+.path{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.step{background:var(--lav);color:var(--ink);border-radius:5px;padding:5px 10px;font-size:13px;font-weight:700}
+.step b{color:var(--purple);margin-right:5px}
+.step:hover{background:var(--purple);color:#fff;text-decoration:none}
+.step:hover b{color:#fff}
+.arrow{color:var(--purple);font-size:12px}
+.dx-note{font-size:14px;color:var(--ink3);margin:0}
+
+/* stages */
+.stage{display:flex;gap:18px;padding:15px 0;border-bottom:1px solid var(--rule2)}
+.stage:last-child{border-bottom:none}
+.stage-n{flex:0 0 46px;font-size:26px;font-weight:700;color:var(--purple);line-height:1}
+.stage-b h3{font-size:18px;margin-bottom:8px}
+.stage-b h3 span{color:var(--purple);font-weight:400}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{background:var(--lav);color:var(--purple-dk);border-radius:5px;padding:4px 9px;font-size:12px;font-weight:700}
+
+/* tools */
+.tool{padding:34px 0;border-bottom:1px solid var(--rule2)}
+.tool-head{display:flex;gap:16px;align-items:flex-start;margin-bottom:14px}
+.tool-n{font-size:40px;font-weight:700;color:var(--purple);line-height:.9}
+.stage-tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--purple);margin-bottom:5px}
+.tool h3{font-size:clamp(21px,3vw,28px);line-height:1.08;padding-bottom:9px;position:relative}
+.tool h3::after{content:"";position:absolute;left:0;bottom:0;width:86px;height:3px;background:var(--purple)}
+.lede{font-size:17px;color:var(--ink2);margin:14px 0 16px}
+.blk{margin-bottom:16px}
+.blk h4{color:var(--purple);font-size:17px;margin-bottom:6px}
+.callout{background:var(--lav);border-left:4px solid var(--purple);padding:13px 17px;margin-bottom:15px}
+.callout h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple-dk);margin-bottom:5px}
+.callout p{margin:0}
+.callout.use{display:flex;gap:16px;align-items:flex-start}
+.callout.use h4{flex:0 0 92px;margin:0}
+.callout.soft{background:var(--lav2);border:1px solid #DED3F5;border-left:1px solid #DED3F5}
+.callout.line{background:#fff;border:1.5px solid var(--purple);border-left-width:1.5px}
+.pair{display:flex;gap:14px;margin-bottom:15px;flex-wrap:wrap}
+.pbox{flex:1;min-width:230px;border:1px solid var(--rule2);padding:13px 15px}
+.pbox h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.pbox p{margin:0;font-size:14px}
+.mins{border-top:1px solid var(--rule2)}
+.min{display:flex;gap:14px;padding:9px 0;border-bottom:1px solid var(--rule2)}
+.mn{flex:0 0 92px;font-size:12px;font-weight:700;color:var(--purple);letter-spacing:.05em;text-transform:uppercase;padding-top:2px}
+.min p{margin:0;font-size:15px}
+.fixes{border-top:1px solid var(--rule);padding-top:11px;font-size:14px}
+.totop{display:inline-block;margin-top:12px;font-size:13px;font-weight:700}
+.preset{display:block;width:100%;text-align:left;border:1px dashed var(--purple);background:var(--lav2);
+  color:var(--ink);border-radius:6px;padding:11px 15px;font:inherit;font-size:15px;font-weight:700;
+  cursor:pointer;margin-bottom:16px}
+.preset:hover{background:var(--lav)}
+.preset .pl{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--purple);margin-bottom:3px}
+.preset .ph{display:block;font-size:13px;font-weight:400;color:var(--ink3);margin-top:2px}
+.preset.off{border-style:solid;border-color:var(--rule);background:#fff;cursor:default}
+.preset.off:hover{background:#fff}
+.preset.off .pl{color:var(--ink3)}
+
+.index{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:30px}
+.index a{background:#fff;border:1px solid var(--rule2);border-radius:6px;padding:6px 11px;
+  font-size:13px;font-weight:700;color:var(--ink2)}
+.index a b{color:var(--purple);margin-right:5px}
+.index a:hover{border-color:var(--purple);color:var(--purple);text-decoration:none}
+.oneline{font-size:17px;color:var(--ink2);margin:14px 0 16px}
+.tool{background:#fff;border:1px solid var(--rule2);border-radius:8px;padding:22px 24px;margin-bottom:16px}
+
+/* cheat */
+.cheat{columns:2;column-gap:34px}
+.ci{break-inside:avoid;padding:10px 0;border-bottom:1px solid var(--rule2)}
+.ci a{display:flex;gap:9px;align-items:baseline}
+.ci .cn{color:var(--purple);font-weight:700;font-size:13px;flex:0 0 26px}
+.ci .cnm{color:var(--ink);font-weight:700;font-size:15px}
+.ci p{margin:3px 0 0 35px;font-size:13.5px;color:var(--ink3)}
+@media(max-width:640px){.cheat{columns:1}}
+
+/* log */
+.logtools{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}
+.logform{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:var(--lav2);
+  border:1px solid var(--rule2);padding:18px;margin-bottom:20px}
+.logform label{display:block;font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  font-weight:700;color:var(--purple-dk);margin-bottom:5px}
+.logform input,.logform textarea{width:100%;border:1px solid var(--rule);border-radius:5px;
+  padding:8px 10px;font:inherit;font-size:14px;background:#fff;color:var(--ink)}
+.logform textarea{min-height:62px;resize:vertical}
+.logform .full{grid-column:1/-1}
+@media(max-width:640px){.logform{grid-template-columns:1fr}}
+table.log{width:100%;border-collapse:collapse;font-size:14px}
+table.log th{text-align:left;font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--purple-dk);border-bottom:2px solid var(--purple);padding:0 8px 8px 0}
+table.log td{border-bottom:1px solid var(--rule2);padding:10px 8px 10px 0;vertical-align:top}
+table.log tr:hover{background:var(--lav2)}
+.del{border:none;background:none;color:var(--ink3);cursor:pointer;font-size:16px;line-height:1}
+.del:hover{color:#B4241A}
+.empty{color:var(--ink3);font-style:italic;padding:18px 0}
+.saved{font-size:12px;color:var(--ink3);margin-top:10px}
+
+footer{background:var(--navy);color:#C9C2DA;padding:34px 0;font-size:14px}
+footer a{color:#C4B5FD}
+footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+
+@media print{
+  .metro,.logtools,.logform,.totop,.preset,footer .cta{display:none!important}
+  .band{padding:18px 0;border:none}
+  .band.alt{background:#fff}
+  body{font-size:10.5pt}
+  .tool{page-break-inside:avoid}
+}
+</style>
+</head>
+<body id="top">
+
+<div class="bar"><div class="wrap">
+  <div class="b">JON BJORK<span>MUSIC</span></div>
+  <div class="roles">GUITARIST &nbsp;/&nbsp; COACH &nbsp;/&nbsp; COMPOSER</div>
+</div></div>
+<div class="strip"></div>
+
+<div class="wrap hero">
+  <div class="kick">Practice Tool</div>
+  <h1>Guitar Technique<br>Toolbox.</h1>
+  <p class="sub">13 practice tools, and the order to use them in.</p>
+  <p class="note">Metronome, the diagnostic, the five-minute routines, and a practice log you can export.<br>The full explanation of every tool is in the book.</p>
+</div>
+
+<div class="metro"><div class="wrap">
+  <div class="mrow">
+    <div class="bpmbox"><span class="bpm" id="bpm">80</span><span class="bpml">BPM</span></div>
+    <button class="btn" data-step="-5">&minus;5</button>
+    <button class="btn" data-step="-1">&minus;1</button>
+    <input type="range" id="slider" min="30" max="260" value="80">
+    <button class="btn" data-step="1">+1</button>
+    <button class="btn" data-step="5">+5</button>
+    <button class="btn play" id="play">Start</button>
+  </div>
+  <div class="mrow" style="margin-top:10px"><div class="subs"><button class="sub" data-sub="1">1/4</button><button class="sub" data-sub="2">8th</button><button class="sub" data-sub="3">3plet</button><button class="sub" data-sub="4">16th</button><button class="sub" data-sub="5">5</button><button class="sub" data-sub="6">6</button><button class="sub" data-sub="7">7</button><button class="sub" data-sub="8">32nd</button></div></div>
+  <div class="viz" id="viz"></div>
+  <p class="mhint">Click any block to accent that subdivision. Spacebar starts and stops.</p>
+</div></div>
+
+<section id="diagnostic" class="band">
+<div class="wrap">
+<div class="eyebrow">Start here</div><h2>What's actually wrong?</h2>
+<p class="dek">Find the line that matches your problem and run the tools left to right.</p>
+<div class="dx">
+<div class="dx-row">
+<div class="dx-q"><span class="qm">&rarr;</span>I'm learning it for the first time</div>
+<div class="path">
+<a class="step" href="#tool-01"><b>01</b>Rhythmic Planting</a><span class="arrow">&#9656;</span><a class="step" href="#tool-02"><b>02</b>Transition Time</a><span class="arrow">&#9656;</span><a class="step" href="#tool-08"><b>08</b>Beat to Beat</a>
+</div></div>
+<div class="dx-row">
+<div class="dx-q"><span class="qm">&rarr;</span>I can play it slowly, but it falls apart when I speed up</div>
+<div class="path">
+<a class="step" href="#tool-08"><b>08</b>Beat to Beat</a><span class="arrow">&#9656;</span><a class="step" href="#tool-02"><b>02</b>Transition Time</a><span class="arrow">&#9656;</span><a class="step" href="#tool-03"><b>03</b>Dotted Rhythms</a><span class="arrow">&#9656;</span><a class="step" href="#tool-07"><b>07</b>Speed Bursts</a>
+</div></div>
+<div class="dx-row">
+<div class="dx-q"><span class="qm">&rarr;</span>One specific spot trips me every single time</div>
+<div class="path">
+<a class="step" href="#tool-08"><b>08</b>Beat to Beat</a><span class="arrow">&#9656;</span><a class="step" href="#tool-b2"><b>B2</b>Hands Separate</a><span class="arrow">&#9656;</span><a class="step" href="#tool-06"><b>06</b>Looping</a><span class="arrow">&#9656;</span><a class="step" href="#tool-04"><b>04</b>Accents</a>
+</div></div>
+<div class="dx-row">
+<div class="dx-q"><span class="qm">&rarr;</span>My picking and fretting don't feel locked together</div>
+<div class="path">
+<a class="step" href="#tool-04"><b>04</b>Accents</a><span class="arrow">&#9656;</span><a class="step" href="#tool-01"><b>01</b>Rhythmic Planting</a><span class="arrow">&#9656;</span><a class="step" href="#tool-09"><b>09</b>Rhythmic Variation</a>
+</div></div>
+<div class="dx-row">
+<div class="dx-q"><span class="qm">&rarr;</span>My picking is inefficient and the notes come out uneven</div>
+<div class="path">
+<a class="step" href="#tool-01"><b>01</b>Planting</a><span class="arrow">&#9656;</span><a class="step" href="#tool-b2"><b>B2</b>Hands Separate</a><span class="arrow">&#9656;</span><a class="step" href="#tool-b1"><b>B1</b>Acoustic</a>
+</div></div>
+<div class="dx-row">
+<div class="dx-q"><span class="qm">&rarr;</span>It's clean and up to tempo, but it sounds mechanical</div>
+<div class="path">
+<a class="step" href="#tool-05"><b>05</b>Dynamics</a><span class="arrow">&#9656;</span><a class="step" href="#tool-04"><b>04</b>Accents</a><span class="arrow">&#9656;</span><a class="step" href="#tool-b3"><b>B3</b>Record Yourself</a>
+</div></div>
+<div class="dx-row">
+<div class="dx-q"><span class="qm">&rarr;</span>I've been repeating it for twenty minutes and stopped listening</div>
+<div class="path">
+<a class="step" href="#tool-05"><b>05</b>Dynamics</a><span class="arrow">&#9656;</span><a class="step" href="#tool-06"><b>06</b>Looping</a><span class="arrow">&#9656;</span><a class="step" href="#tool-09"><b>09</b>Rhythmic Variation</a>
+</div></div>
+<div class="dx-row">
+<div class="dx-q"><span class="qm">&rarr;</span>I'm not at the guitar</div>
+<div class="path">
+<a class="step" href="#tool-10"><b>10</b>Visualization</a>
+</div></div>
+</div></div></section>
+<section id="tools" class="band alt">
+<div class="wrap">
+<div class="eyebrow">The toolbox</div><h2>The thirteen tools.</h2>
+<p class="dek">What to do, while you are doing it. The full explanation of every tool is in the book.</p>
+<div class="index"><a href="#tool-01"><b>01</b> Planting &amp; Rhythmic Planting</a><a href="#tool-02"><b>02</b> Transition Time</a><a href="#tool-03"><b>03</b> Dotted Rhythms</a><a href="#tool-04"><b>04</b> Accents</a><a href="#tool-05"><b>05</b> Dynamics</a><a href="#tool-06"><b>06</b> Looping</a><a href="#tool-07"><b>07</b> Speed Bursts</a><a href="#tool-08"><b>08</b> Beat to Beat</a><a href="#tool-09"><b>09</b> Rhythmic Variation</a><a href="#tool-10"><b>10</b> Visualization</a><a href="#tool-b1"><b>B1</b> Practice on an Acoustic</a><a href="#tool-b2"><b>B2</b> Hands Separate</a><a href="#tool-b3"><b>B3</b> Record Yourself</a></div>
+<article class="tool" id="tool-01">
+<div class="tool-head"><div class="tool-n">01</div><div><div class="stage-tag">Stage 2 &nbsp;·&nbsp; Program</div><h3>Planting &amp; Rhythmic Planting</h3></div></div>
+<p class="oneline">Set the pick before you play the note. Play on the downbeat, plant and pre-finger on the upbeat.</p>
+<div class="callout use"><h4>Use it when</h4><p>Your picking motion is bigger than it needs to be, string changes feel uncontrolled, or you are learning a phrase from scratch and want the first impression to be a clean one.</p></div>
+<button class="preset" data-bpm="70" data-sub="2"><span class="pl">Set the metronome</span> 70 BPM &middot; 8ths<span class="ph">Rhythmic planting in 8ths</span></button>
+<div class="blk"><h4>Five minutes with it</h4><div class="mins">
+<div class="min"><div class="mn">Minute 1</div><p>Open G string, alternate strokes at a very slow pulse. Make every note equally short.</p></div>
+<div class="min"><div class="mn">Minutes 2-3</div><p>9-10-11-12 on the G string. Keep the pick close enough that the string seems to contain the movement.</p></div>
+<div class="min"><div class="mn">Minute 4</div><p>The same pattern with rhythmic planting: play on each downbeat, prepare both hands on each upbeat.</p></div>
+<div class="min"><div class="mn">Minute 5</div><p>One real string change from your phrase. Damp the string you leave with both hands.</p></div>
+</div></div>
+<div class="callout soft"><h4>You've got it when</h4><p>The notes come out short and even, and a string change no longer stands out from the notes on either side of it.</p></div>
+<a class="totop" href="#top">Back to top</a>
+</article>
+<article class="tool" id="tool-02">
+<div class="tool-head"><div class="tool-n">02</div><div><div class="stage-tag">Stage 2 &nbsp;·&nbsp; Program</div><h3>Transition Time</h3></div></div>
+<p class="oneline">Slow tempo, quick transitions. Hold each note, then snap to the next. 50-80 BPM quarters.</p>
+<div class="callout use"><h4>Use it when</h4><p>Your slow practice uses slow-motion movements that look nothing like the technique you need at speed, or your tone is uneven and mushy at every tempo.</p></div>
+<button class="preset" data-bpm="60" data-sub="1"><span class="pl">Set the metronome</span> 60 BPM &middot; quarters<span class="ph">Quarter notes, slow</span></button>
+<div class="blk"><h4>Five minutes with it</h4><div class="mins">
+<div class="min"><div class="mn">Minute 1</div><p>9-10-11-12 on the G string at 60, one note per beat.</p></div>
+<div class="min"><div class="mn">Minute 2</div><p>Make the fretting change quick, without lifting the fingers high.</p></div>
+<div class="min"><div class="mn">Minute 3</div><p>Make the pick pass through the string quickly, without adding force.</p></div>
+<div class="min"><div class="mn">Minute 4</div><p>Apply it to one string crossing or position shift from your phrase.</p></div>
+<div class="min"><div class="mn">Minute 5</div><p>The whole phrase slowly, keeping the same decisive transitions.</p></div>
+</div></div>
+<div class="callout soft"><h4>You've got it when</h4><p>Every note lasts right up to the next one with no gap, while the movement between them feels sharper and faster than the tempo does.</p></div>
+<a class="totop" href="#top">Back to top</a>
+</article>
+<article class="tool" id="tool-03">
+<div class="tool-head"><div class="tool-n">03</div><div><div class="stage-tag">Stage 3 &nbsp;·&nbsp; Stress-test</div><h3>Dotted Rhythms</h3></div></div>
+<p class="oneline">Long-short through the phrase, then short-long. Covers every transition at speed.</p>
+<div class="callout use"><h4>Use it when</h4><p>The phrase collapses as you approach the tempo you want, and you need to feel the transitions at speed without playing the whole thing at speed.</p></div>
+<button class="preset" data-bpm="90" data-sub="4"><span class="pl">Set the metronome</span> 90 BPM &middot; 16ths<span class="ph">Dotted figure inside 16ths</span></button>
+<div class="blk"><h4>Five minutes with it</h4><div class="mins">
+<div class="min"><div class="mn">Minute 1</div><p>Long-short through the phrase at a comfortable tempo.</p></div>
+<div class="min"><div class="mn">Minute 2</div><p>Reverse it to short-long.</p></div>
+<div class="min"><div class="mn">Minute 3</div><p>Find the fastest tempo where both versions still pass RAT.</p></div>
+<div class="min"><div class="mn">Minute 4</div><p>Put the dotted figure inside your target subdivision at the target tempo.</p></div>
+<div class="min"><div class="mn">Minute 5</div><p>Play it straight and notice which transitions now hold.</p></div>
+</div></div>
+<div class="callout soft"><h4>You've got it when</h4><p>You can run both directions cleanly at the subdivision you are aiming for, and playing the phrase straight feels like joining up transitions you have already made.</p></div>
+<a class="totop" href="#top">Back to top</a>
+</article>
+<article class="tool" id="tool-04">
+<div class="tool-head"><div class="tool-n">04</div><div><div class="stage-tag">Stage 3 &nbsp;·&nbsp; Stress-test</div><h3>Accents</h3></div></div>
+<p class="oneline">Accent note 1 of each beat, then 2, then 3, then 4. Both hands accent together.</p>
+<div class="callout use"><h4>Use it when</h4><p>The two hands do not feel joined, your timing is uneven, or there are notes in the middle of a phrase you suspect are sloppy without being able to hear it.</p></div>
+<button class="preset" data-bpm="80" data-sub="4"><span class="pl">Set the metronome</span> 80 BPM &middot; 16ths<span class="ph">Accents through 16ths</span></button>
+<div class="blk"><h4>Five minutes with it</h4><div class="mins">
+<div class="min"><div class="mn">Minute 1</div><p>Accent note 1 of each beat, through the phrase.</p></div>
+<div class="min"><div class="mn">Minute 2</div><p>Accent note 2.</p></div>
+<div class="min"><div class="mn">Minute 3</div><p>Accent note 3.</p></div>
+<div class="min"><div class="mn">Minute 4</div><p>Accent note 4, or note 3 if you are in triplets.</p></div>
+<div class="min"><div class="mn">Minute 5</div><p>Take the position that was hardest and stay on it.</p></div>
+</div></div>
+<div class="callout soft"><h4>You've got it when</h4><p>You can place the accent on any note of the beat without the beat itself moving, and both hands arrive on it together.</p></div>
+<a class="totop" href="#top">Back to top</a>
+</article>
+<article class="tool" id="tool-05">
+<div class="tool-head"><div class="tool-n">05</div><div><div class="stage-tag">Stage 5 &nbsp;·&nbsp; Make it music</div><h3>Dynamics</h3></div></div>
+<p class="oneline">Soft to loud and back. Clean tone. Ride a wave up and down the phrase.</p>
+<div class="callout use"><h4>Use it when</h4><p>The phrase is technically correct and sounds mechanical, or you have been repeating something long enough that you have stopped listening to it.</p></div>
+<button class="preset" data-bpm="70" data-sub="2"><span class="pl">Set the metronome</span> 70 BPM &middot; 8ths<span class="ph">Dynamics on a scale</span></button>
+<div class="blk"><h4>Five minutes with it</h4><div class="mins">
+<div class="min"><div class="mn">Minute 1</div><p>One note, as softly as you can while the tone stays even.</p></div>
+<div class="min"><div class="mn">Minute 2</div><p>The same note at a normal level, then as loud as still sounds musical.</p></div>
+<div class="min"><div class="mn">Minute 3</div><p>A scale, soft going up and loud coming down.</p></div>
+<div class="min"><div class="mn">Minute 4</div><p>Reverse it, loud going up and soft coming down.</p></div>
+<div class="min"><div class="mn">Minute 5</div><p>Your phrase, improvising the shape freely.</p></div>
+</div></div>
+<div class="callout soft"><h4>You've got it when</h4><p>You can play the same phrase at three clearly different volumes with the same tone and the same relaxation in each.</p></div>
+<a class="totop" href="#top">Back to top</a>
+</article>
+<article class="tool" id="tool-06">
+<div class="tool-head"><div class="tool-n">06</div><div><div class="stage-tag">Stage 3 &nbsp;·&nbsp; Stress-test</div><h3>Looping</h3></div></div>
+<p class="oneline">Number the notes. Start the loop on note 1, then 2, then 3, keeping the original pick strokes.</p>
+<div class="callout use"><h4>Use it when</h4><p>One repeating cell is unreliable, or you want a lot of good repetitions on a problem spot without your attention going flat.</p></div>
+<button class="preset" data-bpm="90" data-sub="4"><span class="pl">Set the metronome</span> 90 BPM &middot; 16ths<span class="ph">Loop variations in 16ths</span></button>
+<div class="blk"><h4>Five minutes with it</h4><div class="mins">
+<div class="min"><div class="mn">Minute 1</div><p>Number the notes and play variation 1.</p></div>
+<div class="min"><div class="mn">Minute 2</div><p>Variation 2, checking the starting stroke from the top.</p></div>
+<div class="min"><div class="mn">Minute 3</div><p>Variation 3.</p></div>
+<div class="min"><div class="mn">Minute 4</div><p>Variation 4, and onward if the loop is longer.</p></div>
+<div class="min"><div class="mn">Minute 5</div><p>The hardest variation, on its own.</p></div>
+</div></div>
+<div class="callout soft"><h4>You've got it when</h4><p>Every variation flows without stumbling, and starting the phrase on any note feels available rather than alarming.</p></div>
+<a class="totop" href="#top">Back to top</a>
+</article>
+<article class="tool" id="tool-07">
+<div class="tool-head"><div class="tool-n">07</div><div><div class="stage-tag">Stage 4 &nbsp;·&nbsp; Accelerate</div><h3>Speed Bursts</h3></div></div>
+<p class="oneline">Notes 1-2 fast. Then 1-3. Then 1-4. Plant, relax, play. Then run it backwards from the end.</p>
+<div class="callout use"><h4>Use it when</h4><p>You have already worked the phrase with the slower tools, you can play it accurately at a moderate tempo, and you want to cross a speed barrier.</p></div>
+<button class="preset off"><span class="pl">Metronome</span> Not needed for this one<span class="ph">Work it in silence</span></button>
+<div class="blk"><h4>Five minutes with it</h4><div class="mins">
+<div class="min"><div class="mn">Minute 1</div><p>Notes 1 and 2. Plant, relax, play.</p></div>
+<div class="min"><div class="mn">Minute 2</div><p>Build up to note 4.</p></div>
+<div class="min"><div class="mn">Minute 3</div><p>Continue to the end, or to the first failure.</p></div>
+<div class="min"><div class="mn">Minute 4</div><p>The last two notes, then the last three.</p></div>
+<div class="min"><div class="mn">Minute 5</div><p>The fragment that failed, with Transition Time or Accents on it.</p></div>
+</div></div>
+<div class="callout soft"><h4>You've got it when</h4><p>The full-length burst runs faster than your clean tempo for the whole phrase, and you are still relaxed at the end of it.</p></div>
+<a class="totop" href="#top">Back to top</a>
+</article>
+<article class="tool" id="tool-08">
+<div class="tool-head"><div class="tool-n">08</div><div><div class="stage-tag">Stage 1 &nbsp;·&nbsp; Diagnose</div><h3>Beat to Beat</h3></div></div>
+<p class="oneline">X+1 notes, beat to beat, at 80% of target. Then start one note later. Repeat across the phrase.</p>
+<div class="callout use"><h4>Use it when</h4><p>You do not know where the glitch actually is, or you have a phrase down at a slow tempo and want to know what is stopping it going faster.</p></div>
+<button class="preset" data-bpm="100" data-sub="4"><span class="pl">Set the metronome</span> 100 BPM &middot; 16ths<span class="ph">X+1 at 80% of target</span></button>
+<div class="blk"><h4>Five minutes with it</h4><div class="mins">
+<div class="min"><div class="mn">Minute 1</div><p>Set 80% of target and play the first X+1 group.</p></div>
+<div class="min"><div class="mn">Minute 2</div><p>Start on note 2, then note 3.</p></div>
+<div class="min"><div class="mn">Minute 3</div><p>Continue through the rest of the phrase.</p></div>
+<div class="min"><div class="mn">Minute 4</div><p>Write down the groups that failed.</p></div>
+<div class="min"><div class="mn">Minute 5</div><p>Take the worst one and start on it with another tool.</p></div>
+</div></div>
+<div class="callout soft"><h4>You've got it when</h4><p>Every X+1 window plays at 80% of the target with RAT intact, and you can name the two or three that do not.</p></div>
+<a class="totop" href="#top">Back to top</a>
+</article>
+<article class="tool" id="tool-09">
+<div class="tool-head"><div class="tool-n">09</div><div><div class="stage-tag">Stage 3 &nbsp;·&nbsp; Stress-test</div><h3>Rhythmic Variation</h3></div></div>
+<p class="oneline">Play it in a different subdivision. Triplets become 16ths and back. The accents move.</p>
+<div class="callout use"><h4>Use it when</h4><p>The groupings feel locked in, your timing is unreliable, or you want to make a lick you learned from someone else genuinely your own.</p></div>
+<button class="preset" data-bpm="80" data-sub="3"><span class="pl">Set the metronome</span> 80 BPM &middot; triplets<span class="ph">Triplets against 16ths</span></button>
+<div class="blk"><h4>Five minutes with it</h4><div class="mins">
+<div class="min"><div class="mn">Minute 1</div><p>Play the phrase in its written subdivision.</p></div>
+<div class="min"><div class="mn">Minute 2</div><p>Switch to the opposing one: triplets to sixteenths, or the reverse.</p></div>
+<div class="min"><div class="mn">Minute 3</div><p>Count out loud all the way through it.</p></div>
+<div class="min"><div class="mn">Minute 4</div><p>Try one unfamiliar subdivision, such as fives or sevens.</p></div>
+<div class="min"><div class="mn">Minute 5</div><p>Back to the written one.</p></div>
+</div></div>
+<div class="callout soft"><h4>You've got it when</h4><p>You can change subdivision without stopping, and the accent moving through the phrase no longer throws you.</p></div>
+<a class="totop" href="#top">Back to top</a>
+</article>
+<article class="tool" id="tool-10">
+<div class="tool-head"><div class="tool-n">10</div><div><div class="stage-tag">Anywhere &nbsp;·&nbsp; No guitar needed</div><h3>Visualization</h3></div></div>
+<p class="oneline">Away from the guitar: hear it, see the fretboard, feel the stroke. Three or four notes to start.</p>
+<div class="callout use"><h4>Use it when</h4><p>You cannot clearly hear or remember the phrase, you are learning something new from notation, or you are away from the guitar with time to spare.</p></div>
+<button class="preset off"><span class="pl">Metronome</span> Not needed for this one<span class="ph">Work it in silence</span></button>
+<div class="blk"><h4>Five minutes with it</h4><div class="mins">
+<div class="min"><div class="mn">Minute 1</div><p>The first note: finger, pick stroke planted, then the sound.</p></div>
+<div class="min"><div class="mn">Minute 2</div><p>Add the second note, then combine the two.</p></div>
+<div class="min"><div class="mn">Minute 3</div><p>Build up to four notes.</p></div>
+<div class="min"><div class="mn">Minute 4</div><p>Run those four at a steady slow tempo.</p></div>
+<div class="min"><div class="mn">Minute 5</div><p>Run one other tool mentally, such as moving an accent.</p></div>
+</div></div>
+<div class="callout soft"><h4>You've got it when</h4><p>You can run the phrase in your head from start to finish at a steady slow tempo, hearing and seeing each note as it goes past.</p></div>
+<a class="totop" href="#top">Back to top</a>
+</article>
+<article class="tool" id="tool-b1">
+<div class="tool-head"><div class="tool-n">B1</div><div><div class="stage-tag">Bonus &nbsp;·&nbsp; Stress-test</div><h3>Practice on an Acoustic</h3></div></div>
+<p class="oneline">Move the problem spot to acoustic. Accuracy, not force. Leave the tempo work for the electric.</p>
+<div class="callout use"><h4>Use it when</h4><p>You suspect gain and compression are covering for you, or your legato is nearly there and you cannot tell what is missing.</p></div>
+<button class="preset" data-bpm="60" data-sub="2"><span class="pl">Set the metronome</span> 60 BPM &middot; 8ths<span class="ph">Slow on the acoustic</span></button>
+<div class="blk"><h4>Five minutes with it</h4><div class="mins">
+<div class="min"><div class="mn">Minute 1</div><p>The phrase slowly on the acoustic.</p></div>
+<div class="min"><div class="mn">Minute 2</div><p>The hardest window from it, on its own.</p></div>
+<div class="min"><div class="mn">Minute 3</div><p>Any legato in it, with minimum force.</p></div>
+<div class="min"><div class="mn">Minute 4</div><p>The same window with Dynamics, soft to loud.</p></div>
+<div class="min"><div class="mn">Minute 5</div><p>The whole phrase slowly again.</p></div>
+</div></div>
+<div class="callout soft"><h4>You've got it when</h4><p>The passage sounds clean on the acoustic at a tempo you can hold, without using any more force than you would on the electric.</p></div>
+<a class="totop" href="#top">Back to top</a>
+</article>
+<article class="tool" id="tool-b2">
+<div class="tool-head"><div class="tool-n">B2</div><div><div class="stage-tag">Bonus &nbsp;·&nbsp; Diagnose</div><h3>Hands Separate</h3></div></div>
+<p class="oneline">Picking hand on muted strings. Fretting hand damped, hammer-ons throughout. Find the guilty hand.</p>
+<div class="callout use"><h4>Use it when</h4><p>A window fails and you cannot tell where the fault is, or you want to work one hand without the other's problems in the way.</p></div>
+<button class="preset" data-bpm="70" data-sub="4"><span class="pl">Set the metronome</span> 70 BPM &middot; 16ths<span class="ph">One hand at a time</span></button>
+<div class="blk"><h4>Five minutes with it</h4><div class="mins">
+<div class="min"><div class="mn">Minute 1</div><p>The picking pattern alone on muted strings.</p></div>
+<div class="min"><div class="mn">Minute 2</div><p>The same with plain Planting, notes as short as possible.</p></div>
+<div class="min"><div class="mn">Minute 3</div><p>The fretting hand alone, damped, legato only.</p></div>
+<div class="min"><div class="mn">Minute 4</div><p>The fretting hand with accents, listening for the rhythm.</p></div>
+<div class="min"><div class="mn">Minute 5</div><p>Both hands together, slowly.</p></div>
+</div></div>
+<div class="callout soft"><h4>You've got it when</h4><p>Each hand plays its part cleanly on its own, and you can say out loud which one was causing the problem.</p></div>
+<a class="totop" href="#top">Back to top</a>
+</article>
+<article class="tool" id="tool-b3">
+<div class="tool-head"><div class="tool-n">B3</div><div><div class="stage-tag">Bonus &nbsp;·&nbsp; Diagnose &amp; verify</div><h3>Record Yourself</h3></div></div>
+<p class="oneline">Thirty seconds on your phone. Watch it back. Fix. Record again.</p>
+<div class="callout use"><h4>Use it when</h4><p>You want an objective listener, or you want to know whether a five-minute intervention actually transferred.</p></div>
+<button class="preset off"><span class="pl">Metronome</span> Not needed for this one<span class="ph">Work it in silence</span></button>
+<div class="blk"><h4>Five minutes with it</h4><div class="mins">
+<div class="min"><div class="mn">Minute 1</div><p>Record thirty seconds of the phrase.</p></div>
+<div class="min"><div class="mn">Minute 2</div><p>Watch it back and note three things.</p></div>
+<div class="min"><div class="mn">Minute 3</div><p>Fix one of them.</p></div>
+<div class="min"><div class="mn">Minute 4</div><p>Record it again.</p></div>
+<div class="min"><div class="mn">Minute 5</div><p>Compare the two takes.</p></div>
+</div></div>
+<div class="callout soft"><h4>You've got it when</h4><p>What you hear on playback matches what you thought you were playing while you played it.</p></div>
+<a class="totop" href="#top">Back to top</a>
+</article>
+<div class="callout line"><h4>Default</h4><p>When you do not know which to choose: <strong><a href="#tool-08">Beat to Beat</a></strong> to locate the weak link, then <strong><a href="#tool-02">Transition Time</a></strong> to clean it up.</p></div>
+</div></section>
+
+<section id="log" class="band">
+<div class="wrap">
+  <div class="eyebrow">Putting it to work</div>
+  <h2>The practice log.</h2>
+  <p class="dek">One line per session. It saves in this browser as you go, and the export button gives you a file
+  you can keep, back up, or move to another device. Nothing is sent anywhere.</p>
+
+  <div class="logform">
+    <div><label for="f-date">Date</label><input id="f-date" type="date"></div>
+    <div><label for="f-phrase">Phrase</label><input id="f-phrase" type="text" placeholder="Bach, bar 3"></div>
+    <div class="full"><label for="f-weak">Weak link, and what failed</label>
+      <textarea id="f-weak" placeholder="String crossing on beat 2, picking runs ahead"></textarea></div>
+    <div><label for="f-tools">Tools used</label><input id="f-tools" type="text" placeholder="08, then 02 and 04"></div>
+    <div><label for="f-changed">What changed</label><input id="f-changed" type="text" placeholder="Clean at 92, was 78"></div>
+    <div class="full"><button class="btn play" id="add" style="min-width:150px">Add to log</button></div>
+  </div>
+
+  <div class="logtools">
+    <button class="btn" id="exp">Export log (.json)</button>
+    <button class="btn" id="expcsv">Export as spreadsheet (.csv)</button>
+    <button class="btn" id="imp">Import a log file</button>
+    <input type="file" id="file" accept="application/json,.json" hidden>
+    <button class="btn" id="clr">Clear all</button>
+  </div>
+
+  <table class="log">
+    <thead><tr><th>Date</th><th>Phrase</th><th>Weak link</th><th>Tools</th><th>What changed</th><th></th></tr></thead>
+    <tbody id="logbody"></tbody>
+  </table>
+  <p class="empty" id="logempty">No entries yet. Add your first session above.</p>
+  <p class="saved" id="saved"></p>
+</div>
+</section>
+
+
+<footer><div class="wrap">
+  <div>Guitar Technique Toolbox &nbsp;&middot;&nbsp; &copy; Jon Bjork Music</div>
+  <div class="cta"><a href="https://www.jonbjorkmusic.com/practiceroom/?ref=toolbox">The Practice Room</a>
+    &nbsp;&middot;&nbsp; <a href="https://www.jonbjorkmusic.com">jonbjorkmusic.com</a></div>
+</div></footer>
+
+<script>
+/* ================= metronome (native Web Audio, no dependencies) ========== */
+var AC=null, timerID=null, nextNoteTime=0, tick=0, playing=false;
+var S={bpm:80, sub:2, beats:4, acc:{1:[0],2:[0],3:[0],4:[0],5:[0],6:[0],7:[0],8:[0]}};
+var SUBNAME=['quarters','8ths','triplets','16ths','5s','6s','7s','32nds'];
+var LOOK=0.10, TIMER=25;
+
+function ctx(){ if(!AC){ AC=new (window.AudioContext||window.webkitAudioContext)(); } return AC; }
+function click(t,kind){
+  var c=ctx(), o=c.createOscillator(), g=c.createGain();
+  var f = kind==='acc'?1600 : kind==='beat'?1050 : 720;
+  var v = kind==='acc'?0.55 : kind==='beat'?0.34 : 0.17;
+  o.type='square'; o.frequency.value=f;
+  g.gain.setValueAtTime(0.0001,t);
+  g.gain.exponentialRampToValueAtTime(v,t+0.001);
+  g.gain.exponentialRampToValueAtTime(0.0001,t+0.045);
+  o.connect(g); g.connect(c.destination); o.start(t); o.stop(t+0.06);
+}
+function kindFor(i){
+  var per=S.sub, beat=Math.floor(i/per), inBeat=i%per;
+  if(beat===0 && inBeat===0) return 'acc';
+  if((S.acc[S.sub]||[]).indexOf(inBeat)>-1) return inBeat===0?'beat':'acc';
+  return inBeat===0?'beat':'sub';
+}
+function schedule(){
+  var spb=60.0/S.bpm/S.sub, total=S.beats*S.sub;
+  while(nextNoteTime < ctx().currentTime + LOOK){
+    click(nextNoteTime, kindFor(tick));
+    var t=tick, when=nextNoteTime;
+    setTimeout(function(){ paint(t); }, Math.max(0,(when-ctx().currentTime)*1000));
+    nextNoteTime += spb; tick=(tick+1)%total;
+  }
+}
+function start(){
+  ctx().resume();
+  playing=true; tick=0; nextNoteTime=ctx().currentTime+0.06;
+  timerID=setInterval(schedule,TIMER);
+  var b=document.getElementById('play'); b.textContent='Stop'; b.classList.add('on');
+}
+function stop(){
+  playing=false; clearInterval(timerID); timerID=null;
+  var b=document.getElementById('play'); b.textContent='Start'; b.classList.remove('on');
+  paint(-1);
+}
+function toggle(){ playing?stop():start(); }
+
+function buildViz(){
+  var v=document.getElementById('viz'); v.innerHTML='';
+  var total=S.beats*S.sub;
+  for(var i=0;i<total;i++){
+    var d=document.createElement('div');
+    d.className='dot'+(i%S.sub===0?' beat':'')+((S.acc[S.sub]||[]).indexOf(i%S.sub)>-1 && i%S.sub!==0?' acc':'');
+    d.dataset.i=i;
+    d.onclick=(function(idx){return function(){
+      var inBeat=idx%S.sub, list=S.acc[S.sub]||[], p=list.indexOf(inBeat);
+      if(p>-1){ if(inBeat!==0) list.splice(p,1); } else list.push(inBeat);
+      S.acc[S.sub]=list; buildViz(); save();
+    };})(i);
+    v.appendChild(d);
+  }
+}
+function paint(i){
+  var dots=document.querySelectorAll('#viz .dot');
+  for(var k=0;k<dots.length;k++) dots[k].classList.remove('now');
+  if(i>=0 && dots[i]) dots[i].classList.add('now');
+}
+function setBpm(v){
+  S.bpm=Math.max(30,Math.min(260,parseInt(v,10)||80));
+  document.getElementById('bpm').textContent=S.bpm;
+  document.getElementById('slider').value=S.bpm; save();
+}
+function setSub(n){
+  S.sub=n; buildViz();
+  var c=document.querySelectorAll('.sub');
+  for(var i=0;i<c.length;i++) c[i].classList.toggle('on', parseInt(c[i].dataset.sub,10)===n);
+  save();
+}
+
+/* ================= practice log ========================================== */
+var KEY='gtt.v1';
+var LOG=[];
+function save(){
+  try{ localStorage.setItem(KEY, JSON.stringify({version:1,entries:LOG,settings:{bpm:S.bpm,sub:S.sub,acc:S.acc}})); }catch(e){}
+  var el=document.getElementById('saved');
+  if(el) el.textContent = LOG.length ? (LOG.length+' entr'+(LOG.length===1?'y':'ies')+' saved in this browser.') : '';
+}
+function load(){
+  try{
+    var raw=localStorage.getItem(KEY); if(!raw) return;
+    var d=JSON.parse(raw);
+    if(d.entries) LOG=d.entries;
+    if(d.settings){ if(d.settings.bpm) S.bpm=d.settings.bpm; if(d.settings.sub) S.sub=d.settings.sub; if(d.settings.acc) S.acc=d.settings.acc; }
+  }catch(e){}
+}
+function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+function renderLog(){
+  var b=document.getElementById('logbody'), n=document.getElementById('logempty');
+  b.innerHTML='';
+  if(!LOG.length){ n.style.display='block'; return; }
+  n.style.display='none';
+  LOG.slice().reverse().forEach(function(e){
+    var realIndex=LOG.indexOf(e);
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td>'+esc(e.date)+'</td><td>'+esc(e.phrase)+'</td><td>'+esc(e.weak)+'</td>'+
+                 '<td>'+esc(e.tools)+'</td><td>'+esc(e.changed)+'</td>'+
+                 '<td style="text-align:right"><button class="del" title="Delete">&times;</button></td>';
+    tr.querySelector('.del').onclick=function(){ LOG.splice(realIndex,1); save(); renderLog(); };
+    b.appendChild(tr);
+  });
+}
+function addEntry(){
+  var g=function(id){ return document.getElementById(id).value.trim(); };
+  var e={date:g('f-date')||new Date().toISOString().slice(0,10), phrase:g('f-phrase'),
+         weak:g('f-weak'), tools:g('f-tools'), changed:g('f-changed')};
+  if(!e.phrase && !e.weak && !e.tools && !e.changed) return;
+  LOG.push(e); save(); renderLog();
+  ['f-phrase','f-weak','f-tools','f-changed'].forEach(function(id){ document.getElementById(id).value=''; });
+}
+function download(name, text, type){
+  var b=new Blob([text],{type:type}), u=URL.createObjectURL(b), a=document.createElement('a');
+  a.href=u; a.download=name; document.body.appendChild(a); a.click();
+  setTimeout(function(){ URL.revokeObjectURL(u); a.remove(); },0);
+}
+function exportJSON(){
+  download('practice-log-'+new Date().toISOString().slice(0,10)+'.json',
+    JSON.stringify({app:'Guitar Technique Toolbox',version:1,
+      exported:new Date().toISOString(),entries:LOG,
+      settings:{bpm:S.bpm,sub:S.sub,acc:S.acc}},null,2),'application/json');
+}
+function exportCSV(){
+  var rows=[['Date','Phrase','Weak link','Tools used','What changed']].concat(
+    LOG.map(function(e){ return [e.date,e.phrase,e.weak,e.tools,e.changed]; }));
+  var csv=rows.map(function(r){ return r.map(function(c){
+    return '"'+String(c==null?'':c).replace(/"/g,'""')+'"'; }).join(','); }).join('\r\n');
+  download('practice-log-'+new Date().toISOString().slice(0,10)+'.csv',csv,'text/csv');
+}
+function importJSON(file){
+  var r=new FileReader();
+  r.onload=function(){
+    try{
+      var d=JSON.parse(r.result);
+      var incoming=d.entries||[];
+      if(!Array.isArray(incoming)) throw 0;
+      var replace = LOG.length ? confirm('Replace your '+LOG.length+' saved entries?\n\nOK replaces them. Cancel adds the imported entries to what you already have.') : true;
+      LOG = replace ? incoming : LOG.concat(incoming);
+      if(d.settings){ if(d.settings.bpm) setBpm(d.settings.bpm); if(d.settings.acc) S.acc=d.settings.acc;
+                      if(d.settings.sub) setSub(d.settings.sub); }
+      save(); renderLog();
+      alert('Imported '+incoming.length+' entr'+(incoming.length===1?'y':'ies')+'.');
+    }catch(e){ alert('That file could not be read. It should be a practice log exported from this page.'); }
+  };
+  r.readAsText(file);
+}
+function clearAll(){
+  if(!LOG.length) return;
+  if(confirm('Delete all '+LOG.length+' entries from this browser? Export first if you want to keep them.')){
+    LOG=[]; save(); renderLog();
+  }
+}
+
+/* ================= wire up =============================================== */
+document.addEventListener('DOMContentLoaded', function(){
+  load();
+  document.getElementById('play').onclick=toggle;
+  document.getElementById('slider').oninput=function(){ setBpm(this.value); };
+  document.querySelectorAll('.sub').forEach(function(b){
+    b.onclick=function(){ setSub(parseInt(this.dataset.sub,10)); }; });
+  document.querySelectorAll('[data-step]').forEach(function(b){
+    b.onclick=function(){ setBpm(S.bpm+parseInt(this.dataset.step,10)); }; });
+  document.querySelectorAll('.preset[data-bpm]').forEach(function(b){
+    b.onclick=function(){
+      setBpm(parseInt(this.dataset.bpm,10)); setSub(parseInt(this.dataset.sub,10));
+      document.querySelector('.metro').scrollIntoView({block:'start'});
+      if(!playing) start();
+    };
+  });
+  document.getElementById('f-date').value=new Date().toISOString().slice(0,10);
+  document.getElementById('add').onclick=addEntry;
+  document.getElementById('exp').onclick=exportJSON;
+  document.getElementById('expcsv').onclick=exportCSV;
+  document.getElementById('imp').onclick=function(){ document.getElementById('file').click(); };
+  document.getElementById('file').onchange=function(){ if(this.files[0]){ importJSON(this.files[0]); this.value=''; } };
+  document.getElementById('clr').onclick=clearAll;
+  document.addEventListener('keydown',function(e){
+    if(e.code==='Space' && !/INPUT|TEXTAREA/.test((e.target.tagName||''))){ e.preventDefault(); toggle(); }
+  });
+  setBpm(S.bpm); setSub(S.sub); renderLog(); save();
+});
+</script>
+</body>
+</html>
