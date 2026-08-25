@@ -214,7 +214,44 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
   <p class="mhint">Click any block to accent that subdivision. Spacebar starts and stops.</p>
 </div></div>
 
-<section id="diagnostic" class="band">
+
+<section id="log" class="band">
+<div class="wrap">
+  <div class="eyebrow">Putting it to work</div>
+  <h2>The practice log.</h2>
+  <p class="dek">One line per session, filled in at the end. It sits here so it is one flick from the top
+  rather than a scroll past everything. It saves in this browser as you go, and the export button gives you a
+  file you can keep, back up, or move to another device. Nothing is sent anywhere.
+  Working out what to practise? <a href="#diagnostic">Start with the diagnostic</a>.</p>
+
+  <div class="logform">
+    <div><label for="f-date">Date</label><input id="f-date" type="date"></div>
+    <div><label for="f-phrase">Phrase</label><input id="f-phrase" type="text" placeholder="Bach, bar 3"></div>
+    <div class="full"><label for="f-weak">Weak link, and what failed</label>
+      <textarea id="f-weak" placeholder="String crossing on beat 2, picking runs ahead"></textarea></div>
+    <div><label for="f-tools">Tools used</label><input id="f-tools" type="text" placeholder="08, then 02 and 04"></div>
+    <div><label for="f-changed">What changed</label><input id="f-changed" type="text" placeholder="Clean at 92, was 78"></div>
+    <div class="full"><button class="btn play" id="add" style="min-width:150px">Add to log</button></div>
+  </div>
+
+  <div class="logtools">
+    <button class="btn" id="exp">Export log (.json)</button>
+    <button class="btn" id="expcsv">Export as spreadsheet (.csv)</button>
+    <button class="btn" id="imp">Import a log file</button>
+    <input type="file" id="file" accept="application/json,.json" hidden>
+    <button class="btn" id="clr">Clear all</button>
+  </div>
+
+  <table class="log">
+    <thead><tr><th>Date</th><th>Phrase</th><th>Weak link</th><th>Tools</th><th>What changed</th><th></th></tr></thead>
+    <tbody id="logbody"></tbody>
+  </table>
+  <p class="empty" id="logempty">No entries yet. Add your first session above.</p>
+  <p class="saved" id="saved"></p>
+</div>
+</section>
+
+<section id="diagnostic" class="band alt">
 <div class="wrap">
 <div class="eyebrow">Start here</div><h2>What's actually wrong?</h2>
 <p class="dek">Match your problem to one of the lines below, then use the tools left to right.</p>
@@ -222,7 +259,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 <div class="dx-row">
 <div class="dx-q"><span class="qm">&rarr;</span>I'm learning it for the first time</div>
 <div class="path">
-<a class="step" href="#tool-01"><b>01</b>Rhythmic Planting</a><span class="arrow">&#9656;</span><a class="step" href="#tool-02"><b>02</b>Transition Time</a><span class="arrow">&#9656;</span><a class="step" href="#tool-08"><b>08</b>Beat to Beat</a>
+<a class="step" href="#tool-10"><b>10</b>Visualization</a><span class="arrow">&#9656;</span><a class="step" href="#tool-01"><b>01</b>Rhythmic Planting</a><span class="arrow">&#9656;</span><a class="step" href="#tool-02"><b>02</b>Transition Time</a><span class="arrow">&#9656;</span><a class="step" href="#tool-08"><b>08</b>Beat to Beat</a>
 </div></div>
 <div class="dx-row">
 <div class="dx-q"><span class="qm">&rarr;</span>I can play it slowly, but it falls apart when I speed up</div>
@@ -260,7 +297,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 <a class="step" href="#tool-10"><b>10</b>Visualization</a>
 </div></div>
 </div></div></section>
-<section id="tools" class="band alt">
+<section id="tools" class="band">
 <div class="wrap">
 <div class="eyebrow">The toolbox</div><h2>The thirteen tools.</h2>
 <p class="dek">What to do, while you are doing it. The full explanation of every tool is in the book.</p>
@@ -271,7 +308,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 <div class="callout use"><h4>Use it when</h4><p>Your picking motion is bigger than it needs to be, string changes feel uncontrolled, or you are learning a phrase from scratch and want the first impression to be a clean one.</p></div>
 <button class="preset" data-bpm="70" data-sub="2"><span class="pl">Set the metronome</span> 70 BPM &middot; 8ths<span class="ph">Rhythmic planting in 8ths</span></button>
 <div class="blk"><h4>Get the feel for it</h4><p class="labnote">Once, on a neutral pattern, to learn what the tool feels like.</p><ol><li>Open G string, alternate strokes at a slow pulse. Plant the pick immediately after each note. The shorter and more even you can make the notes, the better you are doing.</li><li>9-10-11-12 on the G string. Keep the pick close enough that you can barely see it leave the string, and let it come to rest against the other side after every stroke.</li><li>The same pattern with rhythmic planting: play on each downbeat, plant and pre-finger both hands on each upbeat.</li></ol></div>
-<div class="blk"><h4>On your phrase</h4><p class="labnote">Every session, on your own music.</p><ol><li>Run your phrase slowly with rhythmic planting. Play on the downbeat, prepare both hands on the upbeat.</li><li>Take one string change out of it. As you cross to the new string, mute the one you came from by releasing the pressure in the fretting hand. You want the sound to stay uniform across the crossing.</li><li>If the picking is the problem, mute the strings and run the picking pattern alone with plain planting.</li></ol></div>
+<div class="blk"><h4>On your phrase</h4><p class="labnote">Every session, on your own music.</p><ol><li>Play your phrase slowly with rhythmic planting. Play on the downbeat, prepare both hands on the upbeat.</li><li>Take one string change out of it. As you cross to the new string, mute the one you came from by releasing the pressure in the fretting hand. You want the sound to stay uniform across the crossing.</li><li>If the picking is the problem, mute the strings and play the picking pattern alone with plain planting.</li></ol></div>
 <div class="callout soft"><h4>You've got it when</h4><p>The notes come out short and even, and a string change no longer stands out from the notes on either side of it.</p></div>
 <a class="totop" href="#top">Back to top</a>
 </article>
@@ -292,7 +329,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 <button class="preset" data-bpm="90" data-sub="4"><span class="pl">Set the metronome</span> 90 BPM &middot; 16ths<span class="ph">Dotted figure inside 16ths</span></button>
 <div class="blk"><h4>Get the feel for it</h4><p class="labnote">Once, on a neutral pattern, to learn what the tool feels like.</p><ol><li>9-10-11-12 on the G string. Long, short, long, short. Hold the first note as long as you can, then snap into the second.</li><li>The same pattern reversed: short, long, short, long.</li></ol></div>
 <div class="blk"><h4>On your phrase</h4><p class="labnote">Every session, on your own music.</p><ol><li>Long-short through the phrase at a comfortable tempo.</li><li>Reverse it to short-long.</li><li>Find the fastest tempo where both directions still pass RAT, and stay there.</li><li>Put the dotted figure inside your target subdivision, at the target tempo.</li><li>Play it straight and notice which transitions now hold.</li></ol></div>
-<div class="callout soft"><h4>You've got it when</h4><p>You can run both directions cleanly at the subdivision you are aiming for, and playing the phrase straight feels like joining up transitions you have already made.</p></div>
+<div class="callout soft"><h4>You've got it when</h4><p>You can play both directions cleanly at the subdivision you are aiming for, and playing the phrase straight feels like joining up transitions you have already made.</p></div>
 <a class="totop" href="#top">Back to top</a>
 </article>
 <article class="tool" id="tool-04">
@@ -326,11 +363,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 </article>
 <article class="tool" id="tool-07">
 <div class="tool-head"><div class="tool-n">07</div><div><div class="stage-tag">Stage 4 &nbsp;·&nbsp; Accelerate</div><h3>Speed Bursts</h3></div></div>
-<p class="oneline">Notes 1-2. Then 1-2-3. Then 1-2-3-4. Plant, relax, play. Then run it backwards from the end.</p>
+<p class="oneline">Notes 1-2. Then 1-2-3. Then 1-2-3-4. Plant, relax, play. Then work backwards from the end.</p>
 <div class="callout use"><h4>Use it when</h4><p>You have already worked the phrase with the slower tools, you can play it accurately at a moderate tempo, and you want to cross a speed barrier.</p></div>
 <button class="preset off"><span class="pl">Metronome</span> Not needed for this one<span class="ph">Work it in silence</span></button>
-<div class="blk"><h4>Get the feel for it</h4><p class="labnote">Once, on a neutral pattern, to learn what the tool feels like.</p><ol><li>Two notes on the G string, 9 then 10. Plant. Relax. Play. Say it out loud if it helps.</li><li>The same two notes ten times over, checking you are still relaxed at the end of each one.</li></ol></div>
-<div class="blk"><h4>On your phrase</h4><p class="labnote">Every session, on your own music.</p><ol><li>Notes 1 and 2 of your phrase, as fast as you can while still passing RAT.</li><li>Add note 3, then note 4, and keep going to the end or to the first failure.</li><li>Then start from the end: the last two notes, then the last three.</li><li>If a burst goes sloppy, drop back a note and run Transition Time or Accents on that exact spot.</li></ol></div>
+<div class="blk"><h4>Get the feel for it</h4><p class="labnote">Once, on a neutral pattern, to learn what the tool feels like.</p><ol><li>Take 9-10-11-12 on the G string, numbered 1 to 4, and play notes 1 and 2 only. Plant, relax, play, and pause properly between every repetition.</li><li>Add note 3 only once you have played 1 and 2 perfectly five times in a row. Then note 4 the same way.</li></ol></div>
+<div class="blk"><h4>On your phrase</h4><p class="labnote">Every session, on your own music.</p><ol><li>Number the notes. Play notes 1 and 2 as fast as you can while still passing RAT, pausing between repetitions.</li><li>Five perfect repetitions in a row before you add note 3, then note 4, and on to the end. Start a new burst wherever it falls apart.</li><li>Then work from the end: the last two notes, then the last three.</li><li>If a burst goes sloppy, drop back a note and apply Transition Time or Accents there.</li></ol></div>
 <div class="callout soft"><h4>You've got it when</h4><p>The full-length burst runs faster than your clean tempo for the whole phrase, and you are still relaxed at the end of it.</p></div>
 <a class="totop" href="#top">Back to top</a>
 </article>
@@ -359,7 +396,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 <div class="callout use"><h4>Use it when</h4><p>You cannot clearly hear or remember the phrase, you are learning something new from notation, or you are away from the guitar with time to spare.</p></div>
 <button class="preset off"><span class="pl">Metronome</span> Not needed for this one<span class="ph">Work it in silence</span></button>
 <div class="blk"><h4>Get the feel for it</h4><p class="labnote">Once, on a neutral pattern, to learn what the tool feels like.</p><ol><li>Away from the guitar, imagine one note: the finger on the fret, the pick planted, then the sound.</li><li>Add a second note, then combine the two.</li><li>Build to four notes and run them at a steady slow tempo.</li></ol></div>
-<div class="blk"><h4>On your phrase</h4><p class="labnote">Every session, on your own music.</p><ol><li>Take the first few notes of your phrase and build them the same way.</li><li>Keep adding until you can run the whole phrase in your head at a slow, steady tempo.</li><li>Then run a tool mentally on it: move an accent, or imagine a dotted rhythm.</li></ol></div>
+<div class="blk"><h4>On your phrase</h4><p class="labnote">Every session, on your own music.</p><ol><li>Take the first few notes of your phrase and build them the same way.</li><li>Keep adding until you can run the whole phrase in your head at a slow, steady tempo.</li><li>Then apply a tool mentally: move an accent, or imagine a dotted rhythm.</li></ol></div>
 <div class="callout soft"><h4>You've got it when</h4><p>You can run the phrase in your head from start to finish at a steady slow tempo, hearing and seeing each note as it goes past.</p></div>
 <a class="totop" href="#top">Back to top</a>
 </article>
@@ -368,7 +405,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 <p class="oneline">Move the problem spot to acoustic. Accuracy rather than force. Keep the tempo slow.</p>
 <div class="callout use"><h4>Use it when</h4><p>You suspect gain and compression are covering for you, or your legato is nearly there and you cannot tell what is missing.</p></div>
 <button class="preset" data-bpm="60" data-sub="2"><span class="pl">Set the metronome</span> 60 BPM &middot; 8ths<span class="ph">Slow on the acoustic</span></button>
-<div class="blk"><h4>On your phrase</h4><p class="labnote">Every session, on your own music.</p><ol><li>Move the passage that is giving you trouble to a steel-string or a nylon.</li><li>Play it slowly, using the minimum force that sounds each note cleanly.</li><li>Work the hardest weak link on its own.</li><li>Run Dynamics on it, which has more range here than anywhere else.</li><li>Go back to the electric at the tempo you had before.</li></ol></div>
+<div class="blk"><h4>On your phrase</h4><p class="labnote">Every session, on your own music.</p><ol><li>Move the passage that is giving you trouble to a steel-string or a nylon.</li><li>Play it slowly, using the minimum force that sounds each note cleanly.</li><li>Work the hardest weak link on its own.</li><li>Practise Dynamics on it, which has more range here than anywhere else.</li><li>Go back to the electric at the tempo you had before.</li></ol></div>
 <div class="callout soft"><h4>You've got it when</h4><p>The passage sounds clean on the acoustic at a tempo you can hold, without using any more force than you would on the electric.</p></div>
 <a class="totop" href="#top">Back to top</a>
 </article>
@@ -378,14 +415,14 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 <div class="callout use"><h4>Use it when</h4><p>A weak link fails and you cannot tell where the fault is, or you want to work one hand without the other's problems in the way.</p></div>
 <button class="preset" data-bpm="70" data-sub="4"><span class="pl">Set the metronome</span> 70 BPM &middot; 16ths<span class="ph">One hand at a time</span></button>
 <div class="blk"><h4>Get the feel for it</h4><p class="labnote">Once, on a neutral pattern, to learn what the tool feels like.</p><ol><li>Mute the strings with the fretting hand so nothing sounds, and play a simple alternate-picked pattern. Listen only to the rhythm of the pick.</li><li>Damp the strings with the picking hand and sound 9-10-11-12 with hammer-ons alone. Listen only to the rhythm of the fingers.</li></ol></div>
-<div class="blk"><h4>On your phrase</h4><p class="labnote">Every session, on your own music.</p><ol><li>Narrow the problem down to three to six notes first.</li><li>Picking hand alone: mute the strings and play the exact picking pattern, same strokes and string changes.</li><li>Fretting hand alone: damp the strings and play the fingering with hammer-ons, or with the real hammers and pull-offs if the phrase has legato in it.</li><li>Put the two hands back together, slowly.</li></ol></div>
-<div class="callout soft"><h4>You've got it when</h4><p>Each hand plays its part cleanly on its own, and you can say out loud which one was causing the problem.</p></div>
+<div class="blk"><h4>On your phrase</h4><p class="labnote">Every session, on your own music.</p><ol><li>Narrow the problem down to three to six notes first.</li><li>Picking hand alone: mute the strings and play the exact picking pattern, same strokes and string changes.</li><li>Fretting hand alone: mute the strings with a cloth or hair band and play the fingering with hammer-ons in both directions, unless the phrase has real pull-offs in it.</li><li>Put the two hands back together, slowly.</li></ol></div>
+<div class="callout soft"><h4>You've got it when</h4><p>Each hand plays its part cleanly on its own, and you know for sure which one was causing the problem.</p></div>
 <a class="totop" href="#top">Back to top</a>
 </article>
 <article class="tool" id="tool-13">
 <div class="tool-head"><div class="tool-n">13</div><div><div class="stage-tag">Stage 1 &nbsp;·&nbsp; Diagnose &amp; verify</div><h3>Record Yourself</h3></div></div>
 <p class="oneline">Thirty seconds on your phone. Watch it back. Fix. Record again.</p>
-<div class="callout use"><h4>Use it when</h4><p>You want an objective listener, or you want to know whether a five-minute intervention actually transferred.</p></div>
+<div class="callout use"><h4>Use it when</h4><p>You want an objective listener, or you want to know whether a specific practice tool did its job.</p></div>
 <button class="preset off"><span class="pl">Metronome</span> Not needed for this one<span class="ph">Work it in silence</span></button>
 <div class="blk"><h4>On your phrase</h4><p class="labnote">Every session, on your own music.</p><ol><li>Record thirty seconds of the phrase.</li><li>Watch it back straight away and note three things.</li><li>Fix one of them.</li><li>Record again and compare the two takes.</li></ol></div>
 <div class="callout soft"><h4>You've got it when</h4><p>What you hear on playback matches what you thought you were playing while you played it.</p></div>
@@ -393,41 +430,6 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 </article>
 <div class="callout line"><h4>Default</h4><p>When you do not know which to choose: <strong><a href="#tool-08">Beat to Beat</a></strong> to locate the weak link, then <strong><a href="#tool-02">Transition Time</a></strong> to clean it up.</p></div>
 </div></section>
-
-<section id="log" class="band">
-<div class="wrap">
-  <div class="eyebrow">Putting it to work</div>
-  <h2>The practice log.</h2>
-  <p class="dek">One line per session. It saves in this browser as you go, and the export button gives you a file
-  you can keep, back up, or move to another device. Nothing is sent anywhere.</p>
-
-  <div class="logform">
-    <div><label for="f-date">Date</label><input id="f-date" type="date"></div>
-    <div><label for="f-phrase">Phrase</label><input id="f-phrase" type="text" placeholder="Bach, bar 3"></div>
-    <div class="full"><label for="f-weak">Weak link, and what failed</label>
-      <textarea id="f-weak" placeholder="String crossing on beat 2, picking runs ahead"></textarea></div>
-    <div><label for="f-tools">Tools used</label><input id="f-tools" type="text" placeholder="08, then 02 and 04"></div>
-    <div><label for="f-changed">What changed</label><input id="f-changed" type="text" placeholder="Clean at 92, was 78"></div>
-    <div class="full"><button class="btn play" id="add" style="min-width:150px">Add to log</button></div>
-  </div>
-
-  <div class="logtools">
-    <button class="btn" id="exp">Export log (.json)</button>
-    <button class="btn" id="expcsv">Export as spreadsheet (.csv)</button>
-    <button class="btn" id="imp">Import a log file</button>
-    <input type="file" id="file" accept="application/json,.json" hidden>
-    <button class="btn" id="clr">Clear all</button>
-  </div>
-
-  <table class="log">
-    <thead><tr><th>Date</th><th>Phrase</th><th>Weak link</th><th>Tools</th><th>What changed</th><th></th></tr></thead>
-    <tbody id="logbody"></tbody>
-  </table>
-  <p class="empty" id="logempty">No entries yet. Add your first session above.</p>
-  <p class="saved" id="saved"></p>
-</div>
-</section>
-
 
 <footer><div class="wrap">
   <div>Guitar Technique Toolbox &nbsp;&middot;&nbsp; &copy; Jon Bjork Music</div>
@@ -438,7 +440,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 <script>
 /* ================= metronome (native Web Audio, no dependencies) ========== */
 var AC=null, timerID=null, nextNoteTime=0, tick=0, playing=false;
-var S={bpm:80, sub:2, beats:4, acc:{1:[0],2:[0],3:[0],4:[0],5:[0],6:[0],7:[0],8:[0]}};
+var S={bpm:80, sub:2, beats:4, acc:{1:[],2:[],3:[],4:[],5:[],6:[],7:[],8:[]}};
 var SUBNAME=['quarters','8ths','triplets','16ths','5s','6s','7s','32nds'];
 var LOOK=0.10, TIMER=25;
 
@@ -454,9 +456,11 @@ function click(t,kind){
   o.connect(g); g.connect(c.destination); o.start(t); o.stop(t+0.06);
 }
 function kindFor(i){
-  var per=S.sub, beat=Math.floor(i/per), inBeat=i%per;
-  if(beat===0 && inBeat===0) return 'acc';
-  if((S.acc[S.sub]||[]).indexOf(inBeat)>-1) return inBeat===0?'beat':'acc';
+  /* No automatic accent anywhere, not even on beat 1. The beat click is still
+     pitched above the subdivisions so you can hear the pulse; a true accent
+     only sounds where the user has clicked one in. */
+  var inBeat=i%S.sub;
+  if((S.acc[S.sub]||[]).indexOf(inBeat)>-1) return 'acc';
   return inBeat===0?'beat':'sub';
 }
 function schedule(){
@@ -486,11 +490,11 @@ function buildViz(){
   var total=S.beats*S.sub;
   for(var i=0;i<total;i++){
     var d=document.createElement('div');
-    d.className='dot'+(i%S.sub===0?' beat':'')+((S.acc[S.sub]||[]).indexOf(i%S.sub)>-1 && i%S.sub!==0?' acc':'');
+    d.className='dot'+(i%S.sub===0?' beat':'')+((S.acc[S.sub]||[]).indexOf(i%S.sub)>-1?' acc':'');
     d.dataset.i=i;
     d.onclick=(function(idx){return function(){
       var inBeat=idx%S.sub, list=S.acc[S.sub]||[], p=list.indexOf(inBeat);
-      if(p>-1){ if(inBeat!==0) list.splice(p,1); } else list.push(inBeat);
+      if(p>-1) list.splice(p,1); else list.push(inBeat);
       S.acc[S.sub]=list; buildViz(); save();
     };})(i);
     v.appendChild(d);

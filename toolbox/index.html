@@ -185,20 +185,26 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   /* ---------- Hero ---------- */
   .hero {
     min-height: 92vh;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    display: flex; justify-content: center; align-items: center;
     text-align: center; position: relative;
-    padding: 140px 24px 90px;
+    padding: 124px 32px 86px;
   }
+  .hero-inner {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 390px 1fr; gap: 68px;
+    align-items: center; width: 100%; max-width: 1160px; text-align: left;
+  }
+  .hero-copy > .btn { margin-top: 6px; }
+  .hero h1 { font-size: clamp(2.6rem, 4.6vw, 4.3rem); }
   .hero-glow {
     position: absolute; inset: 0; pointer-events: none;
     background: radial-gradient(ellipse 900px 560px at 50% 22%, rgba(124,58,237,0.16), transparent 70%);
   }
-  .hero > * { position: relative; z-index: 1; }
-  .hero-sub { max-width: 700px; color: var(--muted); font-size: 1.45rem; font-weight: 300; line-height: 1.7; margin: 0 auto; }
+  .hero-sub { max-width: 620px; color: var(--muted); font-size: 1.4rem; font-weight: 300; line-height: 1.65; margin: 0; }
   .hero-proof {
     font-family: 'Oswald', sans-serif; font-weight: 400;
     font-size: 0.9rem; letter-spacing: 0.26em; text-transform: uppercase;
-    color: var(--muted); margin: 26px 0 34px;
+    color: var(--muted); margin: 24px 0 30px; line-height: 1.9;
   }
   .hero-alt { margin-top: 22px; }
   .price-note {
@@ -211,7 +217,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   .price-note strong { color: var(--white); font-weight: 700; }
 
   /* ---------- Cover shot ---------- */
-  .hero-cover-wrap { position: relative; width: min(250px, 52vw); margin: 0 auto 38px; }
+  .hero-cover-wrap { position: relative; width: 100%; margin: 0; }
   .hero-cover-wrap::after {
     content: ''; position: absolute; inset: -1px; border-radius: 12px;
     background: linear-gradient(135deg, rgba(124,58,237,0.25), transparent 60%);
@@ -429,6 +435,14 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   .footer-copy { margin-top: 16px; font-size: 0.85rem; }
 
   /* ---------- Responsive ---------- */
+  @media (max-width: 1000px) {
+    .hero-inner {
+      grid-template-columns: 1fr; gap: 40px;
+      justify-items: center; text-align: center;
+    }
+    .hero-cover-wrap { width: min(310px, 62vw); }
+    .hero-sub { margin: 0 auto; }
+  }
   @media (max-width: 900px) {
     section { padding: 84px 0; }
     .qs, .inside, .split { grid-template-columns: 1fr; }
@@ -444,7 +458,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     .nav-name { font-size: 1.05rem; letter-spacing: 0.1em; }
     .nav-suffix { display: none; }
     .nav-cta { font-size: 0.82rem; letter-spacing: 0.14em; }
-    .hero { padding: 120px 18px 70px; }
+    .hero { padding: 116px 18px 70px; }
     .stages, .tools { grid-template-columns: 1fr; }
     .stats { grid-template-columns: repeat(2, 1fr); }
     .s-item { flex: 0 0 82%; max-width: 82%; }
@@ -474,20 +488,24 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
        ============================================================ -->
   <header class="hero ov-55">
     <div class="hero-glow" aria-hidden="true"></div>
-    <div class="hero-cover-wrap">
-      <img class="hero-cover" src="assets/cover.jpg" alt="Guitar Technique Toolbox, by Jon Bjork" width="900" height="1165">
+    <div class="hero-inner">
+      <div class="hero-cover-wrap">
+        <img class="hero-cover" src="assets/cover.jpg" alt="Guitar Technique Toolbox, by Jon Bjork" width="900" height="1165">
+      </div>
+      <div class="hero-copy">
+        <span class="tag">Guitar Technique Toolbox</span>
+        <h1>Learn The Music You Love Faster.</h1>
+        <p class="hero-sub">Most of a hard phrase is already fine. Two or three notes are stopping you. This is the system for finding them, fixing them, and knowing when they are actually fixed.</p>
+        <p class="hero-proof">54 Pages &middot; 13 Tools &middot; The Diagnostic &middot; Practice Labs &middot; Notation &middot; Browser Tool</p>
+        <p class="price-note"><strong>$27</strong> once. Instant download, yours to keep and print.</p>
+        <br />
+        <a class="btn" href="https://CHECKOUT-URL-GOES-HERE">
+          Get The Toolbox
+          <span class="btn-sub">$27 &middot; instant download &middot; pdf</span>
+        </a>
+        <p class="hero-alt"><a class="link-quiet" href="#inside">or see what's inside first &darr;</a></p>
+      </div>
     </div>
-    <span class="tag">Guitar Technique Toolbox</span>
-    <h1>Learn The Music<br>You Love Faster.</h1>
-    <p class="hero-sub">Most of a hard phrase is already fine. Two or three notes are stopping you. This is the system for finding them, fixing them, and knowing when they are actually fixed.</p>
-    <p class="hero-proof">54 Pages &middot; 13 Tools &middot; The Diagnostic &middot; Practice Labs &middot; Notation &middot; Browser Tool</p>
-    <p class="price-note"><strong>$27</strong> once. Instant download, yours to keep and print.</p>
-    <br />
-    <a class="btn" href="https://CHECKOUT-URL-GOES-HERE">
-      Get The Toolbox
-      <span class="btn-sub">$27 &middot; instant download &middot; pdf</span>
-    </a>
-    <p class="hero-alt"><a class="link-quiet" href="#inside">or see what's inside first &darr;</a></p>
   </header>
 
 
@@ -537,8 +555,6 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
         <h2>Ten Notes Are Stopping You.</h2>
         <p class="pull">It will not do you much good to practise the part you can already play.</p>
         <p>Take the phrase you have been stuck on. Walk <b>Beat to Beat</b> through it: one beat at a time plus the first note of the next, starting from every note in turn, at 80% of your target tempo.</p>
-        <p>Two or three short stretches will be dramatically harder than everything around them. Those are your weak links. They usually add up to about ten notes, and they have been the reason the whole phrase is stuck, the entire time.</p>
-
         <div class="fig">
           <div class="fig-row">
             <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 139" width="470" height="139" font-family="Liberation Sans, Helvetica, Arial, sans-serif">
@@ -588,7 +604,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
 <text x="274" y="80" font-size="17" font-weight="700" fill="#ffffff" text-anchor="middle">10</text>
 </svg></div>
           </div>
-          <p class="fig-cap">Two of the groups from one eight-note run. Same notes, different entry point, and the second one starts on an upstroke. That is the sort of thing that has been quietly breaking the phrase.</p>
+          <p class="fig-cap">Two of the groups from one eight-note run. Starting a phrase from each different note will reveal the more difficult patterns within it, and once you find those weak links, you can finally do something about them.</p>
         </div>
 
         <p>Now the problem is small enough to actually solve, and the book tells you which tool solves it.</p>
@@ -717,7 +733,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
           <div class="s-item"><figure class="shot"><img src="assets/page-cheatsheet.jpg" alt="The cheat sheet page: all thirteen tools at a glance" width="1000" height="1294" loading="lazy"><figcaption>The cheat sheet</figcaption></figure></div>
           <div class="s-item"><figure class="shot"><img src="assets/page-accents.jpg" alt="The Accents page with tab cards showing the accent moving through the beat one note at a time" width="1000" height="1294" loading="lazy"><figcaption>A tool page</figcaption></figure></div>
           <div class="s-item"><figure class="shot"><img src="assets/page-workedweek.jpg" alt="The worked week page: one phrase across seven days" width="1000" height="1294" loading="lazy"><figcaption>The worked week</figcaption></figure></div>
-          <div class="s-item"><figure class="shot"><img src="assets/page-notation.jpg" alt="A full notation and tab page" width="1000" height="1294" loading="lazy"><figcaption>Notation</figcaption></figure></div>
+          <div class="s-item"><figure class="shot"><img src="assets/page-notation.jpg" alt="The Looping notated example: a full page of tab with every pick stroke marked" width="1000" height="1294" loading="lazy"><figcaption>Notation</figcaption></figure></div>
         </div>
         <div class="s-arrows">
           <button class="s-btn" data-dir="-1" aria-label="Previous page">&larr;</button>
