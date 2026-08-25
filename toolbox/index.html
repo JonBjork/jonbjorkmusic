@@ -15,10 +15,10 @@
 <!-- =============================================================================
      /toolbox — Guitar Technique Toolbox sales page (Aug 2026)
 
-     CHECKOUT LINK: the Lemon Squeezy URL is the string
-       https://CHECKOUT-URL-GOES-HERE
-     and it appears in FIVE hrefs: nav, hero, offer band, final CTA, and the
-     "buy" anchor in the FAQ. Search "CHECKOUT-URL-GOES-HERE" and replace all.
+     CHECKOUT LINK: the Lemon Squeezy checkout is in FOUR hrefs: the nav button,
+     the hero button, the mid-page CTA and the final CTA. If the product is ever
+     rebuilt in Lemon Squeezy, search for "lemonsqueezy.com/checkout" and replace all four.
+     (#buy on the final section is an internal anchor, not a checkout link.)
 
      Structure and tokens mirror /practiceroom and /pro: one fixed backdrop,
      semi-transparent section overlays, reveal-on-scroll. Assets are local to
@@ -416,6 +416,16 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   .faq details[open] summary::after { content: "\2013"; }
   .faq p { color: var(--muted); font-weight: 300; font-size: 1.14rem; margin: 14px 0 0; }
 
+  /* ---------- Mid-page CTA ----------
+     A shorter band, placed where the offer is complete: the reader has just seen
+     the book and the browser tool. Deliberately quieter than the final CTA. */
+  .midcta { padding: 76px 0; text-align: center; }
+  .midcta h3 {
+    font-family: 'Oswald', sans-serif; font-size: clamp(1.7rem, 3vw, 2.3rem);
+    margin: 0 0 14px;
+  }
+  .midcta p { color: var(--muted); font-weight: 300; font-size: 1.22rem; max-width: 560px; margin: 0 auto 30px; }
+
   /* ---------- Final ---------- */
   .final { text-align: center; padding: 130px 24px; }
   .final-glow {
@@ -478,7 +488,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
 
 <nav>
   <a class="nav-name" href="https://www.jonbjorkmusic.com/">Jon Bjork <span class="nav-suffix"><span>&middot;</span> Toolbox</span></a>
-  <a class="nav-cta" href="https://CHECKOUT-URL-GOES-HERE">Get It &middot; $27</a>
+  <a class="nav-cta" href="https://jonbjorkmusic.lemonsqueezy.com/checkout/buy/ae2b1606-30ae-464c-a544-d1ec215b7800">Get It &middot; $27</a>
 </nav>
 
 <main>
@@ -499,7 +509,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
         <p class="hero-proof">54 Pages &middot; 13 Tools &middot; The Diagnostic &middot; Practice Labs &middot; Notation &middot; Browser Tool</p>
         <p class="price-note"><strong>$27</strong> once. Instant download, yours to keep and print.</p>
         <br />
-        <a class="btn" href="https://CHECKOUT-URL-GOES-HERE">
+        <a class="btn" href="https://jonbjorkmusic.lemonsqueezy.com/checkout/buy/ae2b1606-30ae-464c-a544-d1ec215b7800">
           Get The Toolbox
           <span class="btn-sub">$27 &middot; instant download &middot; pdf</span>
         </a>
@@ -770,6 +780,22 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
 
 
   <!-- ============================================================
+       MID-PAGE CTA — the offer is complete by this point, so this is
+       the natural second ask. Third checkout href on the page.
+       ============================================================ -->
+  <section class="ov-86 midcta">
+    <div class="wrap rv">
+      <h3>That is the whole thing. $27.</h3>
+      <p>54 pages, thirteen tools, the diagnostic that tells you which one to use, and the browser version for the music stand.</p>
+      <a class="btn" href="https://jonbjorkmusic.lemonsqueezy.com/checkout/buy/ae2b1606-30ae-464c-a544-d1ec215b7800">
+        Get The Toolbox
+        <span class="btn-sub">$27 &middot; instant download &middot; pdf</span>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
        WHO IT'S FOR
        ============================================================ -->
   <section class="ov-86">
@@ -887,7 +913,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
       <p class="lead">54 pages, thirteen tools, the diagnostic that tells you which one to use, and the browser version for the music stand.</p>
       <p class="price-note"><strong>$27</strong> once. Instant download, yours to keep and print.</p>
       <br />
-      <a class="btn" href="https://CHECKOUT-URL-GOES-HERE">
+      <a class="btn" href="https://jonbjorkmusic.lemonsqueezy.com/checkout/buy/ae2b1606-30ae-464c-a544-d1ec215b7800">
         Get The Toolbox
         <span class="btn-sub">$27 &middot; instant download &middot; pdf</span>
       </a>
