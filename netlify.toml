@@ -9,6 +9,22 @@
   to = "/practiceroom"
   status = 301
   force = true
+
+# Channel short links -> The Practice Room on Skool (2026-08-26).
+# One path per channel so each shows up separately in analytics.
+# 302 (not 301) so browsers do not cache them permanently and the
+# destination can be changed later without stale redirects.
+[[redirects]]
+  from = "/yt"
+  to = "https://www.skool.com/thepracticeroom"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/ig"
+  to = "https://www.skool.com/thepracticeroom"
+  status = 302
+  force = true
 #
 # Strategy:
 # 1. Run Eleventy in the notes/ folder, which generates notes/_site/
