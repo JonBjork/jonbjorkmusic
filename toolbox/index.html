@@ -216,6 +216,43 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   }
   .price-note strong { color: var(--white); font-weight: 700; }
 
+  /* ---------- Walkthrough video ----------
+     Click-to-play facade: no YouTube iframe is loaded until the visitor clicks,
+     so the page keeps its weight and nobody is tracked for scrolling past.
+     Video id lives in data-id on .vid. Same pattern as /practiceroom. */
+  .tour { padding: 40px 0 104px; }
+  .tour-head { text-align: center; margin-bottom: 40px; }
+  .tour-head h2 { margin-bottom: 14px; }
+  .tour-head p { color: var(--muted); font-size: 1.3rem; font-weight: 300; margin: 0 auto; max-width: 660px; }
+  .vid {
+    position: relative; width: 100%; aspect-ratio: 16 / 9;
+    border-radius: 14px; overflow: hidden;
+    border: 1px solid var(--line-2);
+    box-shadow: 0 30px 90px rgba(0,0,0,0.62);
+    background: #000; cursor: pointer;
+  }
+  .vid img, .vid iframe {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    display: block; border: 0; object-fit: cover;
+  }
+  .vid-play {
+    position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+    width: 94px; height: 94px; border-radius: 50%;
+    background: rgba(124,58,237,0.92);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+  }
+  .vid:hover .vid-play,
+  .vid:focus-visible .vid-play { background: var(--purple-lt); transform: translate(-50%,-50%) scale(1.07); }
+  .vid:focus-visible { outline: 2px solid var(--purple-lt); outline-offset: 4px; }
+  .vid-play svg { width: 34px; height: 34px; fill: #fff; margin-left: 5px; }
+  @media (max-width: 640px) {
+    .tour { padding: 20px 0 80px; }
+    .vid-play { width: 66px; height: 66px; }
+    .vid-play svg { width: 25px; height: 25px; }
+  }
+
   /* ---------- Cover shot ---------- */
   .hero-cover-wrap { position: relative; width: 100%; margin: 0; }
   .hero-cover-wrap::after {
@@ -513,16 +550,38 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
           Get The Toolbox
           <span class="btn-sub">$27 &middot; instant download &middot; pdf</span>
         </a>
-        <p class="hero-alt"><a class="link-quiet" href="#inside">or see what's inside first &darr;</a></p>
+        <p class="hero-alt"><a class="link-quiet" href="#walkthrough">or watch the walkthrough first &darr;</a></p>
       </div>
     </div>
   </header>
 
 
   <!-- ============================================================
+       WALKTHROUGH — the YouTube tour, click-to-play facade.
+       The hero's "watch the walkthrough" link points here.
+       Video: https://youtu.be/uA0pfQE6A5E
+       ============================================================ -->
+  <section class="tour ov-70" id="walkthrough">
+    <div class="wrap rv">
+      <div class="tour-head">
+        <span class="tag">The Walkthrough</span>
+        <h2>See It Working.</h2>
+        <p>Me going through the book and the practice tool, and using the diagnostic on a real problem.</p>
+      </div>
+      <div class="vid" id="tour-vid" data-id="uA0pfQE6A5E" role="button" tabindex="0"
+           aria-label="Play the walkthrough video, Why You've Been Stuck On The Same Solo For Years">
+        <img src="https://i.ytimg.com/vi/uA0pfQE6A5E/maxresdefault.jpg"
+             alt="Why You've Been Stuck On The Same Solo For Years" width="1280" height="720" loading="lazy" />
+        <span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
        THE PROBLEM
        ============================================================ -->
-  <section class="ov-70">
+  <section class="ov-74">
     <div class="wrap rv">
       <div class="narrow story">
         <span class="tag">The Forty Minutes</span>
@@ -956,6 +1015,31 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
       track.scrollBy({ left: (e.key === 'ArrowRight' ? 1 : -1) * step, behavior: 'smooth' });
     });
   });
+
+  // ---------- Walkthrough: swap the poster for the real player on click ----------
+  (function () {
+    var vid = document.getElementById('tour-vid');
+    if (!vid) return;
+    function play() {
+      if (vid.dataset.loaded) return;
+      vid.dataset.loaded = '1';
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + vid.dataset.id +
+              '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      f.title = 'Guitar Technique Toolbox walkthrough';
+      f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+      f.allowFullscreen = true;
+      vid.innerHTML = '';
+      vid.appendChild(f);
+      vid.style.cursor = 'default';
+      vid.removeAttribute('role');
+      vid.removeAttribute('tabindex');
+    }
+    vid.addEventListener('click', play);
+    vid.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
+    });
+  })();
 
   // ---------- Five stages: light each one in turn, then land on stage five ----------
   (function () {
