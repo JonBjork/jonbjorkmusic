@@ -16,6 +16,12 @@ const LICENSE_KEY = "jbm:pickingworkout:license";
 const LOG_KEY     = "jbm:pickingworkout:log";
 const PREFS_KEY   = "jbm:pickingworkout:prefs";
 
+// The walkthrough video. Paste the YouTube id here — the bit after "v=" in
+// the watch URL, e.g. "Hd-gfXTaN_4". Unlisted is fine: unlisted videos embed
+// normally, they just do not show up in search or on the channel.
+// Leave it empty and the Walkthrough tab hides itself.
+const WALKTHROUGH_VIDEO_ID = "";
+
 const SUBDIVISION = 2;          // eighth notes, and nothing else
 const COUNT_IN_BEATS = 4;
 
@@ -67,7 +73,7 @@ function seg(id, fn){
   });
 }
 function show(id){
-  ["view-setup","view-run","view-done","view-log"].forEach(v => $(v).classList.toggle("hidden", v !== id));
+  ["view-setup","view-run","view-done","view-log","view-video"].forEach(v => $(v).classList.toggle("hidden", v !== id));
 }
 
 // ── the session ──────────────────────────────────────────────────────────────
@@ -453,6 +459,12 @@ function openApp(data){
   loadPrefs();
   rebuild();
   renderLog();
+  // A first-time buyer lands on the walkthrough; everyone else on the routine.
+  const firstRun = readLog().sessions.length === 0;
+  if (WALKTHROUGH_VIDEO_ID){
+    $("tabVideo").classList.remove("hidden");
+    if (firstRun){ setTab("video"); return; }
+  }
   show("view-setup");
 }
 
@@ -532,14 +544,33 @@ $("btnExport").addEventListener("click", exportLog);
 $("btnImport").addEventListener("click", () => $("fileInput").click());
 $("fileInput").addEventListener("change", e => { if (e.target.files[0]) importLog(e.target.files[0]); e.target.value = ""; });
 
+// The iframe is only built the first time the tab is opened, so the video
+// never costs anything to someone who just wants to practise.
+function mountVideo(){
+  const box = $("videobox");
+  if (!WALKTHROUGH_VIDEO_ID || box.dataset.mounted) return;
+  box.dataset.mounted = "1";
+  const f = document.createElement("iframe");
+  f.src = `https://www.youtube-nocookie.com/embed/${WALKTHROUGH_VIDEO_ID}?rel=0`;
+  f.title = "Walkthrough";
+  f.allow = "accelerometer; encrypted-media; picture-in-picture; fullscreen";
+  f.allowFullscreen = true;
+  f.loading = "lazy";
+  box.appendChild(f);
+}
+
 function setTab(which){
   $("tabPractice").setAttribute("aria-pressed", String(which === "practice"));
   $("tabLog").setAttribute("aria-pressed", String(which === "log"));
+  $("tabVideo").setAttribute("aria-pressed", String(which === "video"));
   if (which === "log"){ renderLog(); show("view-log"); }
+  else if (which === "video"){ mountVideo(); show("view-video"); }
   else { show(S.playing ? "view-run" : "view-setup"); }
 }
 $("tabPractice").addEventListener("click", () => setTab("practice"));
 $("tabLog").addEventListener("click", () => setTab("log"));
+$("tabVideo").addEventListener("click", () => setTab("video"));
+$("btnToPractice").addEventListener("click", () => setTab("practice"));
 
 window.addEventListener("beforeunload", e => {
   if (S.playing){ e.preventDefault(); e.returnValue = ""; }

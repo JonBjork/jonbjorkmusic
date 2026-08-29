@@ -101,6 +101,8 @@ table.sessions tr:last-child td{border-bottom:0}
 .coverage div{font-family:'Oswald',sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;justify-content:center;padding:9px 4px;border:1px solid var(--border);border-radius:6px;background:var(--card2)}
 .coverage div.lbl{border:0;background:none;justify-content:flex-end;padding-right:10px}
 .coverage div.hit{background:var(--purple);color:#fff;border-color:transparent}
+.videobox{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:8px;overflow:hidden}
+.videobox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 nav.tabs{display:flex;gap:8px;margin-bottom:18px}
 nav.tabs button{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:9px 18px;font-family:'Oswald',sans-serif;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
 nav.tabs button[aria-pressed="true"]{background:var(--card);color:var(--white);border-color:var(--purple)}
@@ -141,6 +143,7 @@ footer a{color:var(--muted)}
   <nav class="tabs">
     <button id="tabPractice" aria-pressed="true">Practice</button>
     <button id="tabLog" aria-pressed="false">Progress</button>
+    <button id="tabVideo" aria-pressed="false" class="hidden">Walkthrough</button>
   </nav>
 
   <!-- setup -->
@@ -237,6 +240,20 @@ footer a{color:var(--muted)}
       <div class="transport" style="margin-top:18px">
         <button class="btn" id="btnAgain">Go again</button>
         <button class="btn ghost" id="btnSeeLog">See progress</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- walkthrough -->
+  <div id="view-video" class="hidden">
+    <div class="panel">
+      <h2>Watch this first</h2>
+      <p style="color:var(--muted);max-width:680px;margin-bottom:18px">
+        How the routine is built and how to run it. Worth the few minutes before your first pass.
+      </p>
+      <div class="videobox" id="videobox"></div>
+      <div class="transport" style="margin-top:18px">
+        <button class="btn" id="btnToPractice">Go to the routine</button>
       </div>
     </div>
   </div>
