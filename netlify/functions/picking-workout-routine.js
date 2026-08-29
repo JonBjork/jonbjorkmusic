@@ -1,5 +1,5 @@
 // =============================================================================
-// The Ultimate Alternate Picking Warmup — the routine itself.
+// The Ultimate Alternate Picking Workout — the routine itself.
 //
 // Every note here was checked against Jon's Guitar Pro file
 // (Ultimate Alternate Picking Warmup Routine.gpx, 40 bars): all 297 written
@@ -14,7 +14,7 @@
 // first note of the next exercise, so the app drops it everywhere except at
 // the very end of the routine.
 //
-// This file is only ever reached through picking-warmup-unlock.js, behind a
+// This file is only ever reached through picking-workout-unlock.js, behind a
 // valid license key. It must not be copied into the public site folder.
 // =============================================================================
 
@@ -76,7 +76,7 @@ function buildRoutine() {
 }
 
 const ROUTINE_META = {
-  title: "The Ultimate Alternate Picking Warmup",
+  title: "The Ultimate Alternate Picking Workout",
   defaultBpm: 100,                 // the tempo on Jon's Guitar Pro file
   positions: [1, 5, 9, 13, 17],
   noteValue: "8ths",

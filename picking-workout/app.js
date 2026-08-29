@@ -1,20 +1,20 @@
 // =============================================================================
-// The Ultimate Alternate Picking Warmup
+// The Ultimate Alternate Picking Workout
 //
 // The exercises are not in this file. They arrive from
-// /.netlify/functions/picking-warmup-unlock once Lemon Squeezy confirms the key.
+// /.netlify/functions/picking-workout-unlock once Lemon Squeezy confirms the key.
 //
 // Metronome: the Practice Lab engine, copied verbatim except for the sample
 // path, which now reads window.__PL_SOUND_BASE. Eighth notes throughout, which
 // is subdivision 2: click on the beat, hi-hat on the offbeat.
 // =============================================================================
 
-import { createMetronomeEngine, primeMetronomeAudio } from "/picking-warmup/metronome.js";
+import { createMetronomeEngine, primeMetronomeAudio } from "/picking-workout/metronome.js";
 
-const UNLOCK_URL = "/.netlify/functions/picking-warmup-unlock";
-const LICENSE_KEY = "jbm:pickingwarmup:license";
-const LOG_KEY     = "jbm:pickingwarmup:log";
-const PREFS_KEY   = "jbm:pickingwarmup:prefs";
+const UNLOCK_URL = "/.netlify/functions/picking-workout-unlock";
+const LICENSE_KEY = "jbm:pickingworkout:license";
+const LOG_KEY     = "jbm:pickingworkout:log";
+const PREFS_KEY   = "jbm:pickingworkout:prefs";
 
 const SUBDIVISION = 2;          // eighth notes, and nothing else
 const COUNT_IN_BEATS = 4;
@@ -257,7 +257,7 @@ function readLog(){
     const parsed = raw ? JSON.parse(raw) : null;
     if (parsed && Array.isArray(parsed.sessions)) return parsed;
   } catch (e) { /* corrupt or unavailable, start clean */ }
-  return { version: 1, product: "picking-warmup", sessions: [] };
+  return { version: 1, product: "picking-workout", sessions: [] };
 }
 function writeLog(log){
   try { localStorage.setItem(LOG_KEY, JSON.stringify(log)); } catch (e) {}
@@ -386,7 +386,7 @@ function exportLog(){
   const blob = new Blob([JSON.stringify(log, null, 2)], { type: "application/json" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = `picking-warmup-log-${dayKey(new Date())}.json`;
+  a.download = `picking-workout-log-${dayKey(new Date())}.json`;
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 2000);
   $("ioMsg").className = "err ok";
@@ -433,7 +433,7 @@ function deviceName(){
   else if (/Mac/i.test(ua)) os = "Mac";
   else if (/Win/i.test(ua)) os = "Windows";
   else if (/Linux/i.test(ua)) os = "Linux";
-  return `Picking Warmup – ${os}`;
+  return `Picking Workout – ${os}`;
 }
 
 async function callUnlock(key, instanceId){

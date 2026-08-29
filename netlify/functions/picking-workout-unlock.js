@@ -1,5 +1,5 @@
 // =============================================================================
-// Netlify function: the gate for /picking-warmup
+// Netlify function: the gate for /picking-workout
 //
 // The app shell on the site is public and empty. The routine itself only ever
 // leaves this function, and only for a license key Lemon Squeezy says is good.
@@ -13,14 +13,14 @@
 // with the user's own key. No store API token is used and none is needed.
 //
 // Setup (one time), Netlify -> Site configuration -> Environment variables:
-//   PICKING_WARMUP_PRODUCT_ID   the Lemon Squeezy product id for this product.
+//   PICKING_WORKOUT_PRODUCT_ID   the Lemon Squeezy product id for this product.
 //   Without it, ANY key from Jon's store unlocks this, including a $5 Looper
 //   key. Set it as soon as the product exists.
 // =============================================================================
 
 const LS_API = "https://api.lemonsqueezy.com/v1/licenses";
 
-const { buildRoutine, ROUTINE_META } = require("./picking-warmup-routine.js");
+const { buildRoutine, ROUTINE_META } = require("./picking-workout-routine.js");
 
 async function ls(path, params) {
   const res = await fetch(`${LS_API}/${path}`, {
@@ -54,7 +54,7 @@ function json(statusCode, body) {
 
 // Is this key for THIS product, rather than another one in the same store?
 function wrongProduct(meta) {
-  const want = process.env.PICKING_WARMUP_PRODUCT_ID;
+  const want = process.env.PICKING_WORKOUT_PRODUCT_ID;
   if (!want) return false;                 // not configured yet, see the note above
   return String(meta && meta.product_id) !== String(want);
 }
