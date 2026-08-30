@@ -67,7 +67,8 @@ strong{color:var(--white);font-weight:400}
 /* top bar */
 .bar{border-bottom:1px solid var(--border);padding:18px 0}
 .bar .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
-.bar .b{font-family:'Oswald',sans-serif;font-size:1.05rem;letter-spacing:.04em}
+.bar .b{font-family:'Oswald',sans-serif;font-size:1.05rem;letter-spacing:.04em;text-decoration:none;color:var(--white);transition:.15s}
+.bar .b:hover{color:var(--purple-lt)}
 .bar .b b{font-weight:700}
 .bar .b span{color:var(--dim);font-weight:400;font-size:.82rem;letter-spacing:.16em;margin-left:8px}
 .bar .t{font-family:'Oswald',sans-serif;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple-lt)}
@@ -124,6 +125,13 @@ ul.pts li b{color:var(--white);font-weight:400}
 .facts b{display:block;font-family:'Oswald',sans-serif;font-size:1.9rem;font-weight:600;line-height:1.1;margin-bottom:2px}
 .facts span{font-family:'Oswald',sans-serif;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
 
+.members{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--purple);
+  border-radius:11px;padding:26px 28px}
+.members .n{font-family:'Oswald',sans-serif;font-size:.78rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--purple-lt);margin-bottom:10px}
+.members p{font-size:.99rem}
+.members a{color:var(--purple-lt)}
+
 footer{border-top:1px solid var(--border);padding:34px 0 60px;color:var(--dim);font-size:.9rem}
 .fnav{display:flex;flex-wrap:wrap;gap:22px;margin-bottom:16px}
 .fnav a{color:var(--muted);text-decoration:none}
@@ -135,7 +143,7 @@ footer{border-top:1px solid var(--border);padding:34px 0 60px;color:var(--dim);f
 
 <div class="bar">
   <div class="wrap">
-    <div class="b"><b>JON BJORK</b><span>MUSIC</span></div>
+    <a class="b" href="https://www.jonbjorkmusic.com/"><b>JON BJORK</b><span>MUSIC</span></a>
     <div class="t">Level up your playing</div>
   </div>
 </div>
@@ -258,6 +266,18 @@ footer{border-top:1px solid var(--border);padding:34px 0 60px;color:var(--dim);f
         <div class="n">Your log</div>
         <p>Kept in your browser, and you can export it as a small file to move between computers or keep as a backup.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<section class="tight">
+  <div class="wrap">
+    <div class="members">
+      <div class="n">Already a member?</div>
+      <p>This is included in The Practice Room and Practice Room Pro, along with everything else I have made. If you are already in, you do not need to buy it. Open your Practice Lab and it is under Workouts.</p>
+      <p style="margin-bottom:0">If you are not, <a href="https://www.jonbjorkmusic.com/practiceroom/?ref=apw">have a look at what is in there</a> before you decide.</p>
     </div>
   </div>
 </section>
