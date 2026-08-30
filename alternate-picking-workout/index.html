@@ -78,7 +78,20 @@ section.tight{padding:44px 0}
 
 /* hero */
 .hero{padding-top:56px}
-.hero .shot{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:40px}
+.hero .shot{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:40px;position:relative;background:#000}
+.hero .shot iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
+.play{display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;position:relative}
+.play img{transition:.25s}
+.play:hover img{opacity:.72}
+.pbtn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:78px;height:78px;border-radius:50%;background:var(--purple);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 40px rgba(124,58,237,.45);transition:.2s}
+.play:hover .pbtn{background:var(--purple-lt);transform:translate(-50%,-50%) scale(1.06)}
+.plabel{position:absolute;right:18px;top:16px;font-family:'Oswald',sans-serif;
+  font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--off);
+  background:rgba(13,13,13,.72);padding:7px 13px;border-radius:6px}
+@media (max-width:560px){.pbtn{width:60px;height:60px}}
 .hero h1{margin-bottom:18px}
 .hero .sub{font-size:1.2rem;color:var(--off);max-width:720px;margin-bottom:28px}
 
@@ -126,7 +139,13 @@ footer a{color:var(--muted)}
 
 <section class="hero">
   <div class="wrap">
-    <div class="shot"><img src="hero.jpg" alt="The Ultimate Alternate Picking Workout, running in the app"></div>
+    <div class="shot" id="demo">
+      <button class="play" id="playBtn" aria-label="Play the demo">
+        <img src="hero.jpg" alt="The Ultimate Alternate Picking Workout, running in the app">
+        <span class="pbtn"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+        <span class="plabel">Watch the demo &middot; 6 min</span>
+      </button>
+    </div>
     <span class="eyebrow">App + guided workout</span>
     <h1>The Ultimate<br>Alternate Picking Workout.</h1>
     <p class="sub">This routine will systematically take you through all possible left-hand fingerings and the three most common string crossings you'll come across in real music.</p>
@@ -165,6 +184,7 @@ footer a{color:var(--muted)}
       <li><b>Five positions.</b> The neck feels different everywhere. Being comfortable at the first fret says nothing about the thirteenth.</li>
       <li><b>Both starting strokes.</b> Start on an upstroke and the whole thing turns around. The app flips it with one tap and tracks which way you did it.</li>
       <li><b>One unbroken pass.</b> Strict alternate picking straight through, no stopping between exercises.</li>
+      <li><b>Tab written as fingers, not frets.</b> Move the routine to the fifth position and the tab still reads 1 and 2, so you always know which finger combination you are on instead of doing sums in your head.</li>
     </ul>
   </div>
 </section>
@@ -243,7 +263,8 @@ footer a{color:var(--muted)}
 <section>
   <div class="wrap" style="text-align:center">
     <span class="eyebrow">One time, yours to keep</span>
-    <h2 style="margin-bottom:22px">Start it properly today.</h2>
+    <h2 style="margin-bottom:18px">It is all about getting<br>the practice done.</h2>
+    <p style="max-width:620px;margin:0 auto 26px">Playing along with something like this is more fun than trying to do the routine on your own, and it is much easier to sit down and get it done. You start, and you get through it.</p>
     <div class="buy" style="justify-content:center">
       <a class="btn" href="https://jonbjorkmusic.lemonsqueezy.com/checkout/buy/0c2e7ee0-654c-410d-adf0-8ac1c13c8577">Get the workout &mdash; $29</a>
     </div>
@@ -255,5 +276,18 @@ footer a{color:var(--muted)}
   <div class="wrap">Jon Bjork Music &middot; <a href="https://jonbjorkmusic.com">jonbjorkmusic.com</a></div>
 </footer>
 
+<script>
+// Click to play, so the page stays light and the cover art is what people see
+// first. Nothing loads from YouTube until someone actually asks for the demo.
+document.getElementById("playBtn").addEventListener("click", function () {
+  var f = document.createElement("iframe");
+  f.src = "https://www.youtube-nocookie.com/embed/VbVmuD8TUcw?autoplay=1&rel=0";
+  f.title = "The Ultimate Alternate Picking Workout demo";
+  f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+  f.allowFullscreen = true;
+  document.getElementById("demo").replaceChildren(f);
+  if (window.fbq) fbq("trackCustom", "WatchedDemo", { content_name: "Ultimate Alternate Picking Workout" });
+});
+</script>
 </body>
 </html>
