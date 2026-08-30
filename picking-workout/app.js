@@ -20,7 +20,7 @@ const PREFS_KEY   = "jbm:pickingworkout:prefs";
 // the watch URL, e.g. "Hd-gfXTaN_4". Unlisted is fine: unlisted videos embed
 // normally, they just do not show up in search or on the channel.
 // Leave it empty and the Walkthrough tab hides itself.
-const WALKTHROUGH_VIDEO_ID = "";
+const WALKTHROUGH_VIDEO_ID = "a4UkxRIcMNI";
 
 const SUBDIVISION = 2;          // eighth notes, and nothing else
 const COUNT_IN_BEATS = 4;
