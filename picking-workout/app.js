@@ -190,10 +190,9 @@ async function play(fromIndex, withCountIn){
     countInBeats: withCountIn ? COUNT_IN_BEATS : 0,
     countInSubdivide: false,
     onCountIn: (num) => {
-      const el = $("countin");
-      el.classList.remove("hidden");
-      el.textContent = String(num);
-      if (num === 1) setTimeout(() => el.classList.add("hidden"), (60/S.bpm)*1000);
+      $("countin").classList.remove("hidden");
+      $("countinNum").textContent = String(num);
+      if (num === 1) setTimeout(() => $("countin").classList.add("hidden"), (60/S.bpm)*1000);
     },
     onTick: (i) => paintNote(base + i),
   });
@@ -317,6 +316,22 @@ function streakOf(map){
   return n;
 }
 
+// Walk the finished sessions in order. Each time all ten squares are covered
+// the round closes and the grid starts empty again.
+function coverageRound(sessions, positions){
+  const target = positions.length * 2;
+  const finished = sessions
+    .filter(s => s.complete && positions.includes(s.position))
+    .sort((a, b) => new Date(a.startedAt) - new Date(b.startedAt));
+  let round = 1;
+  let done = new Set();
+  for (const s of finished){
+    done.add(s.position + s.startStroke);
+    if (done.size >= target){ round++; done = new Set(); }
+  }
+  return { round, done };
+}
+
 function shadeFor(ms){
   const m = ms/60000;
   if (m >= 20) return "#7c3aed";
@@ -361,13 +376,19 @@ function renderLog(){
   }
   $("cal").innerHTML = html;
 
-  // coverage: five positions against the two starting strokes
+  // Coverage: five positions against the two starting strokes. Fill all ten and
+  // it starts a new round, so the grid keeps meaning something instead of
+  // sitting permanently full.
   const positions = (S.meta && S.meta.positions) || [1,5,9,13,17];
+  const { round, done } = coverageRound(log.sessions, positions);
+  const target = positions.length * 2;
+  $("covRound").textContent = `Round ${round} · ${done.size} of ${target}`;
+
   let cov = `<div class="lbl"></div>` + positions.map(p => `<div class="lbl">Pos ${p}</div>`).join("");
   for (const stroke of ["D","U"]){
     cov += `<div class="lbl">${stroke === "D" ? "Downstroke" : "Upstroke"}</div>`;
     for (const p of positions){
-      const hit = log.sessions.some(s => s.position === p && s.startStroke === stroke && s.complete);
+      const hit = done.has(p + stroke);
       cov += `<div class="${hit ? "hit" : ""}">${hit ? "✓" : "—"}</div>`;
     }
   }
@@ -538,8 +559,11 @@ $("btnStop").addEventListener("click", () => finish(false));
 $("btnNext").addEventListener("click", () => jump(1));
 $("btnPrev").addEventListener("click", () => jump(-1));
 $("btnPause").addEventListener("click", async () => {
-  if (S.playing){ halt(); $("btnPause").textContent = "Resume"; }
-  else { await play(S.pointer, false); }
+  if (S.playing){ halt(); $("btnPause").textContent = "Resume"; return; }
+  const ei = (S.flat[S.pointer] || {}).ei || 0;
+  const first = S.flat.findIndex(n => n.ei === ei);
+  S.shownEx = -1;
+  await play(first < 0 ? S.pointer : first, true);
 });
 $("btnAgain").addEventListener("click", () => show("view-setup"));
 $("btnSeeLog").addEventListener("click", () => { setTab("log"); });

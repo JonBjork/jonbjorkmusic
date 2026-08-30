@@ -68,7 +68,9 @@ input[type=text]{background:var(--card2);color:var(--white);border:1px solid var
 .tabwrap{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 0 14px;overflow-x:auto;overflow-y:hidden;min-height:238px}
 .tabwrap::-webkit-scrollbar{height:8px}
 .tabwrap::-webkit-scrollbar-thumb{background:#333;border-radius:4px}
-.countin{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(13,13,13,.9);font-family:'Oswald',sans-serif;font-size:6rem;font-weight:700;color:var(--purple-lt);border-radius:10px;z-index:2}
+.countin{position:absolute;top:14px;right:22px;display:flex;align-items:baseline;gap:12px;z-index:2;pointer-events:none;font-family:'Oswald',sans-serif}
+.countin span{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.countin b{font-size:3.4rem;font-weight:700;line-height:.9;color:var(--purple-lt)}
 .stage{position:relative}
 .progress{height:3px;background:var(--border);border-radius:2px;margin:14px 0 6px;overflow:hidden}
 .progress i{display:block;height:100%;background:var(--purple);width:0}
@@ -99,6 +101,7 @@ table.sessions{width:100%;border-collapse:collapse;margin-top:8px;font-size:.98r
 table.sessions th{text-align:left;font-family:'Oswald',sans-serif;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:400;padding:8px 10px;border-bottom:1px solid var(--border)}
 table.sessions td{padding:10px 10px;border-bottom:1px solid var(--border);color:var(--off)}
 table.sessions tr:last-child td{border-bottom:0}
+.covhead{font-family:'Oswald',sans-serif;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--purple-lt);margin-bottom:10px}
 .coverage{display:grid;grid-template-columns:auto repeat(5,1fr);gap:6px;margin-top:6px;max-width:560px}
 .coverage div{font-family:'Oswald',sans-serif;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;justify-content:center;padding:9px 4px;border:1px solid var(--border);border-radius:6px;background:var(--card2)}
 .coverage div.lbl{border:0;background:none;justify-content:flex-end;padding-right:10px}
@@ -216,7 +219,7 @@ footer a{color:var(--muted)}
 
     <div class="stage">
       <div class="tabwrap" id="tabwrap"></div>
-      <div class="countin hidden" id="countin">4</div>
+      <div class="countin hidden" id="countin"><span>Count in</span><b id="countinNum">4</b></div>
     </div>
 
     <div class="progress"><i id="progBar"></i></div>
@@ -293,6 +296,7 @@ footer a{color:var(--muted)}
     <div class="panel">
       <h2>Ground covered</h2>
       <p style="color:var(--muted);font-size:.92rem;margin-bottom:14px">Every position feels different, and so does starting on an upstroke. This is what you have actually played.</p>
+      <div class="covhead" id="covRound"></div>
       <div class="coverage" id="coverage"></div>
     </div>
 
