@@ -112,6 +112,9 @@ nav.tabs{display:flex;gap:8px;margin-bottom:18px}
 nav.tabs button{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:9px 18px;font-family:'Oswald',sans-serif;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
 nav.tabs button[aria-pressed="true"]{background:var(--card);color:var(--white);border-color:var(--purple)}
 footer{color:var(--muted);font-size:.9rem;padding:28px 0 60px;border-top:1px solid var(--border);margin-top:32px}
+.fnav{display:flex;flex-wrap:wrap;gap:20px;margin-top:12px}
+.fnav a{color:var(--dim);text-decoration:none}
+.fnav a:hover{color:var(--off)}
 footer a{color:var(--muted)}
 @media (max-width:640px){
   .tempo input[type=range]{width:130px}
@@ -322,6 +325,11 @@ footer a{color:var(--muted)}
 
 <footer>
   <span id="footNote">The Ultimate Alternate Picking Workout &middot; Jon Bjork Music</span>
+  <nav class="fnav">
+    <a href="https://www.jonbjorkmusic.com/">Home</a>
+    <a href="https://www.jonbjorkmusic.com/contact">Contact</a>
+    <a href="https://www.jonbjorkmusic.com/legal">Legal</a>
+  </nav>
 </footer>
 
 </div>

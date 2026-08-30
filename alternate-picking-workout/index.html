@@ -125,7 +125,10 @@ ul.pts li b{color:var(--white);font-weight:400}
 .facts span{font-family:'Oswald',sans-serif;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
 
 footer{border-top:1px solid var(--border);padding:34px 0 60px;color:var(--dim);font-size:.9rem}
-footer a{color:var(--muted)}
+.fnav{display:flex;flex-wrap:wrap;gap:22px;margin-bottom:16px}
+.fnav a{color:var(--muted);text-decoration:none}
+.fnav a:hover{color:var(--white)}
+.fcopy{color:var(--dim);font-size:.86rem}
 </style>
 </head>
 <body>
@@ -274,7 +277,16 @@ footer a{color:var(--muted)}
 </section>
 
 <footer>
-  <div class="wrap">Jon Bjork Music &middot; <a href="https://jonbjorkmusic.com">jonbjorkmusic.com</a></div>
+  <div class="wrap">
+    <nav class="fnav">
+      <a href="https://www.jonbjorkmusic.com/">Home</a>
+      <a href="https://www.jonbjorkmusic.com/practiceroom/?ref=apw">The Practice Room</a>
+      <a href="https://www.jonbjorkmusic.com/start?ref=apw">Start Here</a>
+      <a href="https://www.jonbjorkmusic.com/contact">Contact</a>
+      <a href="https://www.jonbjorkmusic.com/legal">Legal</a>
+    </nav>
+    <div class="fcopy">&copy; 2026 Jon Bjork Music</div>
+  </div>
 </footer>
 
 <script>
