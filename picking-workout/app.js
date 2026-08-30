@@ -11,7 +11,8 @@
 
 import { createMetronomeEngine, primeMetronomeAudio } from "/picking-workout/metronome.js";
 
-const UNLOCK_URL = "/.netlify/functions/picking-workout-unlock";
+const UNLOCK_URL   = "/.netlify/functions/picking-workout-unlock";
+const WORKBOOK_URL = "/.netlify/functions/picking-workout-workbook";
 const LICENSE_KEY = "jbm:pickingworkout:license";
 const LOG_KEY     = "jbm:pickingworkout:log";
 const PREFS_KEY   = "jbm:pickingworkout:prefs";
@@ -577,6 +578,40 @@ $("tabPractice").addEventListener("click", () => setTab("practice"));
 $("tabLog").addEventListener("click", () => setTab("log"));
 $("tabVideo").addEventListener("click", () => setTab("video"));
 $("btnToPractice").addEventListener("click", () => setTab("practice"));
+
+// The workbook is bundled into its Netlify function rather than published, so
+// it has to be fetched with the licence key and handed over as a blob.
+$("btnWorkbook").addEventListener("click", async () => {
+  const btn = $("btnWorkbook"), msg = $("wbMsg");
+  let stored = null;
+  try { stored = JSON.parse(localStorage.getItem(LICENSE_KEY) || "null"); } catch (e) {}
+  if (!stored || !stored.key){ msg.className = "err"; msg.textContent = "Your key isn't stored on this device any more. Reload and paste it again."; return; }
+  btn.disabled = true; msg.className = "err"; msg.textContent = "Fetching…";
+  try {
+    const res = await fetch(WORKBOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ key: stored.key, instanceId: stored.instanceId }),
+    });
+    if (!res.ok){
+      let err = "That didn't work.";
+      try { err = (await res.json()).error || err; } catch (e) {}
+      msg.className = "err"; msg.textContent = err;
+      return;
+    }
+    const blob = await res.blob();
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "The-Ultimate-Alternate-Picking-Workout-Workbook.pdf";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    msg.className = "err ok"; msg.textContent = "Downloaded.";
+  } catch (e) {
+    msg.className = "err"; msg.textContent = "Couldn't reach the server. Check your connection and try again.";
+  } finally {
+    btn.disabled = false;
+  }
+});
 
 window.addEventListener("beforeunload", e => {
   if (S.playing){ e.preventDefault(); e.returnValue = ""; }

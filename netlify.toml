@@ -38,6 +38,9 @@
 # picking-warmup routine data on a public URL and defeat its licence gate.
 [functions]
   directory = "netlify/functions"
+  # The workbook PDF is bundled INTO the function rather than published, so
+  # picking-workout-workbook.js can hand it out only to a valid licence key.
+  included_files = ["netlify/assets/**"]
 
 [build]
   publish = "build"
