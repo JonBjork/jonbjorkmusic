@@ -36,7 +36,7 @@ const S = {
   position: 1,
   startStroke: "D",
   groups: [2, 3, 4],
-  bpm: 100,
+  bpm: 50,                      // start slow; Jon rarely goes above 80, mostly around 60
   pointer: 0,                   // where playback resumes in S.flat
   playing: false,
   shownEx: -1,
@@ -103,13 +103,15 @@ function paintSetupHints(){
   $("hintPos").innerHTML =
     `The tab is always written at the first position, so the fret numbers are the finger numbers. ` +
     `You are playing it with the <b>index finger on fret ${S.position}</b>.`;
+  // Time is the only number that matters here. The note and exercise counts
+  // were noise.
   $("hintSize").innerHTML =
-    `<b>${S.exercises.length}</b> exercises, <b>${notes}</b> notes, about <b>${fmtClock(secs)}</b> at ${S.bpm} BPM. ` +
+    `This will take <b>${fmtClock(secs)}</b> per position at <b>${S.bpm}</b> BPM. ` +
     `Play it through starting on a downstroke, then again starting on an upstroke.`;
 }
 
 // ── tab ──────────────────────────────────────────────────────────────────────
-const COL_W = 34, PAD_L = 44, PAD_R = 24, ROW_H = 22, TOP_PAD = 42;
+const COL_W = 38, PAD_L = 48, PAD_R = 26, ROW_H = 25, TOP_PAD = 46;
 
 function renderTab(notes){
   const n = notes.length;
@@ -123,7 +125,7 @@ function renderTab(notes){
 
   for (let s=1;s<=6;s++){
     svg += `<line x1="${PAD_L-10}" y1="${yFor(s)}" x2="${width-PAD_R+6}" y2="${yFor(s)}" stroke="#555" stroke-width="1.1"/>`;
-    svg += `<text x="${PAD_L-19}" y="${yFor(s)+4}" text-anchor="end" font-size="12" font-family="Oswald,sans-serif" font-weight="500" fill="#666">${STRING_NAMES[s]}</text>`;
+    svg += `<text x="${PAD_L-19}" y="${yFor(s)+4}" text-anchor="end" font-size="13" font-family="Oswald,sans-serif" font-weight="500" fill="#8c8c8c">${STRING_NAMES[s]}</text>`;
   }
 
   notes.forEach((note,i) => {
@@ -134,8 +136,8 @@ function renderTab(notes){
     svg += down
       ? `<path d="M ${x-5} ${TOP_PAD-18} L ${x-5} ${TOP_PAD-28} L ${x+5} ${TOP_PAD-28} L ${x+5} ${TOP_PAD-18}" fill="none" stroke="${col}" stroke-width="1.8" stroke-linecap="square"/>`
       : `<path d="M ${x-5} ${TOP_PAD-28} L ${x} ${TOP_PAD-18} L ${x+5} ${TOP_PAD-28}" fill="none" stroke="${col}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>`;
-    svg += `<rect x="${x-10}" y="${y-9}" width="20" height="18" fill="#181818"/>`;
-    svg += `<text x="${x}" y="${y+5}" text-anchor="middle" font-size="14" font-family="Oswald,sans-serif" font-weight="600" fill="#e8e8e8">${note.fret}</text>`;
+    svg += `<rect x="${x-11}" y="${y-10}" width="22" height="20" fill="#181818"/>`;
+    svg += `<text x="${x}" y="${y+5}" text-anchor="middle" font-size="16" font-family="Oswald,sans-serif" font-weight="600" fill="#e8e8e8">${note.fret}</text>`;
   });
 
   svg += `</svg>`;
@@ -457,6 +459,7 @@ function openApp(data){
   $("scr-locked").classList.add("hidden");
   $("scr-main").classList.remove("hidden");
   loadPrefs();
+  setBpm(S.bpm);      // keep the sliders in step with the state, prefs or not
   rebuild();
   renderLog();
   // A first-time buyer lands on the walkthrough; everyone else on the routine.

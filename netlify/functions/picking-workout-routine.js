@@ -77,7 +77,8 @@ function buildRoutine() {
 
 const ROUTINE_META = {
   title: "The Ultimate Alternate Picking Workout",
-  defaultBpm: 100,                 // the tempo on Jon's Guitar Pro file
+  defaultBpm: 50,                  // start slow. The .gpx says 100, but Jon rarely
+                                   // goes above 80 and mostly sits around 60.
   positions: [1, 5, 9, 13, 17],
   noteValue: "8ths",
 };
