@@ -84,10 +84,27 @@ exports.handler = async function (event) {
   if (wrongProduct(d.meta))
     return json(200, { unlocked: false, error: "That key is for a different product." });
 
-  return json(200, {
+  const out = {
     unlocked: true,
     instanceId: instanceId || String((d.instance && d.instance.id) || ""),
     meta: ROUTINE_META,
     exercises: buildRoutine(),
-  });
+  };
+
+  // Until PICKING_WORKOUT_PRODUCT_ID is set there is nothing to check the key
+  // against, so report what Lemon Squeezy actually said about it. Read this in
+  // the browser console after unlocking, put the productId in the env var, and
+  // this block stops appearing by itself.
+  if (!process.env.PICKING_WORKOUT_PRODUCT_ID) {
+    const m = d.meta || {};
+    out.unconfigured = {
+      note: "Set PICKING_WORKOUT_PRODUCT_ID to this productId. Any key from this store opens the app until you do.",
+      productId: m.product_id ?? null,
+      variantId: m.variant_id ?? null,
+      productName: m.product_name ?? null,
+      testMode: d.license_key ? !!d.license_key.test_mode : null,
+    };
+  }
+
+  return json(200, out);
 };

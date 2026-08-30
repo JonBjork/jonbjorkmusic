@@ -490,6 +490,9 @@ async function unlock(){
   try {
     const data = await callUnlock(key, "");
     if (!data.unlocked){ $("keyErr").textContent = data.error || "That key didn't work."; return; }
+    // Only present while PICKING_WORKOUT_PRODUCT_ID is unset. Tells us which
+    // product the key actually belongs to, and whether it was a test order.
+    if (data.unconfigured) console.log("[picking-workout] unconfigured:", data.unconfigured);
     try { localStorage.setItem(LICENSE_KEY, JSON.stringify({ key, instanceId: data.instanceId })); } catch (e) {}
     $("keyErr").textContent = "";
     openApp(data);
