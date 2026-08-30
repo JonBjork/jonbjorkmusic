@@ -25,6 +25,15 @@
   to = "https://www.skool.com/thepracticeroom"
   status = 302
   force = true
+
+# Short link for the picking workout sales page, for video descriptions and
+# posts. The page itself lives at /alternate-picking-workout; the APP is at
+# /picking-workout, which is where a buyer's licence key gets used.
+[[redirects]]
+  from = "/apw"
+  to = "/alternate-picking-workout"
+  status = 302
+  force = true
 #
 # Strategy:
 # 1. Run Eleventy in the notes/ folder, which generates notes/_site/
