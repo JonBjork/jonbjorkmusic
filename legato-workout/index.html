@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Ultimate Legato Warmup Routine — Jon Bjork</title>
+<meta name="description" content="The legato warmup routine as an app. Every fingering, one note to six notes per string, in time, in order.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0d0d; --card:#181818; --card2:#1f1f1f; --border:#2a2a2a;
+  --white:#fff; --off:#e8e8e8; --muted:#b4b4b4; --dim:#8c8c8c;
+  --purple:#7c3aed; --purple-lt:#9d5ff5;
+  --string:#555; --down:#9d5ff5; --up:#e8e8e8;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+@media (min-width:900px){html{font-size:17.5px}}
+html,body{background:var(--bg);color:var(--white);font-family:'Lato',sans-serif;font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.eyebrow{font-family:'Oswald',sans-serif;font-weight:400;font-size:.82rem;letter-spacing:.28em;text-transform:uppercase;color:var(--purple-lt);display:block;margin-bottom:12px}
+h1{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(1.9rem,4vw,2.9rem);line-height:1.05;letter-spacing:.02em;text-transform:uppercase}
+h2{font-family:'Oswald',sans-serif;font-weight:600;font-size:1rem;letter-spacing:.14em;text-transform:uppercase;color:var(--off);margin-bottom:14px}
+header{padding:40px 0 20px}
+header p{color:var(--muted);max-width:680px;margin-top:12px}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:22px 24px;margin-bottom:16px}
+.row{display:flex;flex-wrap:wrap;gap:26px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field > span{font-family:'Oswald',sans-serif;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.seg{display:flex;border:1px solid var(--border);border-radius:7px;overflow:hidden;width:fit-content}
+.seg button{background:var(--card2);color:var(--muted);border:0;border-right:1px solid var(--border);padding:10px 16px;font-family:'Oswald',sans-serif;font-size:.88rem;letter-spacing:.06em;cursor:pointer;transition:.15s}
+.seg button:last-child{border-right:0}
+.seg button:hover{color:var(--white)}
+.seg button[aria-pressed="true"]{background:var(--purple);color:#fff}
+.checks{display:flex;gap:18px;flex-wrap:wrap;padding-top:3px}
+.checks label{display:flex;align-items:center;gap:9px;font-size:1.02rem;color:var(--off);cursor:pointer}
+input[type=checkbox]{accent-color:var(--purple);width:16px;height:16px}
+input[type=text]{background:var(--card2);color:var(--white);border:1px solid var(--border);border-radius:7px;padding:12px 14px;font-family:'Oswald',sans-serif;font-size:1rem;letter-spacing:.06em;width:340px;max-width:100%}
+.btn{background:var(--purple);color:#fff;border:0;border-radius:7px;padding:13px 26px;font-family:'Oswald',sans-serif;font-size:.98rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:.15s}
+.btn:hover{background:var(--purple-lt)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.ghost{background:transparent;border:1px solid var(--border);color:var(--muted)}
+.btn.ghost:hover{border-color:var(--purple-lt);color:var(--white)}
+.btn.sm{padding:9px 16px;font-size:.82rem}
+.transport{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.tempo{display:flex;align-items:center;gap:10px}
+.tempo input[type=range]{width:200px;accent-color:var(--purple)}
+.bpm{font-family:'Oswald',sans-serif;font-size:1.6rem;font-weight:600;min-width:88px}
+.bpm em{font-style:normal;font-size:.7rem;color:var(--dim);letter-spacing:.14em;margin-left:5px}
+.hint{color:var(--muted);font-size:1rem;margin-top:14px;line-height:1.6}
+.hint b{color:var(--off);font-weight:400}
+.hidden{display:none !important}
+.err{color:#ff8080;font-size:.92rem;margin-top:10px;min-height:1.2em}
+.ok{color:var(--purple-lt)}
+
+/* runner */
+.now{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:14px}
+.now .mode{color:var(--purple-lt);font-family:'Oswald',sans-serif;letter-spacing:.16em;text-transform:uppercase;font-size:.82rem}
+.now .combo{font-family:'Oswald',sans-serif;font-size:2.1rem;font-weight:600;letter-spacing:.06em;line-height:1.1}
+.now .right{text-align:right}
+.badge{display:inline-block;border:1px solid var(--border);border-radius:6px;padding:8px 14px;font-family:'Oswald',sans-serif;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);background:var(--card)}
+.badge b{color:var(--purple-lt);font-weight:600}
+.next{color:var(--muted);font-size:.84rem;font-family:'Oswald',sans-serif;letter-spacing:.12em;text-transform:uppercase;margin-top:9px}
+.next b{display:block;color:var(--off);font-weight:400;font-size:1.05rem;margin-top:2px;letter-spacing:.04em}
+.tabwrap{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px 0 14px;overflow-x:auto;overflow-y:hidden;min-height:238px}
+.tabwrap::-webkit-scrollbar{height:8px}
+.tabwrap::-webkit-scrollbar-thumb{background:#333;border-radius:4px}
+.countin{position:absolute;top:14px;right:22px;display:flex;align-items:baseline;gap:12px;z-index:2;pointer-events:none;font-family:'Oswald',sans-serif}
+.countin span{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.countin b{font-size:3.4rem;font-weight:700;line-height:.9;color:var(--purple-lt)}
+.stage{position:relative}
+.progress{height:3px;background:var(--border);border-radius:2px;margin:14px 0 6px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--purple);width:0}
+.plabel{display:flex;justify-content:space-between;color:var(--muted);font-size:.86rem;font-family:'Oswald',sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.rat{display:flex;margin-top:16px;border:1px solid var(--border);border-radius:10px;overflow:hidden;flex-wrap:wrap}
+.rat div{flex:1;min-width:200px;padding:13px 18px;border-right:1px solid var(--border);background:var(--card)}
+.rat div:last-child{border-right:0}
+.rat b{display:block;font-family:'Oswald',sans-serif;color:var(--purple-lt);letter-spacing:.16em;text-transform:uppercase;font-size:.82rem;margin-bottom:2px}
+.rat span{color:var(--muted);font-size:.95rem}
+
+/* log */
+.stats{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.stat{flex:1;min-width:150px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px}
+.stat b{display:block;font-family:'Oswald',sans-serif;font-size:1.9rem;font-weight:600;color:var(--white);line-height:1.1}
+.stat span{font-family:'Oswald',sans-serif;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.calhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.calhead h3{font-family:'Oswald',sans-serif;font-weight:600;letter-spacing:.1em;text-transform:uppercase;font-size:1.05rem}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:560px}
+.cal .dow{font-family:'Oswald',sans-serif;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:center;padding-bottom:4px}
+.cal .day{height:58px;border:1px solid var(--border);border-radius:6px;background:var(--card2);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:.82rem;color:var(--dim);cursor:default;position:relative}
+.cal .day.blank{border:0;background:none}
+.cal .day.done{color:#fff;border-color:transparent}
+.cal .day.today{outline:1px solid var(--purple-lt);outline-offset:-1px}
+.cal .day em{font-style:normal;font-size:.62rem;color:rgba(255,255,255,.75);margin-top:1px}
+.legend{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.82rem;font-family:'Oswald',sans-serif;letter-spacing:.1em;text-transform:uppercase;margin-top:12px}
+.legend i{width:16px;height:16px;border-radius:4px;display:inline-block;border:1px solid var(--border)}
+table.sessions{width:100%;border-collapse:collapse;margin-top:8px;font-size:.98rem}
+table.sessions th{text-align:left;font-family:'Oswald',sans-serif;font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);font-weight:400;padding:8px 10px;border-bottom:1px solid var(--border)}
+table.sessions td{padding:10px 10px;border-bottom:1px solid var(--border);color:var(--off)}
+table.sessions tr:last-child td{border-bottom:0}
+.covhead{font-family:'Oswald',sans-serif;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;color:var(--purple-lt);margin-bottom:10px}
+.coverage{display:grid;grid-template-columns:auto repeat(5,1fr);gap:6px;margin-top:6px;max-width:560px}
+.coverage div{font-family:'Oswald',sans-serif;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;justify-content:center;padding:9px 4px;border:1px solid var(--border);border-radius:6px;background:var(--card2)}
+.coverage div.lbl{border:0;background:none;justify-content:flex-end;padding-right:10px}
+.coverage div.hit{background:var(--purple);color:#fff;border-color:transparent}
+.videobox{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:8px;overflow:hidden}
+.videobox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+nav.tabs{display:flex;gap:8px;margin-bottom:18px}
+nav.tabs button{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:7px;padding:9px 18px;font-family:'Oswald',sans-serif;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+nav.tabs button[aria-pressed="true"]{background:var(--card);color:var(--white);border-color:var(--purple)}
+footer{color:var(--muted);font-size:.9rem;padding:28px 0 60px;border-top:1px solid var(--border);margin-top:32px}
+.fnav{display:flex;flex-wrap:wrap;gap:20px;margin-top:12px}
+.fnav a{color:var(--dim);text-decoration:none}
+.fnav a:hover{color:var(--off)}
+footer a{color:var(--muted)}
+.today{background:var(--card);border:1px solid var(--purple);border-radius:10px;padding:24px;margin-bottom:16px}
+.today .k{font-family:'Oswald',sans-serif;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple-lt)}
+.today .v{font-family:'Oswald',sans-serif;font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:600;letter-spacing:.04em;line-height:1.15;margin:6px 0 10px}
+.addmore{display:flex;gap:22px;flex-wrap:wrap;align-items:center}
+.addmore label{display:flex;align-items:center;gap:9px;color:var(--off);cursor:pointer}
+.addmore .t{color:var(--dim);font-size:.9rem}
+@media (max-width:640px){
+  .tempo input[type=range]{width:130px}
+  .now .combo{font-size:1.6rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Jon Bjork Music</span>
+  <h1>The Ultimate Legato<br>Warmup Routine</h1>
+  <p id="lede">Every finger combination, taken through one, two, three and four notes per string, over the whole fretboard. It doesn't sound like much, and that is the point.</p>
+</header>
+
+<!-- LOCKED -->
+<section id="scr-locked" class="hidden">
+  <div class="panel">
+    <h2>Enter your key</h2>
+    <p style="color:var(--muted);max-width:620px;margin-bottom:16px">
+      Your key arrived by email when you bought the routine. Members of The Practice Room and Practice Room Pro get one the same way, through the classroom link.
+    </p>
+    <div class="transport">
+      <input type="text" id="keyInput" placeholder="XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" autocomplete="off" spellcheck="false">
+      <button class="btn" id="btnUnlock">Unlock</button>
+    </div>
+    <div class="err" id="keyErr"></div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<section id="scr-main" class="hidden">
+  <nav class="tabs">
+    <button id="tabPractice" aria-pressed="true">Practice</button>
+    <button id="tabLog" aria-pressed="false">Progress</button>
+    <button id="tabVideo" aria-pressed="false" class="hidden">Walkthrough</button>
+  </nav>
+
+  <!-- setup -->
+  <div id="view-setup">
+    <div class="today">
+      <div class="k">Today</div>
+      <div class="v" id="todayLine">Section A &middot; 1st position</div>
+      <p class="hint" id="todayTime" style="margin-top:0"></p>
+      <div class="transport" style="margin-top:18px">
+        <button class="btn" id="btnStart">Start</button>
+        <div class="tempo">
+          <input type="range" id="tempo" min="40" max="200" value="50" step="1">
+          <div class="bpm"><span id="bpmVal">50</span><em>BPM</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h2>Add more</h2>
+      <div class="addmore">
+        <label><input type="checkbox" id="secB"> Section B <span class="t">&middot; extra sequences</span></label>
+        <label><input type="checkbox" id="secC"> The 24 combinations</label>
+      </div>
+      <p class="hint" id="hintAdd">Section A on its own is the daily warm-up. Add these when you want a longer technique session.</p>
+    </div>
+
+    <div class="panel">
+      <h2>Position</h2>
+      <p style="color:var(--muted);font-size:.94rem;margin-bottom:14px">The app moves you along on its own. Change it here if you want a different one today.</p>
+      <div class="seg" id="segPosition">
+        <button data-v="1" aria-pressed="true">1</button>
+        <button data-v="5" aria-pressed="false">5</button>
+        <button data-v="9" aria-pressed="false">9</button>
+        <button data-v="13" aria-pressed="false">13</button>
+        <button data-v="17" aria-pressed="false">17</button>
+      </div>
+      <p class="hint" id="hintPos"></p>
+    </div>
+
+    <div class="panel">
+      <h2>Just one block</h2>
+      <p style="color:var(--muted);font-size:.94rem;margin-bottom:14px">Section A is four blocks. Run the whole thing, or pick one off if you are short of time.</p>
+      <div class="seg" id="segBlock"></div>
+    </div>
+
+    <div class="rat">
+      <div><b>Relaxed</b><span>Feel tension anywhere, stop and shake it out.</span></div>
+      <div><b>Accurate</b><span>Never faster than you can play it perfectly.</span></div>
+      <div><b>Tone</b><span>Play it the way you want to sound for real.</span></div>
+    </div>
+  </div>
+
+  <!-- runner -->
+  <div id="view-run" class="hidden">
+    <div class="now">
+      <div>
+        <div class="mode" id="nowMode">One note per string</div>
+        <div class="combo" id="nowCombo">1&ndash;2</div>
+      </div>
+      <div class="right">
+        <span class="badge" id="nowPos">Position <b>1</b> &middot; index on fret 1</span>
+        <div class="next">Up next<b id="nextUp">&mdash;</b></div>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="tabwrap" id="tabwrap"></div>
+      <div class="countin hidden" id="countin"><span>Count in</span><b id="countinNum">4</b></div>
+    </div>
+
+    <div class="progress"><i id="progBar"></i></div>
+    <div class="plabel"><span id="progText">Exercise 1 of 60</span><span id="timeText">0:00 / 0:00</span></div>
+
+    <div class="panel transport" style="margin-top:16px">
+      <button class="btn" id="btnPause">Pause</button>
+      <button class="btn ghost" id="btnPrev">&larr; Previous</button>
+      <button class="btn ghost" id="btnNext">Next &rarr;</button>
+      <button class="btn ghost" id="btnStop">Finish</button>
+      <div class="tempo">
+        <input type="range" id="tempo2" min="40" max="200" value="50" step="1">
+        <div class="bpm"><span id="bpmVal2">50</span><em>BPM</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- done -->
+  <div id="view-done" class="hidden">
+    <div class="panel">
+      <h2 id="doneTitle">Done</h2>
+      <p id="doneBody" style="color:var(--muted)"></p>
+      <div class="transport" style="margin-top:18px">
+        <button class="btn" id="btnAgain">Go again</button>
+        <button class="btn ghost" id="btnSeeLog">See progress</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- walkthrough -->
+  <div id="view-video" class="hidden">
+    <div class="panel">
+      <h2>Watch this first</h2>
+      <p style="color:var(--muted);max-width:680px;margin-bottom:18px">
+        How the routine is built and how to run it. Worth the few minutes before your first pass.
+      </p>
+      <div class="videobox" id="videobox"></div>
+    </div>
+    <div class="panel">
+      <h2>The cheat sheet</h2>
+      <p style="color:var(--muted);max-width:700px;margin-bottom:18px">
+        Every finger combination and every sequence on one sheet. The app runs them for you, but it is a useful thing to have on the stand.
+      </p>
+      <div class="transport">
+        <button class="btn" id="btnWorkbook">Download the cheat sheet</button>
+        <button class="btn ghost" id="btnToPractice">Go to the routine</button>
+      </div>
+      <div class="err" id="wbMsg"></div>
+    </div>
+  </div>
+
+  <!-- log -->
+  <div id="view-log" class="hidden">
+    <div class="stats">
+      <div class="stat"><b id="stTotal">0h</b><span>Total time</span></div>
+      <div class="stat"><b id="stMonth">0m</b><span>This month</span></div>
+      <div class="stat"><b id="stStreak">0</b><span>Day streak</span></div>
+      <div class="stat"><b id="stSessions">0</b><span>Sessions</span></div>
+    </div>
+
+    <div class="panel">
+      <div class="calhead" style="max-width:520px">
+        <button class="btn ghost sm" id="calPrev">&larr;</button>
+        <h3 id="calTitle">Month</h3>
+        <button class="btn ghost sm" id="calNext">&rarr;</button>
+      </div>
+      <div class="cal" id="cal"></div>
+      <div class="legend">Time on the day<i style="background:rgba(124,58,237,.28)"></i><i style="background:rgba(124,58,237,.55)"></i><i style="background:rgba(124,58,237,.8)"></i><i style="background:#7c3aed"></i></div>
+    </div>
+
+    <div class="panel">
+      <h2>Ground covered</h2>
+      <p style="color:var(--muted);font-size:.92rem;margin-bottom:14px">The neck feels different everywhere. This is which blocks you have played at which position.</p>
+      <div class="covhead" id="covRound"></div>
+      <div class="coverage" id="coverage"></div>
+    </div>
+
+    <div class="panel">
+      <h2 id="recentTitle">Recent sessions</h2>
+      <table class="sessions" id="recent"></table>
+    </div>
+
+    <div class="panel">
+      <h2>Your practice log</h2>
+      <p style="color:var(--muted);font-size:.92rem;margin-bottom:14px">
+        The log lives in this browser. Export it to keep a copy, or to move it to another computer.
+      </p>
+      <div class="transport">
+        <button class="btn ghost" id="btnExport">Export JSON</button>
+        <button class="btn ghost" id="btnImport">Import JSON</button>
+        <input type="file" id="fileInput" accept="application/json,.json" class="hidden">
+      </div>
+      <div class="err" id="ioMsg"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span id="footNote">The Ultimate Legato Warmup Routine &middot; Jon Bjork Music</span>
+  <nav class="fnav">
+    <a href="https://www.jonbjorkmusic.com/">Home</a>
+    <a href="https://www.jonbjorkmusic.com/contact">Contact</a>
+    <a href="https://www.jonbjorkmusic.com/legal">Legal</a>
+  </nav>
+</footer>
+
+</div>
+<script>window.__PL_SOUND_BASE = "/legato-workout/sounds";</script>
+<script type="module" src="/legato-workout/app.js"></script>
+</body>
+</html>
