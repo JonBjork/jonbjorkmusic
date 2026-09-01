@@ -181,9 +181,7 @@ function renderTab(notes){
 
   // Slurs, in Normal Legato only. Anything after the first note of a string
   // visit is a hammer-on or a pull-off, so it gets an arc back to the note
-  // before it. All Hammers gets none: every note is hammered, so marking each
-  // one is noise. The T on the string starts carries the only distinction that
-  // matters there, the hammer-on from nowhere.
+  // before it. All Hammers gets no slurs; every note there is marked H.
   if (S.mode !== "hammers"){
     notes.forEach((note,i) => {
       const prev = notes[i-1];
@@ -196,10 +194,14 @@ function renderTab(notes){
 
   notes.forEach((note,i) => {
     const x = xFor(i), y = yFor(note.string);
+    // All Hammers marks every note the same, because every note is hammered,
+    // including the one that starts a string with nothing behind it.
+    if (S.mode === "hammers"){
+      svg += `<text x="${x}" y="${TOP_PAD-20}" text-anchor="middle" font-size="12" font-family="Oswald,sans-serif" font-weight="600" fill="#8c8c8c">H</text>`;
+    }
     if (note.stringStart){
       if (S.mode === "hammers"){
-        // hammer-on from nowhere
-        svg += `<text x="${x}" y="${TOP_PAD-20}" text-anchor="middle" font-size="12" font-family="Oswald,sans-serif" font-weight="600" fill="#9d5ff5">T</text>`;
+        /* nothing extra: the H above is the marking */
       } else {
         // Standard picking symbols: squared frame down, V up. Down going up the
         // strings, up coming back.
