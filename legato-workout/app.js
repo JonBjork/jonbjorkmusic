@@ -1,5 +1,5 @@
 // =============================================================================
-// The Ultimate Legato Warmup Routine
+// The Legato Workout
 //
 // The exercises are not in this file. They arrive from
 // /.netlify/functions/legato-workout-unlock once Lemon Squeezy confirms the key.
@@ -7,10 +7,9 @@
 // Metronome: the Practice Lab engine, byte-identical to the picking workout's
 // copy except for the sample path, which reads window.__PL_SOUND_BASE.
 //
-// Unlike the picking workout this routine mixes note values: some blocks are
-// eighths, some are triplets. The engine takes one subdivision per run, so the
-// session is played as a chain of runs, one per stretch of equal note value,
-// handed off seamlessly at the boundary.
+// Eighth notes throughout, so one metronome run per session. The run-chaining
+// in startRun is kept because it costs nothing and the next routine may not be
+// so tidy.
 // =============================================================================
 
 import { createMetronomeEngine, primeMetronomeAudio } from "/legato-workout/metronome.js";
@@ -33,7 +32,8 @@ const $ = (id) => document.getElementById(id);
 const S = {
   meta: null,
   sections: [],            // the whole routine as it came from the server
-  sel: { B: false, C: false, block: "all" },
+  mode: "legato",          // or "hammers"
+  sel: { two: true, three: true, four: false },
   exercises: [],           // the selected ones, in order
   flat: [],                // every note of the session
   runs: [],                // [{from, to, sub}] stretches of equal note value
@@ -52,7 +52,10 @@ const engine = createMetronomeEngine();
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 const STRING_NAMES = { 1:"e", 2:"B", 3:"G", 4:"D", 5:"A", 6:"E" };
-const ORD = { 1:"1st", 5:"5th", 9:"9th", 13:"13th", 17:"17th" };
+function ord(n){
+  if (n === 1) return "1st"; if (n === 2) return "2nd"; if (n === 3) return "3rd";
+  return n + "th";
+}
 
 function fmtClock(sec){
   sec = Math.max(0, Math.round(sec));
@@ -86,30 +89,25 @@ function show(id){
   ["view-setup","view-run","view-done","view-log","view-video"].forEach(v => $(v).classList.toggle("hidden", v !== id));
 }
 
-// every block of every selected section, flattened
-function allBlocks(){
-  const want = ["A", ...(S.sel.B ? ["B"] : []), ...(S.sel.C ? ["C"] : [])];
-  return S.sections.filter(s => want.includes(s.id))
-                   .flatMap(s => s.blocks.map(b => ({ ...b, sectionId: s.id, sectionName: s.name })));
+function modeMeta(){
+  return ((S.meta && S.meta.modes) || []).find(m => m.id === S.mode)
+      || { name: "Normal Legato", positions: [1,5,9,13,17], blurb: "" };
+}
+function chosenSections(){
+  return S.sections.filter(sec => S.sel[sec.id]);
 }
 
 // ── the session ──────────────────────────────────────────────────────────────
 function rebuild(){
-  let blocks = allBlocks();
-  if (S.sel.block !== "all") blocks = blocks.filter(b => b.id === S.sel.block);
-
   S.exercises = [];
-  blocks.forEach(b => b.exercises.forEach(ex => S.exercises.push({
-    ...ex,
-    blockId: b.id, blockName: b.name, sectionId: b.sectionId,
-    sub: SUB[b.noteValue] || 2,
+  chosenSections().forEach(sec => sec.exercises.forEach(ex => S.exercises.push({
+    ...ex, sectionId: sec.id, sectionName: sec.name, sub: 2,
   })));
 
   S.flat = [];
   S.exercises.forEach((ex, ei) => ex.notes.forEach((n, ni) =>
-    S.flat.push({ ...n, ei, ni, sub: ex.sub })));
+    S.flat.push({ ...n, ei, ni, sub: 2 })));
 
-  // stretches of equal note value, so each can be one metronome run
   S.runs = [];
   for (let i = 0; i < S.flat.length; i++){
     const last = S.runs[S.runs.length - 1];
@@ -125,30 +123,42 @@ function sessionSeconds(bpm){
 
 function paintSetup(){
   const sec = sessionSeconds(S.bpm);
-  const bits = ["Section A"];
-  if (S.sel.B) bits.push("Section B");
-  if (S.sel.C) bits.push("the 24 combinations");
-  const what = S.sel.block === "all"
-    ? bits.length === 1 ? bits[0] : bits.slice(0,-1).join(", ") + " and " + bits[bits.length-1]
-    : (S.exercises[0] ? S.exercises[0].blockName : "One block");
+  const m = modeMeta();
+  const names = chosenSections().map(x => x.name.replace(" fingers", ""));
+  const what = names.length
+    ? names.length === 1 ? names[0] + " fingers"
+      : names.slice(0,-1).join(", ") + " and " + names[names.length-1] + " fingers"
+    : "Nothing selected";
 
-  $("todayLine").textContent = `${what} · ${ORD[S.position] || S.position + "th"} position`;
-  $("todayTime").innerHTML =
-    `This will take <b>${fmtLong(sec)}</b> at <b>${S.bpm}</b> BPM.`;
+  $("todayLine").textContent = `${m.name} · ${what} · ${ord(S.position)} position`;
+  $("todayTime").innerHTML = S.exercises.length
+    ? `This will take <b>${fmtLong(sec)}</b> at <b>${S.bpm}</b> BPM.`
+    : `Pick at least one set to play.`;
+  $("btnStart").disabled = !S.exercises.length;
+
+  $("hintMode").innerHTML = m.blurb;
   $("hintPos").innerHTML =
     `The tab is written at the first position, so the fret numbers are the finger numbers. ` +
-    `You are playing it with the <b>index finger on fret ${S.position}</b>. ` +
-    `Coming back down the strings the hand moves up one fret, which is why you will see a 5.`;
-  $("hintAdd").innerHTML = S.sel.B || S.sel.C
-    ? `That is <b>${fmtLong(sec)}</b> at ${S.bpm} BPM. Learn section A first, then add these.`
-    : `Section A on its own is the daily warm-up. Add these when you want a longer technique session.`;
+    `You are playing it with the <b>index finger on fret ${S.position}</b>.`;
+
+  const full = S.sel.two && (S.sel.three || S.sel.four);
+  $("hintSections").innerHTML = !S.exercises.length
+    ? `Pick at least one set.`
+    : S.sel.two && S.sel.three && S.sel.four
+      ? `All three sets. That is the long session, <b>${fmtLong(sec)}</b> at ${S.bpm} BPM.`
+      : full
+        ? `That is a full workout, <b>${fmtLong(sec)}</b> at ${S.bpm} BPM.`
+        : `A full workout is the two-finger set plus either the three-finger or the four-finger one.`;
 }
 
-function paintBlockPicker(){
-  const blocks = allBlocks();
-  $("segBlock").innerHTML =
-    `<button data-v="all" aria-pressed="${S.sel.block === "all"}">Everything</button>` +
-    blocks.map(b => `<button data-v="${b.id}" aria-pressed="${S.sel.block === b.id}">${b.name}</button>`).join("");
+// The position buttons change with the mode: Normal Legato runs from the 1st,
+// All Hammers from the 3rd so there are no open strings to mute, and neither
+// goes past the 17th so nothing needs more than 20 frets.
+function paintPositions(){
+  const list = modeMeta().positions;
+  if (!list.includes(S.position)) S.position = list[0];
+  $("segPosition").innerHTML = list.map(p =>
+    `<button data-v="${p}" aria-pressed="${p === S.position}">${p}</button>`).join("");
 }
 
 // ── tab ──────────────────────────────────────────────────────────────────────
@@ -169,21 +179,31 @@ function renderTab(notes){
     svg += `<text x="${PAD_L-19}" y="${yFor(s)+4}" text-anchor="end" font-size="13" font-family="Oswald,sans-serif" font-weight="500" fill="#8c8c8c">${STRING_NAMES[s]}</text>`;
   }
 
-  // Slurs. Everything here is legato, so any two consecutive notes on the same
-  // string are a hammer-on or a pull-off and get an arc. A note that starts a
-  // string is either picked or, in the first block, tapped.
+  // Slurs. Anything after the first note of a string visit is a hammer-on or a
+  // pull-off, so it gets an arc back to the note before it.
   notes.forEach((note,i) => {
     const prev = notes[i-1];
-    if (prev && prev.string === note.string){
+    if (prev && prev.string === note.string && !note.stringStart){
       const x1 = xFor(i-1), x2 = xFor(i), y = yFor(note.string) - 13;
-      svg += `<path d="M ${x1} ${y} Q ${(x1+x2)/2} ${y-9} ${x2} ${y}" fill="none" stroke="#7c3aed" stroke-width="1.5"/>`;
+      svg += `<path class="slur" d="M ${x1} ${y} Q ${(x1+x2)/2} ${y-9} ${x2} ${y}" fill="none" stroke="#7c3aed" stroke-width="1.5"/>`;
     }
   });
 
   notes.forEach((note,i) => {
     const x = xFor(i), y = yFor(note.string);
-    if (note.tap){
-      svg += `<text x="${x}" y="${TOP_PAD-20}" text-anchor="middle" font-size="12" font-family="Oswald,sans-serif" font-weight="600" fill="#9d5ff5">T</text>`;
+    if (note.stringStart){
+      if (S.mode === "hammers"){
+        // hammer-on from nowhere
+        svg += `<text x="${x}" y="${TOP_PAD-20}" text-anchor="middle" font-size="12" font-family="Oswald,sans-serif" font-weight="600" fill="#9d5ff5">T</text>`;
+      } else {
+        // Standard picking symbols: squared frame down, V up. Down going up the
+        // strings, up coming back.
+        const down = note.dir === "up";
+        const col = down ? "#9d5ff5" : "#e8e8e8";
+        svg += down
+          ? `<path d="M ${x-5} ${TOP_PAD-18} L ${x-5} ${TOP_PAD-28} L ${x+5} ${TOP_PAD-28} L ${x+5} ${TOP_PAD-18}" fill="none" stroke="${col}" stroke-width="1.8" stroke-linecap="square"/>`
+          : `<path d="M ${x-5} ${TOP_PAD-28} L ${x} ${TOP_PAD-18} L ${x+5} ${TOP_PAD-28}" fill="none" stroke="${col}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>`;
+      }
     }
     svg += `<rect x="${x-11}" y="${y-10}" width="22" height="20" fill="#181818"/>`;
     svg += `<text x="${x}" y="${y+5}" text-anchor="middle" font-size="16" font-family="Oswald,sans-serif" font-weight="600" fill="#e8e8e8">${note.fret}</text>`;
@@ -198,9 +218,9 @@ function showExercise(ei){
   if (!ex) return;
   S.shownEx = ei;
   $("nowCombo").textContent = ex.fingeringLabel.split("").join("–");
-  $("nowMode").textContent  = ex.blockName;
+  $("nowMode").textContent  = ex.sectionName;
   const nx = S.exercises[ei+1];
-  $("nextUp").textContent = nx ? `${nx.fingeringLabel.split("").join("–")} · ${nx.blockName}` : "Last one";
+  $("nextUp").textContent = nx ? `${nx.fingeringLabel.split("").join("–")} · ${nx.sectionName}` : "Last one";
   $("progText").textContent = `Exercise ${ei+1} of ${S.exercises.length}`;
   $("tabwrap").innerHTML = renderTab(ex.notes);
 }
@@ -316,28 +336,27 @@ function finish(completed){
   halt();
   const seconds = Math.round(S.activeMs/1000);
   const exercisesDone = completed ? S.exercises.length : ((S.flat[S.pointer]?.ei ?? 0));
-  const blocks = [...new Set(S.exercises.map(e => e.blockId))];
+  const sections = [...new Set(S.exercises.map(e => e.sectionId))];
   // A finished routine always counts. An abandoned one has to be a real attempt.
   const saved = completed || seconds >= 10;
   if (saved){
     addSession({
       startedAt: S.sessionStartedAt,
-      seconds, bpm: S.bpm, position: S.position,
-      blocks, sections: [...new Set(S.exercises.map(e => e.sectionId))],
+      seconds, bpm: S.bpm, position: S.position, mode: S.mode, sections,
       exercisesDone, exercisesTotal: S.exercises.length,
       complete: !!completed,
     });
   }
   $("doneTitle").textContent = completed ? "That's the routine" : "Session saved";
   $("doneBody").innerHTML = completed
-    ? `All ${S.exercises.length} exercises at the ${ORD[S.position] || S.position} position, in <b style="color:var(--off)">${fmtClock(seconds)}</b>. ` +
-      `Next time the app will move you to the ${ORD[nextPosition()] || nextPosition()} position.`
+    ? `All ${S.exercises.length} exercises at the ${ord(S.position)} position, in <b style="color:var(--off)">${fmtClock(seconds)}</b>. ` +
+      `Next time the app will move you to the ${ord(nextPosition())} position.`
     : `Stopped at exercise ${exercisesDone + 1} of ${S.exercises.length}. ` +
       (saved ? `<b style="color:var(--off)">${fmtClock(seconds)}</b> logged.`
              : `Too short to log, nothing saved.`);
   show("view-done");
   S.position = nextPosition();
-  [...$("segPosition").children].forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === S.position)));
+  paintPositions();
   savePrefs();
   renderLog();
 }
@@ -346,14 +365,10 @@ function finish(completed){
 // The positions Jon actually uses, in order, skipping the 17th unless the
 // player has asked for it. Whichever has gone longest without a finished
 // session comes up next, so nobody has to remember where they were.
-function positionsInPlay(){
-  const all = (S.meta && S.meta.positions) || [1,5,9,13,17];
-  const def = (S.meta && S.meta.defaultPositions) || all;
-  return S.position === 17 ? all : def;
-}
 function nextPosition(){
-  const list = positionsInPlay();
-  const done = readLog().sessions.filter(s => s.complete);
+  const list = modeMeta().positions;
+  // only sessions in this mode count towards where you are due next
+  const done = readLog().sessions.filter(s => s.complete && (s.mode || "legato") === S.mode);
   const lastAt = {};
   for (const s of done) lastAt[s.position] = Math.max(lastAt[s.position] || 0, +new Date(s.startedAt));
   let best = list[0], bestT = Infinity;
@@ -384,7 +399,7 @@ function addSession(s){
 function savePrefs(){
   try {
     localStorage.setItem(PREFS_KEY, JSON.stringify({
-      position: S.position, bpm: S.bpm, sel: S.sel,
+      position: S.position, bpm: S.bpm, sel: S.sel, mode: S.mode,
     }));
   } catch (e) {}
 }
@@ -394,14 +409,17 @@ function loadPrefs(){
     if (p){
       if (p.position) S.position = p.position;
       if (p.bpm) S.bpm = p.bpm;
-      if (p.sel) S.sel = { block: "all", ...p.sel };
+      if (p.mode) S.mode = p.mode;
+      if (p.sel) S.sel = { two: true, three: true, four: false, ...p.sel };
     }
   } catch (e) {}
   // A finished session moves you on, so open on wherever you are due next.
   if (readLog().sessions.some(s => s.complete)) S.position = nextPosition();
-  [...$("segPosition").children].forEach(b => b.setAttribute("aria-pressed", String(+b.dataset.v === S.position)));
-  $("secB").checked = !!S.sel.B;
-  $("secC").checked = !!S.sel.C;
+  [...$("segMode").children].forEach(b => b.setAttribute("aria-pressed", String(b.dataset.v === S.mode)));
+  paintPositions();
+  $("secTwo").checked   = !!S.sel.two;
+  $("secThree").checked = !!S.sel.three;
+  $("secFour").checked  = !!S.sel.four;
   setBpm(S.bpm);
 }
 
@@ -428,18 +446,19 @@ function shadeFor(ms){
   return "rgba(124,58,237,.28)";
 }
 
-// Coverage is blocks against positions: which parts of the routine you have
-// actually played where. Fill the grid and it starts a new round.
-function coverageRound(sessions, positions, blockIds){
-  const target = positions.length * blockIds.length;
+// Coverage is the three sets against the positions, and only for the mode you
+// are looking at, so it stays fifteen cells however much you have played.
+// Fill the grid and it starts a new round.
+function coverageRound(sessions, positions, sectionIds, mode){
+  const target = positions.length * sectionIds.length;
   const finished = sessions
-    .filter(s => s.complete && positions.includes(s.position))
+    .filter(s => s.complete && (s.mode || "legato") === mode && positions.includes(s.position))
     .sort((a,b) => new Date(a.startedAt) - new Date(b.startedAt));
   let round = 1, done = new Set();
   for (const s of finished){
-    for (const b of (s.blocks || [])){
-      if (!blockIds.includes(b)) continue;
-      done.add(s.position + ":" + b);
+    for (const id of (s.sections || [])){
+      if (!sectionIds.includes(id)) continue;
+      done.add(s.position + ":" + id);
     }
     if (done.size >= target){ round++; done = new Set(); }
   }
@@ -481,17 +500,18 @@ function renderLog(){
   }
   $("cal").innerHTML = html;
 
-  const positions = (S.meta && S.meta.defaultPositions) || [1,5,9,13];
-  const aBlocks = (S.sections.find(s => s.id === "A") || { blocks: [] }).blocks;
-  const blockIds = aBlocks.map(b => b.id);
-  const { round, done } = coverageRound(log.sessions, positions, blockIds);
-  $("covRound").textContent = `Round ${round} · ${done.size} of ${positions.length * blockIds.length}`;
+  const m = modeMeta();
+  const positions = m.positions;
+  const sectionIds = S.sections.map(x => x.id);
+  const { round, done } = coverageRound(log.sessions, positions, sectionIds, S.mode);
+  $("covRound").textContent =
+    `${m.name} · round ${round} · ${done.size} of ${positions.length * sectionIds.length}`;
 
   let cov = `<div class="lbl"></div>` + positions.map(p => `<div class="lbl">Pos ${p}</div>`).join("");
-  for (const b of aBlocks){
-    cov += `<div class="lbl">${b.name.replace(" per string","")}</div>`;
+  for (const sec of S.sections){
+    cov += `<div class="lbl">${sec.name.replace(" fingers","")}</div>`;
     for (const p of positions){
-      const hit = done.has(p + ":" + b.id);
+      const hit = done.has(p + ":" + sec.id);
       cov += `<div class="${hit ? "hit" : ""}">${hit ? "✓" : "—"}</div>`;
     }
   }
@@ -501,12 +521,13 @@ function renderLog(){
   const recent = log.sessions.slice().sort((a,b) => new Date(b.startedAt) - new Date(a.startedAt)).slice(0, 12);
   $("recentTitle").textContent = recent.length ? "Recent sessions" : "No sessions yet";
   $("recent").innerHTML = recent.length
-    ? `<tr><th>Date</th><th>Time</th><th>Position</th><th>Ran</th><th>BPM</th><th>Exercises</th></tr>` +
+    ? `<tr><th>Date</th><th>Time</th><th>Mode</th><th>Position</th><th>Ran</th><th>BPM</th><th>Exercises</th></tr>` +
       recent.map(s => {
         const d = new Date(s.startedAt);
         return `<tr><td>${d.toLocaleDateString(undefined,{day:"numeric",month:"short"})}</td>` +
-               `<td>${fmtDur(s.seconds*1000)}</td><td>${s.position}</td>` +
-               `<td>${(s.sections||["A"]).join(" + ")}</td><td>${s.bpm}</td>` +
+               `<td>${fmtDur(s.seconds*1000)}</td>` +
+               `<td>${(s.mode || "legato") === "hammers" ? "Hammers" : "Legato"}</td><td>${s.position}</td>` +
+               `<td>${(s.sections||[]).join(" + ")}</td><td>${s.bpm}</td>` +
                `<td>${s.complete ? "all " + s.exercisesTotal : s.exercisesDone + " of " + s.exercisesTotal}</td></tr>`;
       }).join("")
     : "";
@@ -537,7 +558,7 @@ function importLog(file){
       return;
     }
     const log = readLog();
-    const idOf = (s) => [s.startedAt, s.seconds, s.position].join("|");
+    const idOf = (s) => [s.startedAt, s.seconds, s.position, s.mode || "legato"].join("|");
     const seen = new Set(log.sessions.map(idOf));
     let added = 0;
     for (const s of incoming.sessions){
@@ -584,7 +605,7 @@ function openApp(data){
   $("scr-main").classList.remove("hidden");
   loadPrefs();
   setBpm(S.bpm);
-  paintBlockPicker();
+  paintPositions();
   rebuild();
   renderLog();
   const firstRun = readLog().sessions.length === 0;
@@ -637,19 +658,26 @@ function setBpm(v){
   if (S.flat.length) paintSetup();
 }
 
-seg("segPosition", v => { S.position = +v; paintSetup(); savePrefs(); });
-$("segBlock").addEventListener("click", e => {
+$("segPosition").addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
-  S.sel.block = b.dataset.v;
-  [...$("segBlock").children].forEach(c => c.setAttribute("aria-pressed", String(c === b)));
-  rebuild(); savePrefs();
+  S.position = +b.dataset.v;
+  [...$("segPosition").children].forEach(c => c.setAttribute("aria-pressed", String(c === b)));
+  paintSetup(); savePrefs();
+});
+$("segMode").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  S.mode = b.dataset.v;
+  [...$("segMode").children].forEach(c => c.setAttribute("aria-pressed", String(c === b)));
+  // Each mode keeps its own place in the position cycle.
+  S.position = nextPosition();
+  paintPositions();
+  paintSetup(); savePrefs();
 });
 
-["secB","secC"].forEach(id => $(id).addEventListener("change", () => {
-  S.sel.B = $("secB").checked;
-  S.sel.C = $("secC").checked;
-  S.sel.block = "all";            // adding a section always means the whole thing
-  paintBlockPicker();
+["secTwo","secThree","secFour"].forEach(id => $(id).addEventListener("change", () => {
+  const next = { two: $("secTwo").checked, three: $("secThree").checked, four: $("secFour").checked };
+  if (!next.two && !next.three && !next.four){ $(id).checked = true; return; }   // never empty
+  S.sel = next;
   rebuild(); savePrefs();
 }));
 

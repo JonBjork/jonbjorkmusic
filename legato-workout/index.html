@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Ultimate Legato Warmup Routine — Jon Bjork</title>
+<title>The Legato Workout — Jon Bjork</title>
 <meta name="description" content="The legato warmup routine as an app. Every fingering, one note to six notes per string, in time, in order.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -133,8 +133,8 @@ footer a{color:var(--muted)}
 
 <header>
   <span class="eyebrow">Jon Bjork Music</span>
-  <h1>The Ultimate Legato<br>Warmup Routine</h1>
-  <p id="lede">Every finger combination, taken through one, two, three and four notes per string, over the whole fretboard. It doesn't sound like much, and that is the point.</p>
+  <h1>The Legato<br>Workout</h1>
+  <p id="lede">Every finger combination, up the strings and back, in one position at a time. Pick each string change, or hammer every note and let your muting do the work.</p>
 </header>
 
 <!-- LOCKED -->
@@ -164,7 +164,7 @@ footer a{color:var(--muted)}
   <div id="view-setup">
     <div class="today">
       <div class="k">Today</div>
-      <div class="v" id="todayLine">Section A &middot; 1st position</div>
+      <div class="v" id="todayLine">Normal Legato &middot; 1st position</div>
       <p class="hint" id="todayTime" style="margin-top:0"></p>
       <div class="transport" style="margin-top:18px">
         <button class="btn" id="btnStart">Start</button>
@@ -176,31 +176,29 @@ footer a{color:var(--muted)}
     </div>
 
     <div class="panel">
-      <h2>Add more</h2>
-      <div class="addmore">
-        <label><input type="checkbox" id="secB"> Section B <span class="t">&middot; extra sequences</span></label>
-        <label><input type="checkbox" id="secC"> The 24 combinations</label>
+      <h2>Mode</h2>
+      <div class="seg" id="segMode">
+        <button data-v="legato" aria-pressed="true">Normal Legato</button>
+        <button data-v="hammers" aria-pressed="false">All Hammers</button>
       </div>
-      <p class="hint" id="hintAdd">Section A on its own is the daily warm-up. Add these when you want a longer technique session.</p>
+      <p class="hint" id="hintMode"></p>
+    </div>
+
+    <div class="panel">
+      <h2>What you are playing</h2>
+      <div class="addmore">
+        <label><input type="checkbox" id="secTwo" checked> Two fingers <span class="t">&middot; 12</span></label>
+        <label><input type="checkbox" id="secThree" checked> Three fingers <span class="t">&middot; 24</span></label>
+        <label><input type="checkbox" id="secFour"> Four fingers <span class="t">&middot; 24</span></label>
+      </div>
+      <p class="hint" id="hintSections">A full workout is the two-finger set plus either the three-finger or the four-finger one. All three is for a longer session.</p>
     </div>
 
     <div class="panel">
       <h2>Position</h2>
       <p style="color:var(--muted);font-size:.94rem;margin-bottom:14px">The app moves you along on its own. Change it here if you want a different one today.</p>
-      <div class="seg" id="segPosition">
-        <button data-v="1" aria-pressed="true">1</button>
-        <button data-v="5" aria-pressed="false">5</button>
-        <button data-v="9" aria-pressed="false">9</button>
-        <button data-v="13" aria-pressed="false">13</button>
-        <button data-v="17" aria-pressed="false">17</button>
-      </div>
+      <div class="seg" id="segPosition"></div>
       <p class="hint" id="hintPos"></p>
-    </div>
-
-    <div class="panel">
-      <h2>Just one block</h2>
-      <p style="color:var(--muted);font-size:.94rem;margin-bottom:14px">Section A is four blocks. Run the whole thing, or pick one off if you are short of time.</p>
-      <div class="seg" id="segBlock"></div>
     </div>
 
     <div class="rat">
@@ -214,7 +212,7 @@ footer a{color:var(--muted)}
   <div id="view-run" class="hidden">
     <div class="now">
       <div>
-        <div class="mode" id="nowMode">One note per string</div>
+        <div class="mode" id="nowMode">Two fingers</div>
         <div class="combo" id="nowCombo">1&ndash;2</div>
       </div>
       <div class="right">
@@ -229,7 +227,7 @@ footer a{color:var(--muted)}
     </div>
 
     <div class="progress"><i id="progBar"></i></div>
-    <div class="plabel"><span id="progText">Exercise 1 of 60</span><span id="timeText">0:00 / 0:00</span></div>
+    <div class="plabel"><span id="progText">Exercise 1 of 36</span><span id="timeText">0:00 / 0:00</span></div>
 
     <div class="panel transport" style="margin-top:16px">
       <button class="btn" id="btnPause">Pause</button>
@@ -298,7 +296,7 @@ footer a{color:var(--muted)}
 
     <div class="panel">
       <h2>Ground covered</h2>
-      <p style="color:var(--muted);font-size:.92rem;margin-bottom:14px">The neck feels different everywhere. This is which blocks you have played at which position.</p>
+      <p style="color:var(--muted);font-size:.92rem;margin-bottom:14px">The neck feels different everywhere, and so does hammering every note. This is what you have played where, in the mode you are in.</p>
       <div class="covhead" id="covRound"></div>
       <div class="coverage" id="coverage"></div>
     </div>
@@ -324,7 +322,7 @@ footer a{color:var(--muted)}
 </section>
 
 <footer>
-  <span id="footNote">The Ultimate Legato Warmup Routine &middot; Jon Bjork Music</span>
+  <span id="footNote">The Legato Workout &middot; Jon Bjork Music</span>
   <nav class="fnav">
     <a href="https://www.jonbjorkmusic.com/">Home</a>
     <a href="https://www.jonbjorkmusic.com/contact">Contact</a>
