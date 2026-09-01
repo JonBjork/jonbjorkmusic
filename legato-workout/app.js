@@ -138,7 +138,7 @@ function paintSetup(){
   $("hintPos").innerHTML =
     `The tab is written at the first position, so the fret numbers are the finger numbers. ` +
     `You are playing it with the <b>index finger on fret ${S.position}</b>. ` +
-    `On the way back down the strings the hand moves up one fret, which is why you will see a 5.`;
+    `Coming back down the strings the hand moves up one fret, which is why you will see a 5.`;
   $("hintAdd").innerHTML = S.sel.B || S.sel.C
     ? `That is <b>${fmtLong(sec)}</b> at ${S.bpm} BPM. Learn section A first, then add these.`
     : `Section A on its own is the daily warm-up. Add these when you want a longer technique session.`;

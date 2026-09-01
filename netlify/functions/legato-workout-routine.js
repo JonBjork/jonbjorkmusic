@@ -7,14 +7,14 @@
 // the 55 exercises long enough to test. Every miss traces to a fingering label
 // sitting a few notes late in the tab, not to the notes themselves.
 //
-// Strings are numbered the way tab numbers them: 6 = low E, 1 = high e. Unlike
-// the picking workout, this routine starts on the HIGH e and works down.
+// Strings are numbered the way tab numbers them: 6 = low E, 1 = high e. The
+// routine starts on the low E and works up to the high e, then comes back.
 //
 // Frets are written from position 1, where fret === finger, and the app names
 // the position rather than transposing. The one exception is the return leg:
 // see below.
 //
-// THE RULE. Every exercise walks down the six strings and back. Going down you
+// THE RULE. Every exercise walks up the six strings and back. Going down you
 // play the fingering from the position. Coming back the hand moves up one fret
 // and plays it again, which is why a 1-4 shape reads as frets 1 and 4 on the
 // way down and 5 and 2 on the way back. Two notes on a string is an
@@ -60,11 +60,11 @@ const B_SIX = [
   [2,3,4,3,2,1],[3,4,3,2,1,2],[4,3,2,1,2,3],[3,2,1,2,3,4],[2,1,2,3,4,3],
 ];
 
-const STRINGS_DOWN = [1, 2, 3, 4, 5, 6];        // high e to low E
-const STRINGS_BACK = [6, 5, 4, 3, 2, 1];
+const STRINGS_DOWN = [6, 5, 4, 3, 2, 1];        // low E up to high e
+const STRINGS_BACK = [1, 2, 3, 4, 5, 6];
 // Four fingers do not fit one-per-string across six strings, so the one-note
-// block groups them the way the tab does.
-const GROUPED_DOWN = [1, 2, 3, 4, 3, 4, 5, 6];
+// block groups them the way the tab does. Same shape as the picking routine.
+const GROUPED_DOWN = [6, 5, 4, 3, 4, 3, 2, 1];
 
 // One note per string, every note a hammer-on from nowhere. The return leg
 // replays the finger each string got on the way down, stopping one note short
