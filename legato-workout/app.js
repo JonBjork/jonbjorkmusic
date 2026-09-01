@@ -179,15 +179,20 @@ function renderTab(notes){
     svg += `<text x="${PAD_L-19}" y="${yFor(s)+4}" text-anchor="end" font-size="13" font-family="Oswald,sans-serif" font-weight="500" fill="#8c8c8c">${STRING_NAMES[s]}</text>`;
   }
 
-  // Slurs. Anything after the first note of a string visit is a hammer-on or a
-  // pull-off, so it gets an arc back to the note before it.
-  notes.forEach((note,i) => {
-    const prev = notes[i-1];
-    if (prev && prev.string === note.string && !note.stringStart){
-      const x1 = xFor(i-1), x2 = xFor(i), y = yFor(note.string) - 13;
-      svg += `<path class="slur" d="M ${x1} ${y} Q ${(x1+x2)/2} ${y-9} ${x2} ${y}" fill="none" stroke="#7c3aed" stroke-width="1.5"/>`;
-    }
-  });
+  // Slurs, in Normal Legato only. Anything after the first note of a string
+  // visit is a hammer-on or a pull-off, so it gets an arc back to the note
+  // before it. All Hammers gets none: every note is hammered, so marking each
+  // one is noise. The T on the string starts carries the only distinction that
+  // matters there, the hammer-on from nowhere.
+  if (S.mode !== "hammers"){
+    notes.forEach((note,i) => {
+      const prev = notes[i-1];
+      if (prev && prev.string === note.string && !note.stringStart){
+        const x1 = xFor(i-1), x2 = xFor(i), y = yFor(note.string) - 13;
+        svg += `<path class="slur" d="M ${x1} ${y} Q ${(x1+x2)/2} ${y-9} ${x2} ${y}" fill="none" stroke="#7c3aed" stroke-width="1.5"/>`;
+      }
+    });
+  }
 
   notes.forEach((note,i) => {
     const x = xFor(i), y = yFor(note.string);
