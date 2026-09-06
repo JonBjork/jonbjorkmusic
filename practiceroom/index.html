@@ -399,6 +399,23 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   }
   .track-step small { display: block; color: var(--dim); font-size: 0.92rem; }
   .tracks-foot { margin-top: 40px; color: var(--muted); font-weight: 300; font-size: 1.15rem; }
+
+  /* ---------- Value stack (library, priced) ---------- */
+  .stack { max-width: 720px; margin: 56px auto 0; text-align: left; border-top: 1px solid var(--line); }
+  .stack-row { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .stack-row .stack-name { flex: 1; }
+  .stack-row .stack-name small { display: block; color: var(--muted); font-weight: 300; font-size: 0.95rem; margin-top: 3px; }
+  .stack-row .stack-val { font-family: 'Oswald', sans-serif; font-weight: 500; letter-spacing: 0.06em; color: var(--off); white-space: nowrap; }
+  .stack-row .stack-val.na { color: var(--muted); font-weight: 400; font-size: 0.9rem; letter-spacing: 0.12em; text-transform: uppercase; }
+  .stack-total { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 22px 0 8px; font-family: 'Oswald', sans-serif; font-size: 1.25rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); }
+  .stack-total .stack-val { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 2px; }
+  .stack-price { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 4px 0 0; font-family: 'Oswald', sans-serif; font-size: 1.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); }
+  .stack-price .stack-val { color: var(--purple-pop); font-size: 2.2rem; font-weight: 700; }
+  .stack-note { max-width: 720px; margin: 22px auto 0; text-align: left; color: var(--muted); font-weight: 300; font-size: 1rem; }
+  @media (max-width: 640px) {
+    .stack-row { flex-direction: column; gap: 4px; }
+    .stack-total, .stack-price { flex-direction: column; align-items: flex-start; gap: 4px; }
+  }
   @media (max-width: 900px) { .tracks-grid { grid-template-columns: 1fr; } }
 
   /* ---------- SUPPORT / PRO ---------- */
@@ -496,9 +513,9 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     <div class="hero-glow" aria-hidden="true"></div>
     <span class="tag">The Practice Room</span>
     <h1>You Don't Need More Lessons.<br>You Need A Practice System.</h1>
-    <p class="hero-sub">One room with everything I've made for guitarists: every course, the tabs and Guitar Pro files, the structured practice programs, and the Practice Lab. One payment, and it's yours.</p>
+    <p class="hero-sub">Fix how you practice and your playing follows: cleaner picking, faster tempos, and progress you can measure week by week. Every course, program and tool I've made is in here, starting with a 30-minute-a-day plan for your first month. One payment, and it's yours.</p>
     <p class="hero-proof">Over 20 Courses &middot; The Practice Lab &middot; Structured Programs &middot; Tabs + GP Files &middot; Future Library Additions &middot; One Payment</p>
-    <p class="launch-note"><strong>$297</strong> once. No subscription, and nothing renews.</p>
+    <p class="launch-note"><strong>$297</strong> once. No subscription, and nothing renews. Rises to <strong>$399</strong> at 100 members.</p>
     <br />
     <a class="btn" href="https://www.skool.com/thepracticeroom/about" target="_blank" rel="noopener">
       Join The Practice Room
@@ -581,13 +598,20 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
       </div>
       <div class="slider" data-per="1">
         <div class="s-track" aria-label="Member quotes" tabindex="0">
+          <div class="s-item">
+            <div class="voice">
+              <span class="voice-mark">&ldquo;</span>
+              <p>Working systematically on single- and multiple-string picking solidified my picking mechanics more than expected. I can now consistently pick 10-15 bpm faster across the strings than before, without pushing it and having my technique fall apart.</p>
+              <div class="voice-who">Acke &middot; 8-Week Alternate Picking Intensive &middot; 10 to 15 bpm faster across the strings</div>
+            </div>
+          </div>
                     <div class="s-item">
             <div class="voice">
               <span class="voice-mark">&ldquo;</span>
               <p>I've always practiced a lot of technique throughout my life. My technique was okay, but I was never able to reach a really high level. I always thought that maybe I just didn't have the talent to become really good. But after learning from Jon how to practice properly, I now understand the mistake I was making.</p>
               <p>I used to practice fast and sloppy, thinking that my playing would become cleaner the more I played it. Jon showed me that this is not the right way. Instead, you should practice everything perfectly, so you don't practice mistakes.</p>
               <p>I've been doing this for about a year now, and my technique has improved tremendously. This is a practice method I will keep for the rest of my life.</p>
-              <div class="voice-who">Stefan Siekmann</div>
+              <div class="voice-who">Stefan Siekmann &middot; one year on the method</div>
             </div>
           </div>
           <div class="s-item">
@@ -595,13 +619,6 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
               <span class="voice-mark">&ldquo;</span>
               <p>It changed my playing a lot. But for me personally more important: it changed the way I practice. Jon gave me an insight on how to practice systematically and offered well arranged practice schedules that helped me overcome the plateau I was on for quite some time. Now I can see improvements in my playing regularly by following his practice routines.</p>
               <div class="voice-who">Toni Watzinger</div>
-            </div>
-          </div>
-          <div class="s-item">
-            <div class="voice">
-              <span class="voice-mark">&ldquo;</span>
-              <p>Working systematically on single- and multiple-string picking solidified my picking mechanics more than expected. I can now consistently pick 10-15 bpm faster across the strings than before, without pushing it and having my technique fall apart.</p>
-              <div class="voice-who">Acke &middot; Alternate Picking Intensive</div>
             </div>
           </div>
           <div class="s-item">
@@ -685,7 +702,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
             <div class="voice">
               <span class="voice-mark">&ldquo;</span>
               <p>I'm at week 5, completely consistent, haven't missed a day. I find the most benefit being the consistency, keeping the schedule, and keeping the slow tempo.</p>
-              <div class="voice-who">Chris &middot; Alternate Picking Intensive</div>
+              <div class="voice-who">Chris &middot; Alternate Picking Intensive &middot; week 5, no missed days</div>
             </div>
           </div>
         </div>
@@ -735,9 +752,50 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
         <li>Structured practice programs that tell you what to work on each day</li>
         <li>Full access to the Practice Lab, the software my members train in</li>
         <li>A community of serious players, with me in it every day</li>
-        <li>The Guitar Technique Toolbox, the 54-page practice manual, and the practice tool that comes with it</li>
         <li>New courses and practice material added to the library, yours as they land</li>
       </ul>
+      <div style="margin-top:36px;">
+        <span class="tag">Also Yours</span>
+        <ul class="room-list" style="margin-top:12px;">
+          <li><strong>The Practice Lab Looper</strong>, the Chrome extension for looping and slowing down any YouTube video. Non-members pay $5 a month; your licence is $0 for as long as you're in the room.</li>
+          <li><strong>The Guitar Technique Toolbox</strong>, the 54-page practice manual and the browser tool that goes with it.</li>
+          <li><strong>Chops Builders</strong>, four 60-minute play-along workouts for the days you want to practise without planning anything.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       THE TRACKS — Deep Dive month -> 8-week Intensive per technique
+       ============================================================ -->
+  <section class="ov-74">
+    <div class="wrap rv" style="text-align:center;">
+      <span class="tag">A Track To Run On</span>
+      <h2>Start Here, Then Follow The Path.</h2>
+      <p class="lead narrow">You don't browse this room, you follow it. Pick your technique and start the Deep Dive: 30 minutes a day for one month, building the foundation the right way. By the end of week one you'll have a daily routine you can keep, and the Practice Lab keeping score. After the month, the complete 8-week Intensive puts it to work.</p>
+      <div class="tracks-grid">
+        <div class="track">
+          <span class="tag" style="margin-bottom:8px;">Track 01</span>
+          <h3>Alternate Picking</h3>
+          <div class="track-step"><span class="track-num">1</span><span>Alternate Picking Deep Dive<small>30 minutes a day, one month</small></span></div>
+          <div class="track-step"><span class="track-num">2</span><span>8-Week Alternate Picking Intensive<small>the full program</small></span></div>
+          <div class="track-step"><span class="track-num">3</span><span>The Next Step<small>when you're ready for round two</small></span></div>
+        </div>
+        <div class="track">
+          <span class="tag" style="margin-bottom:8px;">Track 02</span>
+          <h3>Legato</h3>
+          <div class="track-step"><span class="track-num">1</span><span>Legato Deep Dive<small>30 minutes a day, one month</small></span></div>
+          <div class="track-step"><span class="track-num">2</span><span>8-Week Legato Intensive<small>the full program</small></span></div>
+        </div>
+        <div class="track">
+          <span class="tag" style="margin-bottom:8px;">Track 03</span>
+          <h3>Sweep Picking</h3>
+          <div class="track-step"><span class="track-num">1</span><span>Sweep Picking Deep Dive<small>30 minutes a day, one month</small></span></div>
+          <div class="track-step"><span class="track-num">2</span><span>8-Week Sweep Picking Intensive<small>the full program</small></span></div>
+        </div>
+      </div>
+      <p class="tracks-foot">Hybrid picking, tapping and timing have Deep Dives of their own, and the rest of the library rounds out your ear, fretboard and repertoire along the way.</p>
     </div>
   </section>
 
@@ -749,7 +807,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     <div class="wrap rv" style="text-align:center;">
       <span class="tag">The Practice Lab</span>
       <h2>Software Built For Practicing.</h2>
-      <p class="lead narrow">This is what separates the room from a pile of courses: my own training software, included in full. Eight labs, one for each part of your playing: Technique, Rhythm, Ear, Virtuoso, Harmony, Fretboard, Target Tone, and Systematic Chops. Same access my Pro members use, and you get the Lab exactly as it works today.</p>
+      <p class="lead narrow">This is what separates the room from a pile of courses: my own training software, included in full. Eight labs, one for each part of your playing: Technique, Rhythm, Ear, Virtuoso, Harmony, Fretboard, Target Tone, and Systematic Chops, plus the Workouts: the alternate picking routine, and repertoire like Paganini's Caprice No. 16 and Bach's Solfeggietto, chunked bar by bar against the click. Same access my Pro members use, and you get the Lab exactly as it works today.</p>
       <div class="slider" data-per="2">
         <div class="s-track" aria-label="Inside the Practice Lab" tabindex="0">
           <div class="s-item">
@@ -805,7 +863,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     <div class="wrap rv" style="text-align:center;">
       <span class="tag">The Library</span>
       <h2>Every Course I've Made.<br>Included.</h2>
-      <p class="lead narrow">Intensives, Deep Dives, and full courses, from alternate picking, legato and sweep to timing, ear training and fretboard speed systems. When an intensive finishes its live run in Pro, the complete package lands here too, so the shelf keeps growing.</p>
+      <p class="lead narrow">Intensives, Deep Dives, and full courses, from alternate picking, legato and sweep to timing, ear training and fretboard speed systems. Every one of these was sold on its own, most of them for years, and the prices below are what they went for. When an intensive finishes its live run in Pro, the complete package lands here too.</p>
       <p class="inside-link"><a href="/practiceroom/inside">See what's in every course &rarr;</a></p>
       <div class="slider" data-per="4">
         <div class="s-track" aria-label="Course library" tabindex="0">
@@ -836,40 +894,32 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
           <button class="s-btn" type="button" data-dir="1" aria-label="Next courses">&rarr;</button>
         </div>
       </div>
-    </div>
-  </section>
 
-
-  <!-- ============================================================
-       THE TRACKS — Deep Dive month -> 8-week Intensive per technique
-       ============================================================ -->
-  <section class="ov-74">
-    <div class="wrap rv" style="text-align:center;">
-      <span class="tag">A Track To Run On</span>
-      <h2>Start Here, Then Follow The Path.</h2>
-      <p class="lead narrow">For each of the big techniques there's a clear order. Begin with the Deep Dive: around 30 minutes a day for a month, building the foundation the right way. Then move into the complete 8-week Intensive and put it to work.</p>
-      <div class="tracks-grid">
-        <div class="track">
-          <span class="tag" style="margin-bottom:8px;">Track 01</span>
-          <h3>Alternate Picking</h3>
-          <div class="track-step"><span class="track-num">1</span><span>Alternate Picking Deep Dive<small>30 minutes a day, one month</small></span></div>
-          <div class="track-step"><span class="track-num">2</span><span>8-Week Alternate Picking Intensive<small>the full program</small></span></div>
-          <div class="track-step"><span class="track-num">3</span><span>The Next Step<small>when you're ready for round two</small></span></div>
-        </div>
-        <div class="track">
-          <span class="tag" style="margin-bottom:8px;">Track 02</span>
-          <h3>Legato</h3>
-          <div class="track-step"><span class="track-num">1</span><span>Legato Deep Dive<small>30 minutes a day, one month</small></span></div>
-          <div class="track-step"><span class="track-num">2</span><span>8-Week Legato Intensive<small>the full program</small></span></div>
-        </div>
-        <div class="track">
-          <span class="tag" style="margin-bottom:8px;">Track 03</span>
-          <h3>Sweep Picking</h3>
-          <div class="track-step"><span class="track-num">1</span><span>Sweep Picking Deep Dive<small>30 minutes a day, one month</small></span></div>
-          <div class="track-step"><span class="track-num">2</span><span>8-Week Sweep Picking Intensive<small>the full program</small></span></div>
-        </div>
+      <!-- Value stack: what each block sold for on its own. Every figure is a
+           price Jon actually charged (Deep Dives and Speed Systems in the old
+           Practice Room, Intensives at their last price, the rest on /courses).
+           Items never sold on their own say so instead of carrying a number. -->
+      <div class="stack">
+        <div class="stack-row"><div class="stack-name">Three 8-Week Intensives<small>Alternate Picking, Legato, Sweep Picking. A new 60-minute routine every week for eight weeks. $199 each.</small></div><div class="stack-val">$597</div></div>
+        <div class="stack-row"><div class="stack-name">Six Deep Dives<small>Alternate Picking, Legato, Sweep, Hybrid, Tapping, Timing. 30 minutes a day for a month. $99 each.</small></div><div class="stack-val">$594</div></div>
+        <div class="stack-row"><div class="stack-name">The Speed Systems<small>The Single-String Speed System and The 3NPS Speed System. $99 each.</small></div><div class="stack-val">$198</div></div>
+        <div class="stack-row"><div class="stack-name">Alternate Picking Mastery: 3 NPS</div><div class="stack-val">$149</div></div>
+        <div class="stack-row"><div class="stack-name">Playing What You Hear<small>Ear and fretboard, together.</small></div><div class="stack-val">$149</div></div>
+        <div class="stack-row"><div class="stack-name">Nailing The Minor Pentatonic<small>12 weeks, 12 keys.</small></div><div class="stack-val">$99</div></div>
+        <div class="stack-row"><div class="stack-name">Quick Licks</div><div class="stack-val">$99</div></div>
+        <div class="stack-row"><div class="stack-name">The Daily Ten<small>150 ten-minute workouts.</small></div><div class="stack-val">$97</div></div>
+        <div class="stack-row"><div class="stack-name">Pentatonic Picking Power</div><div class="stack-val">$49</div></div>
+        <div class="stack-row"><div class="stack-name">10-Minute Workouts Vol. 1 &amp; 2</div><div class="stack-val">$49</div></div>
+        <div class="stack-row"><div class="stack-name">The Ultimate Alternate Picking Workout<small>The app, inside the Practice Lab.</small></div><div class="stack-val">$29</div></div>
+        <div class="stack-row"><div class="stack-name">Guitar Technique Toolbox<small>The 54-page practice manual and its browser tool.</small></div><div class="stack-val">$27</div></div>
+        <div class="stack-row"><div class="stack-name">The Practice Lab Looper<small>Your own licence. Non-members pay $5 a month.</small></div><div class="stack-val">$60 a year</div></div>
+        <div class="stack-row"><div class="stack-name">The Practice Lab<small>Eight labs plus the Workouts: the picking routine, Paganini's Caprice No. 16 and Bach's Solfeggietto, chunked bar by bar against the click.</small></div><div class="stack-val na">Never sold separately</div></div>
+        <div class="stack-row"><div class="stack-name">Chops Builders<small>Four 60-minute play-along routines.</small></div><div class="stack-val na">Never sold separately</div></div>
+        <div class="stack-row"><div class="stack-name">Tabs and Guitar Pro files, the community, and everything added next<small>Alternate Picking: The Next Step ($199) joins when its live run in Pro ends.</small></div><div class="stack-val na">Included</div></div>
+        <div class="stack-total"><div>Sold separately</div><div class="stack-val">$2,196</div></div>
+        <div class="stack-price"><div>The Practice Room</div><div class="stack-val">$297</div></div>
       </div>
-      <p class="tracks-foot">Hybrid picking, tapping and timing have Deep Dives of their own, and the rest of the library rounds out your ear, fretboard and repertoire along the way.</p>
+      <p class="stack-note">Those are real prices, not made-up ones: the Deep Dives and Speed Systems were $99 each in the old Practice Room, the Intensives were $149 and then $199, and the rest is what the courses page charges today. The room is a single payment for all of it, and the Lab and the Chops Builders have never been for sale on their own at all.</p>
     </div>
   </section>
 
@@ -949,7 +999,11 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
         </details>
         <details>
           <summary>Why is it $297?</summary>
-          <p>It's one payment for everything I've made, and the price keeps rising as the library grows. Whatever the price is when you join, that's the only payment you ever make.</p>
+          <p>Because it's everything, once. Sold one at a time, at the prices they actually went for, the courses in the room come to $2,196, before the Practice Lab, the Chops Builders and the community, which were never sold separately. The price rises as the room grows, and whatever the price is when you join is the only payment you ever make.</p>
+        </details>
+        <details>
+          <summary>When does the price go up?</summary>
+          <p>At 100 members it goes to $399. The member count is public on the room's Skool page, so you can see exactly how close it is. Join before then and $297 is your price, for everything that gets added after it too.</p>
         </details>
         <details>
           <summary>What exactly do I get?</summary>
@@ -977,7 +1031,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
         </details>
         <details>
           <summary>What happens after I pay?</summary>
-          <p>You're in immediately. Start with the welcome post: it points you to your first practice program and shows you where everything lives.</p>
+          <p>You're in immediately. The welcome post sends you to your first Deep Dive and shows you where everything lives. Day one is a 30-minute session, and by the end of your first week you'll have a routine you can keep.</p>
         </details>
       </div>
     </div>
@@ -993,7 +1047,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
       <span class="tag">The Practice Room</span>
       <h2>Everything I've Made.<br>One Payment.</h2>
       <p class="lead">One payment, one time. Every course, the files, the programs, the Practice Lab, and a room that practices every day.</p>
-      <p class="launch-note"><strong>$297</strong> once. No subscription, and nothing renews.</p>
+      <p class="launch-note"><strong>$297</strong> once. No subscription, and nothing renews. Rises to <strong>$399</strong> at 100 members.</p>
       <br />
       <a class="btn" href="https://www.skool.com/thepracticeroom/about" target="_blank" rel="noopener">
         Join The Practice Room
