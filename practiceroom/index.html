@@ -509,6 +509,28 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
 
 
   <!-- ============================================================
+       FROM JON — Jon on why the room exists, click-to-play facade.
+       Same video as the Skool about page.
+       Video: https://youtu.be/CzKiMJXA8Uc
+       ============================================================ -->
+  <section class="tour ov-70" id="from-jon">
+    <div class="wrap rv">
+      <div class="tour-head">
+        <span class="tag">From Jon</span>
+        <h2>Why I Built The Room</h2>
+        <p>Me, on camera, on what The Practice Room is, who it's for, and why it's one payment instead of a subscription.</p>
+      </div>
+      <div class="vid" data-id="CzKiMJXA8Uc" data-title="Everything I've Made For Guitarists, In One Place" role="button" tabindex="0"
+           aria-label="Play the video, Everything I've Made For Guitarists, In One Place">
+        <img src="https://i.ytimg.com/vi/CzKiMJXA8Uc/maxresdefault.jpg"
+             alt="Jon Bjork on The Practice Room" width="1280" height="720" loading="lazy" />
+        <span class="vid-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
        WALKTHROUGH — the YouTube tour, click-to-play facade.
        The hero's "see what's inside first" link points here.
        Video: https://youtu.be/eLj98HjCEh0
@@ -520,7 +542,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
         <h2>Have A Look Inside</h2>
         <p>Six minutes through the actual room. The courses, how a deep dive and an intensive are laid out, and the Practice Lab running a real session.</p>
       </div>
-      <div class="vid" id="tour-vid" data-id="eLj98HjCEh0" role="button" tabindex="0"
+      <div class="vid" id="tour-vid" data-id="eLj98HjCEh0" data-title="Inside The Practice Room" role="button" tabindex="0"
            aria-label="Play the walkthrough video, Inside The Practice Room">
         <img src="https://i.ytimg.com/vi/eLj98HjCEh0/maxresdefault.jpg"
              alt="Inside The Practice Room" width="1280" height="720" loading="lazy" />
@@ -1017,17 +1039,16 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     });
   });
 
-  // ---------- Walkthrough: swap the poster for the real player on click ----------
-  (function () {
-    var vid = document.getElementById('tour-vid');
-    if (!vid) return;
+  // ---------- Videos: swap each poster for the real player on click ----------
+  // Every .vid with a data-id gets the same treatment (From Jon + Walkthrough).
+  document.querySelectorAll('.vid[data-id]').forEach(function (vid) {
     function play() {
       if (vid.dataset.loaded) return;
       vid.dataset.loaded = '1';
       var f = document.createElement('iframe');
       f.src = 'https://www.youtube-nocookie.com/embed/' + vid.dataset.id +
               '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
-      f.title = 'Inside The Practice Room';
+      f.title = vid.dataset.title || 'The Practice Room';
       f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
       f.allowFullscreen = true;
       vid.innerHTML = '';
@@ -1040,7 +1061,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     vid.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); }
     });
-  })();
+  });
 
   // ---------- Reveal on scroll ----------
   (function () {
