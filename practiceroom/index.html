@@ -411,10 +411,18 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   .stack-total .stack-val { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 2px; }
   .stack-price { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 4px 0 0; font-family: 'Oswald', sans-serif; font-size: 1.6rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); }
   .stack-price .stack-val { color: var(--purple-pop); font-size: 2.2rem; font-weight: 700; }
+  .stack-future { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 18px 0 0; border-top: 1px solid var(--line); margin-top: 18px; font-family: 'Oswald', sans-serif; font-size: 1.1rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); }
+  .stack-future .stack-val { color: var(--purple-pop); font-weight: 600; white-space: nowrap; }
+  .stack-future small { display: block; font-family: 'Lato', sans-serif; text-transform: none; letter-spacing: 0; color: var(--muted); font-weight: 300; font-size: 1rem; margin-top: 4px; }
+  .stack-since { max-width: 720px; margin: 28px auto 0; text-align: left; }
+  .stack-since .tag { margin-bottom: 10px; }
+  .stack-since ul { list-style: none; margin: 0; padding: 0; }
+  .stack-since li { padding: 8px 0; border-bottom: 1px solid var(--line); color: var(--off); }
+  .stack-since li small { color: var(--muted); font-weight: 300; }
   .stack-note { max-width: 720px; margin: 22px auto 0; text-align: left; color: var(--muted); font-weight: 300; font-size: 1rem; }
   @media (max-width: 640px) {
     .stack-row { flex-direction: column; gap: 4px; }
-    .stack-total, .stack-price { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .stack-total, .stack-price, .stack-future { flex-direction: column; align-items: flex-start; gap: 4px; }
   }
   @media (max-width: 900px) { .tracks-grid { grid-template-columns: 1fr; } }
 
@@ -900,9 +908,9 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
            Practice Room, Intensives at their last price, the rest on /courses).
            Items never sold on their own say so instead of carrying a number. -->
       <div class="stack">
-        <div class="stack-row"><div class="stack-name">Three 8-Week Intensives<small>Alternate Picking, Legato, Sweep Picking. A new 60-minute routine every week for eight weeks. $199 each.</small></div><div class="stack-val">$597</div></div>
+        <div class="stack-row"><div class="stack-name">Three 8-Week Intensives<small>Alternate Picking, Legato, Sweep Picking. A new 60-minute routine every week for eight weeks. $149 each.</small></div><div class="stack-val">$447</div></div>
         <div class="stack-row"><div class="stack-name">Six Deep Dives<small>Alternate Picking, Legato, Sweep, Hybrid, Tapping, Timing. 30 minutes a day for a month. $99 each.</small></div><div class="stack-val">$594</div></div>
-        <div class="stack-row"><div class="stack-name">The Speed Systems<small>The Single-String Speed System and The 3NPS Speed System. $99 each.</small></div><div class="stack-val">$198</div></div>
+        <div class="stack-row"><div class="stack-name">The Speed Systems<small>The Single-String Speed System and The 3NPS Speed System. $49 each.</small></div><div class="stack-val">$98</div></div>
         <div class="stack-row"><div class="stack-name">Alternate Picking Mastery: 3 NPS</div><div class="stack-val">$149</div></div>
         <div class="stack-row"><div class="stack-name">Playing What You Hear<small>Ear and fretboard, together.</small></div><div class="stack-val">$149</div></div>
         <div class="stack-row"><div class="stack-name">Nailing The Minor Pentatonic<small>12 weeks, 12 keys.</small></div><div class="stack-val">$99</div></div>
@@ -916,11 +924,24 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
         <div class="stack-row"><div class="stack-name">The Practice Lab Looper<small>Your own licence. Non-members pay $5 a month.</small></div><div class="stack-val">$60 a year</div></div>
         <div class="stack-row"><div class="stack-name">The Practice Lab<small>Eight labs plus the Workouts: the picking routine, Paganini's Caprice No. 16 and Bach's Solfeggietto, chunked bar by bar against the click.</small></div><div class="stack-val na">Never sold separately</div></div>
         <div class="stack-row"><div class="stack-name">Chops Builders<small>Four 60-minute play-along routines.</small></div><div class="stack-val">$49</div></div>
-        <div class="stack-row"><div class="stack-name">Tabs and Guitar Pro files, the community, and everything added next<small>Alternate Picking: The Next Step ($199) joins when its live run in Pro ends.</small></div><div class="stack-val na">Included</div></div>
-        <div class="stack-total"><div>Sold separately</div><div class="stack-val">$2,344</div></div>
+        <div class="stack-row"><div class="stack-name">Tabs and Guitar Pro files, and the community</div><div class="stack-val na">Included</div></div>
+        <div class="stack-total"><div>Sold separately, today</div><div class="stack-val">$2,094</div></div>
         <div class="stack-price"><div>The Practice Room</div><div class="stack-val">$297</div></div>
+        <div class="stack-future"><div>Everything I make after you join<small>Every future course, intensive and Lab update lands in the room, and it's yours at no extra charge. Alternate Picking: The Next Step ($149) is first, when its live run in Pro ends.</small></div><div class="stack-val">Yours, no extra charge</div></div>
       </div>
-      <p class="stack-note">Those are real prices, not made-up ones. Each line is the most that course sold for on its own, on Teachable or as an unlock in the old Practice Room. The room is a single payment for all of it, and the Practice Lab has never been for sale on its own at all.</p>
+
+      <!-- Track record for the future promise: what has landed in the room
+           since it opened in August 2026. Add to this list as things ship. -->
+      <div class="stack-since">
+        <span class="tag">Added Since The Room Opened In August</span>
+        <ul>
+          <li>The Ultimate Alternate Picking Workout <small>the app, inside the Practice Lab</small></li>
+          <li>Workouts in the Practice Lab, with two pieces to run bar by bar <small>Paganini's Caprice No. 16 and Bach's Solfeggietto</small></li>
+          <li>The Guitar Technique Toolbox <small>the 54-page practice manual and its browser tool</small></li>
+          <li>The weekly Practice Room Sessions sets <small>every week's session and workbook, as they happen</small></li>
+        </ul>
+      </div>
+      <p class="stack-note">Those are real prices, not made-up ones. Each line is the most that course sold for on its own, on Teachable or as an unlock in the old Practice Room. The room is a single payment for all of it, and the Practice Lab has never been for sale on its own at all. The number above is what the room is worth today. It's the smaller half of the deal: you pay once, and everything I make from then on is yours too.</p>
     </div>
   </section>
 
@@ -1000,7 +1021,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
         </details>
         <details>
           <summary>Why is it $297?</summary>
-          <p>Because it's everything, once. Sold one at a time, at the prices they actually went for, the courses in the room come to $2,344, before the Practice Lab and the community, which were never sold separately. The price rises as the room grows, and whatever the price is when you join is the only payment you ever make.</p>
+          <p>Because it's everything, once. Sold one at a time, at the prices they actually went for, the courses in the room come to $2,094, before the Practice Lab and the community, which were never sold separately. The price rises as the room grows, and whatever the price is when you join is the only payment you ever make, for everything in here now and everything I add after.</p>
         </details>
         <details>
           <summary>When does the price go up?</summary>
