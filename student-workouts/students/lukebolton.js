@@ -1,7 +1,8 @@
 export default {
- id:'lukebolton',name:'Luke Bolton',
+ id:'lukebolton',name:'Luke Bolton',programTitle:'12-Week Guitar Mastery Program',
  exercises:[
   {kind:'hammers',title:'All hammers',positions:[3,7,11,15,17],description:'All 24 three-finger combinations. Hammer every note, including each string change. Mute unused strings and lift cleanly between notes.'},
-  {kind:'picking',title:'Triplet picking',positions:[1,5,9,13,17],description:'Two, three and four notes per string. Keep alternate picking continuous, shift up one fret for the descent, and let the final note ring for four beats.'}
+  {kind:'picking',title:'Triplet picking',positions:[1,5,9,13,17],description:'Two, three and four notes per string. Keep alternate picking continuous, shift up one fret for the descent, and let the final note ring for four beats.'},
+  {kind:'deepdive',title:'Six-string shapes',root:0,maxFret:24,plantingDescription:'Play three short, even notes on each string. Prepare the opposite pick stroke immediately after each note. At a string change, release fretting-hand pressure to shorten the last note while preparing the pick on the next string. Shift one fret after every crossing of all six strings, up the neck and back. Use a clean sound.',singleStringDescription:'Move up the string in overlapping groups of three, then reverse the pattern all the way down. Keep alternate picking continuous. Focus on quick transitions at a slow beat, use only the fretting-hand pressure you need, and keep the pinky close to the string.',twoStringDescription:'Play ascending sixes from the lowest available position to the top of the neck, then return with descending sixes. Keep the transitions quick and prepare the next finger without muting the sounding string. Both directions start with a downstroke.',description:'Keep the beat slow and the transitions quick. Prepare the index finger as the pinky plays when ascending; prepare the pinky as the index plays when descending. Use the index for the lowest note on each string and the pinky for the highest. Both directions start with a downstroke.'}
  ]
 };

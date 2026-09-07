@@ -1,0 +1,2 @@
+// Fret maps from APDD #1 Single String.gp; expanded into overlapping threes in model.js.
+export const singleStringScore = [{"string":1,"frets":[1,3,5,7,8,10,12,13,15,17,19,20,22,24]},{"string":2,"frets":[1,3,5,6,8,10,12,13,15,17,18,20,22,24]},{"string":3,"frets":[2,4,5,7,9,10,12,14,16,17,19,21,22,24]},{"string":4,"frets":[2,3,5,7,9,10,12,14,15,17,19,21,22,24]},{"string":5,"frets":[2,3,5,7,8,10,12,14,15,17,19,20,22,24]},{"string":6,"frets":[1,3,5,7,8,10,12,13,15,17,19,20,22,24]}];
