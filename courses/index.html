@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="UTF-8">
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZW8ZW4P5D"></script>
 <script>
@@ -28,7 +29,6 @@ fbq('track', 'ViewContent', { content_name: 'Courses' });
 src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Courses | Jon Bjork Music</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,7 +44,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   /* --- PAGE HEADER --- */
   .page-header {
     padding: 80px 48px 64px;
-    max-width: 1100px; margin: 0 auto;
+    max-width: 1400px; margin: 0 auto;
     position: relative;
   }
   .page-header::before {
@@ -66,7 +66,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   .page-sub {
     font-size: var(--fs-hero-sub);
     color: var(--muted); max-width: 680px;
-    font-weight: 300; line-height: 1.7;
+    font-weight: 400; line-height: 1.7;
     opacity: 0; animation: fadeUp 0.6s 0.35s forwards;
   }
   /* Page-header eyebrow gets the entrance animation too */
@@ -77,7 +77,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
   /* --- COURSES GRID --- */
   .courses-wrap {
     padding: 0 48px 120px;
-    max-width: 1100px; margin: 0 auto;
+    max-width: 1400px; margin: 0 auto;
   }
   .courses-grid {
     display: grid;
@@ -172,7 +172,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
 
   /* --- THE PRACTICE ROOM BANNER (added 2026-08-11, launch) --- */
   .tpr-band {
-    max-width: 1100px; margin: 0 auto 56px; padding: 0 48px;
+    max-width: 1400px; margin: 0 auto 56px; padding: 0 48px;
   }
   .tpr-card {
     position: relative; overflow: hidden;
@@ -229,6 +229,10 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     .page-header, .courses-wrap { padding-left: 24px; padding-right: 24px; }
     .courses-grid { grid-template-columns: 1fr; }
   }
+  .course-label { font-size: .85rem; letter-spacing: .18em; }
+  .course-title { min-height: 3.5em; }
+  .course-card:focus-visible { outline: 3px solid var(--purple-lt); outline-offset: 4px; }
+  @media (max-width:600px) { .course-title { min-height: 0; } }
 </style>
 </head>
 <body>
@@ -338,7 +342,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
 
     <!-- Alternate Picking Deep Dive (free) -->
     <a class="course-card" href="https://www.jonbjorkmusic.com/alternate-picking/">
-      <img class="course-img" src="/notes/images/apdd-boxart.jpg" alt="Alternate Picking Deep Dive" />
+      <img class="course-img" src="/pro/assets/boxart-alt-picking-deep-dive.jpg" alt="Alternate Picking Deep Dive" />
       <div class="course-body">
         <span class="course-label">Technique</span>
         <div class="course-title">Alternate Picking Deep Dive</div>
@@ -470,7 +474,7 @@ src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"
     function syncNavSpacing() {
       var nav = document.querySelector('nav');
       if (!nav) return;
-      document.body.style.paddingTop = nav.offsetHeight + 'px';
+      document.body.style.paddingTop = (nav.offsetHeight + (document.getElementById('promoBar')?.offsetHeight || 0)) + 'px';
     }
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', syncNavSpacing);
