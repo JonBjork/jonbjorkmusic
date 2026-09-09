@@ -1,3 +1,4 @@
+import {mountChunkPlayer} from './chunk-player.js';
 import {shapeSVG} from './scale-shapes.js';
 import {buildPlan,blockAt,noteAt,remaining,localDate,freshState,validateState,mergeState} from './model.js';
 import {createMetronomeEngine,primeMetronomeAudio,getAudioContext} from './metronome.js';
@@ -6,6 +7,11 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 const clock=s=>`${Math.floor(Math.ceil(Math.max(0,s))/60)}:${String(Math.ceil(Math.max(0,s))%60).padStart(2,'0')}`;
 const tuning={6:40,5:45,4:50,3:55,2:59,1:64};
 export function mount(root,config){
+ if(config.player==='chunks')return mountChunkPlayer(root,config);
+ if(!config.exercises?.length){
+  root.innerHTML=`<header><a href="/" class="brand">JON BJORK</a><span class="eyebrow">${esc(config.programTitle||'Your guitar workout')}</span><h1>${esc(config.name)}</h1></header><section class="plan-view" aria-labelledby="preparingTitle"><div class="plan-intro"><span class="eyebrow">YOUR ROUTINE</span><h2 id="preparingTitle">Your routine is being prepared.</h2><p>Your exercises and practice instructions will appear here once they’re ready.</p></div></section>`;
+  return;
+ }
  const key=`jb-student-v1:${config.id}`;let state=freshState(config.id),warning='';
  const limit=buildPlan(config,state.settings).length;
  try{const raw=localStorage.getItem(key);if(raw)state=validateState(JSON.parse(raw),config.id,limit);}catch(e){warning='Saved progress could not be read. Export a backup after practising to keep a separate copy.';}
