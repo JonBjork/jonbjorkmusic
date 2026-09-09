@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import score from '../../student-workouts/love-gun-score.js';
-import {buildGroups,cycleLayout,stages,freshChunkState,validateChunkState,mergeChunkState} from '../../student-workouts/chunk-model.js';
+import {buildGroups,cycleLayout,timerElapsed,stages,freshChunkState,validateChunkState,mergeChunkState} from '../../student-workouts/chunk-model.js';
 import {chunkNotation} from '../../student-workouts/chunk-notation.js';
 assert.equal(score.notes.length,38);
 assert.deepEqual(score.notes[0],{at:0,string:6,fret:12,len:1,midi:52,stroke:'U'});
@@ -22,15 +22,15 @@ for(const size of stages){
   assert.equal((layout.musicStart+downbeat.at)%3,0);
   const notation=chunkNotation(g,score);
   assert.equal((notation.match(/data-note=/g)||[]).length,g.notes.length);
-  // Model the scheduler: count-ins/padding never count, final note always completes.
-  let musicTicks=0,finishTick;
-  for(let t=0;t<10000;t++){
-   const pos=t%layout.length;
-   if(pos>=layout.musicStart&&pos<layout.musicEnd)musicTicks++;
-   if(pos===layout.musicEnd-1&&musicTicks/3>=120){finishTick=t;break;}
-  }
-  assert.ok(finishTick);assert.ok(musicTicks/3>=120);assert.ok(musicTicks/3<120+g.length/3);
-  assert.equal(musicTicks%g.length,0);
+  assert.equal(layout.musicStart,g.pickup?5:6);
+  // Timer runs through count-ins and inter-repeat padding, capped at its deadline.
+  assert.equal(timerElapsed(0,10,11,120),1);
+  assert.equal(timerElapsed(0,10,12,120),2);
+  assert.equal(timerElapsed(0,10,130,120),120);
+  assert.equal(timerElapsed(0,10,140,120),120);
+  assert.equal(timerElapsed(32.5,null,1000,120),32.5);
+  assert.equal(timerElapsed(32.5,1000,1001,120),33.5);
+
  }
 }
 const state=freshChunkState('vincentstagliano',score);
@@ -42,4 +42,4 @@ assert.equal(mergeChunkState(state,state).progress['1:0'].elapsed,32.5);
 assert.throws(()=>validateChunkState(state,'lukebolton',score));
 const bad=structuredClone(state);bad.progress['__proto__']={elapsed:2};assert.throws(()=>validateChunkState({...bad,stage:7},'vincentstagliano',score));
 const corrupted=structuredClone(state);corrupted.events[0].seconds=-1;assert.throws(()=>validateChunkState(corrupted,'vincentstagliano',score));
-console.log('PASS: exact GP notes, pickup, 19 overlapping groups, landing durations, strict strokes, beat alignment, music-only timers, notation coverage and student-specific backup validation/merge.');
+console.log('PASS: exact GP notes, pickup, 19 overlapping groups, landing durations, strict strokes, beat alignment, continuous timers and two-beat count-ins, notation coverage and student-specific backup validation/merge.');

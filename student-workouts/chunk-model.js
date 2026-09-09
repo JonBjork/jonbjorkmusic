@@ -16,7 +16,7 @@ export function buildGroups(score, size) {
 }
 // Whole-beat cycles keep the pickup on the final triplet before the downbeat.
 export function cycleLayout(group, sub=3) {
-  const musicStart = 4*sub - (group.pickup ? 1 : 0);
+  const musicStart = 2*sub - (group.pickup ? 1 : 0);
   return {musicStart,musicEnd:musicStart+group.length,length:Math.ceil((musicStart+group.length)/sub)*sub};
 }
 export function freshChunkState(student,score) {
@@ -48,4 +48,8 @@ export function mergeChunkState(current,incoming) {
   const events=new Map(current.events.map(e=>[e.id,e]));
   for(const e of incoming.events){const old=events.get(e.id);events.set(e.id,old?{...old,seconds:Math.max(old.seconds,e.seconds),repetitions:Math.max(old.repetitions,e.repetitions),completions:Math.max(old.completions,e.completions)}:e);}
   return {...latest,progress,events:[...events.values()]};
+}
+
+export function timerElapsed(base, start, now, target) {
+  return Math.min(target, base + (start === null ? 0 : Math.max(0, now-start)));
 }
