@@ -1,3 +1,4 @@
+import WorkoutProgress from './WorkoutProgress';
 import FingerLegatoWorkout from './FingerLegatoWorkout';
 import {catalog} from '../../routines/catalog';
 import NpsWorkout from './NpsWorkout';
@@ -590,6 +591,7 @@ function WorkoutLibrary({ onBack }) {
   const nextEx = exercises[((flat[cursor] || {}).ei || 0) + 1];
 
 
+  if (screen === "progress") return <WorkoutProgress onBack={()=>setScreen("list")}/>;
   if (collection === "finger-legato" && screen === "list") return <FingerLegatoWorkout onBack={()=>setCollection(null)}/>;
   if (collection === "chops-legato-1" && screen === "list") return <NpsWorkout legato onBack={()=>setCollection("chops-builders")}/>;
   if (collection === "chops-sweep-3string-1" && screen === "list") return <NpsWorkout sweep onBack={()=>setCollection("chops-builders")}/>;
@@ -603,7 +605,7 @@ function WorkoutLibrary({ onBack }) {
       <style>{WK_STYLES}</style>
 
 
-      <header className="cp-header"><button className="cp-home" onClick={onBack}>← JON BJORK <span>/ WORKOUTS</span></button><div style={{display:"flex",alignItems:"center",gap:18}}><span><span className="cp-dot" /> WORKOUTS</span>{screen === "list" && <Tuning/>}</div></header>
+      <header className="cp-header"><button className="cp-home" onClick={onBack}>← JON BJORK <span>/ WORKOUTS</span></button><div style={{display:"flex",alignItems:"center",gap:18}}><span><span className="cp-dot" /> WORKOUTS</span>{screen === "list" && <><button onClick={()=>setScreen("progress")}>My Progress</button><Tuning/></>}</div></header>
 
       <div style={{ maxWidth: 1280, margin: "0 auto", padding: "32px 32px 64px" }}>
 

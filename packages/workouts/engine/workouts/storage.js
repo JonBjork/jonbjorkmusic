@@ -137,12 +137,12 @@ export function importLog(parsed) {
   if (!parsed || !Array.isArray(parsed.sessions)) {
     return { ok: false, error: "That file doesn't look like a practice log." };
   }
-  const idOf = (s) => [s.startedAt, s.seconds, s.position, s.startStroke].join("|");
+  const idOf = (s) => [s.workoutId || "picking", s.startedAt, s.seconds, s.position, s.startStroke, s.mode].join("|");
   const log = readLog();
   const seen = new Set(log.sessions.map(idOf));
   let added = 0;
   for (const s of parsed.sessions) {
-    if (!s || !s.startedAt) continue;
+    if (!s || !s.startedAt || !Number.isFinite(new Date(s.startedAt).getTime()) || !Number.isFinite(Number(s.seconds)) || Number(s.seconds)<=0) continue;
     const id = idOf(s);
     if (!seen.has(id)) { log.sessions.push(s); seen.add(id); added++; }
   }
