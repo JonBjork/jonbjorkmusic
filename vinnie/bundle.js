@@ -1100,6 +1100,29 @@ function TabView(_ref) {
     }
     return groups;
   }, [notes, notesPerBeat, resolution, beatOffset]);
+  // H/P marks belong to the destination note. Connect only genuine
+  // same-string articulations, skipping duration ticks but never rests.
+  var slurs = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var links = [];
+    var previous = null;
+    notes.forEach(function (note, i) {
+      if (note.hold) return;
+      if (note.rest) {
+        previous = null;
+        return;
+      }
+      if (previous !== null && ['H', 'P'].includes(note.legato) && notes[previous].string === note.string && !note.stroke) {
+        links.push({
+          from: previous,
+          to: i,
+          string: note.string,
+          kind: note.legato
+        });
+      }
+      previous = i;
+    });
+    return links;
+  }, [notes]);
   var yStemTop = yFor(nStr) + 5;
   var yBeam = yStemTop + STEM_LEN;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -1150,6 +1173,21 @@ function TabView(_ref) {
       fontWeight: "500",
       fill: _storage__WEBPACK_IMPORTED_MODULE_1__.C.dim
     }, names[nStr - s]));
+  }), slurs.filter(function (link) {
+    return !continuous || xFor(link.to) >= viewport.left - 600 && xFor(link.from) <= viewport.left + viewport.width + 600;
+  }).map(function (link) {
+    var left = xFor(link.from) + 4,
+      right = xFor(link.to) - 4,
+      y = yFor(link.string) - 13;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
+      key: "slur-".concat(link.to),
+      "data-legato-slur": link.kind,
+      d: "M ".concat(left, " ").concat(y, " Q ").concat((left + right) / 2, " ").concat(y - 17, " ").concat(right, " ").concat(y),
+      fill: "none",
+      stroke: _storage__WEBPACK_IMPORTED_MODULE_1__.C.purpleLt,
+      strokeWidth: "1.6",
+      strokeLinecap: "round"
+    });
   }), visibleNotes.map(function (_ref3) {
     var col = _ref3.col,
       i = _ref3.i;
@@ -4876,6 +4914,29 @@ function TabView(_ref) {
     }
     return groups;
   }, [notes, notesPerBeat, resolution, beatOffset]);
+  // H/P marks belong to the destination note. Connect only genuine
+  // same-string articulations, skipping duration ticks but never rests.
+  var slurs = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var links = [];
+    var previous = null;
+    notes.forEach(function (note, i) {
+      if (note.hold) return;
+      if (note.rest) {
+        previous = null;
+        return;
+      }
+      if (previous !== null && ['H', 'P'].includes(note.legato) && notes[previous].string === note.string && !note.stroke) {
+        links.push({
+          from: previous,
+          to: i,
+          string: note.string,
+          kind: note.legato
+        });
+      }
+      previous = i;
+    });
+    return links;
+  }, [notes]);
   var yStemTop = yFor(nStr) + 5;
   var yBeam = yStemTop + STEM_LEN;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -4926,6 +4987,21 @@ function TabView(_ref) {
       fontWeight: "500",
       fill: _storage__WEBPACK_IMPORTED_MODULE_1__.C.dim
     }, names[nStr - s]));
+  }), slurs.filter(function (link) {
+    return !continuous || xFor(link.to) >= viewport.left - 600 && xFor(link.from) <= viewport.left + viewport.width + 600;
+  }).map(function (link) {
+    var left = xFor(link.from) + 4,
+      right = xFor(link.to) - 4,
+      y = yFor(link.string) - 13;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
+      key: "slur-".concat(link.to),
+      "data-legato-slur": link.kind,
+      d: "M ".concat(left, " ").concat(y, " Q ").concat((left + right) / 2, " ").concat(y - 17, " ").concat(right, " ").concat(y),
+      fill: "none",
+      stroke: _storage__WEBPACK_IMPORTED_MODULE_1__.C.purpleLt,
+      strokeWidth: "1.6",
+      strokeLinecap: "round"
+    });
   }), visibleNotes.map(function (_ref3) {
     var col = _ref3.col,
       i = _ref3.i;

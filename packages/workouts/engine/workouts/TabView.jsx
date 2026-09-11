@@ -121,6 +121,21 @@ export default function TabView({ notes, cursor, tuning = STANDARD, notesPerBeat
   }
   return groups;
   },[notes,notesPerBeat,resolution,beatOffset]);
+  // H/P marks belong to the destination note. Connect only genuine
+  // same-string articulations, skipping duration ticks but never rests.
+  const slurs=useMemo(()=>{
+    const links=[];let previous=null;
+    notes.forEach((note,i)=>{
+      if(note.hold)return;
+      if(note.rest){previous=null;return;}
+      if(previous!==null && ['H','P'].includes(note.legato) &&
+        notes[previous].string===note.string && !note.stroke){
+        links.push({from:previous,to:i,string:note.string,kind:note.legato});
+      }
+      previous=i;
+    });
+    return links;
+  },[notes]);
   const yStemTop = yFor(nStr) + 5;
   const yBeam = yStemTop + STEM_LEN;
 
@@ -164,6 +179,13 @@ export default function TabView({ notes, cursor, tuning = STANDARD, notesPerBeat
             >{names[nStr - s]}</text>
           </g>
         ))}
+
+        {slurs.filter(link=>!continuous || (xFor(link.to)>=viewport.left-600 && xFor(link.from)<=viewport.left+viewport.width+600)).map(link=>{
+          const left=xFor(link.from)+4,right=xFor(link.to)-4,y=yFor(link.string)-13;
+          return <path key={`slur-${link.to}`} data-legato-slur={link.kind}
+            d={`M ${left} ${y} Q ${(left+right)/2} ${y-17} ${right} ${y}`}
+            fill="none" stroke={C.purpleLt} strokeWidth="1.6" strokeLinecap="round"/>;
+        })}
 
         {visibleNotes.map(({col, i}) => {
           if (!col.bar) return null;
