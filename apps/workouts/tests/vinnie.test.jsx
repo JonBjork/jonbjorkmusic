@@ -33,3 +33,34 @@ test('paused tab scrolls to the resume position without a playback highlight',()
  act(()=>root.render(<TabView continuous notes={notes} cursor={-1} previewCursor={88} notesPerBeat={4}/>));
  expect(host.firstChild.scrollLeft).toBeGreaterThan(before);act(()=>root.unmount());
 });
+
+jest.mock('../../../packages/workouts/engine/shared/metronome',()=>({createMetronomeEngine:jest.fn(),primeMetronomeAudio:async()=>{},getAudioContext:()=>({currentTime:0})}));
+jest.mock('../../../packages/workouts/engine/workouts/guitarSynth',()=>({prepareGuitar:async()=>{},pluck:jest.fn(),stopGuitar:jest.fn(),setInstrumentVolume:jest.fn()}));
+jest.mock('../../../packages/workouts/engine/workouts/PieceSetup',()=>({NumberField:()=>null}));
+jest.mock('../../../packages/workouts/engine/workouts/Tuning',()=>()=>null);
+test('pause resumes the current position or restarts the exercise, both with a count-in',async()=>{
+ const React=require('react'),{act}=React,{createRoot}=require('react-dom/client');
+ const Workout=require('../../vinnie/src/ChromaticWorkout').default;
+ const {createMetronomeEngine}=require('../../../packages/workouts/engine/shared/metronome');
+ const {pluck}=require('../../../packages/workouts/engine/workouts/guitarSynth');
+ const options=[];createMetronomeEngine.mockReturnValue({start:jest.fn(async o=>options.push(o)),stop:jest.fn(),setVolume:jest.fn(),setAudibleSubdivision:jest.fn()});
+ localStorage.clear();global.IS_REACT_ACT_ENVIRONMENT=true;
+ const host=document.createElement('div'),root=createRoot(host);
+ const button=text=>[...host.querySelectorAll('button')].find(b=>b.textContent===text);
+ act(()=>root.render(<Workout/>));
+ expect(host.querySelector('.prs-days progress')).toBeNull();
+ expect(host.querySelector('.prs-days').textContent).not.toMatch(/positions/);
+ act(()=>button('Start workout ▶').click());
+ expect(host.textContent).not.toContain('Preview / resume from');
+ await act(async()=>button('Start exercise ▶').click());
+ act(()=>options[0].onTick(50));act(()=>button('Pause').click());
+ await act(async()=>button('Resume from this position ▶').click());
+ expect(options[1].countInBeats).toBe(4);
+ const notes=buildChromatic(EXERCISES[0]).notes;
+ act(()=>options[1].onScheduleTick(0,0));expect(pluck.mock.calls.at(-1)[1]).toBe(notes[44].midi[0]);
+ act(()=>button('Pause').click());await act(async()=>button('Restart exercise').click());
+ expect(options[2].countInBeats).toBe(4);
+ act(()=>options[2].onScheduleTick(0,0));expect(pluck.mock.calls.at(-1)[1]).toBe(notes[0].midi[0]);
+ act(()=>button('Pause').click());expect(button('Resume from this position ▶')).toBeDefined();
+ act(()=>root.unmount());
+});
