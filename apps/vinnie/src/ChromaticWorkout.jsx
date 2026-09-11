@@ -3,7 +3,7 @@ import {EXERCISES,CHROMATIC_ID,CHROMATIC_TITLE,buildChromatic} from './chromatic
 import {createMetronomeEngine,primeMetronomeAudio,getAudioContext} from '../../../packages/workouts/engine/shared/metronome';
 import {prepareGuitar,pluck,stopGuitar,setInstrumentVolume as applyVolume} from '../../../packages/workouts/engine/workouts/guitarSynth';
 import {addSession,readLog,MIN_LOGGED_SEC,fmtClock} from './storage';
-import {recordGroup,todayProgress,completedExercise} from './tracking';
+import {recordGroup,todayProgress,completedExercise,dateKey} from './tracking';
 import TabView from './TabView';
 import {ShapeFretboard} from './CurrentRoomShape';
 import Tuning from '../../../packages/workouts/engine/workouts/Tuning';
@@ -60,10 +60,12 @@ export default function ChromaticWorkout({onBack,onBusyChange,initialExercise=nu
   }catch{if(token===r.token){pause();setMessage('Could not start audio. Please try again.');}}
  }
  const logs=useMemo(()=>readLog().sessions.filter(s=>s.workoutId===CHROMATIC_ID),[logVersion]);
- const completed=new Set(EXERCISES.filter((e,i)=>completedExercise(todayProgress(),i)).map(e=>e.id));
+ const day=dateKey();
+ const daily=useMemo(()=>todayProgress(),[logVersion,day]);
+ const completed=new Set(EXERCISES.filter((e,i)=>completedExercise(daily,i)).map(e=>e.id));
  const locked=playing||loading;
  useEffect(()=>{onBusyChange?.(locked);return()=>onBusyChange?.(false);},[locked,onBusyChange]);
- const daily=todayProgress(),nextExercise=Math.max(0,EXERCISES.findIndex((e,i)=>!completedExercise(daily,i)));
+ const nextExercise=Math.max(0,EXERCISES.findIndex((e,i)=>!completedExercise(daily,i)));
  const exerciseDuration=e=>{const pref=settings[e.id]||{};return buildChromatic(e).notes.length*60/valid(pref.bpm,30,240,60)/valid(pref.subdivision,1,8,e.defaultSubdivision);};
  return <div className="prs chromatic"><main>
  {selected===null?<>

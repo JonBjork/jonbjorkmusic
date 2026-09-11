@@ -94,3 +94,16 @@ test('opening from progress resumes at the first unfinished position',()=>{
  expect(host.textContent).toContain('Index finger: fret 2');
  act(()=>root.unmount());
 });
+
+test('a distant playback cursor mounts its notation immediately without waiting for a scroll event',()=>{
+ const React=require('react'),{act}=React,{createRoot}=require('react-dom/client');
+ const TabView=require('../../vinnie/src/TabView').default;
+ const host=document.createElement('div'),root=createRoot(host),notes=buildChromatic(EXERCISES[0]).notes;
+ global.IS_REACT_ACT_ENVIRONMENT=true;
+ act(()=>root.render(<TabView continuous notes={notes} cursor={0} notesPerBeat={4}/>));
+ act(()=>root.render(<TabView continuous notes={notes} cursor={400} notesPerBeat={4}/>));
+ expect(host.firstChild.scrollLeft).toBeGreaterThan(10000);
+ expect(host.querySelector(`text[x="${48+400*38+19}"]`)).not.toBeNull();
+ expect(host.querySelector(`rect[x="${48+400*38}"]`)).not.toBeNull();
+ act(()=>root.unmount());
+});
