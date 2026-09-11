@@ -108,32 +108,36 @@ function ChromaticWorkout(_ref) {
     setSubdivisions = _useState14[1];
   var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState16 = _slicedToArray(_useState15, 2),
-    playing = _useState16[0],
-    setPlaying = _useState16[1],
-    _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    started = _useState16[0],
+    setStarted = _useState16[1];
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState18 = _slicedToArray(_useState17, 2),
-    loading = _useState18[0],
-    setLoading = _useState18[1],
-    _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    playing = _useState18[0],
+    setPlaying = _useState18[1],
+    _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState20 = _slicedToArray(_useState19, 2),
-    cursor = _useState20[0],
-    setCursor = _useState20[1],
-    _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+    loading = _useState20[0],
+    setLoading = _useState20[1],
+    _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
     _useState22 = _slicedToArray(_useState21, 2),
-    count = _useState22[0],
-    setCount = _useState22[1],
-    _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    cursor = _useState22[0],
+    setCursor = _useState22[1],
+    _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState24 = _slicedToArray(_useState23, 2),
-    done = _useState24[0],
-    setDone = _useState24[1],
-    _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    count = _useState24[0],
+    setCount = _useState24[1],
+    _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState26 = _slicedToArray(_useState25, 2),
-    message = _useState26[0],
-    setMessage = _useState26[1],
-    _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    done = _useState26[0],
+    setDone = _useState26[1],
+    _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
     _useState28 = _slicedToArray(_useState27, 2),
-    logVersion = _useState28[0],
-    setLogVersion = _useState28[1];
+    message = _useState28[0],
+    setMessage = _useState28[1],
+    _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    _useState30 = _slicedToArray(_useState29, 2),
+    logVersion = _useState30[0],
+    setLogVersion = _useState30[1];
   var exercise = _chromaticData__WEBPACK_IMPORTED_MODULE_1__.EXERCISES[selected !== null && selected !== void 0 ? selected : 0],
     prefs = settings[exercise.id] || {},
     bpm = valid(prefs.bpm, 30, 240, 60),
@@ -248,6 +252,7 @@ function ChromaticWorkout(_ref) {
     pause();
     save();
     setSelected(i);
+    setStarted(false);
     var progress = (0,_tracking__WEBPACK_IMPORTED_MODULE_5__.todayProgress)();
     var exerciseIndex = i !== null && i !== void 0 ? i : 0;
     var nextData = (0,_chromaticData__WEBPACK_IMPORTED_MODULE_1__.buildChromatic)(_chromaticData__WEBPACK_IMPORTED_MODULE_1__.EXERCISES[exerciseIndex]);
@@ -268,6 +273,7 @@ function ChromaticWorkout(_ref) {
       return _objectSpread(_objectSpread({}, s), {}, _defineProperty({}, exercise.id, _objectSpread(_objectSpread({}, s[exercise.id]), {}, _defineProperty({}, key, value))));
     });
     setCursor(0);
+    setStarted(false);
     setDone(false);
     setMessage('');
   }
@@ -276,12 +282,20 @@ function ChromaticWorkout(_ref) {
   }
   function _start() {
     _start = _asyncToGenerator(/*#__PURE__*/_regenerator().m(function _callee() {
-      var r, token, from, _t;
+      var restart,
+        r,
+        token,
+        from,
+        _args = arguments,
+        _t;
       return _regenerator().w(function (_context) {
         while (1) switch (_context.p = _context.n) {
           case 0:
+            restart = _args.length > 0 && _args[0] !== undefined ? _args[0] : false;
             stop();
-            r = state.current, token = r.token, from = done ? 0 : group.start;
+            if (restart) save();
+            r = state.current, token = r.token, from = restart || done ? 0 : group.start;
+            setStarted(true);
             setLoading(true);
             setDone(false);
             setCursor(from);
@@ -432,11 +446,7 @@ function ChromaticWorkout(_ref) {
         onClick: function onClick() {
           return choose(i);
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("small", null, "EXERCISE ", i + 1, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, completed.has(e.id) ? '✓ Complete' : daily[i].length ? 'In progress' : '')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, e.pattern.length ? e.pattern.join('–') : e.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_storage__WEBPACK_IMPORTED_MODULE_4__.fmtClock)(exerciseDuration(e)), " \xB7 ", ((_settings$e$id = settings[e.id]) === null || _settings$e$id === void 0 ? void 0 : _settings$e$id.subdivision) || e.defaultSubdivision, " notes per beat"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("progress", {
-        "aria-label": "".concat(e.title, " daily progress"),
-        value: daily[i].length,
-        max: (0,_chromaticData__WEBPACK_IMPORTED_MODULE_1__.buildChromatic)(e).groups.length
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("small", null, daily[i].length, " / ", (0,_chromaticData__WEBPACK_IMPORTED_MODULE_1__.buildChromatic)(e).groups.length, " positions", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Open \u2192")));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("small", null, "EXERCISE ", i + 1, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, completed.has(e.id) ? '✓ Complete' : daily[i].length ? 'In progress' : '')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, e.pattern.length ? e.pattern.join('–') : e.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_storage__WEBPACK_IMPORTED_MODULE_4__.fmtClock)(exerciseDuration(e)), " \xB7 ", ((_settings$e$id = settings[e.id]) === null || _settings$e$id === void 0 ? void 0 : _settings$e$id.subdivision) || e.defaultSubdivision, " notes per beat"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("small", null, "Open \u2192"));
     })));
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
     className: "chromatic-history"
@@ -464,13 +474,20 @@ function ChromaticWorkout(_ref) {
     className: "prs-layout"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "prs-eyebrow"
-  }, "EXERCISE ", selected + 1, " / ", _chromaticData__WEBPACK_IMPORTED_MODULE_1__.EXERCISES.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, exercise.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, exercise.kind === 'scale' ? 'Play the complete scale sequence once, then shift up one fret. Travel from index-finger fret 1 to 12, then straight back through 11 to 1. Keep the written holds ringing.' : exercise.kind === 'six' ? 'Play the group once on each string: high E → B → G → D → A → low E → A → D → G → B → high E. Then shift up one fret.' : exercise.kind === 'pairs' ? 'Finish the entire fret 1 → 12 → 1 journey on each string pair before moving to the next pair. Always start on the lower string.' : 'Alternate ascending and descending four-note groups with each one-fret shift. Finish fret 1 → 12 → 1 on each string before moving to the next.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, "EXERCISE ", selected + 1, " / ", _chromaticData__WEBPACK_IMPORTED_MODULE_1__.EXERCISES.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, exercise.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, exercise.kind === 'scale' ? 'Play the complete scale sequence once, then shift up one fret. Travel from index-finger fret 1 to 12, then straight back through 11 to 1. Keep the written holds ringing.' : exercise.kind === 'six' ? 'Play the group once on each string: high E → B → G → D → A → low E → A → D → G → B → high E. Then shift up one fret.' : exercise.kind === 'pairs' ? 'Finish the entire fret 1 → 12 → 1 journey on each string pair before moving to the next pair. Always start on the lower string.' : 'Alternate ascending and descending four-note groups with each one-fret shift. Finish fret 1 → 12 → 1 on each string before moving to the next.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "vinnie-transport"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: "prs-start",
     disabled: loading,
     onClick: function onClick() {
       return playing ? pause() : start();
     }
-  }, loading ? 'Loading sound…' : playing ? 'Pause' : done ? 'Play again ▶' : cursor ? 'Resume position ▶' : 'Start exercise ▶'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, loading ? 'Loading sound…' : playing ? 'Pause' : done ? 'Play again ▶' : started || cursor > 0 ? 'Resume from this position ▶' : 'Start exercise ▶'), !locked && !done && (started || cursor > 0) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "vinnie-restart",
+    onClick: function onClick() {
+      return start(true);
+    }
+  }, "Restart exercise")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "chromatic-position"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "chromatic-location"
@@ -490,20 +507,7 @@ function ChromaticWorkout(_ref) {
     "aria-label": "Exercise progress",
     value: done ? data.notes.length : cursor,
     max: data.notes.length
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Preview / resume from", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
-    disabled: locked,
-    value: n.group,
-    onChange: function onChange(e) {
-      pause();
-      setCursor(data.groups[Number(e.target.value)].start);
-      setDone(false);
-    }
-  }, data.groups.map(function (g, i) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-      key: i,
-      value: i
-    }, i + 1, ". ", g.label);
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("aside", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Exercise time remaining"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("aside", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Exercise time remaining"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", {
     className: "prs-duration",
     role: "timer"
   }, (0,_storage__WEBPACK_IMPORTED_MODULE_4__.fmtClock)((done ? 0 : data.notes.length - cursor) * 60 / bpm / subdivision)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Count-ins and breaks are extra."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("fieldset", {
@@ -6235,6 +6239,8 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.vinnie-nav,.vinnie-tracker{max-width:
 @media(max-width:700px){.vinnie-hero{grid-template-columns:1fr;gap:20px}.vinnie-hero img{max-width:440px}.vinnie-nav{padding:12px 16px}.vinnie-nav>a{width:100%;margin-bottom:8px}.vinnie-tuning{margin-left:auto}.vinnie-nav button{padding:10px 12px}.chromatic .prs-days{grid-template-columns:1fr}.vinnie-hero .prs-start{width:100%;max-width:none}}
 
 .vinnie-logo{display:inline-flex;align-items:center;gap:14px;line-height:1;text-transform:uppercase;font-family:Oswald,sans-serif}.vinnie-logo-name{font-size:26px;font-weight:700;letter-spacing:.06em}.vinnie-logo-divider{width:2px;height:30px;background:#eee;flex-shrink:0}.vinnie-logo-tag{font-size:18px;font-weight:400;letter-spacing:.22em}.vinnie-room{display:grid;grid-template-columns:1.15fr 1fr;align-items:center;gap:32px;padding:28px;margin:20px 0 32px;border:1px solid #4a315d;border-radius:18px;background:linear-gradient(120deg,#19121f,#121014)}.vinnie-room-art{display:block;border-radius:10px;overflow:hidden}.vinnie-room-art img{display:block;width:100%;height:auto}.vinnie-room-copy h2{font-family:Oswald,sans-serif;font-size:clamp(26px,2.7vw,36px);line-height:1.2;margin:12px 0 18px}.vinnie-room-copy p{color:#c2b8ca;line-height:1.6}.vinnie-room-copy .vinnie-room-eyebrow{color:#c59bff;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin:0}.vinnie-room-button{display:inline-flex;align-items:center;justify-content:center;gap:16px;min-height:48px;padding:14px 22px;margin-top:8px;border:1px solid #a16bf4;border-radius:10px;background:#7c3aed;color:white;text-decoration:none;font-weight:700}.vinnie-room-button:hover{background:#8b4bef}.vinnie-room-copy .vinnie-room-payment{font-size:13px;color:#c9bfd1;margin:14px 0 0}@media(max-width:760px){.vinnie-room{grid-template-columns:1fr;padding:18px;gap:24px}.vinnie-room-button{width:100%}}
+
+.vinnie-transport{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.vinnie-transport .prs-start{margin:0;max-width:none;width:auto}.vinnie-restart{min-height:48px;padding:12px 20px}@media(max-width:600px){.vinnie-transport .prs-start{width:100%}.vinnie-restart{width:100%}}
 `, ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
@@ -40728,7 +40734,7 @@ function App() {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h2", null, "Today\u2019s exercises"), _chromaticData__WEBPACK_IMPORTED_MODULE_5__.EXERCISES.map(function (e, i) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
       key: e.id
-    }, (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.completedExercise)(row, i) ? '✓ ' : '', e.title, " \xB7 ", row[i].length, " / ", _tracking__WEBPACK_IMPORTED_MODULE_6__.counts[i], " positions");
+    }, (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.completedExercise)(row, i) ? '✓ ' : '', e.title, " \xB7 ", (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.completedExercise)(row, i) ? 'Complete' : row[i].length ? 'In progress' : 'Not started');
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("summary", null, "Practice history"), Object.entries(state.days).sort(function (_ref3, _ref4) {
     var _ref5 = _slicedToArray(_ref3, 1),
       a = _ref5[0];
