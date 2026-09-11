@@ -2,7 +2,7 @@ export function focusPassages(data,mode,sequence){return mode==='focus'?{...data
 export function completedFocusSequences(sessions,context,count,positions){
  const coverage=Array.from({length:count},()=>new Set());
  sessions.forEach(s=>{
-  if(s.practiceMode!=='focus'||!Object.entries(context).every(([k,v])=>s[k]===v))return;
+  if(s.practiceMode!=='focus'||!Object.entries(context).filter(([k])=>k!=='bpm'&&k!=='notesPerBeat').every(([k,v])=>s[k]===v))return;
   if(!Number.isInteger(s.focusSequence)||!coverage[s.focusSequence])return;
   (s.completedPositions||[]).forEach(p=>{if(Number.isInteger(p)&&p>=0&&p<positions)coverage[s.focusSequence].add(p);});
  });
