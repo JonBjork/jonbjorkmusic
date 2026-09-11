@@ -72,7 +72,9 @@ var valid = function valid(n, min, max, fallback) {
 };
 function ChromaticWorkout(_ref) {
   var onBack = _ref.onBack,
-    onBusyChange = _ref.onBusyChange;
+    onBusyChange = _ref.onBusyChange,
+    _ref$initialExercise = _ref.initialExercise,
+    initialExercise = _ref$initialExercise === void 0 ? null : _ref$initialExercise;
   var initial = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(read()).current;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
@@ -266,6 +268,9 @@ function ChromaticWorkout(_ref) {
       return v + 1;
     });
   }
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    if (initialExercise !== null) choose(initialExercise);
+  }, [initialExercise]);
   function change(key, value) {
     pause();
     save();
@@ -706,6 +711,150 @@ function ShapeFretboard(_ref2) {
       textAnchor: "middle"
     }, "R"));
   })));
+}
+
+/***/ },
+
+/***/ "./apps/vinnie/src/ProgressView.jsx"
+/*!******************************************!*\
+  !*** ./apps/vinnie/src/ProgressView.jsx ***!
+  \******************************************/
+(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ProgressView)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../practice-lab/node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _chromaticData__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./chromaticData */ "./apps/vinnie/src/chromaticData.js");
+/* harmony import */ var _tracking__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tracking */ "./apps/vinnie/src/tracking.js");
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+
+
+
+var milestones = [[7, 'your first week'], [14, 'two weeks'], [21, 'three weeks'], [30, '30 days of practice']];
+function ProgressView(_ref) {
+  var state = _ref.state,
+    onOpen = _ref.onOpen;
+  var days = (0,_tracking__WEBPACK_IMPORTED_MODULE_2__.completedDays)(state),
+    row = state.days[(0,_tracking__WEBPACK_IMPORTED_MODULE_2__.dateKey)()] || (0,_tracking__WEBPACK_IMPORTED_MODULE_2__.emptyRow)();
+  var done = _chromaticData__WEBPACK_IMPORTED_MODULE_1__.EXERCISES.filter(function (_, i) {
+    return (0,_tracking__WEBPACK_IMPORTED_MODULE_2__.completedExercise)(row, i);
+  }).length;
+  var next = _chromaticData__WEBPACK_IMPORTED_MODULE_1__.EXERCISES.findIndex(function (_, i) {
+    return !(0,_tracking__WEBPACK_IMPORTED_MODULE_2__.completedExercise)(row, i);
+  });
+  var milestone = milestones.find(function (_ref2) {
+    var _ref3 = _slicedToArray(_ref2, 1),
+      n = _ref3[0];
+    return days.length < n;
+  });
+  var sections = _toConsumableArray(new Set(_chromaticData__WEBPACK_IMPORTED_MODULE_1__.EXERCISES.map(function (e) {
+    return e.section;
+  })));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
+    className: "vinnie-tracker vinnie-progress-page"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    className: "vinnie-progress-eyebrow"
+  }, "Your practice, adding up"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Your 30-day progress"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
+    className: "vinnie-today",
+    "aria-labelledby": "today-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
+    id: "today-title"
+  }, done === _chromaticData__WEBPACK_IMPORTED_MODULE_1__.EXERCISES.length ? 'Today’s workout is complete.' : 'Keep your practice moving.'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Today: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, done, " of ", _chromaticData__WEBPACK_IMPORTED_MODULE_1__.EXERCISES.length), " exercises complete"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("progress", {
+    "aria-label": "Today\u2019s completed exercises",
+    value: done,
+    max: _chromaticData__WEBPACK_IMPORTED_MODULE_1__.EXERCISES.length
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    className: "vinnie-muted"
+  }, "Complete all twelve to mark a day. Miss a day? Your progress stays here.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "vinnie-continue",
+    onClick: function onClick() {
+      return onOpen(next < 0 ? 0 : next);
+    }
+  }, next < 0 ? 'Practice again' : row.some(function (g) {
+    return g.length;
+  }) ? 'Continue practicing' : 'Start practicing', " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    "aria-hidden": "true"
+  }, "\u2192"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
+    "aria-labelledby": "calendar-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "vinnie-calendar-heading"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
+    id: "calendar-title"
+  }, Math.min(30, days.length), " of 30 days complete"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    className: "vinnie-next-milestone"
+  }, milestone ? "".concat(milestone[0] - days.length, " more completed ").concat(milestone[0] - days.length === 1 ? 'day' : 'days', " to ").concat(milestone[1], ".") : '✓ 30 days of practice. Keep it going!')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "vinnie-days"
+  }, Array.from({
+    length: 30
+  }, function (_, i) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      key: i,
+      className: i < days.length ? 'complete' : ''
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, "Day ", i + 1, " ", i < days.length ? '✓' : ''), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("small", null, days[i] || 'Not completed yet'));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
+    className: "vinnie-progress-exercises",
+    "aria-labelledby": "exercises-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
+    id: "exercises-title"
+  }, "Today\u2019s exercises"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    className: "vinnie-muted"
+  }, "Choose an exercise to pick up where you left off."), sections.map(function (section) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
+      className: "vinnie-progress-group",
+      key: section
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, section), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      className: "vinnie-progress-cards"
+    }, _chromaticData__WEBPACK_IMPORTED_MODULE_1__.EXERCISES.map(function (e, i) {
+      if (e.section !== section) return null;
+      var complete = (0,_tracking__WEBPACK_IMPORTED_MODULE_2__.completedExercise)(row, i),
+        started = row[i].length > 0;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        key: e.id,
+        className: "vinnie-progress-card".concat(complete ? ' is-complete' : started ? ' is-started' : ''),
+        onClick: function onClick() {
+          return onOpen(i);
+        },
+        "aria-label": "Open exercise ".concat(i + 1, ": ").concat(e.title)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+        className: "vinnie-card-top"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Exercise ", i + 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+        className: "vinnie-card-status"
+      }, complete ? '✓ Complete' : started ? 'In progress' : 'Not started')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, e.pattern.length ? e.pattern.join('–') : e.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+        className: "vinnie-card-action"
+      }, complete ? 'Practice again' : started ? 'Resume' : 'Open exercise', " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+        "aria-hidden": "true"
+      }, "\u2192")));
+    })));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("details", {
+    className: "vinnie-practice-history"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("summary", null, "Practice history"), Object.keys(state.days).length ? Object.entries(state.days).sort(function (_ref4, _ref5) {
+    var _ref6 = _slicedToArray(_ref4, 1),
+      a = _ref6[0];
+    var _ref7 = _slicedToArray(_ref5, 1),
+      b = _ref7[0];
+    return b.localeCompare(a);
+  }).map(function (_ref8) {
+    var _ref9 = _slicedToArray(_ref8, 2),
+      day = _ref9[0],
+      r = _ref9[1];
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+      key: day
+    }, day, " \xB7 ", r.filter(function (_, i) {
+      return (0,_tracking__WEBPACK_IMPORTED_MODULE_2__.completedExercise)(r, i);
+    }).length, " of 12 exercises complete");
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Your practice history will appear here as you work through the exercises.")));
 }
 
 /***/ },
@@ -6241,6 +6390,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.vinnie-nav,.vinnie-tracker{max-width:
 .vinnie-logo{display:inline-flex;align-items:center;gap:14px;line-height:1;text-transform:uppercase;font-family:Oswald,sans-serif}.vinnie-logo-name{font-size:26px;font-weight:700;letter-spacing:.06em}.vinnie-logo-divider{width:2px;height:30px;background:#eee;flex-shrink:0}.vinnie-logo-tag{font-size:18px;font-weight:400;letter-spacing:.22em}.vinnie-room{display:grid;grid-template-columns:1.15fr 1fr;align-items:center;gap:32px;padding:28px;margin:20px 0 32px;border:1px solid #4a315d;border-radius:18px;background:linear-gradient(120deg,#19121f,#121014)}.vinnie-room-art{display:block;border-radius:10px;overflow:hidden}.vinnie-room-art img{display:block;width:100%;height:auto}.vinnie-room-copy h2{font-family:Oswald,sans-serif;font-size:clamp(26px,2.7vw,36px);line-height:1.2;margin:12px 0 18px}.vinnie-room-copy p{color:#c2b8ca;line-height:1.6}.vinnie-room-copy .vinnie-room-eyebrow{color:#c59bff;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin:0}.vinnie-room-button{display:inline-flex;align-items:center;justify-content:center;gap:16px;min-height:48px;padding:14px 22px;margin-top:8px;border:1px solid #a16bf4;border-radius:10px;background:#7c3aed;color:white;text-decoration:none;font-weight:700}.vinnie-room-button:hover{background:#8b4bef}.vinnie-room-copy .vinnie-room-payment{font-size:13px;color:#c9bfd1;margin:14px 0 0}@media(max-width:760px){.vinnie-room{grid-template-columns:1fr;padding:18px;gap:24px}.vinnie-room-button{width:100%}}
 
 .vinnie-transport{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.vinnie-transport .prs-start{margin:0;max-width:none;width:auto}.vinnie-restart{min-height:48px;padding:12px 20px}@media(max-width:600px){.vinnie-transport .prs-start{width:100%}.vinnie-restart{width:100%}}
+.vinnie-progress-page h1{font:600 clamp(30px,4vw,44px)/1.2 Oswald,sans-serif;margin:8px 0 28px}.vinnie-progress-page h2{font:500 26px/1.3 Oswald,sans-serif}.vinnie-progress-eyebrow{color:#bd95f3;text-transform:uppercase;font-size:12px;letter-spacing:.12em}.vinnie-today{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;padding:28px;border:1px solid #604477;background:linear-gradient(115deg,#281c38,#18131e);border-radius:16px;margin-bottom:32px}.vinnie-today h2{margin:0 0 12px}.vinnie-today progress{display:block;width:100%;height:8px;accent-color:#a66aff;margin:18px 0}.vinnie-today .vinnie-muted{margin-bottom:0;line-height:1.5}.vinnie-continue{background:#7c3aed;border-color:#a16bf4;font-weight:700;min-height:48px;display:flex;gap:24px;align-items:center}.vinnie-tracker .vinnie-continue:hover{background:#8b4bef}.vinnie-calendar-heading{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:18px}.vinnie-calendar-heading h2{margin:0}.vinnie-next-milestone{color:#cbb0ef;font-size:14px;line-height:1.5;margin:0}.vinnie-progress-exercises{margin-top:40px}.vinnie-progress-exercises>h2{margin-bottom:8px}.vinnie-progress-group h3{font-size:14px;color:#b8acbf;font-weight:400;margin:24px 0 12px}.vinnie-progress-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:14px}.vinnie-progress-card{display:flex;flex-direction:column;text-align:left;gap:18px;padding:22px;background:#171419;border-color:#39313f;border-radius:12px;transition:background .15s,border-color .15s}.vinnie-card-top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:12px;color:#a79cac;width:100%}.vinnie-card-status{font-size:11px;border-radius:20px;padding:5px 9px;background:#242026;color:#bdb4c4}.is-started .vinnie-card-status{background:#352346;color:#d6b8ff}.is-complete .vinnie-card-status{background:#20372c;color:#afe0bd}.vinnie-progress-card.is-complete{border-color:#365241}.vinnie-progress-card>strong{font:500 27px/1.3 Oswald,sans-serif}.vinnie-card-action{display:flex;justify-content:space-between;color:#c6a0f5;font-size:13px;width:100%;margin-top:auto}.vinnie-practice-history{margin-top:32px;border-top:1px solid #39313f;padding-top:22px;color:#b8acbf}.vinnie-practice-history summary{cursor:pointer;color:#ddd;min-height:32px}@media(max-width:700px){.vinnie-today{grid-template-columns:1fr;padding:22px;gap:20px}.vinnie-continue{justify-content:center}.vinnie-calendar-heading{display:block}.vinnie-next-milestone{margin-top:10px}.vinnie-progress-cards{grid-template-columns:1fr}}
 `, ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
@@ -40544,10 +40694,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/client */ "../practice-lab/node_modules/react-dom/client.js");
 /* harmony import */ var _ChromaticWorkout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ChromaticWorkout */ "./apps/vinnie/src/ChromaticWorkout.jsx");
-/* harmony import */ var _packages_workouts_engine_shared_assets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../packages/workouts/engine/shared/assets */ "./packages/workouts/engine/shared/assets.js");
-/* harmony import */ var _chromaticData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chromaticData */ "./apps/vinnie/src/chromaticData.js");
-/* harmony import */ var _tracking__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./tracking */ "./apps/vinnie/src/tracking.js");
-/* harmony import */ var _site_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./site.css */ "./apps/vinnie/src/site.css");
+/* harmony import */ var _ProgressView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ProgressView */ "./apps/vinnie/src/ProgressView.jsx");
+/* harmony import */ var _packages_workouts_engine_shared_assets__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../packages/workouts/engine/shared/assets */ "./packages/workouts/engine/shared/assets.js");
+/* harmony import */ var _chromaticData__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./chromaticData */ "./apps/vinnie/src/chromaticData.js");
+/* harmony import */ var _tracking__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./tracking */ "./apps/vinnie/src/tracking.js");
+/* harmony import */ var _site_css__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./site.css */ "./apps/vinnie/src/site.css");
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -40566,38 +40717,47 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-(0,_packages_workouts_engine_shared_assets__WEBPACK_IMPORTED_MODULE_4__.configureAssets)('/vinnie');
+
+(0,_packages_workouts_engine_shared_assets__WEBPACK_IMPORTED_MODULE_5__.configureAssets)('/vinnie');
 function App() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
     busy = _useState2[0],
     setBusy = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('workout'),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null),
     _useState4 = _slicedToArray(_useState3, 2),
-    view = _useState4[0],
-    setView = _useState4[1],
-    _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+    initialExercise = _useState4[0],
+    setInitialExercise = _useState4[1];
+  function openExercise(i) {
+    setInitialExercise(i);
+    setView('workout');
+  }
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('workout'),
     _useState6 = _slicedToArray(_useState5, 2),
-    version = _useState6[0],
-    setVersion = _useState6[1],
-    _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+    view = _useState6[0],
+    setView = _useState6[1],
+    _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
     _useState8 = _slicedToArray(_useState7, 2),
-    notice = _useState8[0],
-    setNotice = _useState8[1],
-    _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(function () {
+    version = _useState8[0],
+    setVersion = _useState8[1],
+    _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+    _useState0 = _slicedToArray(_useState9, 2),
+    notice = _useState0[0],
+    setNotice = _useState0[1],
+    _useState1 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(function () {
       try {
-        return (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.read)();
+        return (0,_tracking__WEBPACK_IMPORTED_MODULE_7__.read)();
       } catch (_unused) {
-        return (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.fresh)();
+        return (0,_tracking__WEBPACK_IMPORTED_MODULE_7__.fresh)();
       }
     }),
-    _useState0 = _slicedToArray(_useState9, 2),
-    state = _useState0[0],
-    setState = _useState0[1];
+    _useState10 = _slicedToArray(_useState1, 2),
+    state = _useState10[0],
+    setState = _useState10[1];
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var update = function update() {
         try {
-          setState((0,_tracking__WEBPACK_IMPORTED_MODULE_6__.read)());
+          setState((0,_tracking__WEBPACK_IMPORTED_MODULE_7__.read)());
         } catch (_unused2) {
           setNotice('Saved progress could not be read. Import a backup to recover it.');
         }
@@ -40613,10 +40773,10 @@ function App() {
       window.removeEventListener('vinnie-save-error', error);
     };
   }, []);
-  var days = (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.completedDays)(state),
-    row = state.days[(0,_tracking__WEBPACK_IMPORTED_MODULE_6__.dateKey)()] || (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.emptyRow)(),
+  var days = (0,_tracking__WEBPACK_IMPORTED_MODULE_7__.completedDays)(state),
+    row = state.days[(0,_tracking__WEBPACK_IMPORTED_MODULE_7__.dateKey)()] || (0,_tracking__WEBPACK_IMPORTED_MODULE_7__.emptyRow)(),
     done = row.filter(function (_, i) {
-      return (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.completedExercise)(row, i);
+      return (0,_tracking__WEBPACK_IMPORTED_MODULE_7__.completedExercise)(row, i);
     }).length;
   function download() {
     var blob = new Blob([JSON.stringify(state, null, 2)], {
@@ -40625,7 +40785,7 @@ function App() {
       url = URL.createObjectURL(blob),
       a = document.createElement('a');
     a.href = url;
-    a.download = "vinnie-progress-".concat((0,_tracking__WEBPACK_IMPORTED_MODULE_6__.dateKey)(), ".json");
+    a.download = "vinnie-progress-".concat((0,_tracking__WEBPACK_IMPORTED_MODULE_7__.dateKey)(), ".json");
     a.click();
     setTimeout(function () {
       return URL.revokeObjectURL(url);
@@ -40654,13 +40814,13 @@ function App() {
             }
             throw Error('Backup is too large.');
           case 2:
-            _t = _tracking__WEBPACK_IMPORTED_MODULE_6__.validate;
+            _t = _tracking__WEBPACK_IMPORTED_MODULE_7__.validate;
             _t2 = JSON;
             _context.n = 3;
             return file.text();
           case 3:
             incoming = _t(_t2.parse.call(_t2, _context.v));
-            (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.write)((0,_tracking__WEBPACK_IMPORTED_MODULE_6__.merge)((0,_tracking__WEBPACK_IMPORTED_MODULE_6__.read)(), incoming));
+            (0,_tracking__WEBPACK_IMPORTED_MODULE_7__.write)((0,_tracking__WEBPACK_IMPORTED_MODULE_7__.merge)((0,_tracking__WEBPACK_IMPORTED_MODULE_7__.read)(), incoming));
             setVersion(function (v) {
               return v + 1;
             });
@@ -40695,7 +40855,8 @@ function App() {
     className: "vinnie-logo-tag"
   }, "Music")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
     onClick: function onClick() {
-      return setView('workout');
+      setInitialExercise(null);
+      setView('workout');
     },
     "aria-pressed": view === 'workout'
   }, "Workout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
@@ -40706,51 +40867,16 @@ function App() {
   }, "My progress \xB7 ", Math.min(30, days.length), " / 30"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "vinnie-tuning"
   }, !busy && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_packages_workouts_engine_workouts_Tuning__WEBPACK_IMPORTED_MODULE_0__["default"], null))), view === 'workout' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ChromaticWorkout__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    initialExercise: initialExercise,
     onBusyChange: setBusy,
     key: version,
     onBack: function onBack() {
       window.location.href = '/';
     }
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("main", {
-    className: "vinnie-tracker"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h1", null, "Your 30-day progress"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "Today: ", done, " of ", _chromaticData__WEBPACK_IMPORTED_MODULE_5__.EXERCISES.length, " exercises complete. Complete all twelve to mark a day. Miss a day? Your progress stays here."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
-    className: "vinnie-days"
-  }, Array.from({
-    length: 30
-  }, function (_, i) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
-      key: i,
-      className: i < days.length ? 'complete' : ''
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("strong", null, "Day ", i + 1, " ", i < days.length ? '✓' : ''), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("small", null, days[i] || 'Not completed yet'));
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
-    className: "vinnie-milestones"
-  }, [[7, 'First week'], [14, 'Two weeks'], [21, 'Three weeks'], [30, '30 days of practice']].map(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-      n = _ref2[0],
-      title = _ref2[1];
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
-      key: n
-    }, days.length >= n ? '✓ ' : '', title, " \xB7 ", Math.min(n, days.length), " / ", n);
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h2", null, "Today\u2019s exercises"), _chromaticData__WEBPACK_IMPORTED_MODULE_5__.EXERCISES.map(function (e, i) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
-      key: e.id
-    }, (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.completedExercise)(row, i) ? '✓ ' : '', e.title, " \xB7 ", (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.completedExercise)(row, i) ? 'Complete' : row[i].length ? 'In progress' : 'Not started');
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("summary", null, "Practice history"), Object.entries(state.days).sort(function (_ref3, _ref4) {
-    var _ref5 = _slicedToArray(_ref3, 1),
-      a = _ref5[0];
-    var _ref6 = _slicedToArray(_ref4, 1),
-      b = _ref6[0];
-    return b.localeCompare(a);
-  }).map(function (_ref7) {
-    var _ref8 = _slicedToArray(_ref7, 2),
-      day = _ref8[0],
-      r = _ref8[1];
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
-      key: day
-    }, day, " \xB7 ", r.filter(function (_, i) {
-      return (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.completedExercise)(r, i);
-    }).length, " of 12 exercises complete");
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("footer", {
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ProgressView__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    state: state,
+    onOpen: openExercise
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("footer", {
     className: "vinnie-tracker"
   }, view === 'progress' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("section", {
     className: "vinnie-backup"

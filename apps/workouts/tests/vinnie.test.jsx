@@ -64,3 +64,33 @@ test('pause resumes the current position or restarts the exercise, both with a c
  act(()=>button('Pause').click());expect(button('Resume from this position ▶')).toBeDefined();
  act(()=>root.unmount());
 });
+
+test('progress cards and continue open the correct exercise with clear completion states',()=>{
+ const React=require('react'),{act}=React,{createRoot}=require('react-dom/client');
+ const Progress=require('../../vinnie/src/ProgressView').default;
+ localStorage.clear();const state=fresh();state.days[dateKey()]=emptyRow();state.days[dateKey()][0]=Array.from({length:counts[0]},(_,i)=>i);state.days[dateKey()][1]=[0];
+ const open=jest.fn(),host=document.createElement('div'),root=createRoot(host);global.IS_REACT_ACT_ENVIRONMENT=true;
+ act(()=>root.render(<Progress state={state} onOpen={open}/>));
+ expect(host.querySelectorAll('.vinnie-progress-card')).toHaveLength(12);
+ expect(host.querySelectorAll('.vinnie-progress-group')).toHaveLength(4);
+ expect(host.querySelector('.vinnie-today').textContent).toContain('1 of 12');
+ expect(host.querySelector('.vinnie-next-milestone').textContent).toContain('7 more completed days');
+ act(()=>host.querySelector('.vinnie-continue').click());expect(open).toHaveBeenLastCalledWith(1);
+ act(()=>host.querySelectorAll('.vinnie-progress-card')[8].click());expect(open).toHaveBeenLastCalledWith(8);
+ expect(host.querySelector('.vinnie-progress-card.is-complete')).not.toBeNull();
+ expect(host.querySelector('.vinnie-progress-card.is-started')).not.toBeNull();
+ act(()=>root.unmount());
+});
+test('opening from progress resumes at the first unfinished position',()=>{
+ const React=require('react'),{act}=React,{createRoot}=require('react-dom/client');
+ const Workout=require('../../vinnie/src/ChromaticWorkout').default;
+ const {createMetronomeEngine}=require('../../../packages/workouts/engine/shared/metronome');
+ createMetronomeEngine.mockReturnValue({stop:jest.fn(),setVolume:jest.fn(),setAudibleSubdivision:jest.fn()});
+ localStorage.clear();recordGroup(EXERCISES[8].id,0);
+ const host=document.createElement('div'),root=createRoot(host);global.IS_REACT_ACT_ENVIRONMENT=true;
+ act(()=>root.render(<Workout initialExercise={8}/>));
+ expect(host.textContent).toContain('Single string · alternating direction');
+ expect(host.textContent).toContain('Resume from this position');
+ expect(host.textContent).toContain('Index finger: fret 2');
+ act(()=>root.unmount());
+});

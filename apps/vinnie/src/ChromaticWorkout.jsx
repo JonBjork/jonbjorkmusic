@@ -14,7 +14,7 @@ import './chromatic-workout.css';
 const PREFS='jb-vinnie-settings-v1';
 function read(){try{return JSON.parse(localStorage.getItem(PREFS)||'{}')||{};}catch{return {};}}
 const valid=(n,min,max,fallback)=>Number.isFinite(n)&&n>=min&&n<=max?n:fallback;
-export default function ChromaticWorkout({onBack,onBusyChange}){
+export default function ChromaticWorkout({onBack,onBusyChange,initialExercise=null}){
  const initial=useRef(read()).current;
  const [selected,setSelected]=useState(null),[settings,setSettings]=useState(initial.exercises||{});
  const [tone,setTone]=useState(['piano','harpsichord','electric','nylon'].includes(initial.tone)?initial.tone:'piano');
@@ -44,6 +44,7 @@ export default function ChromaticWorkout({onBack,onBusyChange}){
  function pause(){stop();setPlaying(false);setLoading(false);setCount(null);}
  useEffect(()=>{const hide=()=>{if(document.hidden){pause();}};document.addEventListener('visibilitychange',hide);return()=>document.removeEventListener('visibilitychange',hide);},[]);
  function choose(i){pause();save();setSelected(i);setStarted(false);const progress=todayProgress();const exerciseIndex=i??0;const nextData=buildChromatic(EXERCISES[exerciseIndex]);const pending=nextData.groups.findIndex((g,j)=>!progress[exerciseIndex].includes(j));setCursor(pending<0?0:nextData.groups[pending].start);setDone(false);setMessage('');setLogVersion(v=>v+1);}
+ useEffect(()=>{if(initialExercise!==null)choose(initialExercise);},[initialExercise]);
  function change(key,value){pause();save();setSettings(s=>({...s,[exercise.id]:{...s[exercise.id],[key]:value}}));setCursor(0);setStarted(false);setDone(false);setMessage('');}
  async function start(restart=false){stop();if(restart)save();const r=state.current,token=r.token,from=restart||done?0:group.start;setStarted(true);setLoading(true);setDone(false);setCursor(from);setMessage('');
   try{await primeMetronomeAudio();await prepareGuitar(getAudioContext(),tone);if(token!==r.token)return;
