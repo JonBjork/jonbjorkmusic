@@ -56,7 +56,7 @@
   command = """
     cd notes && npm install && npx @11ty/eleventy && cd .. && \
     mkdir -p build && \
-    rsync -a --exclude='notes' --exclude='build' --exclude='.git' --exclude='node_modules' --exclude='.DS_Store' --exclude='admin' --exclude='netlify' ./ build/ && \
+    rsync -a --exclude='notes' --exclude='build' --exclude='.git' --exclude='node_modules' --exclude='.DS_Store' --exclude='admin' --exclude='netlify' --exclude='apps' --exclude='packages' ./ build/ && \
     cp -r admin build/admin && \
     rsync -a notes/_site/notes/ build/notes/ && \
     if [ -d notes/_site/licks ]; then mkdir -p build/licks && rsync -a notes/_site/licks/ build/licks/; fi && \

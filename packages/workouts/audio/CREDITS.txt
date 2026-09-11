@@ -1,0 +1,22 @@
+Guitar recordings: tonejs-instruments sample collection by Nicholaus P. Brosowsky.
+Source: https://github.com/nbrosowsky/tonejs-instruments
+Sample license: Creative Commons Attribution 3.0 Unported
+https://creativecommons.org/licenses/by/3.0/
+
+Upstream sources as identified by the collection:
+Electric guitar: Karoryfer Samples — https://www.karoryfer.com/karoryfer-samples
+Nylon guitar: quartertone, classicalguitar-multisampled, Freesound pack 11573.
+
+The MP3 recordings are bundled unchanged. Playback selects the nearest sampled
+pitch and applies pitch shifting, a short release envelope, gain and low-pass
+filtering. No endorsement by the original creators is implied.
+
+The upstream README, sample-source-info and code license are retained here.
+
+Grand piano and harpsichord: FluidR3 GM, Frank Wen and contributors,
+pre-rendered and packaged by Benjamin Gleitzman / midi-js-soundfonts.
+Source: https://github.com/gleitz/midi-js-soundfonts/tree/gh-pages/FluidR3_GM
+License: Creative Commons Attribution 3.0 Unported
+https://creativecommons.org/licenses/by/3.0/
+Selected MIDI notes 40–88 extracted from the MP3 data-URI bank without audio
+re-encoding. Playback applies gain, filtering and instrument-specific releases.

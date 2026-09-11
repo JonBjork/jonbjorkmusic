@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#080809"/><stop offset=".65" stop-color="#141019"/><stop offset="1" stop-color="#31174e"/></linearGradient><linearGradient id="accent"><stop stop-color="#7c3aed"/><stop offset="1" stop-color="#c2a0ef"/></linearGradient></defs>
+<rect width="1280" height="720" fill="url(#bg)"/>
+<g stroke="#9b65eb" fill="none" opacity=".32" stroke-width="2"><path d="M850 720 1130 0M910 720 1190 0M970 720 1250 0M1030 720 1310 0M1090 720 1370 0M1150 720 1430 0"/></g>
+<path d="M1020 720 1280 50" stroke="url(#accent)" stroke-width="9" opacity=".7"/>
+<g font-family="Arial, Helvetica, sans-serif" fill="#f5f3f7">
+<text x="72" y="95" font-size="23" letter-spacing="7" fill="#bb94f5">JON BJORK MUSIC</text>
+<text x="68" y="245" font-size="94" font-weight="900" textLength="700" lengthAdjust="spacingAndGlyphs">THE ULTIMATE</text>
+<text x="68" y="358" font-size="94" font-weight="900" textLength="690" lengthAdjust="spacingAndGlyphs">ALTERNATE</text>
+<text x="68" y="471" font-size="94" font-weight="900" textLength="875" lengthAdjust="spacingAndGlyphs">PICKING WORKOUT</text>
+<path d="M72 550H560" stroke="url(#accent)" stroke-width="5"/>
+<text x="72" y="618" font-size="24" letter-spacing="5" fill="#bb94f5">GUIDED TECHNIQUE PRACTICE</text>
+</g></svg>

@@ -1,0 +1,6 @@
+.nps-workout .cp-deliberate-number{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:12px;margin:18px 0}
+.nps-workout .cp-deliberate-number .cp-number{display:flex;flex-direction:column;align-items:stretch;gap:8px;margin:0;font:14px Lato,sans-serif}
+.nps-workout .cp-number input{width:100%;min-width:0;height:44px;padding:8px 12px;background:#201a28;border:1px solid #594071;border-radius:6px;color:#eee;font:20px Lato,sans-serif;text-align:center;box-sizing:border-box}
+.nps-workout .cp-step-buttons{display:flex;gap:8px}
+.nps-workout .cp-step-buttons button{width:44px;height:44px;padding:0;font:24px Lato,sans-serif;line-height:1;display:grid;place-items:center}
+.nps-workout aside label{margin:16px 0}

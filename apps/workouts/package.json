@@ -1,0 +1,25 @@
+{
+  "name": "workouts-app",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "node build.cjs",
+    "test": "node test.cjs"
+  },
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "webpack": "5.107.1",
+    "babel-loader": "8.4.1",
+    "@babel/core": "7.29.0",
+    "@babel/preset-env": "7.29.5",
+    "@babel/preset-react": "7.28.5",
+    "style-loader": "3.3.4",
+    "css-loader": "6.11.0",
+    "jest": "27.5.1",
+    "jest-environment-jsdom": "27.5.1",
+    "babel-jest": "27.5.1"
+  }
+}

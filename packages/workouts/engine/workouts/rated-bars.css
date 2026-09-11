@@ -1,0 +1,17 @@
+.wk-rated-bars{background:#141414;border:1px solid #303030;border-radius:12px;padding:24px;margin-bottom:20px;}
+.wk-rated-bars h2{font:500 1.05rem 'Oswald',sans-serif;letter-spacing:.13em;text-transform:uppercase;margin:0 0 12px;}
+.wk-rated-bars p{color:#aaa;font-size:.93rem;line-height:1.6;}
+.wk-rated-filters{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0;}
+.wk-rated-filters button{background:transparent;border:1px solid currentColor;border-radius:6px;padding:10px 14px;cursor:pointer;font:inherit;font-size:.9rem;}
+.wk-rated-filters b{margin-left:8px;font-weight:500;}.wk-rated-filters button[aria-pressed=true]{background:#ffffff12;box-shadow:inset 0 0 0 1px currentColor;}
+.wk-rated-red{color:#ed9292;}.wk-rated-yellow{color:#dec779;}.wk-rated-green{color:#8ad2a8;}
+.wk-rated-layout{display:grid;grid-template-columns:minmax(230px,1fr) minmax(0,2fr);gap:22px;align-items:start;}
+.wk-rated-list{list-style:none;margin:0;padding:0;max-height:440px;overflow:auto;}
+.wk-rated-list li+li{margin-top:7px;}.wk-rated-list button{width:100%;text-align:left;display:grid;grid-template-columns:1fr auto;gap:5px 10px;background:#1c1c1c;border:1px solid #353535;border-radius:6px;padding:14px;cursor:pointer;}
+.wk-rated-list strong{font:500 1.02rem 'Oswald',sans-serif;}.wk-rated-list button span:first-of-type{grid-column:1;color:#aaa;font-size:.8rem;}.wk-rated-list button span:last-child{grid-column:2;grid-row:1/3;align-self:center;}
+.wk-rated-list button[aria-pressed=true]{border-color:currentColor;background:#252025;}
+.wk-rated-preview{min-width:0;}.wk-rated-preview h3{font:500 1.25rem 'Oswald',sans-serif;margin:0;}.wk-rated-empty{padding:14px 0;}
+.wk-rated-focus{background:#8038dd;color:#fff;border:0;border-radius:6px;padding:13px 18px;font:500 .95rem 'Oswald',sans-serif;cursor:pointer;}
+@media(max-width:700px){.wk-rated-bars{padding:16px;}.wk-rated-layout{grid-template-columns:1fr;}.wk-rated-list{max-height:230px;}.wk-rated-filters button{flex:1;font-size:.79rem;padding:10px 8px;}.wk-rated-focus{width:100%;}}
+
+.wk-rated-tempo{display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:#ccc;font-size:.9rem;}.wk-rated-tempo select{background:#202020;color:#eee;border:1px solid #555;border-radius:6px;padding:10px;font:inherit;max-width:100%;}
