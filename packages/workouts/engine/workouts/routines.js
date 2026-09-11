@@ -166,7 +166,7 @@ export function buildPieceChunks(piece, { chunkSize = 1, startBar = 1, endBar = 
 export const WORKOUTS = [
   {
     id: "picking",
-    cover: "/workouts/picking-cover-landscape.svg",
+    cover: "/workouts/ultimate-alternate-cover.png",
     coverFit: "contain",
     kind: "routine",
     title: "The Ultimate Alternate Picking Workout",
