@@ -1,3 +1,4 @@
+import WorkoutCoverHeading from './WorkoutCoverHeading';
 import React,{useState,useMemo,useRef,useEffect} from 'react';
 import {buildFingerLegato,ROUTINE_META} from './fingerLegatoData';
 import {createMetronomeEngine,primeMetronomeAudio,getAudioContext} from '../shared/metronome';
@@ -74,7 +75,7 @@ export default function FingerLegatoWorkout({onBack}){
  const shape=[...new Map(passage.notes.map(n=>[`${n.string}:${n.fret}`,n])).values()];
  const sessions=readLog().sessions.filter(s=>s.workoutId===workoutId);
  return <div className="prs finger-legato"><header><button onClick={()=>{pause();onBack();}}>← Workouts</button>{!locked&&<Tuning/>}</header><main>
- <div className="prs-eyebrow">FINGER INDEPENDENCE · LEGATO</div><h1>{title}</h1>
+ <WorkoutCoverHeading eyebrow="FINGER INDEPENDENCE · LEGATO" title={title} cover="/workouts/ultimate-legato-cover.png"/>
  <p>Work through the finger combinations in one position. Keep every note clear, even and relaxed.</p>
  <div className="prs-layout"><section>
  <fieldset disabled={locked} className="fl-settings"><div className="prs-position">
