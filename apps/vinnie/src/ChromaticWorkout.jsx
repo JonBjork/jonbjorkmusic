@@ -14,7 +14,7 @@ import './chromatic-workout.css';
 const PREFS='jb-vinnie-settings-v1';
 function read(){try{return JSON.parse(localStorage.getItem(PREFS)||'{}')||{};}catch{return {};}}
 const valid=(n,min,max,fallback)=>Number.isFinite(n)&&n>=min&&n<=max?n:fallback;
-export default function ChromaticWorkout({onBack}){
+export default function ChromaticWorkout({onBack,onBusyChange}){
  const initial=useRef(read()).current;
  const [selected,setSelected]=useState(null),[settings,setSettings]=useState(initial.exercises||{});
  const [tone,setTone]=useState(['piano','harpsichord','electric','nylon'].includes(initial.tone)?initial.tone:'piano');
@@ -60,21 +60,22 @@ export default function ChromaticWorkout({onBack}){
  const logs=useMemo(()=>readLog().sessions.filter(s=>s.workoutId===CHROMATIC_ID),[logVersion]);
  const completed=new Set(EXERCISES.filter((e,i)=>completedExercise(todayProgress(),i)).map(e=>e.id));
  const locked=playing||loading;
- return <div className="prs chromatic"><header><button onClick={()=>{pause();save();onBack();}}>← Jon Bjork Music</button>{!locked&&<Tuning/>}</header><main>
- <div className="prs-eyebrow">ALTERNATE PICKING · CHROMATIC PATTERNS</div><h1>{CHROMATIC_TITLE}</h1><p>Based on the patterns from Vinnie Moore’s first instructional video. Follow the pick strokes, stay relaxed, and keep each note clear.</p>
+ useEffect(()=>{onBusyChange?.(locked);return()=>onBusyChange?.(false);},[locked,onBusyChange]);
+ const daily=todayProgress(),nextExercise=Math.max(0,EXERCISES.findIndex((e,i)=>!completedExercise(daily,i)));
+ const exerciseDuration=e=>{const pref=settings[e.id]||{};return buildChromatic(e).notes.length*60/valid(pref.bpm,30,240,60)/valid(pref.subdivision,1,8,e.defaultSubdivision);};
+ return <div className="prs chromatic"><main>
  {selected===null?<>
- <img src="/vinnie/cover.png" alt="The Vinnie Moore Picking Workout" style={{width:"100%",maxWidth:850,borderRadius:12,marginBottom:24}}/>
- <p>Twelve exercises in four sections. Every moving exercise travels from index-finger fret 1 to 12 and back to 1, without repeating the turnaround position.</p>
- {['Six strings','Two strings','Single string','Scale Exercises'].map(section=><div key={section}><h2>{section}</h2><div className="prs-days">{EXERCISES.map((e,i)=>e.section===section&&<button key={e.id} onClick={()=>choose(i)}><small>EXERCISE {i+1}{completed.has(e.id)?' · PRACTICED':''}</small><h2>{e.title}</h2><p>{e.kind==='scale'?'One sequence per position':e.kind==='pairs'?'Nine string-pair visits':e.kind==='single'?'Eleven string visits':'High E → low E → high E'}</p><small>{e.defaultSubdivision===3?'Triplets':'Sixteenths'} by default · Open ↗</small></button>)}</div></div>)}
+ <div className="vinnie-hero"><img src="/vinnie/cover.png" alt="The Vinnie Moore Picking Workout"/><div><div className="prs-eyebrow">12 EXERCISES · FOUR SECTIONS</div><h1>{CHROMATIC_TITLE}</h1><p>Based on the patterns from Vinnie Moore’s first instructional video. Follow the pick strokes, stay relaxed, and keep each note clear.</p><button className="prs-start" onClick={()=>choose(nextExercise)}>{daily.some(g=>g.length)?'Continue practicing':'Start workout'} ▶</button><p className="vinnie-muted">Choose an exercise below, or work through them in order. Every moving exercise travels from fret 1 to 12 and back.</p></div></div>
+ {['Six strings','Two strings','Single string','Scale Exercises'].map(section=><div key={section}><h2>{section}</h2><div className="prs-days">{EXERCISES.map((e,i)=>e.section===section&&<button key={e.id} onClick={()=>choose(i)}><small>EXERCISE {i+1}<span>{completed.has(e.id)?'✓ Complete':daily[i].length?'In progress':''}</span></small><h2>{e.pattern.length?e.pattern.join('–'):e.title}</h2><p>{fmtClock(exerciseDuration(e))} · {(settings[e.id]?.subdivision||e.defaultSubdivision)} notes per beat</p><progress aria-label={`${e.title} daily progress`} value={daily[i].length} max={buildChromatic(e).groups.length}/><small>{daily[i].length} / {buildChromatic(e).groups.length} positions<span>Open →</span></small></button>)}</div></div>)}
  <section className="chromatic-history"><h2>Your practice</h2><p>{logs.length} saved sessions · {fmtClock(logs.reduce((sum,s)=>sum+s.seconds,0))} practiced</p><p>Your daily progress and JSON backup are available in My progress above.</p></section>
  </>:<>
- <button onClick={()=>choose(null)}>← Exercise overview</button><div className="chromatic-select"><label>Exercise<select disabled={locked} value={selected} onChange={e=>choose(Number(e.target.value))}>{EXERCISES.map((e,i)=><option value={i} key={e.id}>{i+1}. {e.title}</option>)}</select></label></div>
+ <button className="vinnie-back" onClick={()=>choose(null)}>← Exercise overview</button><div className="chromatic-select"><label>Exercise<select disabled={locked} value={selected} onChange={e=>choose(Number(e.target.value))}>{EXERCISES.map((e,i)=><option value={i} key={e.id}>{i+1}. {e.title}</option>)}</select></label></div>
  <div className="prs-layout"><section><div className="prs-eyebrow">EXERCISE {selected+1} / {EXERCISES.length}</div><h2>{exercise.title}</h2>
  <p>{exercise.kind==='scale'?'Play the complete scale sequence once, then shift up one fret. Travel from index-finger fret 1 to 12, then straight back through 11 to 1. Keep the written holds ringing.':exercise.kind==='six'?'Play the group once on each string: high E → B → G → D → A → low E → A → D → G → B → high E. Then shift up one fret.':exercise.kind==='pairs'?'Finish the entire fret 1 → 12 → 1 journey on each string pair before moving to the next pair. Always start on the lower string.':'Alternate ascending and descending four-note groups with each one-fret shift. Finish fret 1 → 12 → 1 on each string before moving to the next.'}</p>
  <button className="prs-start" disabled={loading} onClick={()=>playing?pause():start()}>{loading?'Loading sound…':playing?'Pause':done?'Play again ▶':cursor?'Resume position ▶':'Start exercise ▶'}</button>
  <div className="chromatic-position"><div className="chromatic-location"><strong>{count?`Count in · ${count}`:done?'Exercise finished':`Index finger: fret ${group.position}`}</strong><span>{group.visit<12?'Up the neck':'Back down'}</span></div>
  <ShapeFretboard notes={shapeNotes} label={`Position ${group.position}`} heading="CURRENT PATTERN" activeNote={playing&&count===null?n:null}/></div>
- <TabView key={exercise.id} continuous notes={data.notes} cursor={playing&&count===null?cursor:-1} notesPerBeat={subdivision}/>
+ <TabView key={exercise.id} continuous previewCursor={cursor} notes={data.notes} cursor={playing&&count===null?cursor:-1} notesPerBeat={subdivision}/>
  <p>⊓ Downstroke · ∨ Upstroke · Keep alternating through every shift.</p>
  <progress aria-label="Exercise progress" value={done?data.notes.length:cursor} max={data.notes.length}/>
  <label>Preview / resume from<select disabled={locked} value={n.group} onChange={e=>{pause();setCursor(data.groups[Number(e.target.value)].start);setDone(false);}}>{data.groups.map((g,i)=><option key={i} value={i}>{i+1}. {g.label}</option>)}</select></label>

@@ -15,5 +15,6 @@ webpack({mode:'development',devtool:false,parallelism:1,entry:path.join(__dirnam
  if(error||stats.hasErrors()){console.error(error||stats.toString({all:false,errors:true}));process.exitCode=1;return;}
  fs.copyFileSync(path.join(__dirname,'index.html'),path.join(output,'index.html'));
  for(const [source,target] of [['audio','audio'],['metronome-sounds','metronome-sounds']])fs.cpSync(path.join(packageRoot,source),path.join(output,target),{recursive:true});
+ fs.copyFileSync(path.join(__dirname,'practice-room.jpg'),path.join(output,'practice-room.jpg'));
  fs.copyFileSync(path.join(__dirname,'cover.png'),path.join(output,'cover.png'));console.log('Standalone /vinnie built.');
 });

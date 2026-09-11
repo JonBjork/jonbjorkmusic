@@ -71,7 +71,8 @@ var valid = function valid(n, min, max, fallback) {
   return Number.isFinite(n) && n >= min && n <= max ? n : fallback;
 };
 function ChromaticWorkout(_ref) {
-  var onBack = _ref.onBack;
+  var onBack = _ref.onBack,
+    onBusyChange = _ref.onBusyChange;
   var initial = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(read()).current;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
     _useState2 = _slicedToArray(_useState, 2),
@@ -387,43 +388,62 @@ function ChromaticWorkout(_ref) {
     return e.id;
   }));
   var locked = playing || loading;
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    onBusyChange === null || onBusyChange === void 0 || onBusyChange(locked);
+    return function () {
+      return onBusyChange === null || onBusyChange === void 0 ? void 0 : onBusyChange(false);
+    };
+  }, [locked, onBusyChange]);
+  var daily = (0,_tracking__WEBPACK_IMPORTED_MODULE_5__.todayProgress)(),
+    nextExercise = Math.max(0, _chromaticData__WEBPACK_IMPORTED_MODULE_1__.EXERCISES.findIndex(function (e, i) {
+      return !(0,_tracking__WEBPACK_IMPORTED_MODULE_5__.completedExercise)(daily, i);
+    }));
+  var exerciseDuration = function exerciseDuration(e) {
+    var pref = settings[e.id] || {};
+    return (0,_chromaticData__WEBPACK_IMPORTED_MODULE_1__.buildChromatic)(e).notes.length * 60 / valid(pref.bpm, 30, 240, 60) / valid(pref.subdivision, 1, 8, e.defaultSubdivision);
+  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "prs chromatic"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: function onClick() {
-      pause();
-      save();
-      onBack();
-    }
-  }, "\u2190 Jon Bjork Music"), !locked && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_packages_workouts_engine_workouts_Tuning__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "prs-eyebrow"
-  }, "ALTERNATE PICKING \xB7 CHROMATIC PATTERNS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, _chromaticData__WEBPACK_IMPORTED_MODULE_1__.CHROMATIC_TITLE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Based on the patterns from Vinnie Moore\u2019s first instructional video. Follow the pick strokes, stay relaxed, and keep each note clear."), selected === null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", null, selected === null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "vinnie-hero"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
     src: "/vinnie/cover.png",
-    alt: "The Vinnie Moore Picking Workout",
-    style: {
-      width: "100%",
-      maxWidth: 850,
-      borderRadius: 12,
-      marginBottom: 24
+    alt: "The Vinnie Moore Picking Workout"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "prs-eyebrow"
+  }, "12 EXERCISES \xB7 FOUR SECTIONS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, _chromaticData__WEBPACK_IMPORTED_MODULE_1__.CHROMATIC_TITLE), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Based on the patterns from Vinnie Moore\u2019s first instructional video. Follow the pick strokes, stay relaxed, and keep each note clear."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "prs-start",
+    onClick: function onClick() {
+      return choose(nextExercise);
     }
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Twelve exercises in four sections. Every moving exercise travels from index-finger fret 1 to 12 and back to 1, without repeating the turnaround position."), ['Six strings', 'Two strings', 'Single string', 'Scale Exercises'].map(function (section) {
+  }, daily.some(function (g) {
+    return g.length;
+  }) ? 'Continue practicing' : 'Start workout', " \u25B6"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    className: "vinnie-muted"
+  }, "Choose an exercise below, or work through them in order. Every moving exercise travels from fret 1 to 12 and back."))), ['Six strings', 'Two strings', 'Single string', 'Scale Exercises'].map(function (section) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       key: section
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, section), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
       className: "prs-days"
     }, _chromaticData__WEBPACK_IMPORTED_MODULE_1__.EXERCISES.map(function (e, i) {
+      var _settings$e$id;
       return e.section === section && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         key: e.id,
         onClick: function onClick() {
           return choose(i);
         }
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("small", null, "EXERCISE ", i + 1, completed.has(e.id) ? ' · PRACTICED' : ''), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, e.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, e.kind === 'scale' ? 'One sequence per position' : e.kind === 'pairs' ? 'Nine string-pair visits' : e.kind === 'single' ? 'Eleven string visits' : 'High E → low E → high E'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("small", null, e.defaultSubdivision === 3 ? 'Triplets' : 'Sixteenths', " by default \xB7 Open \u2197"));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("small", null, "EXERCISE ", i + 1, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, completed.has(e.id) ? '✓ Complete' : daily[i].length ? 'In progress' : '')), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, e.pattern.length ? e.pattern.join('–') : e.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, (0,_storage__WEBPACK_IMPORTED_MODULE_4__.fmtClock)(exerciseDuration(e)), " \xB7 ", ((_settings$e$id = settings[e.id]) === null || _settings$e$id === void 0 ? void 0 : _settings$e$id.subdivision) || e.defaultSubdivision, " notes per beat"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("progress", {
+        "aria-label": "".concat(e.title, " daily progress"),
+        value: daily[i].length,
+        max: (0,_chromaticData__WEBPACK_IMPORTED_MODULE_1__.buildChromatic)(e).groups.length
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("small", null, daily[i].length, " / ", (0,_chromaticData__WEBPACK_IMPORTED_MODULE_1__.buildChromatic)(e).groups.length, " positions", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, "Open \u2192")));
     })));
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("section", {
     className: "chromatic-history"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Your practice"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, logs.length, " saved sessions \xB7 ", (0,_storage__WEBPACK_IMPORTED_MODULE_4__.fmtClock)(logs.reduce(function (sum, s) {
     return sum + s.seconds;
   }, 0)), " practiced"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Your daily progress and JSON backup are available in My progress above."))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: "vinnie-back",
     onClick: function onClick() {
       return choose(null);
     }
@@ -462,6 +482,7 @@ function ChromaticWorkout(_ref) {
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_TabView__WEBPACK_IMPORTED_MODULE_6__["default"], {
     key: exercise.id,
     continuous: true,
+    previewCursor: cursor,
     notes: data.notes,
     cursor: playing && count === null ? cursor : -1,
     notesPerBeat: subdivision
@@ -783,7 +804,9 @@ function TabView(_ref) {
     _ref$beatOffset = _ref.beatOffset,
     beatOffset = _ref$beatOffset === void 0 ? 0 : _ref$beatOffset,
     _ref$continuous = _ref.continuous,
-    continuous = _ref$continuous === void 0 ? false : _ref$continuous;
+    continuous = _ref$continuous === void 0 ? false : _ref$continuous,
+    _ref$previewCursor = _ref.previewCursor,
+    previewCursor = _ref$previewCursor === void 0 ? 0 : _ref$previewCursor;
   var wrapRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       left: 0,
@@ -834,10 +857,11 @@ function TabView(_ref) {
   // the click at faster tempos.
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var wrap = wrapRef.current;
-    if (!wrap || cursor == null || cursor < 0) return;
-    var x = offsets[onsets[cursor] || 0] + COL_W / 2;
+    if (!wrap) return;
+    var target = cursor != null && cursor >= 0 ? cursor : previewCursor;
+    var x = offsets[onsets[target] || 0] + COL_W / 2;
     wrap.scrollLeft = Math.max(0, x - wrap.clientWidth * (continuous ? 0.25 : 0.5));
-  }, [cursor, notes, continuous]);
+  }, [cursor, previewCursor, notes, continuous]);
 
   // Keep a full-width strip, but only mount notation near the viewport.
   // Scrolling changes the visible notes without resetting the scroll origin.
@@ -6206,7 +6230,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _practice_lab_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_practice_lab_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `.vinnie-nav,.vinnie-tracker{max-width:1280px;margin:auto;padding:24px;color:#eee;font-family:Lato,sans-serif}.vinnie-nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap}a{color:#bb8bff}button,.vinnie-import{background:#1b1b1b;color:#eee;border:1px solid #555;border-radius:8px;padding:12px 18px;cursor:pointer;font:inherit}button[aria-pressed=true]{border-color:#a66aff;background:#2c1b40}.vinnie-days{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}.vinnie-days>div{padding:18px;border:1px solid #444;border-radius:10px}.vinnie-days small{display:block;margin-top:10px;color:#aaa}.vinnie-days .complete{background:#302044;border-color:#a66aff}.vinnie-milestones{display:flex;gap:24px;flex-wrap:wrap}.vinnie-import{display:inline-block;margin-left:12px}.vinnie-import input{display:block;max-width:210px;margin-top:8px}`, ""]);
+___CSS_LOADER_EXPORT___.push([module.id, `.vinnie-nav,.vinnie-tracker{max-width:1280px;margin:auto;padding:24px;color:#eee;font-family:Lato,sans-serif}.vinnie-nav{display:flex;gap:18px;align-items:center;flex-wrap:wrap}a{color:#bb8bff}button,.vinnie-import{background:#1b1b1b;color:#eee;border:1px solid #555;border-radius:8px;padding:12px 18px;cursor:pointer;font:inherit}button[aria-pressed=true]{border-color:#a66aff;background:#2c1b40}.vinnie-days{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}.vinnie-days>div{padding:18px;border:1px solid #444;border-radius:10px}.vinnie-days small{display:block;margin-top:10px;color:#aaa}.vinnie-days .complete{background:#302044;border-color:#a66aff}.vinnie-milestones{display:flex;gap:24px;flex-wrap:wrap}.vinnie-import{display:inline-block;margin-left:12px}.vinnie-import input{display:block;max-width:210px;margin-top:8px}
+.vinnie-nav{border-bottom:1px solid #29252f;padding-block:16px;gap:8px}.vinnie-nav>a{margin-right:auto;text-decoration:none;color:#eee;font-weight:700;letter-spacing:.04em}.vinnie-tuning{margin-left:16px}.vinnie-nav button{min-height:44px}.vinnie-tuning button{border:0;background:transparent;color:#bbb}.vinnie-hero{display:grid;grid-template-columns:minmax(240px,.9fr) 1.1fr;gap:32px;align-items:center;margin-bottom:40px}.vinnie-hero img{width:100%;border-radius:12px}.vinnie-hero h1{font-size:clamp(27px,3vw,42px);line-height:1.15;margin:12px 0}.vinnie-muted{color:#a69dad;font-size:14px}.chromatic .prs-days{grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:16px}.chromatic .prs-days button{padding:22px;text-align:left;border:1px solid #39313f;border-radius:12px;transition:background .15s,border-color .15s}.chromatic .prs-days button h2{font-size:27px;margin:12px 0}.chromatic .prs-days button p{color:#b7aebe;font-size:14px}.chromatic .prs-days small{display:flex;justify-content:space-between;gap:12px;color:#b7aebe}.chromatic .prs-days progress{height:4px;margin:8px 0 12px}.chromatic .prs-start{background:#7c3aed;color:white;border:1px solid #9560ee;border-radius:10px;min-height:48px;font-weight:700;max-width:340px}.chromatic .vinnie-back{padding:8px 0;border:0;background:none;color:#bca7d5}.chromatic button:hover:not(:disabled),.vinnie-nav button:hover,.vinnie-tracker button:hover{border-color:#a66aff;background:#2a2134}.chromatic .prs-start:hover:not(:disabled){background:#8b4bef}button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid #c9a4ff;outline-offset:4px}button:disabled{opacity:.5;cursor:default}.chromatic aside .cp-deliberate-number{display:grid;grid-template-columns:48px minmax(0,1fr) 48px;gap:8px;align-items:end;margin:0 0 22px}.chromatic aside .cp-number{grid-column:2;grid-row:1;margin:0;display:flex;flex-direction:column;gap:8px;text-align:center}.chromatic aside .cp-number input{width:100%;height:48px;background:#1d1823;color:#fff;border:1px solid #655075;border-radius:8px;text-align:center;font:700 22px Lato,sans-serif}.chromatic .cp-step-buttons{display:contents}.chromatic .cp-step-buttons button{height:48px;min-width:48px;padding:0;font-size:24px;grid-row:1}.chromatic .cp-step-buttons button:first-child{grid-column:1}.chromatic .cp-step-buttons button:last-child{grid-column:3}.chromatic select,.chromatic .prs-sound-switches button{min-height:46px;border-radius:8px}.vinnie-backup{border:1px solid #39313f;border-radius:12px;padding:24px;margin-bottom:32px}.vinnie-import{position:relative}.vinnie-import input{position:absolute;width:1px;height:1px;opacity:0}.vinnie-import:focus-within{outline:2px solid #c9a4ff;outline-offset:4px}.vinnie-tracker footer{border-top:1px solid #29252f}
+@media(max-width:700px){.vinnie-hero{grid-template-columns:1fr;gap:20px}.vinnie-hero img{max-width:440px}.vinnie-nav{padding:12px 16px}.vinnie-nav>a{width:100%;margin-bottom:8px}.vinnie-tuning{margin-left:auto}.vinnie-nav button{padding:10px 12px}.chromatic .prs-days{grid-template-columns:1fr}.vinnie-hero .prs-start{width:100%;max-width:none}}
+
+.vinnie-logo{display:inline-flex;align-items:center;gap:14px;line-height:1;text-transform:uppercase;font-family:Oswald,sans-serif}.vinnie-logo-name{font-size:26px;font-weight:700;letter-spacing:.06em}.vinnie-logo-divider{width:2px;height:30px;background:#eee;flex-shrink:0}.vinnie-logo-tag{font-size:18px;font-weight:400;letter-spacing:.22em}.vinnie-room{display:grid;grid-template-columns:1.15fr 1fr;align-items:center;gap:32px;padding:28px;margin:20px 0 32px;border:1px solid #4a315d;border-radius:18px;background:linear-gradient(120deg,#19121f,#121014)}.vinnie-room-art{display:block;border-radius:10px;overflow:hidden}.vinnie-room-art img{display:block;width:100%;height:auto}.vinnie-room-copy h2{font-family:Oswald,sans-serif;font-size:clamp(26px,2.7vw,36px);line-height:1.2;margin:12px 0 18px}.vinnie-room-copy p{color:#c2b8ca;line-height:1.6}.vinnie-room-copy .vinnie-room-eyebrow{color:#c59bff;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin:0}.vinnie-room-button{display:inline-flex;align-items:center;justify-content:center;gap:16px;min-height:48px;padding:14px 22px;margin-top:8px;border:1px solid #a16bf4;border-radius:10px;background:#7c3aed;color:white;text-decoration:none;font-weight:700}.vinnie-room-button:hover{background:#8b4bef}.vinnie-room-copy .vinnie-room-payment{font-size:13px;color:#c9bfd1;margin:14px 0 0}@media(max-width:760px){.vinnie-room{grid-template-columns:1fr;padding:18px;gap:24px}.vinnie-room-button{width:100%}}
+`, ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -40504,14 +40533,15 @@ var __webpack_exports__ = {};
   !*** ./apps/vinnie/src/main.jsx ***!
   \**********************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../practice-lab/node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom/client */ "../practice-lab/node_modules/react-dom/client.js");
-/* harmony import */ var _ChromaticWorkout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ChromaticWorkout */ "./apps/vinnie/src/ChromaticWorkout.jsx");
-/* harmony import */ var _packages_workouts_engine_shared_assets__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../packages/workouts/engine/shared/assets */ "./packages/workouts/engine/shared/assets.js");
-/* harmony import */ var _chromaticData__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./chromaticData */ "./apps/vinnie/src/chromaticData.js");
-/* harmony import */ var _tracking__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./tracking */ "./apps/vinnie/src/tracking.js");
-/* harmony import */ var _site_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./site.css */ "./apps/vinnie/src/site.css");
+/* harmony import */ var _packages_workouts_engine_workouts_Tuning__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../packages/workouts/engine/workouts/Tuning */ "./packages/workouts/engine/workouts/Tuning.jsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "../practice-lab/node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/client */ "../practice-lab/node_modules/react-dom/client.js");
+/* harmony import */ var _ChromaticWorkout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ChromaticWorkout */ "./apps/vinnie/src/ChromaticWorkout.jsx");
+/* harmony import */ var _packages_workouts_engine_shared_assets__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../packages/workouts/engine/shared/assets */ "./packages/workouts/engine/shared/assets.js");
+/* harmony import */ var _chromaticData__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./chromaticData */ "./apps/vinnie/src/chromaticData.js");
+/* harmony import */ var _tracking__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./tracking */ "./apps/vinnie/src/tracking.js");
+/* harmony import */ var _site_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./site.css */ "./apps/vinnie/src/site.css");
 function _regenerator() { /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/babel/babel/blob/main/packages/babel-helpers/LICENSE */ var e, t, r = "function" == typeof Symbol ? Symbol : {}, n = r.iterator || "@@iterator", o = r.toStringTag || "@@toStringTag"; function i(r, n, o, i) { var c = n && n.prototype instanceof Generator ? n : Generator, u = Object.create(c.prototype); return _regeneratorDefine2(u, "_invoke", function (r, n, o) { var i, c, u, f = 0, p = o || [], y = !1, G = { p: 0, n: 0, v: e, a: d, f: d.bind(e, 4), d: function d(t, r) { return i = t, c = 0, u = e, G.n = r, a; } }; function d(r, n) { for (c = r, u = n, t = 0; !y && f && !o && t < p.length; t++) { var o, i = p[t], d = G.p, l = i[2]; r > 3 ? (o = l === n) && (u = i[(c = i[4]) ? 5 : (c = 3, 3)], i[4] = i[5] = e) : i[0] <= d && ((o = r < 2 && d < i[1]) ? (c = 0, G.v = n, G.n = i[1]) : d < l && (o = r < 3 || i[0] > n || n > l) && (i[4] = r, i[5] = n, G.n = l, c = 0)); } if (o || r > 1) return a; throw y = !0, n; } return function (o, p, l) { if (f > 1) throw TypeError("Generator is already running"); for (y && 1 === p && d(p, l), c = p, u = l; (t = c < 2 ? e : u) || !y;) { i || (c ? c < 3 ? (c > 1 && (G.n = -1), d(c, u)) : G.n = u : G.v = u); try { if (f = 2, i) { if (c || (o = "next"), t = i[o]) { if (!(t = t.call(i, u))) throw TypeError("iterator result is not an object"); if (!t.done) return t; u = t.value, c < 2 && (c = 0); } else 1 === c && (t = i["return"]) && t.call(i), c < 2 && (u = TypeError("The iterator does not provide a '" + o + "' method"), c = 1); i = e; } else if ((t = (y = G.n < 0) ? u : r.call(n, G)) !== a) break; } catch (t) { i = e, c = 1, u = t; } finally { f = 1; } } return { value: t, done: y }; }; }(r, o, i), !0), u; } var a = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} t = Object.getPrototypeOf; var c = [][n] ? t(t([][n]())) : (_regeneratorDefine2(t = {}, n, function () { return this; }), t), u = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(c); function f(e) { return Object.setPrototypeOf ? Object.setPrototypeOf(e, GeneratorFunctionPrototype) : (e.__proto__ = GeneratorFunctionPrototype, _regeneratorDefine2(e, o, "GeneratorFunction")), e.prototype = Object.create(u), e; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, _regeneratorDefine2(u, "constructor", GeneratorFunctionPrototype), _regeneratorDefine2(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = "GeneratorFunction", _regeneratorDefine2(GeneratorFunctionPrototype, o, "GeneratorFunction"), _regeneratorDefine2(u), _regeneratorDefine2(u, o, "Generator"), _regeneratorDefine2(u, n, function () { return this; }), _regeneratorDefine2(u, "toString", function () { return "[object Generator]"; }), (_regenerator = function _regenerator() { return { w: i, m: f }; })(); }
 function _regeneratorDefine2(e, r, n, t) { var i = Object.defineProperty; try { i({}, "", {}); } catch (e) { i = 0; } _regeneratorDefine2 = function _regeneratorDefine(e, r, n, t) { function o(r, n) { _regeneratorDefine2(e, r, function (e) { return this._invoke(r, n, e); }); } r ? i ? i(e, r, { value: n, enumerable: !t, configurable: !t, writable: !t }) : e[r] = n : (o("next", 0), o("throw", 1), o("return", 2)); }, _regeneratorDefine2(e, r, n, t); }
 function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
@@ -40529,34 +40559,39 @@ function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
 
 
 
-(0,_packages_workouts_engine_shared_assets__WEBPACK_IMPORTED_MODULE_3__.configureAssets)('/vinnie');
+
+(0,_packages_workouts_engine_shared_assets__WEBPACK_IMPORTED_MODULE_4__.configureAssets)('/vinnie');
 function App() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('workout'),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
     _useState2 = _slicedToArray(_useState, 2),
-    view = _useState2[0],
-    setView = _useState2[1],
-    _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    busy = _useState2[0],
+    setBusy = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('workout'),
     _useState4 = _slicedToArray(_useState3, 2),
-    version = _useState4[0],
-    setVersion = _useState4[1],
-    _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+    view = _useState4[0],
+    setView = _useState4[1],
+    _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
     _useState6 = _slicedToArray(_useState5, 2),
-    notice = _useState6[0],
-    setNotice = _useState6[1],
-    _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
+    version = _useState6[0],
+    setVersion = _useState6[1],
+    _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(''),
+    _useState8 = _slicedToArray(_useState7, 2),
+    notice = _useState8[0],
+    setNotice = _useState8[1],
+    _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(function () {
       try {
-        return (0,_tracking__WEBPACK_IMPORTED_MODULE_5__.read)();
+        return (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.read)();
       } catch (_unused) {
-        return (0,_tracking__WEBPACK_IMPORTED_MODULE_5__.fresh)();
+        return (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.fresh)();
       }
     }),
-    _useState8 = _slicedToArray(_useState7, 2),
-    state = _useState8[0],
-    setState = _useState8[1];
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    _useState0 = _slicedToArray(_useState9, 2),
+    state = _useState0[0],
+    setState = _useState0[1];
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var update = function update() {
         try {
-          setState((0,_tracking__WEBPACK_IMPORTED_MODULE_5__.read)());
+          setState((0,_tracking__WEBPACK_IMPORTED_MODULE_6__.read)());
         } catch (_unused2) {
           setNotice('Saved progress could not be read. Import a backup to recover it.');
         }
@@ -40572,10 +40607,10 @@ function App() {
       window.removeEventListener('vinnie-save-error', error);
     };
   }, []);
-  var days = (0,_tracking__WEBPACK_IMPORTED_MODULE_5__.completedDays)(state),
-    row = state.days[(0,_tracking__WEBPACK_IMPORTED_MODULE_5__.dateKey)()] || (0,_tracking__WEBPACK_IMPORTED_MODULE_5__.emptyRow)(),
+  var days = (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.completedDays)(state),
+    row = state.days[(0,_tracking__WEBPACK_IMPORTED_MODULE_6__.dateKey)()] || (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.emptyRow)(),
     done = row.filter(function (_, i) {
-      return (0,_tracking__WEBPACK_IMPORTED_MODULE_5__.completedExercise)(row, i);
+      return (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.completedExercise)(row, i);
     }).length;
   function download() {
     var blob = new Blob([JSON.stringify(state, null, 2)], {
@@ -40584,7 +40619,7 @@ function App() {
       url = URL.createObjectURL(blob),
       a = document.createElement('a');
     a.href = url;
-    a.download = "vinnie-progress-".concat((0,_tracking__WEBPACK_IMPORTED_MODULE_5__.dateKey)(), ".json");
+    a.download = "vinnie-progress-".concat((0,_tracking__WEBPACK_IMPORTED_MODULE_6__.dateKey)(), ".json");
     a.click();
     setTimeout(function () {
       return URL.revokeObjectURL(url);
@@ -40613,13 +40648,13 @@ function App() {
             }
             throw Error('Backup is too large.');
           case 2:
-            _t = _tracking__WEBPACK_IMPORTED_MODULE_5__.validate;
+            _t = _tracking__WEBPACK_IMPORTED_MODULE_6__.validate;
             _t2 = JSON;
             _context.n = 3;
             return file.text();
           case 3:
             incoming = _t(_t2.parse.call(_t2, _context.v));
-            (0,_tracking__WEBPACK_IMPORTED_MODULE_5__.write)((0,_tracking__WEBPACK_IMPORTED_MODULE_5__.merge)((0,_tracking__WEBPACK_IMPORTED_MODULE_5__.read)(), incoming));
+            (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.write)((0,_tracking__WEBPACK_IMPORTED_MODULE_6__.merge)((0,_tracking__WEBPACK_IMPORTED_MODULE_6__.read)(), incoming));
             setVersion(function (v) {
               return v + 1;
             });
@@ -40639,50 +40674,62 @@ function App() {
     }));
     return _upload.apply(this, arguments);
   }
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement((react__WEBPACK_IMPORTED_MODULE_1___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("nav", {
     className: "vinnie-nav"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
-    href: "/"
-  }, "JON BJORK / MUSIC"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
+    className: "vinnie-logo",
+    href: "/",
+    "aria-label": "Jon Bjork Music"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
+    className: "vinnie-logo-name"
+  }, "Jon Bjork"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
+    className: "vinnie-logo-divider",
+    "aria-hidden": "true"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
+    className: "vinnie-logo-tag"
+  }, "Music")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
     onClick: function onClick() {
       return setView('workout');
     },
     "aria-pressed": view === 'workout'
-  }, "Workout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, "Workout"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
     onClick: function onClick() {
       return setView('progress');
     },
     "aria-pressed": view === 'progress'
-  }, "My progress \xB7 ", Math.min(30, days.length), " / 30")), view === 'workout' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ChromaticWorkout__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, "My progress \xB7 ", Math.min(30, days.length), " / 30"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    className: "vinnie-tuning"
+  }, !busy && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_packages_workouts_engine_workouts_Tuning__WEBPACK_IMPORTED_MODULE_0__["default"], null))), view === 'workout' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(_ChromaticWorkout__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    onBusyChange: setBusy,
     key: version,
     onBack: function onBack() {
       window.location.href = '/';
     }
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("main", {
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("main", {
     className: "vinnie-tracker"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Your 30-day progress"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Today: ", done, " of ", _chromaticData__WEBPACK_IMPORTED_MODULE_4__.EXERCISES.length, " exercises complete. Complete all twelve to mark a day. Miss a day? Your progress stays here."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h1", null, "Your 30-day progress"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "Today: ", done, " of ", _chromaticData__WEBPACK_IMPORTED_MODULE_5__.EXERCISES.length, " exercises complete. Complete all twelve to mark a day. Miss a day? Your progress stays here."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "vinnie-days"
   }, Array.from({
     length: 30
   }, function (_, i) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
       key: i,
       className: i < days.length ? 'complete' : ''
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("strong", null, "Day ", i + 1, " ", i < days.length ? '✓' : ''), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("small", null, days[i] || 'Not completed yet'));
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("strong", null, "Day ", i + 1, " ", i < days.length ? '✓' : ''), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("small", null, days[i] || 'Not completed yet'));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
     className: "vinnie-milestones"
   }, [[7, 'First week'], [14, 'Two weeks'], [21, 'Three weeks'], [30, '30 days of practice']].map(function (_ref) {
     var _ref2 = _slicedToArray(_ref, 2),
       n = _ref2[0],
       title = _ref2[1];
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
       key: n
     }, days.length >= n ? '✓ ' : '', title, " \xB7 ", Math.min(n, days.length), " / ", n);
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Today\u2019s exercises"), _chromaticData__WEBPACK_IMPORTED_MODULE_4__.EXERCISES.map(function (e, i) {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h2", null, "Today\u2019s exercises"), _chromaticData__WEBPACK_IMPORTED_MODULE_5__.EXERCISES.map(function (e, i) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
       key: e.id
-    }, (0,_tracking__WEBPACK_IMPORTED_MODULE_5__.completedExercise)(row, i) ? '✓ ' : '', e.title, " \xB7 ", row[i].length, " / ", _tracking__WEBPACK_IMPORTED_MODULE_5__.counts[i], " positions");
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("summary", null, "Practice history"), Object.entries(state.days).sort(function (_ref3, _ref4) {
+    }, (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.completedExercise)(row, i) ? '✓ ' : '', e.title, " \xB7 ", row[i].length, " / ", _tracking__WEBPACK_IMPORTED_MODULE_6__.counts[i], " positions");
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("details", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("summary", null, "Practice history"), Object.entries(state.days).sort(function (_ref3, _ref4) {
     var _ref5 = _slicedToArray(_ref3, 1),
       a = _ref5[0];
     var _ref6 = _slicedToArray(_ref4, 1),
@@ -40692,32 +40739,58 @@ function App() {
     var _ref8 = _slicedToArray(_ref7, 2),
       day = _ref8[0],
       r = _ref8[1];
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
       key: day
     }, day, " \xB7 ", r.filter(function (_, i) {
-      return (0,_tracking__WEBPACK_IMPORTED_MODULE_5__.completedExercise)(r, i);
+      return (0,_tracking__WEBPACK_IMPORTED_MODULE_6__.completedExercise)(r, i);
     }).length, " of 12 exercises complete");
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("footer", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("footer", {
     className: "vinnie-tracker"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Keep your progress"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Saved in this browser after each completed position. Export a backup to move devices. Import merges progress without removing completed positions."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, view === 'progress' && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("section", {
+    className: "vinnie-backup"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h2", null, "Keep your progress"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "Saved in this browser after each completed position. Export a backup to move devices. Import merges progress without removing completed positions."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
     onClick: download
-  }, "Export JSON"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+  }, "Export JSON"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("label", {
     className: "vinnie-import"
-  }, "Import JSON", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }, "Import JSON", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("input", {
     type: "file",
     accept: ".json,application/json",
     onChange: upload
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
     role: "status"
-  }, notice), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "More guided practice inside ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+  }, notice), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("section", {
+    className: "vinnie-room",
+    "aria-labelledby": "practice-room-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
+    className: "vinnie-room-art",
+    href: "/practiceroom/?ref=vinnie",
+    "aria-label": "Explore The Practice Room"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("img", {
+    src: "/vinnie/practice-room.jpg",
+    alt: "The Practice Room: guitar courses, structured programs and the Practice Lab",
+    loading: "lazy",
+    width: "1672",
+    height: "941"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", {
+    className: "vinnie-room-copy"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
+    className: "vinnie-room-eyebrow"
+  }, "Keep building your playing"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("h2", {
+    id: "practice-room-title"
+  }, "Take this further inside The Practice Room."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "Guided courses, structured programs and the Practice Lab to help you make the most of your practice."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", null, "All current and future courses, plus every update to the Practice Lab app."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
+    className: "vinnie-room-button",
     href: "/practiceroom/?ref=vinnie"
-  }, "The Practice Room \u2197")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "All current and future courses, plus all updates to the Practice Lab app. One-time payment. No subscription."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+  }, "Explore The Practice Room ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("span", {
+    "aria-hidden": "true"
+  }, "\u2197")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("p", {
+    className: "vinnie-room-payment"
+  }, "One-time payment. Lifetime access. No subscription."))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
     href: "/vinnie/audio/CREDITS.txt"
-  }, "Sound credits"), " \xB7 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+  }, "Sound credits"), " \xB7 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("a", {
     href: "/legal/"
   }, "Privacy & terms")));
 }
-(0,react_dom_client__WEBPACK_IMPORTED_MODULE_1__.createRoot)(document.getElementById('root')).render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(App, null));
+(0,react_dom_client__WEBPACK_IMPORTED_MODULE_2__.createRoot)(document.getElementById('root')).render(/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement(App, null));
 })();
 
 /******/ })()
