@@ -25,7 +25,7 @@ function shapeFor(bar,key,five){
  while(Math.min(...unique.map(n=>n.fret))+shift<1)shift+=12;
  while(Math.max(...unique.map(n=>n.fret))+shift>24)shift-=12;
  const names=sweepKeyLabel((key+offset)%12).split(' / ');
- return {shift,notes:unique.map(n=>({...n,fret:n.fret+shift,midi:[tuning[n.string-1]+n.fret+shift]})),label:`${names[minor?0:1]} · ${inversions[degrees.indexOf(Math.min(...pitches)%12)]}`};
+ return {shift,root:(degrees[0]+key)%12,notes:unique.map(n=>({...n,fret:n.fret+shift,midi:[tuning[n.string-1]+n.fret+shift]})),label:`${names[minor?0:1]} · ${inversions[degrees.indexOf(Math.min(...pitches)%12)]}`};
 }
 export function buildSweep({bpm=80,subdivision=2,key=0,five=false}={}){
  const sections=five?FIVE_SWEEP_SECTIONS:SWEEP_SECTIONS;

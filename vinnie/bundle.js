@@ -596,7 +596,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   ShapeFretboard: () => (/* binding */ ShapeFretboard),
 /* harmony export */   currentRoomShape: () => (/* binding */ currentRoomShape),
-/* harmony export */   "default": () => (/* binding */ CurrentRoomShape)
+/* harmony export */   "default": () => (/* binding */ CurrentRoomShape),
+/* harmony export */   scaleShapeLabel: () => (/* binding */ scaleShapeLabel)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../practice-lab/node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
@@ -607,7 +608,14 @@ function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Sym
 function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 
-
+function scaleShapeLabel(notes, root, keyName) {
+  var intervals = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [0, 2, 3, 5, 7, 8, 10];
+  var lowest = Math.min.apply(Math, _toConsumableArray(notes.flat().map(function (n) {
+    return n.midi[0];
+  })));
+  var degree = intervals.indexOf(((lowest - root) % 12 + 12) % 12) + 1;
+  return "".concat(keyName).concat(degree ? " \xB7 Shape #".concat(degree) : '');
+}
 // The straight run changes shape after 18 notes; the sequence after 30.
 function currentRoomShape(pair, high, noteIndex) {
   var second = noteIndex >= 18 && noteIndex < 36 || noteIndex >= 66 && noteIndex < 96;
@@ -622,8 +630,7 @@ function CurrentRoomShape(_ref) {
     activeNote = _ref.activeNote;
   var shape = currentRoomShape(pair, high, noteIndex),
     notes = shape.flat();
-  var degree = [0, 2, 3, 5, 7, 8, 10].indexOf((notes[0].midi[0] - root + 120) % 12) + 1;
-  var label = "".concat(keyName, " \xB7 Shape #").concat(degree);
+  var label = scaleShapeLabel(notes, root, keyName);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(ShapeFretboard, {
     notes: notes,
     root: root,
@@ -698,6 +705,7 @@ function ShapeFretboard(_ref2) {
       key: "".concat(n.string, "-").concat(n.fret),
       "data-string": n.string,
       "data-fret": n.fret,
+      "data-root": isRoot ? 'true' : undefined,
       "data-active": active ? 'true' : undefined
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("circle", {
       cx: 46 + (n.fret - first) * cell,
@@ -4925,7 +4933,7 @@ function TabView(_ref) {
         previous = null;
         return;
       }
-      if (previous !== null && ['H', 'P'].includes(note.legato) && notes[previous].string === note.string && !note.stroke) {
+      if (previous !== null && ['H', 'P'].includes(note.legato) && notes[previous].string === note.string && !note.stroke && !note.detachedHammer) {
         links.push({
           from: previous,
           to: i,
@@ -6353,7 +6361,7 @@ function importLog(parsed) {
     };
   }
   var idOf = function idOf(s) {
-    return [s.startedAt, s.seconds, s.position, s.startStroke].join("|");
+    return [s.workoutId || "picking", s.startedAt, s.seconds, s.position, s.startStroke, s.mode].join("|");
   };
   var log = readLog();
   var seen = new Set(log.sessions.map(idOf));
@@ -6363,7 +6371,7 @@ function importLog(parsed) {
   try {
     for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
       var s = _step2.value;
-      if (!s || !s.startedAt) continue;
+      if (!s || !s.startedAt || !Number.isFinite(new Date(s.startedAt).getTime()) || !Number.isFinite(Number(s.seconds)) || Number(s.seconds) <= 0) continue;
       var id = idOf(s);
       if (!seen.has(id)) {
         log.sessions.push(s);
