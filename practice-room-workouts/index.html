@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Practice Room Workouts | Jon Bjork Music</title>
+<meta name="description" content="Structured guitar technique workouts that run themselves. Tab under a playhead, metronome, a log of what you covered, and a new workout added every week. $19 a month, 7-day free trial.">
+
+<meta property="og:title" content="The Practice Room Workouts">
+<meta property="og:description" content="Structured guitar technique workouts that run themselves. Press start, play what is on screen, and the app keeps the score.">
+<meta property="og:image" content="https://jonbjorkmusic.com/practice-room-workouts/covers/ultimate-alternate-cover.jpg">
+<meta property="og:url" content="https://jonbjorkmusic.com/practice-room-workouts">
+<meta property="og:type" content="product">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZZW8ZW4P5D"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZZW8ZW4P5D');
+</script>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '407195623608189');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', { content_name: 'The Practice Room Workouts' });
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=407195623608189&ev=PageView&noscript=1"/></noscript>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0d0d; --card:#181818; --card2:#1f1f1f; --border:#2a2a2a;
+  --white:#fff; --off:#e8e8e8; --muted:#b4b4b4; --dim:#8c8c8c;
+  --purple:#7c3aed; --purple-lt:#9d5ff5;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+@media (min-width:900px){html{font-size:17.5px}}
+body{background:var(--bg);color:var(--white);font-family:'Lato',sans-serif;font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+.eyebrow{font-family:'Oswald',sans-serif;font-weight:400;font-size:.82rem;letter-spacing:.28em;text-transform:uppercase;color:var(--purple-lt);display:block;margin-bottom:14px}
+h1{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(2.1rem,5.2vw,3.4rem);line-height:1.03;letter-spacing:.02em;text-transform:uppercase}
+h2{font-family:'Oswald',sans-serif;font-weight:600;font-size:clamp(1.4rem,3vw,1.9rem);line-height:1.1;letter-spacing:.03em;text-transform:uppercase;margin-bottom:16px}
+h3{font-family:'Oswald',sans-serif;font-weight:600;font-size:1.02rem;letter-spacing:.1em;text-transform:uppercase;color:var(--off);margin-bottom:8px}
+p{margin-bottom:16px;color:var(--muted)}
+p.lead{font-size:1.15rem;color:var(--off)}
+strong{color:var(--white);font-weight:400}
+
+/* top bar */
+.bar{border-bottom:1px solid var(--border);padding:18px 0}
+.bar .wrap{display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.bar .b{font-family:'Oswald',sans-serif;font-size:1.05rem;letter-spacing:.04em;text-decoration:none;color:var(--white);transition:.15s}
+.bar .b:hover{color:var(--purple-lt)}
+.bar .b b{font-weight:700}
+.bar .b span{color:var(--dim);font-weight:400;font-size:.82rem;letter-spacing:.16em;margin-left:8px}
+.bar .t{font-family:'Oswald',sans-serif;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple-lt)}
+
+section{padding:64px 0}
+section.tight{padding:44px 0}
+.hr{border:0;border-top:1px solid var(--border)}
+
+/* hero */
+.hero{padding-top:56px}
+.hero .shot{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:40px;position:relative;background:#000}
+.hero .shot iframe{display:block;width:100%;aspect-ratio:16/9;border:0}
+.play{display:block;width:100%;padding:0;border:0;background:none;cursor:pointer;position:relative}
+.play img{transition:.25s;width:100%}
+.play:hover img{opacity:.72}
+.pbtn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:78px;height:78px;border-radius:50%;background:var(--purple);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 10px 40px rgba(124,58,237,.45);transition:.2s}
+.play:hover .pbtn{background:var(--purple-lt);transform:translate(-50%,-50%) scale(1.06)}
+.plabel{position:absolute;right:18px;top:16px;font-family:'Oswald',sans-serif;
+  font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--off);
+  background:rgba(13,13,13,.72);padding:7px 13px;border-radius:6px}
+@media (max-width:560px){.pbtn{width:60px;height:60px}}
+.hero h1{margin-bottom:18px}
+.hero .sub{font-size:1.2rem;color:var(--off);max-width:720px;margin-bottom:28px}
+
+/* buy block */
+.buy{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.btn{background:var(--purple);color:#fff;border:0;border-radius:8px;padding:17px 34px;
+  font-family:'Oswald',sans-serif;font-size:1.02rem;letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;text-decoration:none;display:inline-block;transition:.15s}
+.btn:hover{background:var(--purple-lt)}
+.btn.ghost{background:none;border:1px solid var(--border);color:var(--off)}
+.btn.ghost:hover{border-color:var(--purple-lt);color:var(--white);background:none}
+.price{font-family:'Oswald',sans-serif;font-size:2rem;font-weight:600;line-height:1}
+.price em{font-style:normal;font-size:.78rem;color:var(--dim);letter-spacing:.14em;text-transform:uppercase;margin-left:8px}
+.buynote{color:var(--dim);font-size:.94rem;margin-top:14px}
+
+/* grids */
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:26px 26px 28px}
+.card .n{font-family:'Oswald',sans-serif;font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple-lt);margin-bottom:12px}
+.card p{margin-bottom:0;font-size:.98rem}
+
+/* library */
+.lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-top:30px}
+.wk{background:var(--card);border:1px solid var(--border);border-radius:11px;overflow:hidden;display:flex;flex-direction:column}
+.wk img{width:100%;aspect-ratio:16/9;object-fit:cover;border-bottom:1px solid var(--border)}
+.wk .in{padding:18px 20px 20px}
+.wk .n{font-family:'Oswald',sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple-lt);margin-bottom:6px}
+.wk h3{margin-bottom:8px;font-size:1rem}
+.wk p{font-size:.94rem;margin:0}
+.wk.next{border-style:dashed;justify-content:center;align-items:flex-start;padding:26px 24px}
+.wk.next .n{color:var(--dim)}
+
+/* bullet list */
+ul.pts{list-style:none;margin:6px 0 0}
+ul.pts li{position:relative;padding-left:26px;margin-bottom:14px;color:var(--muted)}
+ul.pts li:before{content:"";position:absolute;left:0;top:.62em;width:9px;height:9px;background:var(--purple);border-radius:2px}
+ul.pts li b{color:var(--white);font-weight:400}
+
+/* facts strip */
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:11px;overflow:hidden}
+.facts div{background:var(--card);padding:22px 22px 24px}
+.facts b{display:block;font-family:'Oswald',sans-serif;font-size:1.9rem;font-weight:600;line-height:1.1;margin-bottom:2px}
+.facts span{font-family:'Oswald',sans-serif;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
+
+/* pricing */
+.plan{background:var(--card);border:1px solid var(--purple);border-radius:14px;padding:38px 36px;max-width:640px;margin:0 auto;text-align:center}
+.plan .big{font-family:'Oswald',sans-serif;font-size:3.4rem;font-weight:700;line-height:1;margin:6px 0 2px}
+.plan .big em{font-style:normal;font-size:1rem;color:var(--dim);letter-spacing:.14em;text-transform:uppercase;font-weight:400;margin-left:6px}
+.plan ul{list-style:none;text-align:left;margin:26px auto 30px;max-width:420px}
+.plan li{position:relative;padding-left:26px;margin-bottom:10px;color:var(--off)}
+.plan li:before{content:"";position:absolute;left:0;top:.62em;width:9px;height:9px;background:var(--purple);border-radius:2px}
+
+.members{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--purple);
+  border-radius:11px;padding:26px 28px}
+.members .n{font-family:'Oswald',sans-serif;font-size:.78rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--purple-lt);margin-bottom:10px}
+.members p{font-size:.99rem}
+.members a{color:var(--purple-lt)}
+
+/* faq */
+.faq{max-width:760px}
+.faq details{border-top:1px solid var(--border);padding:16px 0}
+.faq details:last-child{border-bottom:1px solid var(--border)}
+.faq summary{cursor:pointer;font-family:'Oswald',sans-serif;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;color:var(--off);list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";color:var(--purple-lt);font-weight:400}
+.faq details[open] summary:after{content:"\2013"}
+.faq details p{margin:12px 0 0;font-size:.98rem}
+
+footer{border-top:1px solid var(--border);padding:34px 0 60px;color:var(--dim);font-size:.9rem}
+.fnav{display:flex;flex-wrap:wrap;gap:22px;margin-bottom:16px}
+.fnav a{color:var(--muted);text-decoration:none}
+.fnav a:hover{color:var(--white)}
+.fcopy{color:var(--dim);font-size:.86rem}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="wrap">
+    <a class="b" href="https://www.jonbjorkmusic.com/"><b>JON BJORK</b><span>MUSIC</span></a>
+    <div class="t">Level up your playing</div>
+  </div>
+</div>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="shot" id="demo">
+      <button class="play" id="playBtn" aria-label="Play the demo">
+        <img src="covers/ultimate-alternate-cover.jpg" alt="The Practice Room Workouts, running in the app">
+        <span class="pbtn"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg></span>
+        <span class="plabel">Watch the demo</span>
+      </button>
+    </div>
+    <span class="eyebrow">The app that runs your technique practice</span>
+    <h1>The Practice Room<br>Workouts.</h1>
+    <p class="sub">Alternate picking, legato and sweep picking workouts that run themselves. Press start, play what is on screen, and the app keeps the score. A new workout added every week.</p>
+    <div class="buy">
+      <a class="btn" href="LEMON_SQUEEZY_CHECKOUT_URL">Start your free week</a>
+      <div class="price">$19<em>a month</em></div>
+    </div>
+    <p class="buynote">7 days free, then $19 a month. Cancel in one click. The price you join at is the price you keep.</p>
+  </div>
+</section>
+
+<hr class="hr">
+
+<section>
+  <div class="wrap">
+    <h2>The hard part of technique practice is not the playing.</h2>
+    <p class="lead">It is everything around it. Which exercise, which position, which key, which starting stroke, how long, and did I already do this one on Tuesday. That is the stuff that stops you before you have played a note.</p>
+    <p>So the app holds it for you. Choose a workout, press start, and the tab moves under a playhead in time with the metronome. It runs the whole thing in order, flips the picking direction when it is time, moves you through the positions, and writes down what you covered. Your only job is to play it cleanly.</p>
+    <div class="facts" style="margin-top:34px">
+      <div><b>7</b><span>Workouts at launch</span></div>
+      <div><b>+1</b><span>Every week</span></div>
+      <div><b>3</b><span>Techniques</span></div>
+      <div><b>0</b><span>Decisions to make</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<section>
+  <div class="wrap">
+    <h2>What is in there now.</h2>
+    <p class="lead" style="max-width:760px">Every workout comes from something I actually teach: my courses, the Guitar Gym, and the weekly Practice Room Sessions. Nothing here was written to fill a library.</p>
+    <div class="lib">
+      <div class="wk">
+        <img src="covers/ultimate-alternate-cover.jpg" alt="The Ultimate Alternate Picking Workout">
+        <div class="in">
+          <div class="n">Alternate picking</div>
+          <h3>The Ultimate Alternate Picking Workout</h3>
+          <p>Every left-hand fingering and the three most common string crossings, in five positions, from either starting stroke. 33 exercises as one unbroken pass.</p>
+        </div>
+      </div>
+      <div class="wk">
+        <img src="covers/ultimate-legato-cover.jpg" alt="The Legato Workout">
+        <div class="in">
+          <div class="n">Legato</div>
+          <h3>The Legato Workout</h3>
+          <p>Two, three and four finger combinations across the strings. Run it as normal legato or as all hammers, in five positions each.</p>
+        </div>
+      </div>
+      <div class="wk">
+        <img src="covers/classic-shred-sequence-cover.jpg" alt="Classic Alternate Picked Shred Sequence">
+        <div class="in">
+          <div class="n">Practice Room Sessions</div>
+          <h3>Classic Alternate Picked Shred Sequence</h3>
+          <p>Five days, five minor keys. Scale runs and the sixes sequence through ten pairs of three-note-per-string shapes, in triplets and sixteenths, both picking directions.</p>
+        </div>
+      </div>
+      <div class="wk">
+        <img src="covers/chops-builder-3nps.jpg" alt="3-Notes-Per-String Alternate Picking Workout #1">
+        <div class="in">
+          <div class="n">Chops Builders</div>
+          <h3>3-Notes-Per-String Alternate Picking Workout #1</h3>
+          <p>Eleven sequences through the three-note-per-string shapes, in all twelve keys, with the starting stroke alternating as you move through the positions.</p>
+        </div>
+      </div>
+      <div class="wk">
+        <img src="covers/chops-builder-legato.jpg" alt="Legato Workout #1">
+        <div class="in">
+          <div class="n">Chops Builders</div>
+          <h3>Legato Workout #1</h3>
+          <p>Thirteen sequences of hammer-ons and pull-offs, loops, groups of four and shape connections, in all twelve keys. Pick only when you change strings and keep every note the same volume.</p>
+        </div>
+      </div>
+      <div class="wk">
+        <img src="covers/chops-builder-sweep.jpg" alt="3-String Sweep Picking Workout #1">
+        <div class="in">
+          <div class="n">Chops Builders</div>
+          <h3>3-String Sweep Picking Workout #1</h3>
+          <p>56 one-minute exercises on three-string arpeggio shapes in A minor and E major, with the pick strokes written in, so the sweep is the sweep and the pull-off is the pull-off, every time.</p>
+        </div>
+      </div>
+      <div class="wk">
+        <img src="covers/chops-builder-sweep-five.jpg" alt="5-String Sweep Picking Workout #1">
+        <div class="in">
+          <div class="n">Chops Builders</div>
+          <h3>5-String Sweep Picking Workout #1</h3>
+          <p>Fourteen exercises on the full five-string shapes, in all twelve keys, with every pick stroke written in.</p>
+        </div>
+      </div>
+      <div class="wk next">
+        <div class="n">Next week</div>
+        <h3>A new one lands here.</h3>
+        <p>A new Practice Room Session every week, plus workouts from the Guitar Gym and my courses as I move them into the app. New additions show up at the top of your home screen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<section>
+  <div class="wrap">
+    <h2>What the app does while you play.</h2>
+    <ul class="pts">
+      <li><b>Tab under a playhead.</b> The notes light up as they come. You never lose your place, and you never have to look away from the screen to check what is next.</li>
+      <li><b>A metronome that knows the routine.</b> Count-in, subdivisions, and the tempo you set. Change it between passes without stopping to think about it.</li>
+      <li><b>Hear it before you play it.</b> Every workout plays back on a clean electric, a nylon string, a grand piano or a harpsichord, at whatever tempo you are at. Turn it down or off once you have it.</li>
+      <li><b>Focus on one sequence.</b> Run the full workout, or pick the one sequence that is giving you trouble and take it through every position on its own. The app ticks it off when you have done it in every position in that key.</li>
+      <li><b>Rate what you played.</b> After a pass, mark the patterns as needs work, getting there, or comfortable, at the tempo you played them. Next session, you know exactly where to start.</li>
+      <li><b>Every key, every position, in order.</b> Twelve keys, five positions, both starting strokes, depending on the workout. The app moves you through them so you cover the neck instead of the two spots you like.</li>
+      <li><b>A log that fills itself in.</b> Every session goes into your calendar with the workout, the tempo, the key or position and the time. The coverage view shows which positions and starting strokes you have actually done, so you stop repeating the comfortable one.</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="hr">
+
+<section>
+  <div class="wrap">
+    <h2>Slow, on purpose.</h2>
+    <div class="g2">
+      <div>
+        <p>These exercises sound like nothing. That is the most useful thing about them.</p>
+        <p>When you practise a lick you have heard at full speed, you push toward that speed without deciding to. There is nothing to chase here, so you are free to play it as slowly as it takes to play it properly, which is the only thing that makes practice work.</p>
+        <p>Start at 50 BPM. I do most of this at 60 to 80. The whole point is getting everything perfect, and that is what gives you technique you can actually use in music.</p>
+        <p>I have been teaching this way since 2001, and I studied it at GIT before that. The app is the version of it I would have wanted at 20: it does the admin so I can do the playing.</p>
+      </div>
+      <div class="card">
+        <div class="n">RAT</div>
+        <h3>Relaxed, accurate, tone</h3>
+        <p style="margin-bottom:12px"><strong>Relaxed.</strong> Feel tension anywhere and you stop, shake it out, and start again.</p>
+        <p style="margin-bottom:12px"><strong>Accurate.</strong> Every note clean. No flams where the fingers are not connecting properly.</p>
+        <p><strong>Tone.</strong> Play with the sound you actually want, even on something this unmusical.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<section id="price">
+  <div class="wrap">
+    <div class="plan">
+      <span class="eyebrow">Launch price</span>
+      <div class="big">$19<em>a month</em></div>
+      <p style="color:var(--dim);font-size:.94rem">First 7 days free</p>
+      <ul>
+        <li>Every workout in the library, and every one I add</li>
+        <li>A new Practice Room Session each week</li>
+        <li>Your log, calendar, ratings and coverage</li>
+        <li>Works on up to three devices</li>
+        <li>Cancel any time, in one click, no email needed</li>
+        <li>The price you join at never goes up for you</li>
+      </ul>
+      <a class="btn" href="LEMON_SQUEEZY_CHECKOUT_URL">Start your free week</a>
+      <p class="buynote">You will not be charged until day 8. Cancel before that and you pay nothing.</p>
+      <p class="buynote" style="margin-top:6px">The price will go up as the library grows. Whatever you pay when you join is what you keep paying, for as long as you stay.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<section class="tight">
+  <div class="wrap">
+    <h2>Details.</h2>
+    <div class="g3">
+      <div class="card">
+        <div class="n">Access</div>
+        <p>You get a licence key by email. Paste it in once and the app remembers you. Works on up to three devices.</p>
+      </div>
+      <div class="card">
+        <div class="n">Where it runs</div>
+        <p>In your browser, nothing to install. Made for a laptop or a tablet on a stand, since you need to read tab while you play. On an iPad, add it to your home screen and it behaves like an app.</p>
+      </div>
+      <div class="card">
+        <div class="n">Your progress</div>
+        <p>Kept on your device, not on my server. There is no account and nothing about you is stored anywhere. Export a small backup file whenever you like. Import it on another device and it merges with what is there, so you can practise on two devices and still have one history.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<section class="tight">
+  <div class="wrap">
+    <div class="members">
+      <div class="n">Want the whole thing?</div>
+      <p>This app is one part of The Practice Room. Members get it inside their Practice Lab, along with all of my courses, the full Sessions archive and the community, for a one-time price. If you like how the workouts feel, <a href="https://www.jonbjorkmusic.com/practiceroom/?ref=prw">that is where the rest of it lives</a>.</p>
+      <p style="margin-bottom:0">Already a member of The Practice Room or Practice Room Pro? You have this. Open your Practice Lab and it is under Workouts.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<section>
+  <div class="wrap">
+    <h2>Questions.</h2>
+    <div class="faq">
+      <details>
+        <summary>What happens after the free week?</summary>
+        <p>On day 8 you are charged $19, and then $19 a month after that. Cancel any time from the link in your receipt email and it stops at the end of the month you have paid for. Cancel during the free week and you are never charged.</p>
+      </details>
+      <details>
+        <summary>Is this the same as the $29 picking workout?</summary>
+        <p>That routine is in here, and so is everything else. The $29 product is one workout, yours to keep. This is the whole library plus everything I add to it. If you already bought the picking workout, keep it. Nothing changes there.</p>
+      </details>
+      <details>
+        <summary>Does it work on my phone?</summary>
+        <p>It runs, but the tab is small. A laptop or a tablet on a music stand is what it is built for.</p>
+      </details>
+      <details>
+        <summary>What level is this for?</summary>
+        <p>You should be able to read tab and play at a slow, steady tempo with a metronome. If you can do that, every workout in here starts slow enough to be useful. If you are already fast and want to get clean, this is the same tool.</p>
+      </details>
+      <details>
+        <summary>What if I switch computers?</summary>
+        <p>Paste your licence key into the new one. Export your progress from the old one, import it on the new one, and it carries on from where you were.</p>
+      </details>
+      <details>
+        <summary>Do I need an account?</summary>
+        <p>No. Your licence key is the whole login, and your progress lives on your own device. I never see it.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<hr class="hr">
+
+<section>
+  <div class="wrap" style="text-align:center">
+    <span class="eyebrow">7 days free</span>
+    <h2 style="margin-bottom:18px">It is all about getting<br>the practice done.</h2>
+    <p style="max-width:620px;margin:0 auto 26px">Playing along with something like this is more fun than trying to do a routine on your own, and it is much easier to sit down and get it done. You start, and you get through it. Then next week there is a new one.</p>
+    <div class="buy" style="justify-content:center">
+      <a class="btn" href="LEMON_SQUEEZY_CHECKOUT_URL">Start your free week</a>
+    </div>
+    <p class="buynote">Questions before you try it? Email me at <a href="mailto:jon@jonbjorkmusic.com" style="color:var(--purple-lt)">jon@jonbjorkmusic.com</a>.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <nav class="fnav">
+      <a href="https://www.jonbjorkmusic.com/">Home</a>
+      <a href="https://www.jonbjorkmusic.com/practiceroom/?ref=prw">The Practice Room</a>
+      <a href="https://www.jonbjorkmusic.com/start?ref=prw">Start Here</a>
+      <a href="https://www.jonbjorkmusic.com/contact">Contact</a>
+      <a href="https://www.jonbjorkmusic.com/legal">Legal</a>
+    </nav>
+    <div class="fcopy">&copy; 2026 Jon Bjork Music</div>
+  </div>
+</footer>
+
+<script>
+// Click to play, so the page stays light and the cover art is what people see
+// first. Nothing loads from YouTube until someone actually asks for the demo.
+// Replace DEMO_VIDEO_ID with the YouTube id of the demo once it is recorded.
+document.getElementById("playBtn").addEventListener("click", function () {
+  var f = document.createElement("iframe");
+  f.src = "https://www.youtube-nocookie.com/embed/DEMO_VIDEO_ID?autoplay=1&rel=0";
+  f.title = "The Practice Room Workouts demo";
+  f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+  f.allowFullscreen = true;
+  var shot = document.getElementById("demo");
+  shot.innerHTML = "";
+  shot.appendChild(f);
+});
+</script>
+
+</body>
+</html>
