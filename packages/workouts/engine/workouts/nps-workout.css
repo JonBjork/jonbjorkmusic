@@ -4,3 +4,5 @@
 .nps-workout .cp-step-buttons{display:flex;gap:8px}
 .nps-workout .cp-step-buttons button{width:44px;height:44px;padding:0;font:24px Lato,sans-serif;line-height:1;display:grid;place-items:center}
 .nps-workout aside label{margin:16px 0}
+
+.nps-focus{margin-bottom:24px}.nps-mode{display:flex;gap:8px;flex-wrap:wrap}.nps-focus button[aria-pressed=true]{background:#412667;border-color:#c197ff}.nps-focus-heading{display:flex;justify-content:space-between;gap:12px;margin:20px 0 12px}.nps-focus-heading span{color:#b8a5cc;font-size:14px}.nps-sequences{display:flex;flex-wrap:wrap;gap:8px}.nps-sequences button{min-width:48px;min-height:44px;padding:10px}.nps-sequences button span{color:#bcf0cb}.nps-focus p{font-size:14px;line-height:1.6}

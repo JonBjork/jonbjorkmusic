@@ -209,3 +209,19 @@ test('five-string final exercises run for five minutes with the correct default 
  await act(async()=>jest.advanceTimersByTime(1));expect(options).toHaveLength(2);expect(options[1].countInBeats).toBe(2);
  act(()=>button('Pause').click());act(()=>root.unmount());jest.useRealTimers();
 });
+test('focus selector shows one sequence per position and starts the chosen sequence',async()=>{
+ localStorage.clear();const calls=[];
+ createMetronomeEngine.mockReturnValue({start:jest.fn(async o=>calls.push(o)),stop:jest.fn(),setVolume:jest.fn(),setAudibleSubdivision:jest.fn()});
+ const host=document.createElement('div');document.body.appendChild(host);const root=createRoot(host);
+ act(()=>root.render(<NpsWorkout onBack={()=>{}}/>));
+ const button=text=>[...host.querySelectorAll('button')].find(b=>b.textContent===text);
+ act(()=>button('Focus on one sequence').click());
+ expect(host.querySelectorAll('.nps-sequences button')).toHaveLength(11);
+ act(()=>host.querySelector('[aria-label="Sequence 4"]').click());
+ expect(host.textContent).toContain('Exercise #4 · Position 1');
+ expect(host.textContent).toContain('0 of 11 completed');
+ await act(async()=>button('Start practicing ▶').click());
+ expect(calls[0].countInBeats).toBe(4);
+ act(()=>button('Pause').click());
+ act(()=>root.unmount());host.remove();
+});
