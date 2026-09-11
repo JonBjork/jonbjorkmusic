@@ -6,3 +6,5 @@
 .nps-workout aside label{margin:16px 0}
 
 .nps-focus{margin-bottom:24px}.nps-mode{display:flex;gap:8px;flex-wrap:wrap}.nps-focus button[aria-pressed=true]{background:#412667;border-color:#c197ff}.nps-focus-heading{display:flex;justify-content:space-between;gap:12px;margin:20px 0 12px}.nps-focus-heading span{color:#b8a5cc;font-size:14px}.nps-sequences{display:flex;flex-wrap:wrap;gap:8px}.nps-sequences button{min-width:48px;min-height:44px;padding:10px}.nps-sequences button span{color:#bcf0cb}.nps-focus p{font-size:14px;line-height:1.6}
+
+.nps-live-bar{position:sticky;top:12px;z-index:25;display:flex;align-items:center;gap:24px;margin:18px 0;padding:12px 18px;background:#20172c;border:1px solid #75518f;border-radius:10px;box-shadow:0 6px 20px #0008}.nps-live-bar>div:first-child{flex:1}.nps-live-bar span{display:block;color:#c6b7d3;font-size:13px}.nps-live-time strong{font:28px Oswald,sans-serif;font-variant-numeric:tabular-nums}.nps-live-bar button{border-color:#aa7edd}.nps-live-time{min-width:100px}@media(max-width:600px){.nps-live-bar{top:4px;gap:10px;padding:10px}.nps-live-time{min-width:80px}}
