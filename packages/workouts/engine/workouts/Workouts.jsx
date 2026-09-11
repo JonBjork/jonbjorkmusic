@@ -1,3 +1,4 @@
+import FingerLegatoWorkout from './FingerLegatoWorkout';
 import {catalog} from '../../routines/catalog';
 import NpsWorkout from './NpsWorkout';
 import Tuning from './Tuning';
@@ -589,6 +590,7 @@ function WorkoutLibrary({ onBack }) {
   const nextEx = exercises[((flat[cursor] || {}).ei || 0) + 1];
 
 
+  if (collection === "finger-legato" && screen === "list") return <FingerLegatoWorkout onBack={()=>setCollection(null)}/>;
   if (collection === "chops-legato-1" && screen === "list") return <NpsWorkout legato onBack={()=>setCollection("chops-builders")}/>;
   if (collection === "chops-sweep-3string-1" && screen === "list") return <NpsWorkout sweep onBack={()=>setCollection("chops-builders")}/>;
   if (collection === "chops-sweep-5string-1" && screen === "list") return <NpsWorkout sweep five onBack={()=>setCollection("chops-builders")}/>;
@@ -667,6 +669,7 @@ function WorkoutLibrary({ onBack }) {
                   <div style={{color:C.muted,fontSize:"1rem",lineHeight:1.55}}>Open the sessions collection.</div>
                 </div>
               </button>}
+              {!collection && <button onClick={()=>setCollection("finger-legato")} style={{...panel,textAlign:"left",cursor:"pointer",color:C.white}}><div style={{fontSize:36,color:C.purpleLt,letterSpacing:6}}>1 · 2 · 3 · 4</div><h2 style={{fontFamily:"Oswald"}}>The Legato Workout ↗</h2><p>Two, three and four fingers. Normal Legato or All Hammers.</p><span style={{color:C.purpleLt}}>Choose your combinations and position</span></button>}
               {!collection && <button onClick={()=>setCollection("chops-builders")} aria-label="Open The Practice Room Chops Builders" style={{...panel,marginBottom:0,textAlign:"left",cursor:"pointer",color:C.white,display:"block",width:"100%",padding:0,overflow:"hidden"}}>
                 <img src="/workouts/chops-builders.png" alt="The Practice Room Chops Builders" style={{display:"block",width:"100%",height:"auto"}}/>
                 <div style={{padding:"22px 24px"}}><h2 style={{fontFamily:"Oswald",textTransform:"uppercase"}}>The Practice Room Chops Builders ↗</h2><p style={{color:C.muted}}>Open the workouts collection.</p></div>

@@ -129,7 +129,7 @@ export default function TabView({ notes, cursor, tuning = STANDARD, notesPerBeat
       if(note.hold)return;
       if(note.rest){previous=null;return;}
       if(previous!==null && ['H','P'].includes(note.legato) &&
-        notes[previous].string===note.string && !note.stroke){
+        notes[previous].string===note.string && !note.stroke && !note.detachedHammer){
         links.push({from:previous,to:i,string:note.string,kind:note.legato});
       }
       previous=i;

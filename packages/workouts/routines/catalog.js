@@ -1,5 +1,6 @@
 // The standalone launch library. Practice Lab retains its other workouts.
 export const catalog=[
+ {id:'finger-legato',title:'The Legato Workout',category:'Legato',addedAt:'2026-09-11'},
  {id:'chops-sweep-5string-1',cover:'/workouts/chops-builder-sweep-five.png',collection:'chops-builders',title:'5-String Sweep Picking Workout #1',category:'Sweep picking',addedAt:'2026-09-10'},
  {id:'chops-sweep-3string-1',cover:'/workouts/chops-builder-sweep.png',collection:'chops-builders',title:'3-String Sweep Picking Workout #1',category:'Sweep picking',addedAt:'2026-09-10'},
  {id:'chops-legato-1',cover:'/workouts/chops-builder-legato.png',collection:'chops-builders',title:'Legato Workout #1',category:'Legato',addedAt:'2026-09-10'},

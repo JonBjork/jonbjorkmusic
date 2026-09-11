@@ -1,0 +1,7 @@
+.finger-legato .fl-settings{border:0;padding:0;margin:0 0 20px}.fl-groups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.fl-groups button{padding:18px 12px;text-align:left}.fl-groups strong,.fl-groups span{display:block}.fl-groups span{margin-top:5px;font-size:14px;color:#bcb1cb}.fl-groups button[aria-pressed="true"]{border-color:#a46cff;background:#281c3d}.fl-groups button:disabled{opacity:1}.finger-legato details{border-top:1px solid #38313f;padding:18px 0}.finger-legato summary{cursor:pointer;color:#c7a3ff}.finger-legato button:focus-visible,.finger-legato select:focus-visible{outline:2px solid #c7a3ff;outline-offset:3px}@media(max-width:550px){.fl-groups{grid-template-columns:1fr}}
+.finger-legato .cp-deliberate-number{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:12px;margin:18px 0}
+.finger-legato .cp-deliberate-number .cp-number{display:flex;flex-direction:column;align-items:stretch;gap:8px;margin:0;font:14px Lato,sans-serif}
+.finger-legato .cp-number input{width:100%;min-width:0;height:44px;padding:8px 12px;background:#201a28;border:1px solid #594071;border-radius:6px;color:#eee;font:20px Lato,sans-serif;text-align:center;box-sizing:border-box}
+.finger-legato .cp-step-buttons{display:flex;gap:8px}
+.finger-legato .cp-step-buttons button{width:44px;height:44px;padding:0;font:24px Lato,sans-serif;line-height:1;display:grid;place-items:center}
+.finger-legato aside label{margin:16px 0}
