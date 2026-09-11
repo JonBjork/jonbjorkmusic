@@ -43,7 +43,7 @@ const TUPLET = { 3: true, 5: true, 6: true, 7: true };
 const COL_W = 38, PAD_L = 48, PAD_R = 26, ROW_H = 25, TOP_PAD = 46;
 const STEM_LEN = 22, BEAM_GAP = 4.5, BEAM_AREA = 44;
 
-export default function TabView({ notes, cursor, tuning = STANDARD, notesPerBeat, resolution = 1, beatOffset = 0, continuous = false, previewCursor = 0 }) {
+export default function TabView({ notes, cursor, tuning = STANDARD, notesPerBeat, resolution = 1, beatOffset = 0, continuous = false, previewCursor = null }) {
   const wrapRef = useRef(null);
   const [viewport,setViewport]=useState({left:0,width:1000});
 
@@ -73,7 +73,7 @@ export default function TabView({ notes, cursor, tuning = STANDARD, notesPerBeat
   // the click at faster tempos.
   useLayoutEffect(() => {
     const wrap = wrapRef.current;
-    if (!wrap) return;
+    if (!wrap || ((cursor == null || cursor < 0) && previewCursor == null)) return;
     const target=cursor!=null&&cursor>=0?cursor:previewCursor;
     const x = offsets[onsets[target] || 0]+COL_W/2;
     wrap.scrollLeft = Math.max(0, x - wrap.clientWidth * (continuous ? 0.25 : 0.5));

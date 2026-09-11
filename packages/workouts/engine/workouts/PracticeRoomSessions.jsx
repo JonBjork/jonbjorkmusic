@@ -98,7 +98,7 @@ export function RoomPlayer({day,onBack}){
  const [previewPhase,setPreviewPhase]=useState('Scale run');
  const shown=playing?phase:previewPhase;
  const offset=shown==='Scale run'?0:shown==='Picking sequence'?36:96;
- const shownNotes=shown==='Scale run'?passage.notes.slice(0,36):shown==='Picking sequence'?passage.notes.slice(36,96):passage.notes.slice(96);
+ const shownNotes=useMemo(()=>shown==='Scale run'?passage.notes.slice(0,36):shown==='Picking sequence'?passage.notes.slice(36,96):passage.notes.slice(96),[shown,passage.notes]);
  return <>
  <button className="prs-back" onClick={onBack}>← All five days</button><div className="prs-eyebrow">DAY {day.day} · {day.key.toUpperCase()}</div>
  <h1>Classic Picking Sequence</h1><p>Scale run → picking sequence → held landing. Ten positions, both directions.</p>

@@ -962,7 +962,7 @@ function TabView(_ref) {
     _ref$continuous = _ref.continuous,
     continuous = _ref$continuous === void 0 ? false : _ref$continuous,
     _ref$previewCursor = _ref.previewCursor,
-    previewCursor = _ref$previewCursor === void 0 ? 0 : _ref$previewCursor;
+    previewCursor = _ref$previewCursor === void 0 ? null : _ref$previewCursor;
   var wrapRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       left: 0,
@@ -1023,7 +1023,7 @@ function TabView(_ref) {
   // the click at faster tempos.
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(function () {
     var wrap = wrapRef.current;
-    if (!wrap) return;
+    if (!wrap || (cursor == null || cursor < 0) && previewCursor == null) return;
     var target = cursor != null && cursor >= 0 ? cursor : previewCursor;
     var x = offsets[onsets[target] || 0] + COL_W / 2;
     wrap.scrollLeft = Math.max(0, x - wrap.clientWidth * (continuous ? 0.25 : 0.5));
@@ -4736,7 +4736,9 @@ function TabView(_ref) {
     _ref$beatOffset = _ref.beatOffset,
     beatOffset = _ref$beatOffset === void 0 ? 0 : _ref$beatOffset,
     _ref$continuous = _ref.continuous,
-    continuous = _ref$continuous === void 0 ? false : _ref$continuous;
+    continuous = _ref$continuous === void 0 ? false : _ref$continuous,
+    _ref$previewCursor = _ref.previewCursor,
+    previewCursor = _ref$previewCursor === void 0 ? null : _ref$previewCursor;
   var wrapRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(null);
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
       left: 0,
@@ -4751,24 +4753,34 @@ function TabView(_ref) {
   var beaming = Number.isInteger(notesPerBeat) && notesPerBeat >= 1;
   // Timing ticks can be finer than sixteenths (triplets). Give every
   // sounded note room, while interpolating hold ticks within that note.
-  var offsets = [],
-    onsets = [],
-    widths = [];
-  var position = PAD_L,
-    current = 0;
-  for (var i = 0; i < n;) {
-    var col = notes[i],
-      length = col.landing ? 1 : Math.max(1, col.len || 1);
-    var span = Math.max(COL_W, COL_W * length / resolution);
-    for (var k = 0; k < length && i + k < n; k++) {
-      offsets[i + k] = position + span * k / length;
-      onsets[i + k] = i;
-      widths[i + k] = span;
-    }
-    position += span;
-    i += length;
-  }
-  var width = position + PAD_R;
+  var _useMemo = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+      var offsets = [],
+        onsets = [],
+        widths = [];
+      var position = PAD_L;
+      for (var i = 0; i < n;) {
+        var col = notes[i],
+          length = col.landing ? 1 : Math.max(1, col.len || 1);
+        var span = Math.max(COL_W, COL_W * length / resolution);
+        for (var k = 0; k < length && i + k < n; k++) {
+          offsets[i + k] = position + span * k / length;
+          onsets[i + k] = i;
+          widths[i + k] = span;
+        }
+        position += span;
+        i += length;
+      }
+      return {
+        offsets: offsets,
+        onsets: onsets,
+        widths: widths,
+        width: position + PAD_R
+      };
+    }, [notes, resolution]),
+    offsets = _useMemo.offsets,
+    onsets = _useMemo.onsets,
+    widths = _useMemo.widths,
+    width = _useMemo.width;
   var height = TOP_PAD + ROW_H * nStr + 18 + (beaming ? BEAM_AREA : 0);
   var yFor = function yFor(s) {
     return TOP_PAD + ROW_H * (s - 0.5);
@@ -4776,7 +4788,7 @@ function TabView(_ref) {
   var xFor = function xFor(i) {
     return offsets[i] + COL_W / 2;
   };
-  current = onsets[Math.max(0, cursor)] || 0;
+  var current = onsets[Math.max(0, cursor)] || 0;
   var strings = Array.from({
     length: nStr
   }, function (_, i) {
@@ -4785,12 +4797,27 @@ function TabView(_ref) {
 
   // Keep the current note in view without smooth-scrolling, which lags behind
   // the click at faster tempos.
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useLayoutEffect)(function () {
     var wrap = wrapRef.current;
-    if (!wrap || cursor == null || cursor < 0) return;
-    var x = offsets[onsets[cursor] || 0] + COL_W / 2;
+    if (!wrap || (cursor == null || cursor < 0) && previewCursor == null) return;
+    var target = cursor != null && cursor >= 0 ? cursor : previewCursor;
+    var x = offsets[onsets[target] || 0] + COL_W / 2;
     wrap.scrollLeft = Math.max(0, x - wrap.clientWidth * (continuous ? 0.25 : 0.5));
-  }, [cursor, notes, continuous]);
+    if (continuous) updateViewport(wrap);
+  }, [cursor, previewCursor, offsets, onsets, continuous]);
+
+  // Refresh the buffered notation before paint; leave room for several ticks
+  // so scrolling does not cause a second render for every note.
+  function updateViewport(wrap) {
+    var left = wrap.scrollLeft,
+      width = wrap.clientWidth;
+    setViewport(function (previous) {
+      return previous.width === width && Math.abs(previous.left - left) < 300 ? previous : {
+        left: left,
+        width: width
+      };
+    });
+  }
 
   // Keep a full-width strip, but only mount notation near the viewport.
   // Scrolling changes the visible notes without resetting the scroll origin.
@@ -4810,10 +4837,7 @@ function TabView(_ref) {
     if (!continuous) return;
     var wrap = wrapRef.current;
     var update = function update() {
-      return setViewport({
-        left: wrap.scrollLeft,
-        width: wrap.clientWidth
-      });
+      return updateViewport(wrap);
     };
     update();
     var observer = typeof ResizeObserver !== "undefined" ? new ResizeObserver(update) : null;
@@ -4834,30 +4858,30 @@ function TabView(_ref) {
 
   // Beam groups: every `notesPerBeat` columns from the first, which is a
   // downbeat. A group beams from its first stem to its last.
-  var groups = [];
-  if (beaming) {
-    var beatTicks = notesPerBeat * resolution;
-    for (var from = 0; from < n;) {
-      var to = Math.min(n, from + (from === 0 && beatOffset ? beatTicks - beatOffset : beatTicks));
-      var stems = [];
-      for (var _i = from; _i < to; _i++) if (stemmed(notes[_i])) stems.push(_i);
-      if (stems.length) groups.push({
-        from: from,
-        to: to,
-        stems: stems
-      });
-      from = to;
+  var groups = (0,react__WEBPACK_IMPORTED_MODULE_0__.useMemo)(function () {
+    var groups = [];
+    if (beaming) {
+      var beatTicks = notesPerBeat * resolution;
+      for (var from = 0; from < n;) {
+        var to = Math.min(n, from + (from === 0 && beatOffset ? beatTicks - beatOffset : beatTicks));
+        var stems = [];
+        for (var i = from; i < to; i++) if (stemmed(notes[i])) stems.push(i);
+        if (stems.length) groups.push({
+          from: from,
+          to: to,
+          stems: stems
+        });
+        from = to;
+      }
     }
-  }
+    return groups;
+  }, [notes, notesPerBeat, resolution, beatOffset]);
   var yStemTop = yFor(nStr) + 5;
   var yBeam = yStemTop + STEM_LEN;
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     ref: wrapRef,
     onScroll: continuous ? function (e) {
-      return setViewport({
-        left: e.currentTarget.scrollLeft,
-        width: e.currentTarget.clientWidth
-      });
+      return updateViewport(e.currentTarget);
     } : undefined,
     style: {
       background: _storage__WEBPACK_IMPORTED_MODULE_1__.C.card,

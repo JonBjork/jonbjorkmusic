@@ -21,7 +21,7 @@
 // the metronome tick. The container scrolls to keep the current note centred.
 // ─────────────────────────────────────────────────────────────────────────────
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { C } from "./storage";
 
 const STANDARD = [40, 45, 50, 55, 59, 64];
@@ -43,7 +43,7 @@ const TUPLET = { 3: true, 5: true, 6: true, 7: true };
 const COL_W = 38, PAD_L = 48, PAD_R = 26, ROW_H = 25, TOP_PAD = 46;
 const STEM_LEN = 22, BEAM_GAP = 4.5, BEAM_AREA = 44;
 
-export default function TabView({ notes, cursor, tuning = STANDARD, notesPerBeat, resolution = 1, beatOffset = 0, continuous = false }) {
+export default function TabView({ notes, cursor, tuning = STANDARD, notesPerBeat, resolution = 1, beatOffset = 0, continuous = false, previewCursor = null }) {
   const wrapRef = useRef(null);
   const [viewport,setViewport]=useState({left:0,width:1000});
 
@@ -53,28 +53,40 @@ export default function TabView({ notes, cursor, tuning = STANDARD, notesPerBeat
   const beaming = Number.isInteger(notesPerBeat) && notesPerBeat >= 1;
   // Timing ticks can be finer than sixteenths (triplets). Give every
   // sounded note room, while interpolating hold ticks within that note.
-  const offsets=[], onsets=[], widths=[];let position=PAD_L, current=0;
+  const {offsets,onsets,widths,width}=useMemo(()=>{
+  const offsets=[], onsets=[], widths=[];let position=PAD_L;
   for(let i=0;i<n;) {
     const col=notes[i], length=col.landing?1:Math.max(1,col.len || 1);
     const span=Math.max(COL_W,COL_W*length/resolution);
     for(let k=0;k<length && i+k<n;k++){offsets[i+k]=position+span*k/length;onsets[i+k]=i;widths[i+k]=span;}
     position+=span;i+=length;
   }
-  const width=position+PAD_R;
+  return {offsets,onsets,widths,width:position+PAD_R};
+  },[notes,resolution]);
   const height = TOP_PAD + ROW_H * nStr + 18 + (beaming ? BEAM_AREA : 0);
   const yFor = (s) => TOP_PAD + ROW_H * (s - 0.5);
   const xFor = (i) => offsets[i] + COL_W/2;
-  current=onsets[Math.max(0,cursor)] || 0;
+  const current=onsets[Math.max(0,cursor)] || 0;
   const strings = Array.from({ length: nStr }, (_, i) => i + 1);
 
   // Keep the current note in view without smooth-scrolling, which lags behind
   // the click at faster tempos.
-  useEffect(() => {
+  useLayoutEffect(() => {
     const wrap = wrapRef.current;
-    if (!wrap || cursor == null || cursor < 0) return;
-    const x = offsets[onsets[cursor] || 0]+COL_W/2;
+    if (!wrap || ((cursor == null || cursor < 0) && previewCursor == null)) return;
+    const target=cursor!=null&&cursor>=0?cursor:previewCursor;
+    const x = offsets[onsets[target] || 0]+COL_W/2;
     wrap.scrollLeft = Math.max(0, x - wrap.clientWidth * (continuous ? 0.25 : 0.5));
-  }, [cursor, notes, continuous]);
+    if(continuous) updateViewport(wrap);
+  }, [cursor, previewCursor, offsets, onsets, continuous]);
+
+  // Refresh the buffered notation before paint; leave room for several ticks
+  // so scrolling does not cause a second render for every note.
+  function updateViewport(wrap){
+    const left=wrap.scrollLeft,width=wrap.clientWidth;
+    setViewport(previous=>previous.width===width && Math.abs(previous.left-left)<300
+      ?previous:{left,width});
+  }
 
   // Keep a full-width strip, but only mount notation near the viewport.
   // Scrolling changes the visible notes without resetting the scroll origin.
@@ -83,7 +95,7 @@ export default function TabView({ notes, cursor, tuning = STANDARD, notesPerBeat
   useEffect(()=>{
     if(!continuous)return;
     const wrap=wrapRef.current;
-    const update=()=>setViewport({left:wrap.scrollLeft,width:wrap.clientWidth});
+    const update=()=>updateViewport(wrap);
     update();
     const observer=typeof ResizeObserver!=="undefined"?new ResizeObserver(update):null;
     observer?.observe(wrap);
@@ -95,7 +107,8 @@ export default function TabView({ notes, cursor, tuning = STANDARD, notesPerBeat
 
   // Beam groups: every `notesPerBeat` columns from the first, which is a
   // downbeat. A group beams from its first stem to its last.
-  const groups = [];
+  const groups = useMemo(()=>{
+  const groups=[];
   if (beaming) {
     const beatTicks=notesPerBeat*resolution;
     for (let from=0; from<n;) {
@@ -106,13 +119,15 @@ export default function TabView({ notes, cursor, tuning = STANDARD, notesPerBeat
       from=to;
     }
   }
+  return groups;
+  },[notes,notesPerBeat,resolution,beatOffset]);
   const yStemTop = yFor(nStr) + 5;
   const yBeam = yStemTop + STEM_LEN;
 
   return (
     <div
       ref={wrapRef}
-      onScroll={continuous?e=>setViewport({left:e.currentTarget.scrollLeft,width:e.currentTarget.clientWidth}):undefined}
+      onScroll={continuous?e=>updateViewport(e.currentTarget):undefined}
       style={{
         background: C.card,
         border: `1px solid ${C.border}`,
